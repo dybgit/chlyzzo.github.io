@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,6 +6,11 @@
   
   <title>开始搭建-hexo-git-blog | 山上掏金</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
   <meta name="description" content="“从git起，使用hexo搭建自己的博客，git上传各种资料方便快捷。” 安装软件121,安装git，确保在cmd下可以git --version出版本，关键配置好环境变量；2，安装hexo，百度搜索出，到官网下载自己的版本 ##配置1231，在github上注册自己的账号，会得到一个用户名（yourname）；2，新建repository，把名字取为yourname.github.io，注意这里">
 <meta property="og:type" content="article">
 <meta property="og:title" content="开始搭建-hexo-git-blog">
@@ -17,18 +23,15 @@
 <meta name="twitter:description" content="“从git起，使用hexo搭建自己的博客，git上传各种资料方便快捷。” 安装软件121,安装git，确保在cmd下可以git --version出版本，关键配置好环境变量；2，安装hexo，百度搜索出，到官网下载自己的版本 ##配置1231，在github上注册自己的账号，会得到一个用户名（yourname）；2，新建repository，把名字取为yourname.github.io，注意这里">
   
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
   
-
+  
 </head>
-
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
+<div id="container">
+  <div id="wrap">
+    <header id="header">
   <div id="banner"></div>
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
@@ -46,18 +49,27 @@
         <a id="main-nav-toggle" class="nav-icon"></a>
         
       </nav>
+      <!--
       <nav id="sub-nav">
         
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
       </div>
+      -->
     </div>
   </div>
 </header>
-      <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="outer">
+      <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/05/01/hello-world/" class="article-date">
   <time datetime="2017-05-01T09:14:13.993Z" itemprop="datePublished">2017-05-01</time>
@@ -79,6 +91,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        <!-- Table of Contents -->
+        
         <p>“从git起，使用hexo搭建自己的博客，git上传各种资料方便快捷。”</p>
 <h2 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1,安装git，确保在cmd下可以git --version出版本，关键配置好环境变量；</div><div class="line">2，安装hexo，百度搜索出，到官网下载自己的版本</div></pre></td></tr></table></figure>
 <p>##配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1，在github上注册自己的账号，会得到一个用户名（yourname）；</div><div class="line">2，新建repository，把名字取为yourname.github.io，注意这里的yourname与注册的git账号用户名必须保持一致；</div><div class="line">3，这是在你的git下会有有一个子目录，yourname.github.io，点击进去，查看setting，在GitHub Pages那块不会出现site，不用急；</div></pre></td></tr></table></figure></p>
@@ -88,10 +102,23 @@
 <p>##最后的话<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">分享即是收获，动手后才是自己的。</div></pre></td></tr></table></figure></p>
 
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/01/hello-world/" data-id="cj25yalu70000e8kd6oe9wxs8" class="article-share-link">Share</a>
       
+  <div class="article-statement">
+    <hr>  
+    1.如果本文帮到了您，不妨点一下右下角的 <a>分享到</a> 按钮。<br>
+    2.除非注明，本博文章均为原创，转载请以链接形式标明本文地址。<br>
+    3.本博文章只代表博主当时的观点或结论，与博主公司没有任何关系。<br>
+  </div>
+
+    </div>
+    
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2017/05/01/hello-world/" data-id="cj25yalu70000e8kd6oe9wxs8" class="article-share-link">分享到</a>
+      
+
+      
+
       
     </footer>
   </div>
@@ -101,29 +128,50 @@
 </article>
 
 </section>
-        
-      </div>
-      <footer id="footer">
+      
+    </div>
+    <footer id="footer">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 wenxi<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Copyright &copy; 2012 - 2017 <a href="/" target="_blank">wenxi</a>.
+      &nbsp;
+      <span id="busuanzi_container_site_pv">
+        总访问量 <a href="http://service.ibruce.info/" target="_blank"><span id="busuanzi_value_site_pv"></span></a> 次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        <a href="http://service.ibruce.info/" target="_blank"><span id="busuanzi_value_site_uv"></span></a> 人.
+      </span>
+      
     </div>
   </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
+
+  </div>
+  <nav id="mobile-nav">
   
 </nav>
-    
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 
 
 
 <script src="/js/script.js"></script>
 
-  </div>
+</div>
 </body>
 </html>
