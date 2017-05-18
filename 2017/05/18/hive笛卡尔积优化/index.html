@@ -96,7 +96,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/18/hive笛卡尔积优化/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="hive�ĵѿ�����hive��Ĭ�ϲ�ʹ�õѿ���������Ҫ�����������У�hive���������еѿ����������ǣ���ʵ�������У�������Ҫʹ�õ�����ʱ�͵ÿ����ù��ܣ�Ȼ����hive�����ѿ������Ľ��������������������㶼������һ��reduce�ϣ��ײ�ȷʵ���ˡ���ô������ô�Ż�">
-<meta property="og:updated_time" content="2017-05-18T10:57:03.000Z">
+<meta property="og:updated_time" content="2017-05-18T10:59:07.694Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hive�ѿ������Ż�">
 <meta name="twitter:description" content="hive�ĵѿ�����hive��Ĭ�ϲ�ʹ�õѿ���������Ҫ�����������У�hive���������еѿ����������ǣ���ʵ�������У�������Ҫʹ�õ�����ʱ�͵ÿ����ù��ܣ�Ȼ����hive�����ѿ������Ľ��������������������㶼������һ��reduce�ϣ��ײ�ȷʵ���ˡ���ô������ô�Ż�">
@@ -366,7 +366,7 @@
 <p>drop table if exists aa;<br>create table aa<br>as<br>select aaa.<em><br>       ,cast(round(rand()</em>4+1.0,0) as int) as part from  a aaa<br>;</p>
 <p>4,��һ����join����</p>
 <p>drop table if exists aab;<br>create table aab<br>as<br>select<br>   a.id<br>   ,b.id as id_tj<br>from aa a<br>join b b<br>on a.part=b.part<br>;</p>
-<p>5�������Ϳ�5��reduce���㣬�ȵ�����һ��reduce���Ķ�<br>```</p>
+<p>5�������Ϳ�5��reduce���㣬�ȵ�����һ��reduce���Ķ�</p>
 <h2 id="����"><a href="#����" class="headerlink" title="����"></a>����</h2><p>1, hive�Ƿֲ�ʽ�����ṹ�����ݵ�һ�����ߣ�������ʹ��map-reduce�������ܣ�<br>2��hive������mysql���ƣ����в�ͬ����������in�����ȣ�<br>3��ʹ��map-reduce�����ķ�ʽ������Ҫ���ǲ��кͷ������</p>
 <h2 id="�����L�"><a href="#�����L�" class="headerlink" title="�����Ļ�"></a>�����Ļ�</h2><p>���������ջ񣬶��ֺ������Լ��ġ�</p>
 
