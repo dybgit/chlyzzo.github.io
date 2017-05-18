@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="优化，笛卡尔积," />
 
 
 
@@ -91,12 +91,13 @@
 
 
 <meta name="description" content="hive的笛卡尔积hive中默认不使用笛卡尔积，需要开启才能运行，hive不建议运行笛卡尔积，但是，在实践过程中，难免需要使用到，这时就得开启该功能；然后，hive中做笛卡尔积的结果就是最后的数据运算都集中在一个reduce上，亲测确实如此。那么，该怎么优化呢？ 优化历程笛卡尔积计算需要把数据全部遍历一遍才行，使用笛卡尔积理论上数据需要保存进内存，如果有多个任务运行，那么就得把数据复制多份，然而实">
+<meta name="keywords" content="优化，笛卡尔积">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hive笛卡尔积优化">
 <meta property="og:url" content="http://yoursite.com/2017/05/18/hive笛卡尔积优化/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="hive的笛卡尔积hive中默认不使用笛卡尔积，需要开启才能运行，hive不建议运行笛卡尔积，但是，在实践过程中，难免需要使用到，这时就得开启该功能；然后，hive中做笛卡尔积的结果就是最后的数据运算都集中在一个reduce上，亲测确实如此。那么，该怎么优化呢？ 优化历程笛卡尔积计算需要把数据全部遍历一遍才行，使用笛卡尔积理论上数据需要保存进内存，如果有多个任务运行，那么就得把数据复制多份，然而实">
-<meta property="og:updated_time" content="2017-05-18T11:02:25.297Z">
+<meta property="og:updated_time" content="2017-05-18T11:24:07.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hive笛卡尔积优化">
 <meta name="twitter:description" content="hive的笛卡尔积hive中默认不使用笛卡尔积，需要开启才能运行，hive不建议运行笛卡尔积，但是，在实践过程中，难免需要使用到，这时就得开启该功能；然后，hive中做笛卡尔积的结果就是最后的数据运算都集中在一个reduce上，亲测确实如此。那么，该怎么优化呢？ 优化历程笛卡尔积计算需要把数据全部遍历一遍才行，使用笛卡尔积理论上数据需要保存进内存，如果有多个任务运行，那么就得把数据复制多份，然而实">
@@ -310,7 +311,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-18T18:47:17+08:00">
                 2017-05-18
@@ -322,6 +323,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hive/" itemprop="url" rel="index">
+                    <span itemprop="name">hive</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -417,6 +440,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/优化，笛卡尔积/" rel="tag"># 优化，笛卡尔积</a>
+          
+        </div>
+      
 
       
         
@@ -483,10 +512,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -507,13 +536,31 @@
             <div class="site-state-item site-state-posts">
               <a href="/">
                 <span class="site-state-item-count">2</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
 
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
           
 
         </nav>
@@ -611,7 +658,7 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
