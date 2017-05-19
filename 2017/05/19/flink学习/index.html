@@ -1,0 +1,670 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>flink学习 | 山上掏金</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="wenxi">
+    
+
+    
+    <meta name="description" content="代码 123456789101112131415161718192021222324public class WindowWordCount &amp;#123;       public static void main(String[] args) throws Exception &amp;#123;                StreamExecutionEnvironment env = Strea">
+<meta name="keywords" content="flink,新手,入门技巧,实践经验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flink学习">
+<meta property="og:url" content="http://yoursite.com/2017/05/19/flink学习/index.html">
+<meta property="og:site_name" content="山上掏金">
+<meta property="og:description" content="代码 123456789101112131415161718192021222324public class WindowWordCount &amp;#123;       public static void main(String[] args) throws Exception &amp;#123;                StreamExecutionEnvironment env = Strea">
+<meta property="og:updated_time" content="2017-05-19T14:58:09.755Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="flink学习">
+<meta name="twitter:description" content="代码 123456789101112131415161718192021222324public class WindowWordCount &amp;#123;       public static void main(String[] args) throws Exception &amp;#123;                StreamExecutionEnvironment env = Strea">
+
+    
+    <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="山上掏金" title="山上掏金"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
+				<h2 class="blog-motto">每天起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/05/19/flink学习/" title="flink学习" itemprop="url">flink学习</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
+		
+  <p class="article-time">
+    <time datetime="2017-05-19T14:46:57.000Z" itemprop="datePublished"> Published 2017-05-19</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#共享slot-默认的配置"><span class="toc-number">1.</span> <span class="toc-text">共享slot,默认的配置,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#single-abstract-method-单一的抽象方法"><span class="toc-number">2.</span> <span class="toc-text">single abstract method  单一的抽象方法,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上面的例子，会将toBroadcast设置为广播变量broadcastSetName，这样在运行时，可以用getRuntimeContext-getBroadcastVariable获取该变量使用"><span class="toc-number">3.</span> <span class="toc-text">上面的例子，会将toBroadcast设置为广播变量broadcastSetName，这样在运行时，可以用getRuntimeContext().getBroadcastVariable获取该变量使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2015flink会议"><span class="toc-number">4.</span> <span class="toc-text">2015flink会议,</span></a></li></ol>
+		
+		</div>
+		
+		<p>代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class WindowWordCount &#123;</div><div class="line">       public static void main(String[] args) throws Exception &#123;</div><div class="line">                StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();</div><div class="line">                DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; dataStream = env</div><div class="line">                .socketTextStream(&quot;localhost&quot;, 9999)</div><div class="line">                .flatMap(new Splitter())</div><div class="line">                .keyBy(0)</div><div class="line">                .timeWindow(Time.of(5, TimeUnit.SECONDS))</div><div class="line">                .sum(1);</div><div class="line"></div><div class="line">        dataStream.print();</div><div class="line">        env.execute(&quot;Window WordCount&quot;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public static class Splitter implements FlatMapFunction&lt;String, Tuple2&lt;String, Integer&gt;&gt; &#123;</div><div class="line">        @Override</div><div class="line">        public void flatMap(String sentence, Collector&lt;Tuple2&lt;String, Integer&gt;&gt; out) throws Exception &#123;</div><div class="line">            for (String word: sentence.split(&quot; &quot;)) &#123;</div><div class="line">                out.collect(new Tuple2&lt;String, Integer&gt;(word, 1));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>new Splitter()和Splitter implements FlatMapFunction<string, tuple2<string,="" integer="">&gt;</string,></p>
+<p>flink 下datastrema的window操作</p>
+<p>参考<a href="https://ci.apache.org/projects/flink/flink-docs-release-0.10/apis/streaming_guide.html#working-with-time" target="_blank" rel="external">这个文档</a></p>
+<p>flink下的windows的time类型，</p>
+<p>  import org.apache.flink.streaming.api.TimeCharacteristic</p>
+<p>  processing time，当执行转换算子的时间，分布式和异步下不能满足目的。<br>       env.setStreamTimeCharacteristic(TimeCharacteristic.ProcessingTime)</p>
+<p>  event time，事件时间，独立事件的时间，通常是进入到flink前就有了，嵌入在记录里或者内容里<br>        env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)<br>        时间顺序，无序也能正确处理（需要缓存），有延迟，<br>  Ingestion time，进入到flink的时间，介于前两者之间，<br>       env.setStreamTimeCharacteristic(TimeCharacteristic.IngestionTime)</p>
+<p>watermark 时间水印，由源发出，没有时间戳的时间</p>
+<p>对于事件时间event time，需如下步骤<br>   Set env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)<br>   Use DataStream.assignTimestamps(…) in order to tell Flink how timestamps relate to events<br>       (e.g., which record field is the timestamp)，这是记录中包含时间戳的例子，<br>   Set enableTimestamps(), as well the interval for watermark emission (<br>       setAutoWatermarkInterval(long milliseconds)) in ExecutionConfig.</p>
+<p>flink下的窗口定义，</p>
+<p>窗口中的元素实际存储在 Key/Value State 中，key为Window，value为元素集合（或聚合值）<br>当一个元素进入流时，<br>    1,根据window决定去哪个窗口;<br>          窗口只是一个标示，不存储数据，也会存时间。<br>    2,每个窗口有一个trigger，决定窗口的生存时间（该窗口计算和清除时间）;<br>           trigger返回continue（等待），fire（处理窗口数据），purge（清除窗口），<br>         如果是fire，则窗口保留，数据一直存在，会被计算多次，直到purge。<br>    3,如果窗口被fire（处理），窗口中的元素指定给evictor，<br>         Evictor 主要用来遍历窗口中的元素列表，并决定最先进入窗口的多少个元素需要被移除。剩余的元素会交给用户指定的函数进行窗口的计算<br>    4,计算函数，经过（window，trigger，evictor），接收到窗口元素，计算其中元素，返回给下游，<br>       计算值可返回多个或一个，计算函数有max，min，基于WindowFunction实现的。。<br>（注意，evictor需要对窗口内所有元素保留，除了聚合sum，min只需保留最后值，）</p>
+<p>WindowedStream<br>      其中 T 数据流中元素的数据类型<br>           K 是元素的key的类型<br>           W是窗口类型<br>            R 初始值（fold时用到）<br>   apply (6个apply方法)  (k : Long, w : TimeWindow, T: Iterable[(Long, Long, Long)], out : Collector[(Long,String,String,Double)])</p>
+<pre><code>apply(WindowFunction&lt;T, R, K, W&gt; function)
+
+apply(WindowFunction&lt;T, R, K, W&gt; function, TypeInformation&lt;R&gt; resultType)
+
+apply(ReduceFunction&lt;T&gt; reduceFunction, WindowFunction&lt;T, R, K, W&gt; function)
+apply(ReduceFunction&lt;T&gt; reduceFunction, WindowFunction&lt;T, R, K, W&gt; function, TypeInformation&lt;R&gt; resultType)
+
+apply(R initialValue, FoldFunction&lt;T, R&gt; foldFunction, WindowFunction&lt;R, R, K, W&gt; function)
+apply(R initialValue, FoldFunction&lt;T, R&gt; foldFunction, WindowFunction&lt;R, R, K, W&gt; function, TypeInformation&lt;R&gt; resultType)
+</code></pre><p><a href="https://m.aliyun.com/yunqi/articles/57828" target="_blank" rel="external">https://m.aliyun.com/yunqi/articles/57828</a><br>Blink 阿里</p>
+<p>9.14<br>you can rely on the RichFunction’s open() method’s to load such data directly from a distributed file system.<br>DataStream没有DistributedCache,但是可以在RichFunction’s open() 方法中读取分布式存储的文件…</p>
+<hr>
+<p>flink运行的参数意义,<br>目前用到:<br>flink 提交yarn集群的参数<br><a href="https://ci.apache.org/projects/flink/flink-docs-master/setup/cli.html" target="_blank" rel="external">https://ci.apache.org/projects/flink/flink-docs-master/setup/cli.html</a></p>
+<p>-yn,–yarncontainer <arg>            Number of YARN container to allocate(=Number of Task Managers)</arg></p>
+<p>-ys,–yarnslots <arg>                Number of slots per TaskManager</arg></p>
+<p>-yjm,–yarnjobManagerMemory <arg>    Memory for JobManager Container [inMB]</arg></p>
+<p>-ytm,–yarntaskManagerMemory <arg>   Memory per TaskManager Container [inMB]</arg></p>
+<p>yn是taskmanager的个数,即worker的个数,ys是slot个数,即每个taskmanager由几个slot来计算,<br>yjm,<br>ytm,每一个taskmanager内存大小,</p>
+<hr>
+<p>flink架构重新学习,9.21(理顺一些概念和逻辑)<br>   <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.0/concepts/concepts.html#parallel-dataflows" target="_blank" rel="external">https://ci.apache.org/projects/flink/flink-docs-release-1.0/concepts/concepts.html#parallel-dataflows</a></p>
+<p>  flink的数据块是流,dataset也是流,特殊的流,开始一个或多个源,结束一个或多个sinks,<br>  一个转换有多个转换算子组成…<br>  ///////////////////////////////////////////////////////////////////////////////////////<br>  流的运算流程是,source-&gt;<br>                         transformation(flatmap,map,….算子operators)-&gt;<br>                                          …-&gt;<br>                                                 transformation(flatmap,map,….算子operators)-&gt;<br>                                                            sink<br>///////////////////////////////////////////////////////////////////////////////////////////</p>
+<p>并行度（一个task被split的并行实例个数），可以在不同层级上设定;<br>   一个task可split多个并行实例，一个实例处理inputData的子集，（实例处理子集，有合并没？）</p>
+<p>并行是怎么操作的?<br>  分布式和并行下,数据是分区的,操作也变成操作subtask,(操作subtask是独立隔离的,不同线程,不同机器,不同containers)<br>  操作subtask的个数是并行度,parallelism,由算子operators决定,一个程序会有多个并行,<br>  –&gt;    —&gt;     —&gt;<br>               x        y  –&gt;sink<br>  –&gt;    —&gt;     —&gt;</p>
+<p>流在两个operators(算子)之间可以使一对一前行,也可以是再分区前行,<br>相对的是Redistributing,即算子需要对数据进行重新规划,比如keyby,broadcast, rebalance</p>
+<p>flink链,chains,把算子连在一起,起到优化作用,</p>
+<hr>
+<p>分布式,yarn,集群<br>   两个操作进程类型,<br>     master,JobManagers,协调分布式执行,checkpoint,故障恢复,<br>        必须有一个,可以设置多个,一个是主,其他是备用(其中一个挂了,备用是不是可以当作主来重启运行???)</p>
+<pre><code>worker,TaskManagers,执行task或者执行subtasks,缓冲区,
+   至少有一个,
+</code></pre><p>  The master and worker processes开始于集群,容器,或者yarn的资源管理器,</p>
+<p>  client客户端,不是运行时和程序的部分,准备发送流给master,然后断开或者保持连接等待信息反馈,</p>
+<hr>
+<p>Each worker (TaskManager) is a JVM process, and may execute one or more subtasks in separate threads. </p>
+<p>To control how many tasks a worker accepts, a worker has so called task slots (at least one).</p>
+<p>slot是一个TaskManager可以运行几个task,一个taskTaskManager分配的内存是ytm,<br>每个slot是固定的资源子集,在大集合TaskManager中,也就是slot瓜分TaskManager的资源,而且是平分,<br>每个slot是不同thread执行.</p>
+<p>Having one slot per TaskManager means each task group runs in a separate JVM,<br>Having multiple slots means more subtasks share the same JVM,share data sets and data structures..</p>
+<h2 id="共享slot-默认的配置"><a href="#共享slot-默认的配置" class="headerlink" title="共享slot,默认的配置,"></a>共享slot,默认的配置,</h2><p>迭代,大量的计算,大的分布式计算,做法是step-function和嵌入迭代算子(Iterate and Delta Iterate),</p>
+<p>   <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.0/apis/batch/iterations.html" target="_blank" rel="external">https://ci.apache.org/projects/flink/flink-docs-release-1.0/apis/batch/iterations.html</a></p>
+<p>只用于dataset???</p>
+<p>   1,iterate operator,<br>        1.1 Iteration Input: 初始化数据输入,来源前一个迭代或者前一个算子;<br>        1.2 Step Function: 每一次迭代执行的函数. operators, map, reduce, join, …,<br>        1.3 Next Partial Solution: 下一次迭代的数据,<br>        1.4 Iteration Result: 最后一次迭代,数据输出到sink或者下一个算子,<br>  终止条件,<br>      1,最大迭代次数,自定义的,达到迭代次数,结束,输出结果;<br>      2,自定义聚合和熟练准则,<br>      val count = initial.iterate(10000) { iterationInput: DataSet[Int] =&gt;<br>            val result = iterationInput.map { i =&gt;<br>                  val x = Math.random()<br>                  val y = Math.random()<br>                  i + (if (x <em> x + y </em> y &lt; 1) 1 else 0)<br>            }<br>            result<br>       }</p>
+<p>  2,Delta Iterate Operator,<br>     每次迭代会选择部分数据计算,不是全量,适用于高级的算法,或者某些数据不是每次迭代对计算有用,只关注那些频繁和有用于计算的数据,舍弃无用,没计算的数据.<br>    2.1 Iteration Input: 初始化数据输入,来源data source或者前一个算子;<br>    2.2 Step Function: 每一次迭代执行的函数. operators, map, reduce, join, …,<br>    2.3 Next Workset/Update Solution Set: 下一次迭代反馈workset,数据可通过不同算子更新 ,<br>    2.4 Iteration Result: 最后一次迭代,数据输出到sink或者下一个算子,</p>
+<p>终止条件,<br>      1,最大迭代次数,自定义的,达到迭代次数,结束,输出结果;<br>      2,下一次迭代workset收敛为0,也就是数据为空.(自定义聚合和收敛准则)</p>
+<p>两个数据集,workset和solution,每次迭代得到newworkset和newsolution<br>To create a DeltaIteration call the iterateDelta(initialWorkset, maxIterations, key) on the initial solution set. The step function takes two parameters: (solutionSet, workset), and must return two values: (solutionSetDelta, newWorkset).</p>
+<hr>
+<p>ParameterTool 整合参数</p>
+<p> env.readCsvFile<a href="params.get(&quot;points&quot;">Point</a>,<br>        fieldDelimiter = “ “,<br>        includedFields = Array(0, 1))</p>
+<pre><code>} 
+</code></pre><hr>
+<p>flink下的functions</p>
+<h2 id="single-abstract-method-单一的抽象方法"><a href="#single-abstract-method-单一的抽象方法" class="headerlink" title="single abstract method  单一的抽象方法,"></a>single abstract method  单一的抽象方法,</h2><p> 1,coGroup(Iterable<in1> first, Iterable<in2> second, Collector<o> out)</o></in2></in1></p>
+<pre><code>  set1.coGroup(set2).where(&lt;key-definition&gt;).equalTo(&lt;key-definition&gt;).with(new MyCoGroupFunction());
+
+注意,first:java.lang.Iterable[Int],
+    然后,计算时,采取用
+import scala.collection.JavaConverters._
+val scalaT2 = first.asScala.toList
+</code></pre><p> 2,CombineFunction<in, out=""><br>         把元素组合并返回,</in,></p>
+<hr>
+<p><a href="http://www.cnblogs.com/fxjwind/p/5168785.html" target="_blank" rel="external">http://www.cnblogs.com/fxjwind/p/5168785.html</a><br><a href="https://ci.apache.org/projects/flink/flink-docs-release-0.10/apis/programming_guide.html" target="_blank" rel="external">https://ci.apache.org/projects/flink/flink-docs-release-0.10/apis/programming_guide.html</a><br>非常好的解读flink下的函数和参数,<br>1,<br>使用Rich functions</p>
+<p>Rich functions provide, in addition to the user-defined function (map, reduce, etc), four methods: open, close, getRuntimeContext, and setRuntimeContext.</p>
+<p>Rich functions的使用和普通的function是一样的，不同的就是，多4个接口函数，可以用于一些特殊的场景，比如给function传参，或访问broadcast变量，accumulators和counter，因为这些场景你需要先getRuntimeContext</p>
+<p>2,<br>Broadcast Variables<br>一个算子中在并行实例下可以访问到数据,广播data set的结构是collection,<br>withBroadcastSet(DataSet, String)广播一个dataset<br>getRuntimeContext().getBroadcastVariable(String) at the target operator.访问广播的data set;</p>
+<p> ////////////////////////////////////////////////////////</p>
+<p>  // 1. The DataSet to be broadcasted<br>    DataSet<integer> toBroadcast = env.fromElements(1, 2, 3);</integer></p>
+<pre><code>DataSet&lt;String&gt; data = env.fromElements(&quot;a&quot;, &quot;b&quot;);
+</code></pre><p>   data.map(new RichMapFunction<string, string="">() {<br>    @Override<br>    public void open(Configuration parameters) throws Exception { //open方法会被启用一次,<br>      // 3. Access the broadcasted DataSet as a Collection<br>      Collection<integer> broadcastSet = getRuntimeContext().getBroadcastVariable(“broadcastSetName”);<br>    }</integer></string,></p>
+<pre><code>@Override //map调用的次数是data中的元素个数,
+public String map(String value) throws Exception {
+    ...
+}
+</code></pre><p>   }).withBroadcastSet(toBroadcast, “broadcastSetName”); // 2. Broadcast the DataSet<br> //////////////////////////////////////////////////////////<br>   广播数据集，就是有些不大的公共数据，是要被所有的实例访问到的，比如一些查询表,(不大的公共数据)</p>
+<h2 id="上面的例子，会将toBroadcast设置为广播变量broadcastSetName，这样在运行时，可以用getRuntimeContext-getBroadcastVariable获取该变量使用"><a href="#上面的例子，会将toBroadcast设置为广播变量broadcastSetName，这样在运行时，可以用getRuntimeContext-getBroadcastVariable获取该变量使用" class="headerlink" title="上面的例子，会将toBroadcast设置为广播变量broadcastSetName，这样在运行时，可以用getRuntimeContext().getBroadcastVariable获取该变量使用"></a>上面的例子，会将toBroadcast设置为广播变量broadcastSetName，这样在运行时，可以用getRuntimeContext().getBroadcastVariable获取该变量使用</h2><p>参数传递,在构造函数中使用,<br>///////////////////////////////////////////////////////////////////////////////////<br>private static class MyFilter implements FilterFunction<integer> {</integer></p>
+<p>  private final int limit; //参数</p>
+<p>  public MyFilter(int limit) {//构造函数<br>    this.limit = limit;<br>  }</p>
+<p>  @Override<br>  public boolean filter(Integer value) throws Exception {<br>    return value &gt; limit;<br>  }<br>}<br>//////////////////////////////////////////////////////////////////////////////////////<br>使用withParameters(Configuration)<br>/////////////////////////////////////////////////////////////////////////////////////<br>Configuration config = new Configuration();<br>config.setInteger(“limit”, 2);</p>
+<p>toFilter.filter(new RichFilterFunction<integer>() {<br>    private int limit;</integer></p>
+<pre><code>@Override
+public void open(Configuration parameters) throws Exception {
+  limit = parameters.getInteger(&quot;limit&quot;, 0);
+}
+
+@Override
+public boolean filter(Integer value) throws Exception {
+  return value &gt; limit;
+}
+</code></pre><p>}).withParameters(config);<br>///////////////////////////////////////////////////////////////////////////////////<br>可以用withParameters将定义好的config传入function</p>
+<p>然后用RichFunction的Open接口，将参数解析出来使用</p>
+<hr>
+<p>全局参数,(全局参数只能用于参数形式，广播变量可以是任意dataset),但是全局参数,可用于更大的数据集,比如几百万的表数据,广播的话<br>花费就大.<br>//////////////////////////////////////////////////////////////////////////////////<br>Configuration conf = new Configuration();<br>conf.setString(“mykey”,”myvalue”);<br>final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();<br>env.getConfig().setGlobalJobParameters(conf);</p>
+<p>public static final class Tokenizer extends RichFlatMapFunction<string, tuple2<string,="" integer="">&gt; {</string,></p>
+<pre><code>private String mykey;
+@Override
+public void open(Configuration parameters) throws Exception {
+  super.open(parameters);
+  ExecutionConfig.GlobalJobParameters globalParams = getRuntimeContext().getExecutionConfig().getGlobalJobParameters();
+  Configuration globConf = (Configuration) globalParams;
+  mykey = globConf.getString(&quot;mykey&quot;, null);
+}
+// ... more here ...
+</code></pre><p>///////////////////////////////////////////////////////////////////////////</p>
+<hr>
+<p>richfunction的使用,</p>
+<p>Rich functions的使用和普通的function是一样的，不同的就是，多4个接口函数，可以用于一些特殊的场景，比如给function传参，或访问broadcast变量，accumulators和counter，因为这些场景你需要先getRuntimeContext,</p>
+<p>four methods: open, close, getRuntimeContext, and setRuntimeContext.</p>
+<hr>
+<p>state的使用,Key/Value state 只能用于KeyedStream,<br>    3种不同类型的state，</p>
+<pre><code>ValueState，单值的state，可以通过update(T)或T value()来操作
+
+ListState&lt;T&gt;， 多值的state，通过add(T)或Iterable&lt;T&gt; get()来操作和访问
+  访问当前存储的元素,
+ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
+    聚集的单个元素,
+
+并且所有的state，都有clear，来清除状态数据
+</code></pre><p>这些state对象只能被状态接口使用，<br>并且取出的状态对象，取决于input element的key；所以不同的调用user function 得到的state value是不一样的，因为element的key 可能不同</p>
+<p>对于state，需要一个StateDescriptor ，作为name用于reference这个state，如果你定义多个state，他们的StateDescriptor 必须是unique的。<br>不同类型的state，有不同类型的StateDescriptor</p>
+<p>ValueState<t> getState(ValueStateDescriptor<t>)<br>ReducingState<t> getReducingState(ReducingStateDescriptor<t>)<br>ListState<t> getListState(ListStateDescriptor<t>)</t></t></t></t></t></t></p>
+<p>State对象通过RuntimeContext的接口获取到，当然不同类型的state，对应于不同的接口；<br>关键是，如果要使用state，必须要使用rich function，用普通的function是无法获取到的</p>
+<p><a href="http://blog.csdn.net/lmalds/article/details/52229827" target="_blank" rel="external">http://blog.csdn.net/lmalds/article/details/52229827</a><br>ListState的使用<br><a href="http://blog.csdn.net/codemosi/article/details/51602204" target="_blank" rel="external">http://blog.csdn.net/codemosi/article/details/51602204</a><br>三种state的使用,</p>
+<hr>
+<p>flink 下的向量,矩阵计算<br>引入包,</p>
+<p>(“org.apache.flink” %% “flink-ml” % flinkVersion).<br>                  exclude(“org.apache.flink”,”flink-shaded-hadoop1_2.10”),</p>
+<p>import org.apache.flink.ml.math.Vector<br>import org.apache.flink.ml.math.VectorBuilder<br>import org.apache.flink.ml.math.DenseVector</p>
+<p>val vec1 = “12.3,45,55”.split(“,”).map(<em>.toDouble)<br>val flinkVec1 = DenseVector.apply(vec1)<br>val vec2 = “12.3,45,55”.split(“,”).map(</em>.toDouble)<br>val flinkVec2 = DenseVector.apply(vec2)</p>
+<p>println(flinkVec1.dot(flinkVec2))</p>
+<hr>
+<p><a href="http://data-artisans.com/extending-the-yahoo-streaming-benchmark/" target="_blank" rel="external">http://data-artisans.com/extending-the-yahoo-streaming-benchmark/</a><br>推特的</p>
+<p><a href="https://yahooeng.tumblr.com/post/135321837876/benchmarking-streaming-computation-engines-at" target="_blank" rel="external">https://yahooeng.tumblr.com/post/135321837876/benchmarking-streaming-computation-engines-at</a><br>雅虎的</p>
+<p><a href="http://flink-forward.org/category/news/" target="_blank" rel="external">http://flink-forward.org/category/news/</a></p>
+<h2 id="2015flink会议"><a href="#2015flink会议" class="headerlink" title="2015flink会议,"></a>2015flink会议,</h2><p>2016.10.21<br>使用 <code>RichGroupReduceFunction</code> 实现<code>GroupCombineFunction</code> interface,<br>在shuffle前combining,减少网络负载;<br>另外,reduce实现reduceGroup也可以提高性能,<br>结果再次使用<code>.setCombineHint(CombineHint.HASH)</code> after the reduce.</p>
+<hr>
+<p>flink 读取csv文件的参数含义,<br>val csvInput = env.readCsvFile<a href="&quot;hdfs:///the/CSV/file&quot;,
+  includedFields = Array(0, 3">(String, Double)</a>) // take the first and the fourth field</p>
+<p>lineDelimiter: 行与行之间的分隔符,默认是’\n’.</p>
+<p>fieldDelimiter: 每行数据间的分隔符,默认是 ‘,’.</p>
+<p>includeFields: Array[Int] 需要过滤的字段,也就是每行分割所要留下的哪几列.</p>
+<p>pojoFields: Array[String] 对象实例所要留下的字段.</p>
+<p>parseQuotedStrings: Character enables quoted string parsing. Strings are parsed as quoted strings if the first character of the string field is the quote character (leading or tailing whitespaces are not trimmed). Field delimiters within quoted strings are ignored. Quoted string parsing fails if the last character of a quoted string field is not the quote character. If quoted string parsing is enabled and the first character of the field is not the quoting string, the string is parsed as unquoted string. By default, quoted string parsing is disabled.</p>
+<p>ignoreComments: String specifies a comment prefix. All lines that start with the specified comment prefix are not parsed and ignored. By default, no lines are ignored.</p>
+<p>lenient: Boolean enables lenient parsing, i.e., lines that cannot be correctly parsed are ignored. By default, lenient parsing is disabled and invalid lines raise an exception.</p>
+<p>ignoreFirstLine: 是否忽略第一行,因为第一行有时是为了解释用的.</p>
+<hr>
+<p>遍历目录下的所有文件,<br>// enable recursive enumeration of nested input files<br>val env  = ExecutionEnvironment.getExecutionEnvironment</p>
+<p>// create a configuration object<br>val parameters = new Configuration</p>
+<p>// set the recursive enumeration parameter<br>parameters.setBoolean(“recursive.file.enumeration”, true) //将递归遍历目录设置为true</p>
+<p>// pass the configuration to the data source<br>env.readTextFile(“file:///path/with.nested/files”).withParameters(parameters)</p>
+<hr>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/flink/">flink</a>►<a class="article-category-link" href="/categories/flink/代码/">代码</a>►<a class="article-category-link" href="/categories/flink/代码/入门/">入门</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/flink/">flink</a><a href="/tags/新手/">新手</a><a href="/tags/入门技巧/">入门技巧</a><a href="/tags/实践经验/">实践经验</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/05/19/flink学习/" data-title="flink学习 | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/05/18/hive笛卡尔积优化/"  title="hive笛卡尔积优化">
+ <strong>下一篇：</strong><br/> 
+ <span>hive笛卡尔积优化
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#共享slot-默认的配置"><span class="toc-number">1.</span> <span class="toc-text">共享slot,默认的配置,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#single-abstract-method-单一的抽象方法"><span class="toc-number">2.</span> <span class="toc-text">single abstract method  单一的抽象方法,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上面的例子，会将toBroadcast设置为广播变量broadcastSetName，这样在运行时，可以用getRuntimeContext-getBroadcastVariable获取该变量使用"><span class="toc-number">3.</span> <span class="toc-text">上面的例子，会将toBroadcast设置为广播变量broadcastSetName，这样在运行时，可以用getRuntimeContext().getBroadcastVariable获取该变量使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2015flink会议"><span class="toc-number">4.</span> <span class="toc-text">2015flink会议,</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/flink/" title="flink">flink<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/hive/" title="hive">hive<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/flink/代码/" title="代码">代码<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/flink/代码/入门/" title="入门">入门<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/flink/" title="flink">flink<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/新手/" title="新手">新手<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/入门技巧/" title="入门技巧">入门技巧<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/实践经验/" title="实践经验">实践经验<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/优化/" title="优化">优化<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/笛卡尔积/" title="笛卡尔积">笛卡尔积<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://flink.apache.org/" target="_blank" title="Flink">Flink</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 你现在学的以后终将用到， <br/>
+			别被时间打脸.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1724571293" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/chlyzzo" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:rimin515@sina.cn" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="wenxi">wenxi</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
