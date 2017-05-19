@@ -4,24 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>hive笛卡尔积优化 | 山上掏金</title>
+    <title>hive�ѿ������Ż� | 山上掏金</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="wenxi">
     
 
     
-    <meta name="description" content="hive的笛卡尔积hive中默认不使用笛卡尔积，需要开启才能运行，hive不建议运行笛卡尔积，但是，在实践过程中，难免需要使用到，这时就得开启该功能；然后，hive中做笛卡尔积的结果就是最后的数据运算都集中在一个reduce上，亲测确实如此。那么，该怎么优化呢？ 优化历程笛卡尔积计算需要把数据全部遍历一遍才行，使用笛卡尔积理论上数据需要保存进内存，如果有多个任务运行，那么就得把数据复制多份，然而实">
-<meta name="keywords" content="优化，笛卡尔积">
+    <meta name="description" content="hive�ĵѿ�����hive��Ĭ�ϲ�ʹ�õѿ���������Ҫ�����������У�hive���������еѿ����������ǣ���ʵ�������У�������Ҫʹ�õ�����ʱ�͵ÿ����ù��ܣ�Ȼ����hive�����ѿ������Ľ��������������������㶼������һ��reduce�ϣ��ײ�ȷʵ���ˡ���ô������ô�Ż�">
+<meta name="keywords" content="�Ż�,�ѿ�����">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hive笛卡尔积优化">
+<meta property="og:title" content="hive�ѿ������Ż�">
 <meta property="og:url" content="http://yoursite.com/2017/05/18/hive笛卡尔积优化/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:description" content="hive的笛卡尔积hive中默认不使用笛卡尔积，需要开启才能运行，hive不建议运行笛卡尔积，但是，在实践过程中，难免需要使用到，这时就得开启该功能；然后，hive中做笛卡尔积的结果就是最后的数据运算都集中在一个reduce上，亲测确实如此。那么，该怎么优化呢？ 优化历程笛卡尔积计算需要把数据全部遍历一遍才行，使用笛卡尔积理论上数据需要保存进内存，如果有多个任务运行，那么就得把数据复制多份，然而实">
-<meta property="og:updated_time" content="2017-05-18T11:24:07.354Z">
+<meta property="og:description" content="hive�ĵѿ�����hive��Ĭ�ϲ�ʹ�õѿ���������Ҫ�����������У�hive���������еѿ����������ǣ���ʵ�������У�������Ҫʹ�õ�����ʱ�͵ÿ����ù��ܣ�Ȼ����hive�����ѿ������Ľ��������������������㶼������һ��reduce�ϣ��ײ�ȷʵ���ˡ���ô������ô�Ż�">
+<meta property="og:updated_time" content="2017-05-19T07:20:54.543Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hive笛卡尔积优化">
-<meta name="twitter:description" content="hive的笛卡尔积hive中默认不使用笛卡尔积，需要开启才能运行，hive不建议运行笛卡尔积，但是，在实践过程中，难免需要使用到，这时就得开启该功能；然后，hive中做笛卡尔积的结果就是最后的数据运算都集中在一个reduce上，亲测确实如此。那么，该怎么优化呢？ 优化历程笛卡尔积计算需要把数据全部遍历一遍才行，使用笛卡尔积理论上数据需要保存进内存，如果有多个任务运行，那么就得把数据复制多份，然而实">
+<meta name="twitter:title" content="hive�ѿ������Ż�">
+<meta name="twitter:description" content="hive�ĵѿ�����hive��Ĭ�ϲ�ʹ�õѿ���������Ҫ�����������У�hive���������еѿ����������ǣ���ʵ�������У�������Ҫʹ�õ�����ʱ�͵ÿ����ù��ܣ�Ȼ����hive�����ѿ������Ľ��������������������㶼������һ��reduce�ϣ��ײ�ȷʵ���ˡ���ô������ô�Ż�">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -81,7 +81,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/05/18/hive笛卡尔积优化/" title="hive笛卡尔积优化" itemprop="url">hive笛卡尔积优化</a>
+      <a href="/2017/05/18/hive笛卡尔积优化/" title="hive�ѿ������Ż�" itemprop="url">hive�ѿ������Ż�</a>
   </h1>
   <p class="article-author">By
        
@@ -97,21 +97,21 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hive的笛卡尔积"><span class="toc-number">1.</span> <span class="toc-text">hive的笛卡尔积</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化历程"><span class="toc-number">2.</span> <span class="toc-text">优化历程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-number">3.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后话"><span class="toc-number">4.</span> <span class="toc-text">后话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后的话"><span class="toc-number">5.</span> <span class="toc-text">最后的话</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hive�jѿ�����"><span class="toc-number">1.</span> <span class="toc-text">hive�ĵѿ�����</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#�Z�����"><span class="toc-number">2.</span> <span class="toc-text">�Ż�����</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#����ʵ��"><span class="toc-number">3.</span> <span class="toc-text">����ʵ��</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#����"><span class="toc-number">4.</span> <span class="toc-text">����</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#�����L�"><span class="toc-number">5.</span> <span class="toc-text">�����Ļ�</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="hive的笛卡尔积"><a href="#hive的笛卡尔积" class="headerlink" title="hive的笛卡尔积"></a>hive的笛卡尔积</h2><p>hive中默认不使用笛卡尔积，需要开启才能运行，hive不建议运行笛卡尔积，但是，在实践过程中，难免需要使用到，这时就得开启该功能；然后，hive中做笛卡尔积的结果就是最后的数据运算都集中在一个reduce上，亲测确实如此。那么，该怎么优化呢？</p>
-<h2 id="优化历程"><a href="#优化历程" class="headerlink" title="优化历程"></a>优化历程</h2><p>笛卡尔积计算需要把数据全部遍历一遍才行，使用笛卡尔积理论上数据需要保存进内存，如果有多个任务运行，那么就得把数据复制多份，然而实时却并非如此；因为，笛卡尔积的计算最终是计算出结果，因此，会把数据积压到一个reduce上，而不是多份（虽然难以理解，但是，实践测试多次，还真心如此）。<br>因此，想要优化，必须加大reduce的个数，这时需要有分区（或者分块）的概念，即把数据copy成多份，进行join操作，在计算时把小部分数据与全部数据进行join，达到笛卡尔积的效果。</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>1，获得表a<br>2，copya表成b，注意是拓展的copy，即分区成5份（看资源情况可设置成更多份）：  </p>
+		<h2 id="hive�jѿ�����"><a href="#hive�jѿ�����" class="headerlink" title="hive�ĵѿ�����"></a>hive�ĵѿ�����</h2><p>hive��Ĭ�ϲ�ʹ�õѿ���������Ҫ�����������У�hive���������еѿ����������ǣ���ʵ�������У�������Ҫʹ�õ�����ʱ�͵ÿ����ù��ܣ�Ȼ����hive�����ѿ������Ľ��������������������㶼������һ��reduce�ϣ��ײ�ȷʵ���ˡ���ô������ô�Ż��أ�</p>
+<h2 id="�Z�����"><a href="#�Z�����" class="headerlink" title="�Ż�����"></a>�Ż�����</h2><p>�ѿ�����������Ҫ������ȫ������һ�����У�ʹ�õѿ�����������������Ҫ�������ڴ棬�����ж����������У���ô�͵ð����ݸ��ƶ��ݣ�Ȼ��ʵʱȴ�������ˣ���Ϊ���ѿ������ļ��������Ǽ��������������ˣ��������ݻ�ѹ��һ��reduce�ϣ������Ƕ��ݣ���Ȼ�������⣬���ǣ�ʵ�����Զ��Σ����������ˣ���<br>���ˣ���Ҫ�Ż��������Ӵ�reduce�ĸ�������ʱ��Ҫ�з��������߷ֿ飩�ĸ����������copy�ɶ��ݣ�����join�������ڼ���ʱ��С����������ȫ�����ݽ���join���ﵽ�ѿ�������Ч����</p>
+<h2 id="����ʵ��"><a href="#����ʵ��" class="headerlink" title="����ʵ��"></a>����ʵ��</h2><p>1�����ñ�a<br>2��copya����b��ע������չ��copy����������5�ݣ�����Դ���������óɸ����ݣ���  </p>
 <p>drop table if exists b;<br>create table b<br>as<br>select <em> from<br>(<br>select aa.</em>,’1,2,3,4,5’ as old_part  a aa<br>)b lateral view explode(split(old_part,’,’)) b as part<br>;</p>
-<p>3,把表a的记录进行随机打散：</p>
+<p>3,�ѱ�a�ļ�¼����������ɢ��</p>
 <p>drop table if exists aa;<br>create table aa<br>as<br>select aaa.<em><br>       ,cast(round(rand()</em>4+1.0,0) as int) as part from  a aaa<br>;</p>
-<p>4,做一般的join操作</p>
+<p>4,��һ����join����</p>
 <p>drop table if exists aab;<br>create table aab<br>as<br>select<br>   a.id<br>   ,b.id as id_tj<br>from aa a<br>join b b<br>on a.part=b.part<br>;</p>
-<p>5，这样就可5个reduce计算，比单独的一个reduce快的多</p>
-<h2 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h2><p>1, hive是分布式计算结构化数据的一个工具，本质上使用map-reduce计算框架；<br>2，hive操作与mysql类似，但有不同，比如表的in操作等；<br>3，使用map-reduce计算的方式，都需要考虑并行和分区概念。</p>
-<h2 id="最后的话"><a href="#最后的话" class="headerlink" title="最后的话"></a>最后的话</h2><p>分享即是收获，动手后才是自己的。</p>
+<p>5�������Ϳ�5��reduce���㣬�ȵ�����һ��reduce���Ķ�</p>
+<h2 id="����"><a href="#����" class="headerlink" title="����"></a>����</h2><p>1, hive�Ƿֲ�ʽ�����ṹ�����ݵ�һ�����ߣ�������ʹ��map-reduce�������ܣ�<br>2��hive������mysql���ƣ����в�ͬ����������in�����ȣ�<br>3��ʹ��map-reduce�����ķ�ʽ������Ҫ���ǲ��кͷ������</p>
+<h2 id="�����L�"><a href="#�����L�" class="headerlink" title="�����Ļ�"></a>�����Ļ�</h2><p>���������ջ񣬶��ֺ������Լ��ġ�</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -125,7 +125,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/优化，笛卡尔积/">优化，笛卡尔积</a>
+  <span></span> <a href="/tags/�Z�/">�Ż�</a><a href="/tags/�ѿ�����/">�ѿ�����</a>
   </div>
 
 </div>
@@ -134,7 +134,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2017/05/18/hive笛卡尔积优化/" data-title="hive笛卡尔积优化 | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  <div data-url="http://yoursite.com/2017/05/18/hive笛卡尔积优化/" data-title="hive�ѿ������Ż� | 山上掏金" data-tsina="1724571293" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -166,7 +166,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hive的笛卡尔积"><span class="toc-number">1.</span> <span class="toc-text">hive的笛卡尔积</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化历程"><span class="toc-number">2.</span> <span class="toc-text">优化历程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-number">3.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后话"><span class="toc-number">4.</span> <span class="toc-text">后话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后的话"><span class="toc-number">5.</span> <span class="toc-text">最后的话</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hive�jѿ�����"><span class="toc-number">1.</span> <span class="toc-text">hive�ĵѿ�����</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#�Z�����"><span class="toc-number">2.</span> <span class="toc-text">�Ż�����</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#����ʵ��"><span class="toc-number">3.</span> <span class="toc-text">����ʵ��</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#����"><span class="toc-number">4.</span> <span class="toc-text">����</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#�����L�"><span class="toc-number">5.</span> <span class="toc-text">�����Ļ�</span></a></li></ol>
  
   </div>
 
@@ -193,7 +193,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/优化，笛卡尔积/" title="优化，笛卡尔积">优化，笛卡尔积<sup>1</sup></a></li>
+				<li><a href="/tags/�Z�/" title="�Ż�">�Ż�<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/�ѿ�����/" title="�ѿ�����">�ѿ�����<sup>1</sup></a></li>
 			
 		
 		</ul>
