@@ -11,18 +11,18 @@
     
 
     
-    <meta name="description" content="快速开始在yarn上启动一个长期的flink集群启动一个拥有4个task的yarn会话，每个task有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# http://flink.apache.org/downloads.htmlcurl -O &amp;lt;flink_hadoop2_download_url&amp;gt;tar xvzf flink-&amp;#123;&amp;#123; si">
+    <meta name="description" content="翻译flink官网文档，flink在yarn集群提交job，调试，以及命令行提交格式。最后，是flink与yarn的交互分析。文中会夹杂一些实践经验，读者可以参考或者进行实践，完善。 快速开始在yarn上启动一个长期的flink集群启动一个拥有4个task的yarn会话，每个task有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# http://flink.apach">
 <meta name="keywords" content="flink,yarn,搭建,运行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="flink在yarn上搭建">
 <meta property="og:url" content="http://yoursite.com/2017/06/02/flink在yarn上搭建/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:description" content="快速开始在yarn上启动一个长期的flink集群启动一个拥有4个task的yarn会话，每个task有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# http://flink.apache.org/downloads.htmlcurl -O &amp;lt;flink_hadoop2_download_url&amp;gt;tar xvzf flink-&amp;#123;&amp;#123; si">
+<meta property="og:description" content="翻译flink官网文档，flink在yarn集群提交job，调试，以及命令行提交格式。最后，是flink与yarn的交互分析。文中会夹杂一些实践经验，读者可以参考或者进行实践，完善。 快速开始在yarn上启动一个长期的flink集群启动一个拥有4个task的yarn会话，每个task有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# http://flink.apach">
 <meta property="og:image" content="http://yoursite.com/fig/FlinkOnYarn.svg">
-<meta property="og:updated_time" content="2017-06-02T14:54:17.778Z">
+<meta property="og:updated_time" content="2017-06-02T15:24:37.779Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flink在yarn上搭建">
-<meta name="twitter:description" content="快速开始在yarn上启动一个长期的flink集群启动一个拥有4个task的yarn会话，每个task有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# http://flink.apache.org/downloads.htmlcurl -O &amp;lt;flink_hadoop2_download_url&amp;gt;tar xvzf flink-&amp;#123;&amp;#123; si">
+<meta name="twitter:description" content="翻译flink官网文档，flink在yarn集群提交job，调试，以及命令行提交格式。最后，是flink与yarn的交互分析。文中会夹杂一些实践经验，读者可以参考或者进行实践，完善。 快速开始在yarn上启动一个长期的flink集群启动一个拥有4个task的yarn会话，每个task有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# http://flink.apach">
 <meta name="twitter:image" content="http://yoursite.com/fig/FlinkOnYarn.svg">
 
     
@@ -51,7 +51,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -67,7 +67,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:yoursite.com">
 					</form>
 					
@@ -90,20 +90,21 @@
 		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
 		
   <p class="article-time">
-    <time datetime="2017-06-02T14:26:59.000Z" itemprop="datePublished"> 发表于 2017-06-02</time>
+    <time datetime="2017-06-02T14:26:59.000Z" itemprop="datePublished"> Published 2017-06-02</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快速开始"><span class="toc-number">1.</span> <span class="toc-text">快速开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在yarn上启动一个长期的flink集群"><span class="toc-number">1.1.</span> <span class="toc-text">在yarn上启动一个长期的flink集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在yarn上运行一个flink的任务"><span class="toc-number">1.2.</span> <span class="toc-text">在yarn上运行一个flink的任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-yarn-会话"><span class="toc-number">2.</span> <span class="toc-text">flink yarn 会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动flink会话"><span class="toc-number">2.1.</span> <span class="toc-text">启动flink会话</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载flink"><span class="toc-number">2.1.1.</span> <span class="toc-text">下载flink</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动一个会话"><span class="toc-number">2.1.2.</span> <span class="toc-text">启动一个会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隔离yarn会话"><span class="toc-number">2.1.3.</span> <span class="toc-text">隔离yarn会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关联现有会话"><span class="toc-number">2.1.4.</span> <span class="toc-text">关联现有会话</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提交job到flink"><span class="toc-number">2.2.</span> <span class="toc-text">提交job到flink</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在yarn上运行一个flink-任务"><span class="toc-number">3.</span> <span class="toc-text">在yarn上运行一个flink 任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用jars-amp-Classpath"><span class="toc-number">4.</span> <span class="toc-text">使用jars&Classpath</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink在yarn上的恢复行为"><span class="toc-number">5.</span> <span class="toc-text">flink在yarn上的恢复行为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试一个失败的yarn会话"><span class="toc-number">6.</span> <span class="toc-text">调试一个失败的yarn会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#日志文件"><span class="toc-number">6.1.</span> <span class="toc-text">日志文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yarn客户端控制台-amp-web接口"><span class="toc-number">6.2.</span> <span class="toc-text">yarn客户端控制台&web接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Build-YARN-client-for-a-specific-Hadoop-version"><span class="toc-number">7.</span> <span class="toc-text">Build YARN client for a specific Hadoop version</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防火墙后在yarn运行flink"><span class="toc-number">8.</span> <span class="toc-text">防火墙后在yarn运行flink</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背后-内部"><span class="toc-number">9.</span> <span class="toc-text">背后/内部</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="在yarn上启动一个长期的flink集群"><a href="#在yarn上启动一个长期的flink集群" class="headerlink" title="在yarn上启动一个长期的flink集群"></a>在yarn上启动一个长期的flink集群</h3><p>启动一个拥有4个task的yarn会话，每个task有4gb的堆内存:</p>
+		<p>翻译flink官网文档，flink在yarn集群提交job，调试，以及命令行提交格式。最后，是flink与yarn的交互分析。<br>文中会夹杂一些实践经验，读者可以参考或者进行实践，完善。</p>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="在yarn上启动一个长期的flink集群"><a href="#在yarn上启动一个长期的flink集群" class="headerlink" title="在yarn上启动一个长期的flink集群"></a>在yarn上启动一个长期的flink集群</h3><p>启动一个拥有4个task的yarn会话，每个task有4gb的堆内存:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 从flink下载页获取haddoop2包</div><div class="line"># http://flink.apache.org/downloads.html</div><div class="line">curl -O &lt;flink_hadoop2_download_url&gt;</div><div class="line">tar xvzf flink-&#123;&#123; site.version &#125;&#125;-bin-hadoop2.tgz</div><div class="line">cd flink-&#123;&#123; site.version &#125;&#125;/</div><div class="line">./bin/yarn-session.sh -n 4 -jm 1024 -tm 4096</div></pre></td></tr></table></figure>
 <p>特别指出，-s参数表示每个task上可用的处理节点数量。我们建议把节点数量设置成每个机器的处理器个数。<br>一旦会话被启动，你可以使用./bin/flink工具提交任务到集群上。</p>
 <h3 id="在yarn上运行一个flink的任务"><a href="#在yarn上运行一个flink的任务" class="headerlink" title="在yarn上运行一个flink的任务"></a>在yarn上运行一个flink的任务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 从flink下载页获取haddoop2包</div><div class="line"># http://flink.apache.org/downloads.html</div><div class="line">curl -O &lt;flink_hadoop2_download_url&gt;</div><div class="line">tar xvzf flink-&#123;&#123; site.version &#125;&#125;-bin-hadoop2.tgz</div><div class="line">cd flink-&#123;&#123; site.version &#125;&#125;/</div><div class="line">./bin/flink run -m yarn-cluster -yn 4 -yjm 1024 -ytm 4096 ./examples/batch/WordCount.jar</div></pre></td></tr></table></figure>
@@ -257,22 +258,22 @@
 	
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快速开始"><span class="toc-number">1.</span> <span class="toc-text">快速开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在yarn上启动一个长期的flink集群"><span class="toc-number">1.1.</span> <span class="toc-text">在yarn上启动一个长期的flink集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在yarn上运行一个flink的任务"><span class="toc-number">1.2.</span> <span class="toc-text">在yarn上运行一个flink的任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-yarn-会话"><span class="toc-number">2.</span> <span class="toc-text">flink yarn 会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动flink会话"><span class="toc-number">2.1.</span> <span class="toc-text">启动flink会话</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载flink"><span class="toc-number">2.1.1.</span> <span class="toc-text">下载flink</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动一个会话"><span class="toc-number">2.1.2.</span> <span class="toc-text">启动一个会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隔离yarn会话"><span class="toc-number">2.1.3.</span> <span class="toc-text">隔离yarn会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关联现有会话"><span class="toc-number">2.1.4.</span> <span class="toc-text">关联现有会话</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提交job到flink"><span class="toc-number">2.2.</span> <span class="toc-text">提交job到flink</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在yarn上运行一个flink-任务"><span class="toc-number">3.</span> <span class="toc-text">在yarn上运行一个flink 任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用jars-amp-Classpath"><span class="toc-number">4.</span> <span class="toc-text">使用jars&Classpath</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink在yarn上的恢复行为"><span class="toc-number">5.</span> <span class="toc-text">flink在yarn上的恢复行为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试一个失败的yarn会话"><span class="toc-number">6.</span> <span class="toc-text">调试一个失败的yarn会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#日志文件"><span class="toc-number">6.1.</span> <span class="toc-text">日志文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yarn客户端控制台-amp-web接口"><span class="toc-number">6.2.</span> <span class="toc-text">yarn客户端控制台&web接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Build-YARN-client-for-a-specific-Hadoop-version"><span class="toc-number">7.</span> <span class="toc-text">Build YARN client for a specific Hadoop version</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防火墙后在yarn运行flink"><span class="toc-number">8.</span> <span class="toc-text">防火墙后在yarn运行flink</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背后-内部"><span class="toc-number">9.</span> <span class="toc-text">背后/内部</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分类</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -301,7 +302,7 @@
 
   
 <div class="tagslist">
-	<p class="asidetitle">标签</p>
+	<p class="asidetitle">Tags</p>
 		<ul class="clearfix">
 		
 			
@@ -345,7 +346,7 @@
 
 
   <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -583,7 +584,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
