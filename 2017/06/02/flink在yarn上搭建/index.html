@@ -1,0 +1,632 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>flink在yarn上搭建 | 山上掏金</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="wenxi">
+    
+
+    
+    <meta name="description" content="快速开始在yarn上启动一个长期的flink集群启动一个拥有4个task的yarn会话，每个task有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# http://flink.apache.org/downloads.htmlcurl -O &amp;lt;flink_hadoop2_download_url&amp;gt;tar xvzf flink-&amp;#123;&amp;#123; si">
+<meta name="keywords" content="flink,yarn,搭建,运行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flink在yarn上搭建">
+<meta property="og:url" content="http://yoursite.com/2017/06/02/flink在yarn上搭建/index.html">
+<meta property="og:site_name" content="山上掏金">
+<meta property="og:description" content="快速开始在yarn上启动一个长期的flink集群启动一个拥有4个task的yarn会话，每个task有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# http://flink.apache.org/downloads.htmlcurl -O &amp;lt;flink_hadoop2_download_url&amp;gt;tar xvzf flink-&amp;#123;&amp;#123; si">
+<meta property="og:image" content="http://yoursite.com/fig/FlinkOnYarn.svg">
+<meta property="og:updated_time" content="2017-06-02T14:54:17.778Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="flink在yarn上搭建">
+<meta name="twitter:description" content="快速开始在yarn上启动一个长期的flink集群启动一个拥有4个task的yarn会话，每个task有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# http://flink.apache.org/downloads.htmlcurl -O &amp;lt;flink_hadoop2_download_url&amp;gt;tar xvzf flink-&amp;#123;&amp;#123; si">
+<meta name="twitter:image" content="http://yoursite.com/fig/FlinkOnYarn.svg">
+
+    
+    <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="山上掏金" title="山上掏金"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
+				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/06/02/flink在yarn上搭建/" title="flink在yarn上搭建" itemprop="url">flink在yarn上搭建</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
+		
+  <p class="article-time">
+    <time datetime="2017-06-02T14:26:59.000Z" itemprop="datePublished"> 发表于 2017-06-02</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快速开始"><span class="toc-number">1.</span> <span class="toc-text">快速开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在yarn上启动一个长期的flink集群"><span class="toc-number">1.1.</span> <span class="toc-text">在yarn上启动一个长期的flink集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在yarn上运行一个flink的任务"><span class="toc-number">1.2.</span> <span class="toc-text">在yarn上运行一个flink的任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-yarn-会话"><span class="toc-number">2.</span> <span class="toc-text">flink yarn 会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动flink会话"><span class="toc-number">2.1.</span> <span class="toc-text">启动flink会话</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载flink"><span class="toc-number">2.1.1.</span> <span class="toc-text">下载flink</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动一个会话"><span class="toc-number">2.1.2.</span> <span class="toc-text">启动一个会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隔离yarn会话"><span class="toc-number">2.1.3.</span> <span class="toc-text">隔离yarn会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关联现有会话"><span class="toc-number">2.1.4.</span> <span class="toc-text">关联现有会话</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提交job到flink"><span class="toc-number">2.2.</span> <span class="toc-text">提交job到flink</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在yarn上运行一个flink-任务"><span class="toc-number">3.</span> <span class="toc-text">在yarn上运行一个flink 任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用jars-amp-Classpath"><span class="toc-number">4.</span> <span class="toc-text">使用jars&Classpath</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink在yarn上的恢复行为"><span class="toc-number">5.</span> <span class="toc-text">flink在yarn上的恢复行为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试一个失败的yarn会话"><span class="toc-number">6.</span> <span class="toc-text">调试一个失败的yarn会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#日志文件"><span class="toc-number">6.1.</span> <span class="toc-text">日志文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yarn客户端控制台-amp-web接口"><span class="toc-number">6.2.</span> <span class="toc-text">yarn客户端控制台&web接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Build-YARN-client-for-a-specific-Hadoop-version"><span class="toc-number">7.</span> <span class="toc-text">Build YARN client for a specific Hadoop version</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防火墙后在yarn运行flink"><span class="toc-number">8.</span> <span class="toc-text">防火墙后在yarn运行flink</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背后-内部"><span class="toc-number">9.</span> <span class="toc-text">背后/内部</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="在yarn上启动一个长期的flink集群"><a href="#在yarn上启动一个长期的flink集群" class="headerlink" title="在yarn上启动一个长期的flink集群"></a>在yarn上启动一个长期的flink集群</h3><p>启动一个拥有4个task的yarn会话，每个task有4gb的堆内存:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 从flink下载页获取haddoop2包</div><div class="line"># http://flink.apache.org/downloads.html</div><div class="line">curl -O &lt;flink_hadoop2_download_url&gt;</div><div class="line">tar xvzf flink-&#123;&#123; site.version &#125;&#125;-bin-hadoop2.tgz</div><div class="line">cd flink-&#123;&#123; site.version &#125;&#125;/</div><div class="line">./bin/yarn-session.sh -n 4 -jm 1024 -tm 4096</div></pre></td></tr></table></figure>
+<p>特别指出，-s参数表示每个task上可用的处理节点数量。我们建议把节点数量设置成每个机器的处理器个数。<br>一旦会话被启动，你可以使用./bin/flink工具提交任务到集群上。</p>
+<h3 id="在yarn上运行一个flink的任务"><a href="#在yarn上运行一个flink的任务" class="headerlink" title="在yarn上运行一个flink的任务"></a>在yarn上运行一个flink的任务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 从flink下载页获取haddoop2包</div><div class="line"># http://flink.apache.org/downloads.html</div><div class="line">curl -O &lt;flink_hadoop2_download_url&gt;</div><div class="line">tar xvzf flink-&#123;&#123; site.version &#125;&#125;-bin-hadoop2.tgz</div><div class="line">cd flink-&#123;&#123; site.version &#125;&#125;/</div><div class="line">./bin/flink run -m yarn-cluster -yn 4 -yjm 1024 -ytm 4096 ./examples/batch/WordCount.jar</div></pre></td></tr></table></figure>
+<h2 id="flink-yarn-会话"><a href="#flink-yarn-会话" class="headerlink" title="flink yarn 会话"></a>flink yarn 会话</h2><p>apache <a href="http://hadoop.apache.org/" target="_blank" rel="external">Hadoop YARN</a>是一个资源管理架构，允许一个集群上运行多个分布式应用。<br>flink在yarn上相当于其他应用。如果已经有yarn的配置了，用户不需配置或安装任何东西。</p>
+<p><strong>只需</strong></p>
+<ul>
+<li>hadoop版本至少2.2</li>
+<li>HDFS（hadoop分布式文件系统）（或其他由hadoop支持的分布式文件系统）.</li>
+</ul>
+<p>如果你在使用flink yarn客户端有问题时，请看此<a href="http://flink.apache.org/faq.html#yarn-deployment" target="_blank" rel="external">问题论坛</a>.</p>
+<h3 id="启动flink会话"><a href="#启动flink会话" class="headerlink" title="启动flink会话"></a>启动flink会话</h3><p>跟随以下介绍学习怎样在你的yran集群中启动一个flink会话.</p>
+<p>一个会话将启动所有flink服务（job管理器和task管理器），这样你就可以提交程序给集群运行，记住在一个会话中可以运行<br>多个程序。</p>
+<h4 id="下载flink"><a href="#下载flink" class="headerlink" title="下载flink"></a>下载flink</h4><p>下载一个hadoop版本大于2的flink包，可从该下载页获得。它包含了所需的文件。<br>提取下载包的方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar xvzf flink-1.4-SNAPSHOT-bin-hadoop2.tgz</div><div class="line">cd flink-1.4-SNAPSHOT/</div></pre></td></tr></table></figure>
+<h4 id="启动一个会话"><a href="#启动一个会话" class="headerlink" title="启动一个会话"></a>启动一个会话</h4><p>使用如下命令来启动一个会话，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/yarn-session.sh</div></pre></td></tr></table></figure>
+<p>该命令的概览如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">使用:</div><div class="line">   参数必须</div><div class="line">     -n,--container &lt;arg&gt;   yarn上容器个数 (=taskmanager的个数）</div><div class="line">   可选参数</div><div class="line">     -D &lt;arg&gt;                        动态属性</div><div class="line">     -d,--detached                   启动分离（提交job的机器与yarn集群分离）</div><div class="line">     -jm,--jobManagerMemory &lt;arg&gt;    JobManager Container内存大小 [in MB]</div><div class="line">     -nm,--name                      自定义提交job的名字</div><div class="line">     -q,--query                      展示yarn的可用资源，内存和核数 (memory, cores)</div><div class="line">     -qu,--queue &lt;arg&gt;               指定yarn队列.</div><div class="line">     -s,--slots &lt;arg&gt;                每个TaskManager的节点数</div><div class="line">     -tm,--taskManagerMemory &lt;arg&gt;   每个TaskManager Container的内存大小 [in MB]</div><div class="line">     -z,--zookeeperNamespace &lt;arg&gt;   在高可用模式下，命名空间为zookeeper创建子路径</div></pre></td></tr></table></figure>
+<p>请注意客户端必须的YARN_CONF_DIR or HADOOP_CONF_DIR环境变量参数的设置，可以读取到yarn和hdfs配置。</p>
+<p><strong>例子:</strong> 如下命令分配10个task manager，每个task拥有8GB内存和32个处理节点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/yarn-session.sh -n 10 -tm 8192 -s 32</div></pre></td></tr></table></figure>
+<p>系统将使用conf/flink-conf.yaml下的配置。如果你想更改一些配置，请参考配置手册。</p>
+<p>flink在yarn上，将会重写如下配置参数的值，jobmanager.rpc.address（因为job manager总是分配在不同机器上），<br>taskmanager.tmp.dirs（我们使用yarn给的tmp目录），parallelism.default（如果节点个数被指定）。</p>
+<p>如果你不想改变配置文件来设置配置参数，这里有个方法来获得动态属性，通过-D标示。这样可以通过以下方法来传递参数，<br>-Dfs.overwrite-files=true -Dtaskmanager.network.memory.min=536346624.</p>
+<p>例子将请求启动11个容器（尽管仅需10个容器），因为这需要额外的1个容器给ApplicationMaster and Job Manager.</p>
+<p>只要flink部署在yarn集群上，它会让你看到Job Manager间的连接细节。</p>
+<p>通过停止unix进程（使用CTRL+C命令）来停止yarn会话，或者在客户端输入stop。</p>
+<p>flink在yran上仅仅启动所请求的容器，如果yarn集群上有足够的可用资源。大多yarn调度程序为容器，计算请求内存，一些还计算vcores数量。</p>
+<p>默认情况，vcores数量等于处理节点数（-s），yarn.containers.vcores允许自定义值重写vcores数量。</p>
+<h4 id="隔离yarn会话"><a href="#隔离yarn会话" class="headerlink" title="隔离yarn会话"></a>隔离yarn会话</h4><p>If you do not want to keep the Flink YARN client running all the time, it’s also possible to start a <em>detached</em> YARN session.<br>如果你不想保持flink yarn客户端一直运行，可以启动隔离yarn会话来达到目的。这个参数即是-d或–detached。<br>在此情况下，flink yarn客户端将仅提交flink到集群中，然后关闭连接。注意的是在此情况下，将不可能使用flink来停止yarn会话。<br>使用yarn命令（yarn application –kill <appid>）来停止yarn会话。</appid></p>
+<h4 id="关联现有会话"><a href="#关联现有会话" class="headerlink" title="关联现有会话"></a>关联现有会话</h4><p>使用如下命令启动一个会话</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/yarn-session.sh</div></pre></td></tr></table></figure>
+<p>这个命令将展示如下概览：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">使用:</div><div class="line">  必备</div><div class="line">     -id,--applicationId &lt;yarnAppId&gt; YARN application Id</div></pre></td></tr></table></figure>
+<p>如之前所述，YARN_CONF_DIR 或 HADOOP_CONF_DIR环境变量需设置能让YARN 和 HDFS 配置读取到。</p>
+<p><strong>例子:</strong> 假设以下命令关联一个正运行的flink yarn会话application_1463870264508_0029</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/yarn-session.sh -id application_1463870264508_0029</div></pre></td></tr></table></figure>
+<p>使用yarn 资源管理器来决定job管理器的RPC端口从而关联一个运行的会话。<br>停止yarn会话可通过停止unix进程（CTRL+C）或通过再客户端输入stop。</p>
+<h3 id="提交job到flink"><a href="#提交job到flink" class="headerlink" title="提交job到flink"></a>提交job到flink</h3><p>使用如下命令提交一个flink程序到yarn集群：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/flink</div></pre></td></tr></table></figure>
+<p>请参考命令行客户端文档。<br>命令行帮助菜单如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line">run操作编译和运行程序。</div><div class="line"></div><div class="line"> 语法: run [OPTIONS] &lt;jar-file&gt; &lt;arguments&gt;</div><div class="line">  &quot;run&quot; 操作参数:</div><div class="line">     -c,--class &lt;classname&gt;           程序入口的类 (&quot;main&quot;</div><div class="line">                                      方法 或 &quot;getPlan()&quot; 方法.jar文件没有在其清单中指定类才需要.</div><div class="line">     -m,--jobmanager &lt;host:port&gt;      连接job管理器（master）的地址. 使用此参数连接一个不同的job管理器，而不是在配置中指明.</div><div class="line">     -p,--parallelism &lt;parallelism&gt;   运行程序的并行度. 这个可选参数可覆盖配置中指定的默认值。</div></pre></td></tr></table></figure>
+<p>用run操作提交一个job到yarn上。客户端可以决定job管理器的地址。罕见情况下，你可使用-m参数指定job管理器地址。job管理器地址可在yarn控制台见到。</p>
+<p><strong>例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">wget -O LICENSE-2.0.txt http://www.apache.org/licenses/LICENSE-2.0.txt</div><div class="line">hadoop fs -copyFromLocal LICENSE-2.0.txt hdfs:/// ...</div><div class="line">./bin/flink run ./examples/batch/WordCount.jar \</div><div class="line">        hdfs:///..../LICENSE-2.0.txt hdfs:///.../wordcount-result.txt</div></pre></td></tr></table></figure>
+<p>如果存在如下错误，请确保所有task管理器已经启动:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Exception in thread &quot;main&quot; org.apache.flink.compiler.CompilerException:</div><div class="line">    Available instances could not be determined from job manager: Connection timed out.</div></pre></td></tr></table></figure>
+<p>你可以在job管理器的web接口中查看task管理器的数量。接口的地址会在yarn会话的控制台中输出。<br>如果task管理器一分钟内没有显示出，那么你应该在日志文件中检查错误在哪。</p>
+<h2 id="在yarn上运行一个flink-任务"><a href="#在yarn上运行一个flink-任务" class="headerlink" title="在yarn上运行一个flink 任务"></a>在yarn上运行一个flink 任务</h2><p>上述文档描述了如何启动一个flink集群在hadoop yarn环境下。这也可以仅执行一个job而启动flink在yarn下。<br>请注意客户端需要-yn值来设置task管理器的数量。</p>
+<p><strong><em>例子:</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/flink run -m yarn-cluster -yn 2 ./examples/batch/WordCount.jar</div></pre></td></tr></table></figure>
+<p>在yarn会话下命令行 ./bin/flink tool是可选的，以y或yarn前缀。</p>
+<p>注意：你可以通过设置FLINK_CONF_DIR环境变量来为每个job使用不同的配置目录。<br>使用这个将拷贝来自flink分布下conf目录，并更新每个job的日志。</p>
+<p>注意：组合-m yarn-cluster和隔离yarn会话（-yd）命令可”焚毁和忘掉”提交flink job在yarn集群中。<br>在此情况下，你的应用程序将得不到任何确认结果或 排除ExecutionEnvironment.execute()的请求消息。</p>
+<h2 id="使用jars-amp-Classpath"><a href="#使用jars-amp-Classpath" class="headerlink" title="使用jars&amp;Classpath"></a>使用jars&amp;Classpath</h2><p>默认下，flink会把用到的jars带进系统路径，当运行一个job时。这个行为可以用yarn.per-job-cluster.include-user-jar<br>参数来控制。</p>
+<p>当设置这个参数为DISABLED时，flink将把用户路径的jars带进。</p>
+<p>user-jars在系统路径位置可以通过设置参数来控制：</p>
+<ul>
+<li>ORDER：默认，按照字典路径顺序添加jar进系统。</li>
+<li>FIRST:系统路径最前的添加。</li>
+<li>LAST:系统路径最后的添加。</li>
+</ul>
+<h2 id="flink在yarn上的恢复行为"><a href="#flink在yarn上的恢复行为" class="headerlink" title="flink在yarn上的恢复行为"></a>flink在yarn上的恢复行为</h2><p>flink的yarn客户端有如下配置参数来控制行为当容器失败后，这些参数可通过conf/flink-conf.yaml设置，也可以通过<br>在启动yarn会话时用-D参数设置。</p>
+<ul>
+<li><code>yarn.reallocate-failed</code>: 控制flink是否重新分配失败的task管理器。默认true。</li>
+<li><code>yarn.maximum-failed-containers</code>: applicationMaster接受的最大容器失败个数，直到yarn会话失败。默认是-n设置的task管理器个数。</li>
+<li><code>yarn.application-attempts</code>: applicationMaster（+其拥有的task管理器个数）的尝试次数，默认1，applicationMaster失败则yarn会话整个失败。在yarn中指定更大值以便重启applicationMaster。</li>
+</ul>
+<h2 id="调试一个失败的yarn会话"><a href="#调试一个失败的yarn会话" class="headerlink" title="调试一个失败的yarn会话"></a>调试一个失败的yarn会话</h2><p>有很多原因使得一个flink的yarn会话失败。一个错误的hadoop安装（hdfs权限，yarn配置），版本兼容（运行flink在vanilla的hadoop上，却依赖Cloudera Hadoop）或其他原因。</p>
+<h3 id="日志文件"><a href="#日志文件" class="headerlink" title="日志文件"></a>日志文件</h3><p>部署时flink yarn会话失败，用户必须依靠hadoop yarn的日志。<br>最有用的是yarn日志集合。用户必须在yarn-site.xml文件中把yarn.log-aggregation-enable参数值设置为true，<br>使其生效。只要它一经生效，用户可以使用如下命令来检索一个（失败）yarn会话的所有日志文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yarn logs -applicationId &lt;application ID&gt;</div></pre></td></tr></table></figure>
+<p>在会话结束时请等待几秒钟直到日志展示出来。</p>
+<h3 id="yarn客户端控制台-amp-web接口"><a href="#yarn客户端控制台-amp-web接口" class="headerlink" title="yarn客户端控制台&amp;web接口"></a>yarn客户端控制台&amp;web接口</h3><p>flink yarn客户端也可以在终端输出错误信息，如果在运行时出错（如某时间task管理器停止工作）.此外，有yarn 资源管理器的web接口（默认是8088端口），这个资源管理器web接口的端口由<br>yarn.resourcemanager.webapp.address参数值决定。</p>
+<p>在web页面可访问运行yarn应用程序的日志文件并可显示失败应用程序的诊断信息。</p>
+<p>为指定hadoop版本构建yarn客户端</p>
+<p>用户使用像Hortonworks, Cloudera or MapR等公司发布的hadoop，它们的hadoop（hdfs）版本和yarn版本可能与构建flink冲突，<br>请参考构建介绍获得更细介绍。</p>
+<h2 id="Build-YARN-client-for-a-specific-Hadoop-version"><a href="#Build-YARN-client-for-a-specific-Hadoop-version" class="headerlink" title="Build YARN client for a specific Hadoop version"></a>Build YARN client for a specific Hadoop version</h2><p>Users using Hadoop distributions from companies like Hortonworks, Cloudera or MapR might have to build Flink against their specific versions of Hadoop (HDFS) and YARN. Please read the <a href="building.html">build instructions</a> for more details.</p>
+<h2 id="防火墙后在yarn运行flink"><a href="#防火墙后在yarn运行flink" class="headerlink" title="防火墙后在yarn运行flink"></a>防火墙后在yarn运行flink</h2><p>一些yarn集群使用防火墙来控制集群和余下网络之间的网络传输，在这种配置下，flink的job提交到yarn会话中只能通过集群网络（在防火墙背后），<br>如果在生产环境下不可行，flink允许配置一定范围的端口给相关服务，<br>在这些范围配置下，用户可以跨越防火墙提交job到flink。</p>
+<p>当前，有两个服务需要提交job:</p>
+<ul>
+<li>job管理器（yarn上的ApplicationMaster）</li>
+<li>运行job管理器的BlobServer</li>
+</ul>
+<p>当提交一个job到flink，BlobServer将会分发用户代码中的jars给所有工作节点（task管理器），<br>job管理器接收job本身并触发执行。</p>
+<p>以下两个配置参数可指定端口:</p>
+<ul>
+<li><code>yarn.application-master.port</code></li>
+<li><code>blob.server.port</code></li>
+</ul>
+<p>这两个配置可接收单个端口值（如50010），也可以接收范围（50000-50025），或者<br>组合（50010,50011,50020-50025,50050-50075）</p>
+<p>（hadoop使用同样的机制，配置参数是yarn.app.mapreduce.am.job.client.port-range）</p>
+<h2 id="背后-内部"><a href="#背后-内部" class="headerlink" title="背后/内部"></a>背后/内部</h2><p>本小节简要描述flink和yarn如何交互.</p>
+<p><img src="/fig/FlinkOnYarn.svg" class="img-responsive"></p>
+<p>yarn客户端需要访问hadoop的配置以连接yarn资源管理器和hdfs，这决定了hadoop配置采取如下策略，</p>
+<ul>
+<li>测试YARN_CONF_DIR, HADOOP_CONF_DIR or HADOOP_CONF_PATH （按此顺序）是否已配置，其中一个配置了，它们就可以读取到配置。</li>
+<li>如若上述策略失败（正确的yarn安装不会出现此情况），客户端使用HADOOP_HOME环境变量。如环境变量设置了，客户端会尝试访问$HADOOP_HOME/etc/hadoop（hadoop2.<em>）或 $HADOOP_HOME/conf（hadoop1.</em>）</li>
+</ul>
+<p>当启动一个新的flink yarn会话，客户端会先确认请求的资源（容器和内存）是否能获得到。<br>之后，客户端上传包含flink和hdfs配置的jars（步骤1）。</p>
+<p>下一步客户端请求一个yarn容器（步骤2）来启动ApplicationMaster（步骤3），<br>客户端注册了配置和容器资源的jar文件，指定机器运行的yarn节点管理器会准备好容器（下载文件），<br>这些结束了，ApplicationMaster (AM)就启动了。</p>
+<p>job管理器和AM运行在同一个容器里，它们成功启动后，AM知道job管理器（它拥有的主机）的地址。</p>
+<p>job管理器为task管理器生成一个新的flink配置（这样task可连接job管理器）。</p>
+<p>文件也上传到hdfs上。另外AM容器也为flink的web接口服务。yarn代码的所有端口是分配的临时端口。<br>这可让用户并行执行多个yarn会话。</p>
+<p>然后，AM启动分配到的容器，这些容器给flink的task管理器，将会下载jar和更新来自hdfs配置<br>，这些步骤完成后，flink就安装起来了，可以接收job了。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/flink/">flink</a>►<a class="article-category-link" href="/categories/flink/yarn/">yarn</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/flink/">flink</a><a href="/tags/yarn/">yarn</a><a href="/tags/搭建/">搭建</a><a href="/tags/运行/">运行</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/06/02/flink在yarn上搭建/" data-title="flink在yarn上搭建 | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/05/19/flink学习/"  title="flink学习">
+ <strong>下一篇：</strong><br/> 
+ <span>flink学习
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快速开始"><span class="toc-number">1.</span> <span class="toc-text">快速开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在yarn上启动一个长期的flink集群"><span class="toc-number">1.1.</span> <span class="toc-text">在yarn上启动一个长期的flink集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在yarn上运行一个flink的任务"><span class="toc-number">1.2.</span> <span class="toc-text">在yarn上运行一个flink的任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-yarn-会话"><span class="toc-number">2.</span> <span class="toc-text">flink yarn 会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动flink会话"><span class="toc-number">2.1.</span> <span class="toc-text">启动flink会话</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载flink"><span class="toc-number">2.1.1.</span> <span class="toc-text">下载flink</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动一个会话"><span class="toc-number">2.1.2.</span> <span class="toc-text">启动一个会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隔离yarn会话"><span class="toc-number">2.1.3.</span> <span class="toc-text">隔离yarn会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关联现有会话"><span class="toc-number">2.1.4.</span> <span class="toc-text">关联现有会话</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提交job到flink"><span class="toc-number">2.2.</span> <span class="toc-text">提交job到flink</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在yarn上运行一个flink-任务"><span class="toc-number">3.</span> <span class="toc-text">在yarn上运行一个flink 任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用jars-amp-Classpath"><span class="toc-number">4.</span> <span class="toc-text">使用jars&Classpath</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink在yarn上的恢复行为"><span class="toc-number">5.</span> <span class="toc-text">flink在yarn上的恢复行为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试一个失败的yarn会话"><span class="toc-number">6.</span> <span class="toc-text">调试一个失败的yarn会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#日志文件"><span class="toc-number">6.1.</span> <span class="toc-text">日志文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yarn客户端控制台-amp-web接口"><span class="toc-number">6.2.</span> <span class="toc-text">yarn客户端控制台&web接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Build-YARN-client-for-a-specific-Hadoop-version"><span class="toc-number">7.</span> <span class="toc-text">Build YARN client for a specific Hadoop version</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防火墙后在yarn运行flink"><span class="toc-number">8.</span> <span class="toc-text">防火墙后在yarn运行flink</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背后-内部"><span class="toc-number">9.</span> <span class="toc-text">背后/内部</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/flink/" title="flink">flink<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/hive/" title="hive">hive<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/flink/yarn/" title="yarn">yarn<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/flink/代码/" title="代码">代码<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/flink/代码/入门/" title="入门">入门<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/flink/" title="flink">flink<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/yarn/" title="yarn">yarn<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/搭建/" title="搭建">搭建<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/运行/" title="运行">运行<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/新手/" title="新手">新手<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/入门技巧/" title="入门技巧">入门技巧<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/实践经验/" title="实践经验">实践经验<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/优化/" title="优化">优化<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/笛卡尔积/" title="笛卡尔积">笛卡尔积<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://flink.apache.org/" target="_blank" title="Flink">Flink</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 你现在学的以后终将用到， <br/>
+			别被时间打脸.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1724571293" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/chlyzzo" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:rimin515@sina.cn" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="wenxi">wenxi</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
