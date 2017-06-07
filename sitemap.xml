@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chlyzzo.github.io/tags/index.html</loc>
+    
+    <lastmod>2017-06-07T15:30:24.098Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/categories/index.html</loc>
+    
+    <lastmod>2017-06-07T15:30:13.659Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/05/19/flink%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2017-06-07T15:29:37.024Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chlyzzo.github.io/2017/06/02/flink%E5%9C%A8yarn%E4%B8%8A%E6%90%AD%E5%BB%BA/</loc>
     
     <lastmod>2017-06-07T15:25:09.132Z</lastmod>
@@ -9,30 +30,9 @@
   </url>
   
   <url>
-    <loc>https://chlyzzo.github.io/2017/05/19/flink%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2017-06-07T15:24:49.376Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://chlyzzo.github.io/2017/05/18/hive%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF%E4%BC%98%E5%8C%96/</loc>
     
     <lastmod>2017-05-19T07:30:40.919Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/categories/index.html</loc>
-    
-    <lastmod>2017-05-18T11:23:33.997Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/tags/index.html</loc>
-    
-    <lastmod>2017-05-18T11:20:46.807Z</lastmod>
     
   </url>
   
