@@ -1270,21 +1270,6 @@ footer.article-footer {
   background: #c64d3e;
   text-shadow: 0 1px #a13c2f;
 }
-.article-share-qrcode:before {
-  font-family: "fontdiao" !important;
-  content: "\f132";
-}
-.article-share-qrcode:hover {
-  background: #49ae0f;
-  text-shadow: 0 1px #3a8b0c;
-}
-.article-share-renren:before {
-  content: "\f18b";
-}
-.article-share-renren:hover {
-  background: #369;
-  text-shadow: 0 1px #29527a;
-}
 .article-back-to-top:before {
   content: "\f062";
 }
