@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2017/05/19/flink学习/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="讲述flink在实践中的一些经验，对入门级的有一定的认识;flink的窗口，提交运行的命令含义，参数传递，函数重新编写，向量计算，读取csv文件等；主要是一些实践的笔记，比较粗略，后续再考虑逐步细写下，分成更多的小点。 首先从统计单词出发，这个统计是实时接收socket的消息来统计的，需要一个窗口，这里设定为每隔5秒统计一次； 代码 12345678910111213141516171819202">
-<meta property="og:updated_time" content="2017-06-07T15:50:23.315Z">
+<meta property="og:updated_time" content="2017-06-07T23:34:18.888Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flink学习">
 <meta name="twitter:description" content="讲述flink在实践中的一些经验，对入门级的有一定的认识;flink的窗口，提交运行的命令含义，参数传递，函数重新编写，向量计算，读取csv文件等；主要是一些实践的笔记，比较粗略，后续再考虑逐步细写下，分成更多的小点。 首先从统计单词出发，这个统计是实时接收socket的消息来统计的，需要一个窗口，这里设定为每隔5秒统计一次； 代码 12345678910111213141516171819202">
@@ -49,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -65,7 +65,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:chlyzzo.github.io">
 					</form>
 					
@@ -88,14 +88,14 @@
 		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
 		
   <p class="article-time">
-    <time datetime="2017-05-19T14:46:57.000Z" itemprop="datepublished"> 发表于 2017-05-19 22:46:57</time>
+    <time datetime="2017-05-19T14:46:57.000Z" itemprop="datepublished"> Published 2017-05-19 22:46:57</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-下datastrema的window操作"><span class="toc-number">1.</span> <span class="toc-text">flink 下datastrema的window操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flink下的windows的time类型，"><span class="toc-number">1.1.</span> <span class="toc-text">flink下的windows的time类型，</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink下的窗口定义，"><span class="toc-number">2.</span> <span class="toc-text">flink下的窗口定义，</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WindowedStream"><span class="toc-number">3.</span> <span class="toc-text">WindowedStream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink运行的参数意义"><span class="toc-number">4.</span> <span class="toc-text">flink运行的参数意义,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink架构重新学习"><span class="toc-number">5.</span> <span class="toc-text">flink架构重新学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#并行是怎么操作的"><span class="toc-number">5.1.</span> <span class="toc-text">并行是怎么操作的?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分布式-yarn-集群"><span class="toc-number">6.</span> <span class="toc-text">分布式,yarn,集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非常好的解读flink下的函数和参数"><span class="toc-number">7.</span> <span class="toc-text">非常好的解读flink下的函数和参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数传递-在构造函数中使用"><span class="toc-number">8.</span> <span class="toc-text">参数传递,在构造函数中使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用withParameters-Configuration"><span class="toc-number">9.</span> <span class="toc-text">使用withParameters(Configuration)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#全局参数"><span class="toc-number">10.</span> <span class="toc-text">全局参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#richfunction的使用"><span class="toc-number">11.</span> <span class="toc-text">richfunction的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state的使用"><span class="toc-number">12.</span> <span class="toc-text">state的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-下的向量-矩阵计算"><span class="toc-number">13.</span> <span class="toc-text">flink 下的向量,矩阵计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-读取csv文件的参数含义"><span class="toc-number">14.</span> <span class="toc-text">flink 读取csv文件的参数含义,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遍历目录下的所有文件"><span class="toc-number">15.</span> <span class="toc-text">遍历目录下的所有文件,</span></a></li></ol>
 		
@@ -213,7 +213,7 @@ ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Flink/">Flink</a>
+  <a class="article-category-link" href="/categories/flink/">flink</a>
 </div>
 
 
@@ -226,13 +226,10 @@ ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
 
 
 
-	<div class="article-share" id="share">
-	
-	  <div data-url="https://chlyzzo.github.io/2017/05/19/flink学习/" data-title="Flink学习 | 山上掏金" data-tsina="1724571293" class="share clearfix">
-	  </div>
-	
-	</div>
 
+<div class="comments-count">
+	
+</div>
 
 </footer>
 
@@ -242,10 +239,10 @@ ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/06/02/flink在yarn上搭建/" title="Flink在YARN上搭建">
+ <a href="/2017/06/02/flink在yarn上搭建/" title="Flink��YARN�ϴ">
   <strong>上一篇：</strong><br/>
   <span>
-  Flink在YARN上搭建</span>
+  Flink��YARN�ϴ</span>
 </a>
 </div>
 
@@ -263,10 +260,10 @@ ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
 	
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-下datastrema的window操作"><span class="toc-number">1.</span> <span class="toc-text">flink 下datastrema的window操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flink下的windows的time类型，"><span class="toc-number">1.1.</span> <span class="toc-text">flink下的windows的time类型，</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink下的窗口定义，"><span class="toc-number">2.</span> <span class="toc-text">flink下的窗口定义，</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WindowedStream"><span class="toc-number">3.</span> <span class="toc-text">WindowedStream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink运行的参数意义"><span class="toc-number">4.</span> <span class="toc-text">flink运行的参数意义,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink架构重新学习"><span class="toc-number">5.</span> <span class="toc-text">flink架构重新学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#并行是怎么操作的"><span class="toc-number">5.1.</span> <span class="toc-text">并行是怎么操作的?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分布式-yarn-集群"><span class="toc-number">6.</span> <span class="toc-text">分布式,yarn,集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非常好的解读flink下的函数和参数"><span class="toc-number">7.</span> <span class="toc-text">非常好的解读flink下的函数和参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数传递-在构造函数中使用"><span class="toc-number">8.</span> <span class="toc-text">参数传递,在构造函数中使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用withParameters-Configuration"><span class="toc-number">9.</span> <span class="toc-text">使用withParameters(Configuration)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#全局参数"><span class="toc-number">10.</span> <span class="toc-text">全局参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#richfunction的使用"><span class="toc-number">11.</span> <span class="toc-text">richfunction的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state的使用"><span class="toc-number">12.</span> <span class="toc-text">state的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-下的向量-矩阵计算"><span class="toc-number">13.</span> <span class="toc-text">flink 下的向量,矩阵计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-读取csv文件的参数含义"><span class="toc-number">14.</span> <span class="toc-text">flink 读取csv文件的参数含义,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遍历目录下的所有文件"><span class="toc-number">15.</span> <span class="toc-text">遍历目录下的所有文件,</span></a></li></ol>
  
@@ -281,11 +278,6 @@ ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
 	</div>
 	
 	
-	<section class="info">
-		<p> 你现在学的以后终将用到， <br/>
-			别被时间打脸.</p>
-	</section>
-	 
 	<div class="social-font" class="clearfix">
 		
 		<a href="http://weibo.com/1724571293" target="_blank" class="icon-weibo" title="微博"></a>
@@ -308,7 +300,7 @@ ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		Powered by © 2017 
 		
 		<a href="/about" target="_blank" title="wenxi">wenxi</a>
 		
@@ -496,7 +488,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
