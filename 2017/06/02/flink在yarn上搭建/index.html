@@ -1,61 +1,109 @@
-<!doctype html>
-<html lang="en">
-    <head>
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Flink在YARN上搭建 | 山上掏金</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="wenxi">
+    
+
+    
+    <meta name="description" content="翻译Flink官网文档，Flink在YARN集群提交job，调试，以及命令行提交格式。最后，是Flink与YARN的交互分析。文中会夹杂一些实践经验，读者可以参考或者进行实践，完善。 快速开始在YARN上启动一个长期的Flink集群启动一个拥有4个Task Manager的yarn会话，每个Task Manager有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# ht">
+<meta name="keywords" content="搭建,运行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flink在YARN上搭建">
+<meta property="og:url" content="https://chlyzzo.github.io/2017/06/02/flink在yarn上搭建/index.html">
+<meta property="og:site_name" content="山上掏金">
+<meta property="og:description" content="翻译Flink官网文档，Flink在YARN集群提交job，调试，以及命令行提交格式。最后，是Flink与YARN的交互分析。文中会夹杂一些实践经验，读者可以参考或者进行实践，完善。 快速开始在YARN上启动一个长期的Flink集群启动一个拥有4个Task Manager的yarn会话，每个Task Manager有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# ht">
+<meta property="og:image" content="https://chlyzzo.github.io/fig/FlinkOnYarn.svg">
+<meta property="og:updated_time" content="2017-06-07T15:25:09.132Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flink在YARN上搭建">
+<meta name="twitter:description" content="翻译Flink官网文档，Flink在YARN集群提交job，调试，以及命令行提交格式。最后，是Flink与YARN的交互分析。文中会夹杂一些实践经验，读者可以参考或者进行实践，完善。 快速开始在YARN上启动一个长期的Flink集群启动一个拥有4个Task Manager的yarn会话，每个Task Manager有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# ht">
+<meta name="twitter:image" content="https://chlyzzo.github.io/fig/FlinkOnYarn.svg">
+
+    
+    <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
 		
-        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="description" content="">
-        <link rel="shortcut icon" href="/asset/guolin.png"/>
-        <link rel="canonical" href="http://guolinn.com/">
-        <link rel="alternate" type="application/rss+xml" title="wenxi" href="/atom.xml">
-        <title>Flink在YARN上搭建 | 山上掏金</title>
-        <meta name="description" content="{{meta_description}}">
-
-        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
-        <meta name="HandheldFriendly" content="True" />
-        <meta name="MobileOptimized" content="320" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-    </head>
-    
-		<body class="post-template">
-	
-
-        <header id="header">
-            <a id="logo" href="/"><img src="/asset/guolin.png" alt="山上掏金" /></a>
-            <h1><a href="/">wenxi</a></h1>
-            <p>每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</p>
-            <div id="follow-icons">
-                  <a href="/atom.xml"><i class="fa fa-rss-square fa-2x"></i></a>
-  </div>
-<h6><a href="/about">About</a></h6>
-        </header>
-
-        <main id="content">
-        
-
-<article class="post">
-  June 2, 2017
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="山上掏金" title="山上掏金"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
+				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:chlyzzo.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
   
-    <span class="taglist">  &middot; 
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
     
+      <a href="/2017/06/02/flink在yarn上搭建/" title="Flink在YARN上搭建" itemprop="url">Flink在YARN上搭建</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
+		
+  <p class="article-time">
+    <time datetime="2017-06-02T14:26:59.000Z" itemprop="datepublished"> 发表于 2017-06-02 22:26:59</time>
     
-      <a href='/tags/搭建/'>搭建</a> 
-    
-      <a href='/tags/运行/'>运行</a> 
-    
-    </span>
-  
-
-  <h1 class="post-title">Flink在YARN上搭建</h1>
-  <section class="post-content article-entry">
-    <p>翻译Flink官网文档，Flink在YARN集群提交job，调试，以及命令行提交格式。最后，是Flink与YARN的交互分析。<br>文中会夹杂一些实践经验，读者可以参考或者进行实践，完善。</p>
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快速开始"><span class="toc-number">1.</span> <span class="toc-text">快速开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在YARN上启动一个长期的Flink集群"><span class="toc-number">1.1.</span> <span class="toc-text">在YARN上启动一个长期的Flink集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在YARN上运行一个Flink的任务"><span class="toc-number">1.2.</span> <span class="toc-text">在YARN上运行一个Flink的任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-YARN-会话"><span class="toc-number">2.</span> <span class="toc-text">Flink YARN 会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动Flink会话"><span class="toc-number">2.1.</span> <span class="toc-text">启动Flink会话</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载Flink"><span class="toc-number">2.1.1.</span> <span class="toc-text">下载Flink</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动一个会话"><span class="toc-number">2.1.2.</span> <span class="toc-text">启动一个会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隔离YARN会话"><span class="toc-number">2.1.3.</span> <span class="toc-text">隔离YARN会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关联现有会话"><span class="toc-number">2.1.4.</span> <span class="toc-text">关联现有会话</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提交job到Flink"><span class="toc-number">2.2.</span> <span class="toc-text">提交job到Flink</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在YARN上运行一个Flink-任务"><span class="toc-number">3.</span> <span class="toc-text">在YARN上运行一个Flink 任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用jars-amp-Classpath"><span class="toc-number">4.</span> <span class="toc-text">使用jars&Classpath</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink在YARN上的恢复行为"><span class="toc-number">5.</span> <span class="toc-text">Flink在YARN上的恢复行为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试一个失败的YARN会话"><span class="toc-number">6.</span> <span class="toc-text">调试一个失败的YARN会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#日志文件"><span class="toc-number">6.1.</span> <span class="toc-text">日志文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#YARN客户端控制台-amp-web接口"><span class="toc-number">6.2.</span> <span class="toc-text">YARN客户端控制台&web接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为指定Hadoop版本构建YARN客户端"><span class="toc-number">7.</span> <span class="toc-text">为指定Hadoop版本构建YARN客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防火墙后在YARN运行Flink"><span class="toc-number">8.</span> <span class="toc-text">防火墙后在YARN运行Flink</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背后-内部"><span class="toc-number">9.</span> <span class="toc-text">背后/内部</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实践经验"><span class="toc-number">10.</span> <span class="toc-text">实践经验</span></a></li></ol>
+		
+		</div>
+		
+		<p>翻译Flink官网文档，Flink在YARN集群提交job，调试，以及命令行提交格式。最后，是Flink与YARN的交互分析。<br>文中会夹杂一些实践经验，读者可以参考或者进行实践，完善。</p>
 <h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="在YARN上启动一个长期的Flink集群"><a href="#在YARN上启动一个长期的Flink集群" class="headerlink" title="在YARN上启动一个长期的Flink集群"></a>在YARN上启动一个长期的Flink集群</h3><p>启动一个拥有4个Task Manager的yarn会话，每个Task Manager有4gb的堆内存:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 从flink下载页获取haddoop2包</span></div><div class="line"><span class="comment"># http://flink.apache.org/downloads.html</span></div><div class="line">curl -O &lt;flink_hadoop2_download_url&gt;</div><div class="line">tar xvzf flink-&#123;&#123; site.version &#125;&#125;-bin-hadoop2.tgz</div><div class="line"><span class="built_in">cd</span> flink-&#123;&#123; site.version &#125;&#125;/</div><div class="line">./bin/yarn-session.sh -n 4 -jm 1024 -tm 4096</div></pre></td></tr></table></figure>
 <p>特别指出，-s参数表示每个Task Manager上可用的处理槽（processing slot）数量。我们建议把槽数量设置成每个机器处理器的个数。<br>一旦会话被启动，你可以使用./bin/flink工具提交任务到集群上。</p>
@@ -163,34 +211,332 @@
 <p>2，Flink的job提交YARN集群执行时，建议把参数-yd带上，即断开提交客户端与YARN集群的通信。如果不加-yd参数，会在提交job的机器上占用很大内存保持job在YARN上的通信，造成机器资源占用。断开连接后怎么保持job的可靠性，即失败时可自动提交，这功能可在Flink的job代码中配置<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.2/dev/restart_strategies.html" target="_blank" rel="external">重启策略</a>:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">1,失败后尝试重启动策略</div><div class="line"></div><div class="line">在失败后,尝试重启动3次,每次间隔10秒;如果尝试3次后,job还是失败,则不再重启,宣告job失败;不是立刻执行重启,而是延迟固定时间,这是为了让底层有时间准备好环境,比如外部系统连接.</div><div class="line"></div><div class="line">import org.apache.flink.api.common.time.Time</div><div class="line">import java.util.concurrent.TimeUnit</div><div class="line">import org.apache.flink.api.common.restartstrategy.RestartStrategies</div><div class="line"></div><div class="line">val env = ExecutionEnvironment.getExecutionEnvironment()</div><div class="line">env.setRestartStrategy(RestartStrategies.fixedDelayRestart(</div><div class="line">  3, // number of restart attempts</div><div class="line">  Time.of(10, TimeUnit.SECONDS) // delay</div><div class="line">))</div><div class="line"></div><div class="line">2,失败率重启策略</div><div class="line"></div><div class="line">在一定时间段内重启失败率太高,则宣告job失败;在两个尝试策略下,会等待一定时间.</div><div class="line"></div><div class="line">时间间隔内尝试重启job的次数;</div><div class="line">时间间隔多长;</div><div class="line">两次重启间的延迟时长;</div><div class="line"></div><div class="line">val env = ExecutionEnvironment.getExecutionEnvironment()</div><div class="line">env.setRestartStrategy(RestartStrategies.failureRateRestart(</div><div class="line">  3, // max failures per unit</div><div class="line">  Time.of(5, TimeUnit.MINUTES), //time interval <span class="keyword">for</span> measuring failure rate</div><div class="line">  Time.of(10, TimeUnit.SECONDS) // delay</div><div class="line">))</div></pre></td></tr></table></figure>
 <p>3,Flink的新版本，最好在assembly项目时把包到带上，虽然包很大，但是为了YARN的其他开源版本兼容，建议使用程序的包。这样提交运行时不用–classpath带上包。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
 
-  </section>
-  <footer class="post-footer">
-    <!--
-    <section class="author">
-      <h4>wenxi</h4>
-      <p></p>
-    </section>
-    -->
-  </footer>
-</article>
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Flink/">Flink</a>►<a class="article-category-link" href="/categories/Flink/YARN/">YARN</a>
+</div>
 
-<nav class="pagination" role="pagination">
-    
-    <span class="page-number">•</span>
-    
-    <a class="older-posts" href="/2017/05/19/flink学习/">
-        <!--Flink学习--> next →
-    </a>
-    
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/搭建/">搭建</a><a href="/tags/运行/">运行</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://chlyzzo.github.io/2017/06/02/flink在yarn上搭建/" data-title="Flink在YARN上搭建 | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/05/19/flink学习/"  title="Flink学习">
+ <strong>下一篇：</strong><br/> 
+ <span>Flink学习
+</span>
+</a>
+</div>
+
 </nav>
 
+	
 
-        </main>
-        <footer id="footer">
-            <section id="footer-message">&copy; 2017 wenxi. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.</section>
-        </footer>
-    </body>
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快速开始"><span class="toc-number">1.</span> <span class="toc-text">快速开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在YARN上启动一个长期的Flink集群"><span class="toc-number">1.1.</span> <span class="toc-text">在YARN上启动一个长期的Flink集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在YARN上运行一个Flink的任务"><span class="toc-number">1.2.</span> <span class="toc-text">在YARN上运行一个Flink的任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-YARN-会话"><span class="toc-number">2.</span> <span class="toc-text">Flink YARN 会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动Flink会话"><span class="toc-number">2.1.</span> <span class="toc-text">启动Flink会话</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载Flink"><span class="toc-number">2.1.1.</span> <span class="toc-text">下载Flink</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动一个会话"><span class="toc-number">2.1.2.</span> <span class="toc-text">启动一个会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隔离YARN会话"><span class="toc-number">2.1.3.</span> <span class="toc-text">隔离YARN会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关联现有会话"><span class="toc-number">2.1.4.</span> <span class="toc-text">关联现有会话</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提交job到Flink"><span class="toc-number">2.2.</span> <span class="toc-text">提交job到Flink</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在YARN上运行一个Flink-任务"><span class="toc-number">3.</span> <span class="toc-text">在YARN上运行一个Flink 任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用jars-amp-Classpath"><span class="toc-number">4.</span> <span class="toc-text">使用jars&Classpath</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink在YARN上的恢复行为"><span class="toc-number">5.</span> <span class="toc-text">Flink在YARN上的恢复行为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试一个失败的YARN会话"><span class="toc-number">6.</span> <span class="toc-text">调试一个失败的YARN会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#日志文件"><span class="toc-number">6.1.</span> <span class="toc-text">日志文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#YARN客户端控制台-amp-web接口"><span class="toc-number">6.2.</span> <span class="toc-text">YARN客户端控制台&web接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为指定Hadoop版本构建YARN客户端"><span class="toc-number">7.</span> <span class="toc-text">为指定Hadoop版本构建YARN客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防火墙后在YARN运行Flink"><span class="toc-number">8.</span> <span class="toc-text">防火墙后在YARN运行Flink</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背后-内部"><span class="toc-number">9.</span> <span class="toc-text">背后/内部</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实践经验"><span class="toc-number">10.</span> <span class="toc-text">实践经验</span></a></li></ol>
+ 
+  </div>
+
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 你现在学的以后终将用到， <br/>
+			别被时间打脸.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1724571293" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/chlyzzo" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:rimin515@sina.cn" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="wenxi">wenxi</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?429f38d3d6ccb4eb5fdff3bcb2e9bb80";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
 </html>
-
-
