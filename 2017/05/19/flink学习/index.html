@@ -1,346 +1,63 @@
 <!doctype html>
+<html lang="en">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="/asset/guolin.png"/>
+        <link rel="canonical" href="http://guolinn.com/">
+        <link rel="alternate" type="application/rss+xml" title="wenxi" href="/atom.xml">
+        <title>Flink学习 | 山上掏金</title>
+        <meta name="description" content="{{meta_description}}">
 
+        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-
-  
-
-
-<html class="theme-next muse use-motion" lang="">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
+    </head>
     
-    
-  
+		<body class="post-template">
+	
 
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="新手,入门技巧,实践经验," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="讲述flink在实践中的一些经验，对入门级的有一定的认识;flink的窗口，提交运行的命令含义，参数传递，函数重新编写，向量计算，读取csv文件等；主要是一些实践的笔记，比较粗略，后续再考虑逐步细写下，分成更多的小点。 首先从统计单词出发，这个统计是实时接收socket的消息来统计的，需要一个窗口，这里设定为每隔5秒统计一次； 代码 12345678910111213141516171819202">
-<meta name="keywords" content="新手,入门技巧,实践经验">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Flink学习">
-<meta property="og:url" content="https://chlyzzo.github.io/2017/05/19/flink学习/index.html">
-<meta property="og:site_name" content="山上掏金">
-<meta property="og:description" content="讲述flink在实践中的一些经验，对入门级的有一定的认识;flink的窗口，提交运行的命令含义，参数传递，函数重新编写，向量计算，读取csv文件等；主要是一些实践的笔记，比较粗略，后续再考虑逐步细写下，分成更多的小点。 首先从统计单词出发，这个统计是实时接收socket的消息来统计的，需要一个窗口，这里设定为每隔5秒统计一次； 代码 12345678910111213141516171819202">
-<meta property="og:updated_time" content="2017-06-07T15:50:23.315Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Flink学习">
-<meta name="twitter:description" content="讲述flink在实践中的一些经验，对入门级的有一定的认识;flink的窗口，提交运行的命令含义，参数传递，函数重新编写，向量计算，读取csv文件等；主要是一些实践的笔记，比较粗略，后续再考虑逐步细写下，分成更多的小点。 首先从统计单词出发，这个统计是实时接收socket的消息来统计的，需要一个窗口，这里设定为每隔5秒统计一次； 代码 12345678910111213141516171819202">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="https://chlyzzo.github.io/2017/05/19/flink学习/"/>
-
-
-
-
-
-  <title>Flink学习 | 山上掏金</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">山上掏金</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</p>
-      
+        <header id="header">
+            <a id="logo" href="/"><img src="/asset/guolin.png" alt="山上掏金" /></a>
+            <h1><a href="/">wenxi</a></h1>
+            <p>每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</p>
+            <div id="follow-icons">
+                  <a href="/atom.xml"><i class="fa fa-rss-square fa-2x"></i></a>
   </div>
+<h6><a href="/about">About</a></h6>
+        </header>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
+        <main id="content">
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
 
-      
-    </ul>
+<article class="post">
+  May 19, 2017
   
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+    <span class="taglist">  &middot; 
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://chlyzzo.github.io/2017/05/19/flink学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wenxi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+    
+      <a href='/tags/新手/'>新手</a> 
+    
+      <a href='/tags/入门技巧/'>入门技巧</a> 
+    
+      <a href='/tags/实践经验/'>实践经验</a> 
+    
     </span>
+  
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="山上掏金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">Flink学习</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-19T22:46:57+08:00">
-                2017-05-19 22:46:57
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Flink/" itemprop="url" rel="index">
-                    <span itemprop="name">Flink</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>讲述flink在实践中的一些经验，对入门级的有一定的认识;<br>flink的窗口，提交运行的命令含义，参数传递，函数重新编写，向量计算，读取csv文件等；<br>主要是一些实践的笔记，比较粗略，后续再考虑逐步细写下，分成更多的小点。</p>
+  <h1 class="post-title">Flink学习</h1>
+  <section class="post-content article-entry">
+    <p>讲述flink在实践中的一些经验，对入门级的有一定的认识;<br>flink的窗口，提交运行的命令含义，参数传递，函数重新编写，向量计算，读取csv文件等；<br>主要是一些实践的笔记，比较粗略，后续再考虑逐步细写下，分成更多的小点。</p>
 <p>首先从统计单词出发，这个统计是实时接收socket的消息来统计的，需要一个窗口，这里设定为每隔5秒统计一次；</p>
 <p>代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class WindowWordCount &#123;</div><div class="line">       public static void main(String[] args) throws Exception &#123;</div><div class="line">                StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();</div><div class="line">                DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; dataStream = env</div><div class="line">                .socketTextStream(&quot;localhost&quot;, 9999)</div><div class="line">                .flatMap(new Splitter())</div><div class="line">                .keyBy(0)</div><div class="line">                .timeWindow(Time.of(5, TimeUnit.SECONDS))</div><div class="line">                .sum(1);</div><div class="line"></div><div class="line">        dataStream.print();</div><div class="line">        env.execute(&quot;Window WordCount&quot;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public static class Splitter implements FlatMapFunction&lt;String, Tuple2&lt;String, Integer&gt;&gt; &#123;</div><div class="line">        @Override</div><div class="line">        public void flatMap(String sentence, Collector&lt;Tuple2&lt;String, Integer&gt;&gt; out) throws Exception &#123;</div><div class="line">            for (String word: sentence.split(&quot; &quot;)) &#123;</div><div class="line">                out.collect(new Tuple2&lt;String, Integer&gt;(word, 1));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -446,391 +163,37 @@ ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
 <p>ignoreFirstLine: 是否忽略第一行,因为第一行有时是为了解释用的.</p>
 <h2 id="遍历目录下的所有文件"><a href="#遍历目录下的所有文件" class="headerlink" title="遍历目录下的所有文件,"></a>遍历目录下的所有文件,</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// enable recursive enumeration of nested input files</div><div class="line">val env  = ExecutionEnvironment.getExecutionEnvironment</div><div class="line"></div><div class="line">// create a configuration object</div><div class="line">val parameters = new Configuration</div><div class="line"></div><div class="line">// set the recursive enumeration parameter</div><div class="line">parameters.setBoolean(&quot;recursive.file.enumeration&quot;, true) //将递归遍历目录设置为true</div><div class="line"></div><div class="line">// pass the configuration to the data source</div><div class="line">env.readTextFile(&quot;file:///path/with.nested/files&quot;).withParameters(parameters)</div></pre></td></tr></table></figure>
 
-      
-    </div>
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>wenxi</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/新手/" rel="tag"># 新手</a>
-          
-            <a href="/tags/入门技巧/" rel="tag"># 入门技巧</a>
-          
-            <a href="/tags/实践经验/" rel="tag"># 实践经验</a>
-          
-        </div>
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/05/18/hive笛卡尔积优化/" rel="next" title="hive笛卡尔积优化">
-                <i class="fa fa-chevron-left"></i> hive笛卡尔积优化
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/02/flink在yarn上搭建/" rel="prev" title="Flink在YARN上搭建">
-                Flink在YARN上搭建 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
+<nav class="pagination" role="pagination">
     
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="wenxi" />
-          <p class="site-author-name" itemprop="name">wenxi</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">categories</span>
-              
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">tags</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/chlyzzo" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/longshenfeiyang" target="_blank" title="微博">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  微博
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#flink-下datastrema的window操作"><span class="nav-number">1.</span> <span class="nav-text">flink 下datastrema的window操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flink下的windows的time类型，"><span class="nav-number">1.1.</span> <span class="nav-text">flink下的windows的time类型，</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flink下的窗口定义，"><span class="nav-number">2.</span> <span class="nav-text">flink下的窗口定义，</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WindowedStream"><span class="nav-number">3.</span> <span class="nav-text">WindowedStream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flink运行的参数意义"><span class="nav-number">4.</span> <span class="nav-text">flink运行的参数意义,</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flink架构重新学习"><span class="nav-number">5.</span> <span class="nav-text">flink架构重新学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并行是怎么操作的"><span class="nav-number">5.1.</span> <span class="nav-text">并行是怎么操作的?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式-yarn-集群"><span class="nav-number">6.</span> <span class="nav-text">分布式,yarn,集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非常好的解读flink下的函数和参数"><span class="nav-number">7.</span> <span class="nav-text">非常好的解读flink下的函数和参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数传递-在构造函数中使用"><span class="nav-number">8.</span> <span class="nav-text">参数传递,在构造函数中使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用withParameters-Configuration"><span class="nav-number">9.</span> <span class="nav-text">使用withParameters(Configuration)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局参数"><span class="nav-number">10.</span> <span class="nav-text">全局参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#richfunction的使用"><span class="nav-number">11.</span> <span class="nav-text">richfunction的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#state的使用"><span class="nav-number">12.</span> <span class="nav-text">state的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flink-下的向量-矩阵计算"><span class="nav-number">13.</span> <span class="nav-text">flink 下的向量,矩阵计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flink-读取csv文件的参数含义"><span class="nav-number">14.</span> <span class="nav-text">flink 读取csv文件的参数含义,</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历目录下的所有文件"><span class="nav-number">15.</span> <span class="nav-text">遍历目录下的所有文件,</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">wenxi</span>
-</div>
-
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
+    <a class="newer-posts" href="/2017/06/02/flink在yarn上搭建/">
+        ← prev <!--Flink在YARN上搭建-->
+    </a>
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
+    <span class="page-number">•</span>
     
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-</body>
+    <a class="older-posts" href="/2017/05/18/hive笛卡尔积优化/">
+        <!--hive笛卡尔积优化--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2017 wenxi. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. <a href="https://github.com/guolin/crisp-hexo-theme" target="_blank">crisp</a> theme by <a href="guolin.github.io" target="_blank">Guo Lin</a>.</section>
+        </footer>
+    </body>
 </html>
+
+

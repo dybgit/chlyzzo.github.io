@@ -1,359 +1,61 @@
 <!doctype html>
+<html lang="en">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="/asset/guolin.png"/>
+        <link rel="canonical" href="http://guolinn.com/">
+        <link rel="alternate" type="application/rss+xml" title="wenxi" href="/atom.xml">
+        <title>Flink在YARN上搭建 | 山上掏金</title>
+        <meta name="description" content="{{meta_description}}">
 
+        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-
-  
-
-
-<html class="theme-next muse use-motion" lang="">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
+    </head>
     
-    
-  
+		<body class="post-template">
+	
 
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="搭建,运行," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="翻译Flink官网文档，Flink在YARN集群提交job，调试，以及命令行提交格式。最后，是Flink与YARN的交互分析。文中会夹杂一些实践经验，读者可以参考或者进行实践，完善。 快速开始在YARN上启动一个长期的Flink集群启动一个拥有4个Task Manager的yarn会话，每个Task Manager有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# ht">
-<meta name="keywords" content="搭建,运行">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Flink在YARN上搭建">
-<meta property="og:url" content="https://chlyzzo.github.io/2017/06/02/flink在yarn上搭建/index.html">
-<meta property="og:site_name" content="山上掏金">
-<meta property="og:description" content="翻译Flink官网文档，Flink在YARN集群提交job，调试，以及命令行提交格式。最后，是Flink与YARN的交互分析。文中会夹杂一些实践经验，读者可以参考或者进行实践，完善。 快速开始在YARN上启动一个长期的Flink集群启动一个拥有4个Task Manager的yarn会话，每个Task Manager有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# ht">
-<meta property="og:image" content="https://chlyzzo.github.io/fig/FlinkOnYarn.svg">
-<meta property="og:updated_time" content="2017-06-07T15:25:09.132Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Flink在YARN上搭建">
-<meta name="twitter:description" content="翻译Flink官网文档，Flink在YARN集群提交job，调试，以及命令行提交格式。最后，是Flink与YARN的交互分析。文中会夹杂一些实践经验，读者可以参考或者进行实践，完善。 快速开始在YARN上启动一个长期的Flink集群启动一个拥有4个Task Manager的yarn会话，每个Task Manager有4gb的堆内存: 123456# 从flink下载页获取haddoop2包# ht">
-<meta name="twitter:image" content="https://chlyzzo.github.io/fig/FlinkOnYarn.svg">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="https://chlyzzo.github.io/2017/06/02/flink在yarn上搭建/"/>
-
-
-
-
-
-  <title>Flink在YARN上搭建 | 山上掏金</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">山上掏金</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</p>
-      
+        <header id="header">
+            <a id="logo" href="/"><img src="/asset/guolin.png" alt="山上掏金" /></a>
+            <h1><a href="/">wenxi</a></h1>
+            <p>每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</p>
+            <div id="follow-icons">
+                  <a href="/atom.xml"><i class="fa fa-rss-square fa-2x"></i></a>
   </div>
+<h6><a href="/about">About</a></h6>
+        </header>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
+        <main id="content">
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
 
-      
-    </ul>
+<article class="post">
+  June 2, 2017
   
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+    <span class="taglist">  &middot; 
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://chlyzzo.github.io/2017/06/02/flink在yarn上搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wenxi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+    
+      <a href='/tags/搭建/'>搭建</a> 
+    
+      <a href='/tags/运行/'>运行</a> 
+    
     </span>
+  
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="山上掏金">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">Flink在YARN上搭建</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-02T22:26:59+08:00">
-                2017-06-02 22:26:59
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Flink/" itemprop="url" rel="index">
-                    <span itemprop="name">Flink</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Flink/YARN/" itemprop="url" rel="index">
-                    <span itemprop="name">YARN</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>翻译Flink官网文档，Flink在YARN集群提交job，调试，以及命令行提交格式。最后，是Flink与YARN的交互分析。<br>文中会夹杂一些实践经验，读者可以参考或者进行实践，完善。</p>
+  <h1 class="post-title">Flink在YARN上搭建</h1>
+  <section class="post-content article-entry">
+    <p>翻译Flink官网文档，Flink在YARN集群提交job，调试，以及命令行提交格式。最后，是Flink与YARN的交互分析。<br>文中会夹杂一些实践经验，读者可以参考或者进行实践，完善。</p>
 <h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="在YARN上启动一个长期的Flink集群"><a href="#在YARN上启动一个长期的Flink集群" class="headerlink" title="在YARN上启动一个长期的Flink集群"></a>在YARN上启动一个长期的Flink集群</h3><p>启动一个拥有4个Task Manager的yarn会话，每个Task Manager有4gb的堆内存:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 从flink下载页获取haddoop2包</span></div><div class="line"><span class="comment"># http://flink.apache.org/downloads.html</span></div><div class="line">curl -O &lt;flink_hadoop2_download_url&gt;</div><div class="line">tar xvzf flink-&#123;&#123; site.version &#125;&#125;-bin-hadoop2.tgz</div><div class="line"><span class="built_in">cd</span> flink-&#123;&#123; site.version &#125;&#125;/</div><div class="line">./bin/yarn-session.sh -n 4 -jm 1024 -tm 4096</div></pre></td></tr></table></figure>
 <p>特别指出，-s参数表示每个Task Manager上可用的处理槽（processing slot）数量。我们建议把槽数量设置成每个机器处理器的个数。<br>一旦会话被启动，你可以使用./bin/flink工具提交任务到集群上。</p>
@@ -462,385 +164,33 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">1,失败后尝试重启动策略</div><div class="line"></div><div class="line">在失败后,尝试重启动3次,每次间隔10秒;如果尝试3次后,job还是失败,则不再重启,宣告job失败;不是立刻执行重启,而是延迟固定时间,这是为了让底层有时间准备好环境,比如外部系统连接.</div><div class="line"></div><div class="line">import org.apache.flink.api.common.time.Time</div><div class="line">import java.util.concurrent.TimeUnit</div><div class="line">import org.apache.flink.api.common.restartstrategy.RestartStrategies</div><div class="line"></div><div class="line">val env = ExecutionEnvironment.getExecutionEnvironment()</div><div class="line">env.setRestartStrategy(RestartStrategies.fixedDelayRestart(</div><div class="line">  3, // number of restart attempts</div><div class="line">  Time.of(10, TimeUnit.SECONDS) // delay</div><div class="line">))</div><div class="line"></div><div class="line">2,失败率重启策略</div><div class="line"></div><div class="line">在一定时间段内重启失败率太高,则宣告job失败;在两个尝试策略下,会等待一定时间.</div><div class="line"></div><div class="line">时间间隔内尝试重启job的次数;</div><div class="line">时间间隔多长;</div><div class="line">两次重启间的延迟时长;</div><div class="line"></div><div class="line">val env = ExecutionEnvironment.getExecutionEnvironment()</div><div class="line">env.setRestartStrategy(RestartStrategies.failureRateRestart(</div><div class="line">  3, // max failures per unit</div><div class="line">  Time.of(5, TimeUnit.MINUTES), //time interval <span class="keyword">for</span> measuring failure rate</div><div class="line">  Time.of(10, TimeUnit.SECONDS) // delay</div><div class="line">))</div></pre></td></tr></table></figure>
 <p>3,Flink的新版本，最好在assembly项目时把包到带上，虽然包很大，但是为了YARN的其他开源版本兼容，建议使用程序的包。这样提交运行时不用–classpath带上包。</p>
 
-      
-    </div>
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>wenxi</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/搭建/" rel="tag"># 搭建</a>
-          
-            <a href="/tags/运行/" rel="tag"># 运行</a>
-          
-        </div>
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/05/19/flink学习/" rel="next" title="Flink学习">
-                <i class="fa fa-chevron-left"></i> Flink学习
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
+<nav class="pagination" role="pagination">
     
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="wenxi" />
-          <p class="site-author-name" itemprop="name">wenxi</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">categories</span>
-              
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">tags</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/chlyzzo" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/longshenfeiyang" target="_blank" title="微博">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  微博
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#快速开始"><span class="nav-number">1.</span> <span class="nav-text">快速开始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在YARN上启动一个长期的Flink集群"><span class="nav-number">1.1.</span> <span class="nav-text">在YARN上启动一个长期的Flink集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在YARN上运行一个Flink的任务"><span class="nav-number">1.2.</span> <span class="nav-text">在YARN上运行一个Flink的任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flink-YARN-会话"><span class="nav-number">2.</span> <span class="nav-text">Flink YARN 会话</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动Flink会话"><span class="nav-number">2.1.</span> <span class="nav-text">启动Flink会话</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载Flink"><span class="nav-number">2.1.1.</span> <span class="nav-text">下载Flink</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动一个会话"><span class="nav-number">2.1.2.</span> <span class="nav-text">启动一个会话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隔离YARN会话"><span class="nav-number">2.1.3.</span> <span class="nav-text">隔离YARN会话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关联现有会话"><span class="nav-number">2.1.4.</span> <span class="nav-text">关联现有会话</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交job到Flink"><span class="nav-number">2.2.</span> <span class="nav-text">提交job到Flink</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在YARN上运行一个Flink-任务"><span class="nav-number">3.</span> <span class="nav-text">在YARN上运行一个Flink 任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用jars-amp-Classpath"><span class="nav-number">4.</span> <span class="nav-text">使用jars&Classpath</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flink在YARN上的恢复行为"><span class="nav-number">5.</span> <span class="nav-text">Flink在YARN上的恢复行为</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试一个失败的YARN会话"><span class="nav-number">6.</span> <span class="nav-text">调试一个失败的YARN会话</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日志文件"><span class="nav-number">6.1.</span> <span class="nav-text">日志文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YARN客户端控制台-amp-web接口"><span class="nav-number">6.2.</span> <span class="nav-text">YARN客户端控制台&web接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为指定Hadoop版本构建YARN客户端"><span class="nav-number">7.</span> <span class="nav-text">为指定Hadoop版本构建YARN客户端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防火墙后在YARN运行Flink"><span class="nav-number">8.</span> <span class="nav-text">防火墙后在YARN运行Flink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背后-内部"><span class="nav-number">9.</span> <span class="nav-text">背后/内部</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践经验"><span class="nav-number">10.</span> <span class="nav-text">实践经验</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">wenxi</span>
-</div>
-
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
+    <span class="page-number">•</span>
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
+    <a class="older-posts" href="/2017/05/19/flink学习/">
+        <!--Flink学习--> next →
+    </a>
     
+</nav>
 
-  </div>
 
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-</body>
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2017 wenxi. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. <a href="https://github.com/guolin/crisp-hexo-theme" target="_blank">crisp</a> theme by <a href="guolin.github.io" target="_blank">Guo Lin</a>.</section>
+        </footer>
+    </body>
 </html>
+
+
