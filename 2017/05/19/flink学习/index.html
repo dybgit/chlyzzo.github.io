@@ -4,24 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Flink学习 | 山上掏金</title>
+    <title>Flinkѧϰ | 山上掏金</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="wenxi">
     
 
     
-    <meta name="description" content="讲述flink在实践中的一些经验，对入门级的有一定的认识;flink的窗口，提交运行的命令含义，参数传递，函数重新编写，向量计算，读取csv文件等；主要是一些实践的笔记，比较粗略，后续再考虑逐步细写下，分成更多的小点。 首先从统计单词出发，这个统计是实时接收socket的消息来统计的，需要一个窗口，这里设定为每隔5秒统计一次； 代码 12345678910111213141516171819202">
-<meta name="keywords" content="Flink,新手,入门技巧,实践经验">
+    <meta name="description" content="����flink��ʵ���е�һЩ���飬�����ż�����һ������ʶ;flink�Ĵ��ڣ��ύ���е�����壬�������ݣ��������±�д���������㣬��ȡcsv�ļ��ȣ���Ҫ��һЩʵ���ıʼǣ��Ƚϴ��ԣ������ٿ�������ϸд�£��ֳɸ�����С�㡣 ���ȴ�ͳ�Ƶ��ʳ���������ͳ����ʵʱ����socket���">
+<meta name="keywords" content="����,���ż���,ʵ������">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Flink学习">
+<meta property="og:title" content="Flinkѧϰ">
 <meta property="og:url" content="https://chlyzzo.github.io/2017/05/19/flink学习/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:description" content="讲述flink在实践中的一些经验，对入门级的有一定的认识;flink的窗口，提交运行的命令含义，参数传递，函数重新编写，向量计算，读取csv文件等；主要是一些实践的笔记，比较粗略，后续再考虑逐步细写下，分成更多的小点。 首先从统计单词出发，这个统计是实时接收socket的消息来统计的，需要一个窗口，这里设定为每隔5秒统计一次； 代码 12345678910111213141516171819202">
-<meta property="og:updated_time" content="2017-06-06T03:53:44.436Z">
+<meta property="og:description" content="����flink��ʵ���е�һЩ���飬�����ż�����һ������ʶ;flink�Ĵ��ڣ��ύ���е�����壬�������ݣ��������±�д���������㣬��ȡcsv�ļ��ȣ���Ҫ��һЩʵ���ıʼǣ��Ƚϴ��ԣ������ٿ�������ϸд�£��ֳɸ�����С�㡣 ���ȴ�ͳ�Ƶ��ʳ���������ͳ����ʵʱ����socket���">
+<meta property="og:updated_time" content="2017-06-07T15:23:18.220Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Flink学习">
-<meta name="twitter:description" content="讲述flink在实践中的一些经验，对入门级的有一定的认识;flink的窗口，提交运行的命令含义，参数传递，函数重新编写，向量计算，读取csv文件等；主要是一些实践的笔记，比较粗略，后续再考虑逐步细写下，分成更多的小点。 首先从统计单词出发，这个统计是实时接收socket的消息来统计的，需要一个窗口，这里设定为每隔5秒统计一次； 代码 12345678910111213141516171819202">
+<meta name="twitter:title" content="Flinkѧϰ">
+<meta name="twitter:description" content="����flink��ʵ���е�һЩ���飬�����ż�����һ������ʶ;flink�Ĵ��ڣ��ύ���е�����壬�������ݣ��������±�д���������㣬��ȡcsv�ļ��ȣ���Ҫ��һЩʵ���ıʼǣ��Ƚϴ��ԣ������ٿ�������ϸд�£��ֳɸ�����С�㡣 ���ȴ�ͳ�Ƶ��ʳ���������ͳ����ʵʱ����socket���">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -49,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -65,7 +65,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:chlyzzo.github.io">
 					</form>
 					
@@ -81,131 +81,131 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/05/19/flink学习/" title="Flink学习" itemprop="url">Flink学习</a>
+      <a href="/2017/05/19/flink学习/" title="Flinkѧϰ" itemprop="url">Flinkѧϰ</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
 		
   <p class="article-time">
-    <time datetime="2017-05-19T14:46:57.000Z" itemprop="datepublished"> Published 2017-05-19 22:46:57</time>
+    <time datetime="2017-05-19T14:46:57.000Z" itemprop="datepublished"> 发表于 2017-05-19 22:46:57</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
+			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-下datastrema的window操作"><span class="toc-number">1.</span> <span class="toc-text">flink 下datastrema的window操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flink下的windows的time类型，"><span class="toc-number">1.1.</span> <span class="toc-text">flink下的windows的time类型，</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink下的窗口定义，"><span class="toc-number">2.</span> <span class="toc-text">flink下的窗口定义，</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WindowedStream"><span class="toc-number">3.</span> <span class="toc-text">WindowedStream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink运行的参数意义"><span class="toc-number">4.</span> <span class="toc-text">flink运行的参数意义,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink架构重新学习"><span class="toc-number">5.</span> <span class="toc-text">flink架构重新学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#并行是怎么操作的"><span class="toc-number">5.1.</span> <span class="toc-text">并行是怎么操作的?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分布式-yarn-集群"><span class="toc-number">6.</span> <span class="toc-text">分布式,yarn,集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非常好的解读flink下的函数和参数"><span class="toc-number">7.</span> <span class="toc-text">非常好的解读flink下的函数和参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数传递-在构造函数中使用"><span class="toc-number">8.</span> <span class="toc-text">参数传递,在构造函数中使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用withParameters-Configuration"><span class="toc-number">9.</span> <span class="toc-text">使用withParameters(Configuration)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#全局参数"><span class="toc-number">10.</span> <span class="toc-text">全局参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#richfunction的使用"><span class="toc-number">11.</span> <span class="toc-text">richfunction的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state的使用"><span class="toc-number">12.</span> <span class="toc-text">state的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-下的向量-矩阵计算"><span class="toc-number">13.</span> <span class="toc-text">flink 下的向量,矩阵计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-读取csv文件的参数含义"><span class="toc-number">14.</span> <span class="toc-text">flink 读取csv文件的参数含义,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遍历目录下的所有文件"><span class="toc-number">15.</span> <span class="toc-text">遍历目录下的所有文件,</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-��datastrema��window����"><span class="toc-number">1.</span> <span class="toc-text">flink ��datastrema��window����</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flink�µ�windows��time���ͣ�"><span class="toc-number">1.1.</span> <span class="toc-text">flink�µ�windows��time���ͣ�</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink�µJ��ڶ��壬"><span class="toc-number">2.</span> <span class="toc-text">flink�µĴ��ڶ��壬</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WindowedStream"><span class="toc-number">3.</span> <span class="toc-text">WindowedStream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink���еĲ�������"><span class="toc-number">4.</span> <span class="toc-text">flink���еĲ�������,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink�ܹ�����ѧϰ"><span class="toc-number">5.</span> <span class="toc-text">flink�ܹ�����ѧϰ</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#��������o������"><span class="toc-number">5.1.</span> <span class="toc-text">��������ô������?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#�ֲ�ʽ-yarn-��A"><span class="toc-number">6.</span> <span class="toc-text">�ֲ�ʽ,yarn,��Ⱥ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#�dz��oL���flink�µl����Ͳ���"><span class="toc-number">7.</span> <span class="toc-text">�ǳ��õĽ���flink�µĺ����Ͳ���</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#��������-�ڹ��캯����ʹ��"><span class="toc-number">8.</span> <span class="toc-text">��������,�ڹ��캯����ʹ��</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ʹ��withParameters-Configuration"><span class="toc-number">9.</span> <span class="toc-text">ʹ��withParameters(Configuration)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#o�ֲ���"><span class="toc-number">10.</span> <span class="toc-text">ȫ�ֲ���</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#richfunction��ʹ��"><span class="toc-number">11.</span> <span class="toc-text">richfunction��ʹ��</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state��ʹ��"><span class="toc-number">12.</span> <span class="toc-text">state��ʹ��</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-�µ�����-��������"><span class="toc-number">13.</span> <span class="toc-text">flink �µ�����,��������</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-��ȡcsv�l��Ĳ�������"><span class="toc-number">14.</span> <span class="toc-text">flink ��ȡcsv�ļ��Ĳ�������,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#����L¼�µ������l�"><span class="toc-number">15.</span> <span class="toc-text">����Ŀ¼�µ������ļ�,</span></a></li></ol>
 		
 		</div>
 		
-		<p>讲述flink在实践中的一些经验，对入门级的有一定的认识;<br>flink的窗口，提交运行的命令含义，参数传递，函数重新编写，向量计算，读取csv文件等；<br>主要是一些实践的笔记，比较粗略，后续再考虑逐步细写下，分成更多的小点。</p>
-<p>首先从统计单词出发，这个统计是实时接收socket的消息来统计的，需要一个窗口，这里设定为每隔5秒统计一次；</p>
-<p>代码</p>
+		<p>����flink��ʵ���е�һЩ���飬�����ż�����һ������ʶ;<br>flink�Ĵ��ڣ��ύ���е�����壬�������ݣ��������±�д���������㣬��ȡcsv�ļ��ȣ�<br>��Ҫ��һЩʵ���ıʼǣ��Ƚϴ��ԣ������ٿ�������ϸд�£��ֳɸ�����С�㡣</p>
+<p>���ȴ�ͳ�Ƶ��ʳ���������ͳ����ʵʱ����socket����Ϣ��ͳ�Ƶģ���Ҫһ�����ڣ������趨Ϊÿ��5��ͳ��һ�Σ�</p>
+<p>����</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class WindowWordCount &#123;</div><div class="line">       public static void main(String[] args) throws Exception &#123;</div><div class="line">                StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();</div><div class="line">                DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; dataStream = env</div><div class="line">                .socketTextStream(&quot;localhost&quot;, 9999)</div><div class="line">                .flatMap(new Splitter())</div><div class="line">                .keyBy(0)</div><div class="line">                .timeWindow(Time.of(5, TimeUnit.SECONDS))</div><div class="line">                .sum(1);</div><div class="line"></div><div class="line">        dataStream.print();</div><div class="line">        env.execute(&quot;Window WordCount&quot;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public static class Splitter implements FlatMapFunction&lt;String, Tuple2&lt;String, Integer&gt;&gt; &#123;</div><div class="line">        @Override</div><div class="line">        public void flatMap(String sentence, Collector&lt;Tuple2&lt;String, Integer&gt;&gt; out) throws Exception &#123;</div><div class="line">            for (String word: sentence.split(&quot; &quot;)) &#123;</div><div class="line">                out.collect(new Tuple2&lt;String, Integer&gt;(word, 1));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>new Splitter()和Splitter implements FlatMapFunction<string, tuple2<string,="" integer="">&gt;</string,></p>
-<h2 id="flink-下datastrema的window操作"><a href="#flink-下datastrema的window操作" class="headerlink" title="flink 下datastrema的window操作"></a>flink 下datastrema的window操作</h2><p>可以参考<a href="https://ci.apache.org/projects/flink/flink-docs-release-0.10/apis/streaming_guide.html#working-with-time" target="_blank" rel="external">这个文档</a></p>
-<h3 id="flink下的windows的time类型，"><a href="#flink下的windows的time类型，" class="headerlink" title="flink下的windows的time类型，"></a>flink下的windows的time类型，</h3><p>import org.apache.flink.streaming.api.TimeCharacteristic</p>
+<p>new Splitter()��Splitter implements FlatMapFunction<string, tuple2<string,="" integer="">&gt;</string,></p>
+<h2 id="flink-��datastrema��window����"><a href="#flink-��datastrema��window����" class="headerlink" title="flink ��datastrema��window����"></a>flink ��datastrema��window����</h2><p>���Բο�<a href="https://ci.apache.org/projects/flink/flink-docs-release-0.10/apis/streaming_guide.html#working-with-time" target="_blank" rel="external">�����ĵ�</a></p>
+<h3 id="flink�µ�windows��time���ͣ�"><a href="#flink�µ�windows��time���ͣ�" class="headerlink" title="flink�µ�windows��time���ͣ�"></a>flink�µ�windows��time���ͣ�</h3><p>import org.apache.flink.streaming.api.TimeCharacteristic</p>
 <ul>
-<li><p>processing time，当执行转换算子的时间，分布式和异步下不能满足目的。</p>
+<li><p>processing time����ִ��ת�����ӵ�ʱ�䣬�ֲ�ʽ���첽�²�������Ŀ�ġ�</p>
 <pre><code>env.setStreamTimeCharacteristic(TimeCharacteristic.ProcessingTime)
 </code></pre></li>
-<li><p>event time，事件时间，独立事件的时间，通常是进入到flink前就有了，嵌入在记录里或者内容里</p>
+<li><p>event time���¼�ʱ�䣬�����¼���ʱ�䣬ͨ���ǽ��뵽flinkǰ�����ˣ�Ƕ���ڼ�¼������������</p>
 <pre><code>env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
-时间顺序，无序也能正确处理（需要缓存），有延迟，
+ʱ��˳��������Ҳ����ȷ��������Ҫ���棩�����ӳ٣�
 </code></pre></li>
-<li>Ingestion time，进入到flink的时间，介于前两者之间，<pre><code>env.setStreamTimeCharacteristic(TimeCharacteristic.IngestionTime)
+<li>Ingestion time�����뵽flink��ʱ�䣬����ǰ����֮�䣬<pre><code>env.setStreamTimeCharacteristic(TimeCharacteristic.IngestionTime)
 </code></pre></li>
 </ul>
-<p>watermark 时间水印，由源发出，没有时间戳的时间</p>
-<p>对于事件时间event time，需如下步骤<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Set env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)</div><div class="line">Use DataStream.assignTimestamps(...) in order to tell Flink how timestamps relate to events </div><div class="line">    (e.g., which record field is the timestamp)，这是记录中包含时间戳的例子，</div><div class="line">Set enableTimestamps(), as well the interval for watermark emission (</div><div class="line">    setAutoWatermarkInterval(long milliseconds)) in ExecutionConfig.</div></pre></td></tr></table></figure></p>
-<h2 id="flink下的窗口定义，"><a href="#flink下的窗口定义，" class="headerlink" title="flink下的窗口定义，"></a>flink下的窗口定义，</h2><p>窗口中的元素实际存储在 Key/Value State 中，key为Window，value为元素集合（或聚合值）<br>当一个元素进入流时，<br>    1,根据window决定去哪个窗口;<br>          窗口只是一个标示，不存储数据，也会存时间。<br>    2,每个窗口有一个trigger，决定窗口的生存时间（该窗口计算和清除时间）;<br>           trigger返回continue（等待），fire（处理窗口数据），purge（清除窗口），<br>         如果是fire，则窗口保留，数据一直存在，会被计算多次，直到purge。<br>    3,如果窗口被fire（处理），窗口中的元素指定给evictor，<br>         Evictor 主要用来遍历窗口中的元素列表，并决定最先进入窗口的多少个元素需要被移除。剩余的元素会交给用户指定的函数进行窗口的计算<br>    4,计算函数，经过（window，trigger，evictor），接收到窗口元素，计算其中元素，返回给下游，<br>       计算值可返回多个或一个，计算函数有max，min，基于WindowFunction实现的。。<br>（注意，evictor需要对窗口内所有元素保留，除了聚合sum，min只需保留最后值，）</p>
-<h2 id="WindowedStream"><a href="#WindowedStream" class="headerlink" title="WindowedStream"></a>WindowedStream</h2><p>其中 T 数据流中元素的数据类型<br>K 是元素的key的类型<br>W是窗口类型<br>R 初始值（fold时用到）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">apply (6个apply方法)  (k : Long, w : TimeWindow, T: Iterable[(Long, Long, Long)], out : Collector[(Long,String,String,Double)])</div><div class="line"></div><div class="line">     apply(WindowFunction&lt;T, R, K, W&gt; function)</div><div class="line">         </div><div class="line">     apply(WindowFunction&lt;T, R, K, W&gt; function, TypeInformation&lt;R&gt; resultType)</div><div class="line"></div><div class="line">     apply(ReduceFunction&lt;T&gt; reduceFunction, WindowFunction&lt;T, R, K, W&gt; function)</div><div class="line">     apply(ReduceFunction&lt;T&gt; reduceFunction, WindowFunction&lt;T, R, K, W&gt; function, TypeInformation&lt;R&gt; resultType)</div><div class="line">     </div><div class="line">     apply(R initialValue, FoldFunction&lt;T, R&gt; foldFunction, WindowFunction&lt;R, R, K, W&gt; function)</div><div class="line">     apply(R initialValue, FoldFunction&lt;T, R&gt; foldFunction, WindowFunction&lt;R, R, K, W&gt; function, TypeInformation&lt;R&gt; resultType)</div></pre></td></tr></table></figure></p>
-<p><a href="https://m.aliyun.com/yunqi/articles/57828" target="_blank" rel="external">Blink 阿里</a></p>
-<p>you can rely on the RichFunction’s open() method’s to load such data directly from a distributed file system.<br>DataStream没有DistributedCache,但是可以在RichFunction’s open() 方法中读取分布式存储的文件…</p>
-<h2 id="flink运行的参数意义"><a href="#flink运行的参数意义" class="headerlink" title="flink运行的参数意义,"></a>flink运行的参数意义,</h2><p>目前用到:flink 提交yarn集群的<a href="https://ci.apache.org/projects/flink/flink-docs-master/setup/cli.html" target="_blank" rel="external">参数</a></p>
+<p>watermark ʱ��ˮӡ����Դ������û��ʱ������ʱ��</p>
+<p>�����¼�ʱ��event time�������²���<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Set env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)</div><div class="line">Use DataStream.assignTimestamps(...) in order to tell Flink how timestamps relate to events </div><div class="line">    (e.g., which record field is the timestamp)�����Ǽ�¼�а���ʱ���������ӣ�</div><div class="line">Set enableTimestamps(), as well the interval for watermark emission (</div><div class="line">    setAutoWatermarkInterval(long milliseconds)) in ExecutionConfig.</div></pre></td></tr></table></figure></p>
+<h2 id="flink�µJ��ڶ��壬"><a href="#flink�µJ��ڶ��壬" class="headerlink" title="flink�µĴ��ڶ��壬"></a>flink�µĴ��ڶ��壬</h2><p>�����е�Ԫ��ʵ�ʴ洢�� Key/Value State �У�keyΪWindow��valueΪԪ�ؼ��ϣ����ۺ�ֵ��<br>��һ��Ԫ�ؽ�����ʱ��<br>    1,����window����ȥ�ĸ�����;<br>          ����ֻ��һ����ʾ�����洢���ݣ�Ҳ����ʱ�䡣<br>    2,ÿ��������һ��trigger���������ڵ�����ʱ�䣨�ô��ڼ���������ʱ�䣩;<br>           trigger����continue���ȴ�����fire�������������ݣ���purge���������ڣ���<br>         ������fire���򴰿ڱ���������һֱ���ڣ��ᱻ�������Σ�ֱ��purge��<br>    3,�������ڱ�fire���������������е�Ԫ��ָ����evictor��<br>         Evictor ��Ҫ�������������е�Ԫ���б������������Ƚ��봰�ڵĶ��ٸ�Ԫ����Ҫ���Ƴ���ʣ����Ԫ�ػύ���û�ָ���ĺ������д��ڵļ���<br>    4,���㺯����������window��trigger��evictor�������յ�����Ԫ�أ���������Ԫ�أ����ظ����Σ�<br>       ����ֵ�ɷ��ض�����һ�������㺯����max��min������WindowFunctionʵ�ֵġ���<br>��ע�⣬evictor��Ҫ�Դ���������Ԫ�ر��������˾ۺ�sum��minֻ�豣������ֵ����</p>
+<h2 id="WindowedStream"><a href="#WindowedStream" class="headerlink" title="WindowedStream"></a>WindowedStream</h2><p>���� T ��������Ԫ�ص���������<br>K ��Ԫ�ص�key������<br>W�Ǵ�������<br>R ��ʼֵ��foldʱ�õ���<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">apply (6��apply����)  (k : Long, w : TimeWindow, T: Iterable[(Long, Long, Long)], out : Collector[(Long,String,String,Double)])</div><div class="line"></div><div class="line">     apply(WindowFunction&lt;T, R, K, W&gt; function)</div><div class="line">         </div><div class="line">     apply(WindowFunction&lt;T, R, K, W&gt; function, TypeInformation&lt;R&gt; resultType)</div><div class="line"></div><div class="line">     apply(ReduceFunction&lt;T&gt; reduceFunction, WindowFunction&lt;T, R, K, W&gt; function)</div><div class="line">     apply(ReduceFunction&lt;T&gt; reduceFunction, WindowFunction&lt;T, R, K, W&gt; function, TypeInformation&lt;R&gt; resultType)</div><div class="line">     </div><div class="line">     apply(R initialValue, FoldFunction&lt;T, R&gt; foldFunction, WindowFunction&lt;R, R, K, W&gt; function)</div><div class="line">     apply(R initialValue, FoldFunction&lt;T, R&gt; foldFunction, WindowFunction&lt;R, R, K, W&gt; function, TypeInformation&lt;R&gt; resultType)</div></pre></td></tr></table></figure></p>
+<p><a href="https://m.aliyun.com/yunqi/articles/57828" target="_blank" rel="external">Blink ����</a></p>
+<p>you can rely on the RichFunction’s open() method’s to load such data directly from a distributed file system.<br>DataStreamû��DistributedCache,���ǿ�����RichFunction’s open() �����ж�ȡ�ֲ�ʽ�洢���ļ�…</p>
+<h2 id="flink���еĲ�������"><a href="#flink���еĲ�������" class="headerlink" title="flink���еĲ�������,"></a>flink���еĲ�������,</h2><p>Ŀǰ�õ�:flink �ύyarn��Ⱥ��<a href="https://ci.apache.org/projects/flink/flink-docs-master/setup/cli.html" target="_blank" rel="external">����</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-yn,--yarncontainer &lt;arg&gt;            Number of YARN container to allocate(=Number of Task Managers)</div><div class="line"></div><div class="line">-ys,--yarnslots &lt;arg&gt;                Number of slots per TaskManager</div><div class="line"></div><div class="line">-yjm,--yarnjobManagerMemory &lt;arg&gt;    Memory for JobManager Container [inMB]</div><div class="line"></div><div class="line">-ytm,--yarntaskManagerMemory &lt;arg&gt;   Memory per TaskManager Container [inMB]</div></pre></td></tr></table></figure>
-<p>yn是taskmanager的个数,即worker的个数,ys是slot个数,即每个taskmanager由几个slot来计算,<br>yjm,<br>ytm,每一个taskmanager内存大小,</p>
-<h2 id="flink架构重新学习"><a href="#flink架构重新学习" class="headerlink" title="flink架构重新学习"></a><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.0/concepts/concepts.html#parallel-dataflows" target="_blank" rel="external">flink架构重新学习</a></h2><p>flink的数据块是流,dataset也是流,特殊的流,开始一个或多个源,结束一个或多个sinks,一个转换有多个转换算子组成…</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">流的运算流程是,source-&gt; </div><div class="line">                         transformation(flatmap,map,....算子operators)-&gt; </div><div class="line">                                          ...-&gt; </div><div class="line">                                                 transformation(flatmap,map,....算子operators)-&gt;</div><div class="line">                                                            sink</div></pre></td></tr></table></figure>
-<p>并行度（一个task被split的并行实例个数），可以在不同层级上设定;<br>   一个task可split多个并行实例，一个实例处理inputData的子集，（实例处理子集，有合并没？）</p>
-<h3 id="并行是怎么操作的"><a href="#并行是怎么操作的" class="headerlink" title="并行是怎么操作的?"></a>并行是怎么操作的?</h3><p>  分布式和并行下,数据是分区的,操作也变成操作subtask,(操作subtask是独立隔离的,不同线程,不同机器,不同containers)<br>  操作subtask的个数是并行度,parallelism,由算子operators决定,一个程序会有多个并行,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">--&gt;    ---&gt;     ---&gt;</div><div class="line">             x        y  --&gt;sink</div><div class="line">--&gt;    ---&gt;     ---&gt;</div></pre></td></tr></table></figure></p>
-<p>流在两个operators(算子)之间可以使一对一前行,也可以是再分区前行,<br>相对的是Redistributing,即算子需要对数据进行重新规划,比如keyby,broadcast, rebalance</p>
-<p>flink链,chains,把算子连在一起,起到优化作用,</p>
-<h2 id="分布式-yarn-集群"><a href="#分布式-yarn-集群" class="headerlink" title="分布式,yarn,集群"></a>分布式,yarn,集群</h2><p>两个操作进程类型,master,JobManagers,协调分布式执行,checkpoint,故障恢复,<br>必须有一个,可以设置多个,一个是主,其他是备用(其中一个挂了,备用是不是可以当作主来重启运行???)<br>worker,TaskManagers,执行task或者执行subtasks,缓冲区,至少有一个,</p>
-<p>The master and worker processes开始于集群,容器,或者yarn的资源管理器,</p>
-<p>client客户端,不是运行时和程序的部分,准备发送流给master,然后断开或者保持连接等待信息反馈,</p>
+<p>yn��taskmanager�ĸ���,��worker�ĸ���,ys��slot����,��ÿ��taskmanager�ɼ���slot������,<br>yjm,<br>ytm,ÿһ��taskmanager�ڴ���С,</p>
+<h2 id="flink�ܹ�����ѧϰ"><a href="#flink�ܹ�����ѧϰ" class="headerlink" title="flink�ܹ�����ѧϰ"></a><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.0/concepts/concepts.html#parallel-dataflows" target="_blank" rel="external">flink�ܹ�����ѧϰ</a></h2><p>flink�����ݿ�����,datasetҲ����,��������,��ʼһ��������Դ,����һ��������sinks,һ��ת���ж���ת����������…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">��������������,source-&gt; </div><div class="line">                         transformation(flatmap,map,....����operators)-&gt; </div><div class="line">                                          ...-&gt; </div><div class="line">                                                 transformation(flatmap,map,....����operators)-&gt;</div><div class="line">                                                            sink</div></pre></td></tr></table></figure>
+<p>���жȣ�һ��task��split�Ĳ���ʵ���������������ڲ�ͬ�㼶���趨;<br>   һ��task��split��������ʵ����һ��ʵ������inputData���Ӽ�����ʵ�������Ӽ����кϲ�û����</p>
+<h3 id="��������o������"><a href="#��������o������" class="headerlink" title="��������ô������?"></a>��������ô������?</h3><p>  �ֲ�ʽ�Ͳ�����,�����Ƿ�����,����Ҳ���ɲ���subtask,(����subtask�Ƕ���������,��ͬ�߳�,��ͬ����,��ͬcontainers)<br>  ����subtask�ĸ����ǲ��ж�,parallelism,������operators����,һ���������ж�������,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">--&gt;    ---&gt;     ---&gt;</div><div class="line">             x        y  --&gt;sink</div><div class="line">--&gt;    ---&gt;     ---&gt;</div></pre></td></tr></table></figure></p>
+<p>��������operators(����)֮������ʹһ��һǰ��,Ҳ�������ٷ���ǰ��,<br>���Ե���Redistributing,��������Ҫ�����ݽ������¹滮,����keyby,broadcast, rebalance</p>
+<p>flink��,chains,����������һ��,�����Ż�����,</p>
+<h2 id="�ֲ�ʽ-yarn-��A"><a href="#�ֲ�ʽ-yarn-��A" class="headerlink" title="�ֲ�ʽ,yarn,��Ⱥ"></a>�ֲ�ʽ,yarn,��Ⱥ</h2><p>����������������,master,JobManagers,Э���ֲ�ʽִ��,checkpoint,���ϻָ�,<br>������һ��,�������ö���,һ������,�����Ǳ���(����һ������,�����ǲ��ǿ��Ե���������������???)<br>worker,TaskManagers,ִ��task����ִ��subtasks,������,������һ��,</p>
+<p>The master and worker processes��ʼ�ڼ�Ⱥ,����,����yarn����Դ������,</p>
+<p>client�ͻ���,��������ʱ�ͳ����Ĳ���,׼����������master,Ȼ���Ͽ����߱������ӵȴ���Ϣ����,</p>
 <p>Each worker (TaskManager) is a JVM process, and may execute one or more subtasks in separate threads. </p>
 <p>To control how many tasks a worker accepts, a worker has so called task slots (at least one).</p>
-<p>slot是一个TaskManager可以运行几个task,一个taskTaskManager分配的内存是ytm,<br>每个slot是固定的资源子集,在大集合TaskManager中,也就是slot瓜分TaskManager的资源,而且是平分,<br>每个slot是不同thread执行.</p>
+<p>slot��һ��TaskManager�������м���task,һ��taskTaskManager�������ڴ���ytm,<br>ÿ��slot�ǹ̶�����Դ�Ӽ�,�ڴ󼯺�TaskManager��,Ҳ����slot�Ϸ�TaskManager����Դ,������ƽ��,<br>ÿ��slot�ǲ�ͬthreadִ��.</p>
 <p>Having one slot per TaskManager means each task group runs in a separate JVM,<br>Having multiple slots means more subtasks share the same JVM,share data sets and data structures..</p>
-<p>共享slot,默认的配置,</p>
-<p>迭代,大量的计算,大的分布式计算,做法是step-function和嵌入迭代算子(Iterate and Delta Iterate),</p>
-<p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.0/apis/batch/iterations.html" target="_blank" rel="external">迭代例子</a></p>
-<p>只用于dataset???</p>
-<p>   1,iterate operator,<br>        1.1 Iteration Input: 初始化数据输入,来源前一个迭代或者前一个算子;<br>        1.2 Step Function: 每一次迭代执行的函数. operators, map, reduce, join, …,<br>        1.3 Next Partial Solution: 下一次迭代的数据,<br>        1.4 Iteration Result: 最后一次迭代,数据输出到sink或者下一个算子,<br>  终止条件,<br>      1,最大迭代次数,自定义的,达到迭代次数,结束,输出结果;<br>      2,自定义聚合和熟练准则,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">val count = initial.iterate(10000) &#123; iterationInput: DataSet[Int] =&gt;</div><div class="line">      val result = iterationInput.map &#123; i =&gt;</div><div class="line">            val x = Math.random()</div><div class="line">            val y = Math.random()</div><div class="line">            i + (if (x * x + y * y &lt; 1) 1 else 0)</div><div class="line">      &#125;</div><div class="line">      result</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
-<p>  2,Delta Iterate Operator,<br>     每次迭代会选择部分数据计算,不是全量,适用于高级的算法,或者某些数据不是每次迭代对计算有用,只关注那些频繁和有用于计算的数据,舍弃无用,没计算的数据.<br>    2.1 Iteration Input: 初始化数据输入,来源data source或者前一个算子;<br>    2.2 Step Function: 每一次迭代执行的函数. operators, map, reduce, join, …,<br>    2.3 Next Workset/Update Solution Set: 下一次迭代反馈workset,数据可通过不同算子更新 ,<br>    2.4 Iteration Result: 最后一次迭代,数据输出到sink或者下一个算子,</p>
-<p>终止条件,<br>      1,最大迭代次数,自定义的,达到迭代次数,结束,输出结果;<br>      2,下一次迭代workset收敛为0,也就是数据为空.(自定义聚合和收敛准则)</p>
-<p>两个数据集,workset和solution,每次迭代得到newworkset和newsolution<br>To create a DeltaIteration call the iterateDelta(initialWorkset, maxIterations, key) on the initial solution set. The step function takes two parameters: (solutionSet, workset), and must return two values: (solutionSetDelta, newWorkset).</p>
-<p>ParameterTool 整合参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">env.readCsvFile[Point](</div><div class="line">       params.get(&quot;points&quot;),</div><div class="line">       fieldDelimiter = &quot; &quot;,</div><div class="line">       includedFields = Array(0, 1))</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
-<p>flink下的functions<br>single abstract method  单一的抽象方法,</p>
+<p>����slot,Ĭ�ϵ�����,</p>
+<p>����,�����ļ���,���ķֲ�ʽ����,������step-function��Ƕ����������(Iterate and Delta Iterate),</p>
+<p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.0/apis/batch/iterations.html" target="_blank" rel="external">��������</a></p>
+<p>ֻ����dataset???</p>
+<p>   1,iterate operator,<br>        1.1 Iteration Input: ��ʼ����������,��Դǰһ����������ǰһ������;<br>        1.2 Step Function: ÿһ�ε���ִ�еĺ���. operators, map, reduce, join, …,<br>        1.3 Next Partial Solution: ��һ�ε���������,<br>        1.4 Iteration Result: ����һ�ε���,����������sink������һ������,<br>  ��ֹ����,<br>      1,������������,�Զ�����,�ﵽ��������,����,��������;<br>      2,�Զ����ۺϺ�����׼��,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">val count = initial.iterate(10000) &#123; iterationInput: DataSet[Int] =&gt;</div><div class="line">      val result = iterationInput.map &#123; i =&gt;</div><div class="line">            val x = Math.random()</div><div class="line">            val y = Math.random()</div><div class="line">            i + (if (x * x + y * y &lt; 1) 1 else 0)</div><div class="line">      &#125;</div><div class="line">      result</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>  2,Delta Iterate Operator,<br>     ÿ�ε�����ѡ�񲿷����ݼ���,����ȫ��,�����ڸ߼����㷨,����ĳЩ���ݲ���ÿ�ε����Լ�������,ֻ��ע��ЩƵ���������ڼ���������,��������,û����������.<br>    2.1 Iteration Input: ��ʼ����������,��Դdata source����ǰһ������;<br>    2.2 Step Function: ÿһ�ε���ִ�еĺ���. operators, map, reduce, join, …,<br>    2.3 Next Workset/Update Solution Set: ��һ�ε�������workset,���ݿ�ͨ����ͬ���Ӹ��� ,<br>    2.4 Iteration Result: ����һ�ε���,����������sink������һ������,</p>
+<p>��ֹ����,<br>      1,������������,�Զ�����,�ﵽ��������,����,��������;<br>      2,��һ�ε���workset����Ϊ0,Ҳ��������Ϊ��.(�Զ����ۺϺ�����׼��)</p>
+<p>�������ݼ�,workset��solution,ÿ�ε����õ�newworkset��newsolution<br>To create a DeltaIteration call the iterateDelta(initialWorkset, maxIterations, key) on the initial solution set. The step function takes two parameters: (solutionSet, workset), and must return two values: (solutionSetDelta, newWorkset).</p>
+<p>ParameterTool ���ϲ���<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">env.readCsvFile[Point](</div><div class="line">       params.get(&quot;points&quot;),</div><div class="line">       fieldDelimiter = &quot; &quot;,</div><div class="line">       includedFields = Array(0, 1))</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>flink�µ�functions<br>single abstract method  ��һ�ĳ��󷽷�,</p>
 <p>1,coGroup(Iterable<in1> first, Iterable<in2> second, Collector<o> out)</o></in2></in1></p>
 <pre><code>  set1.coGroup(set2).where(&lt;key-definition&gt;).equalTo(&lt;key-definition&gt;).with(new MyCoGroupFunction());
 
-注意,first:java.lang.Iterable[Int],
-    然后,计算时,采取用
+ע��,first:java.lang.Iterable[Int],
+    Ȼ��,����ʱ,��ȡ��
 import scala.collection.JavaConverters._
 val scalaT2 = first.asScala.toList
-</code></pre><p> 2,CombineFunction<in, out=""><br>         把元素组合并返回,</in,></p>
-<h2 id="非常好的解读flink下的函数和参数"><a href="#非常好的解读flink下的函数和参数" class="headerlink" title="非常好的解读flink下的函数和参数"></a>非常好的解读flink下的函数和参数</h2><p><a href="http://www.cnblogs.com/fxjwind/p/5168785.html" target="_blank" rel="external">链接1</a><br><a href="https://ci.apache.org/projects/flink/flink-docs-release-0.10/apis/programming_guide.html" target="_blank" rel="external">链接2</a></p>
-<p>1,使用Rich functions</p>
+</code></pre><p> 2,CombineFunction<in, out=""><br>         ��Ԫ�����ϲ�����,</in,></p>
+<h2 id="�dz��oL���flink�µl����Ͳ���"><a href="#�dz��oL���flink�µl����Ͳ���" class="headerlink" title="�ǳ��õĽ���flink�µĺ����Ͳ���"></a>�ǳ��õĽ���flink�µĺ����Ͳ���</h2><p><a href="http://www.cnblogs.com/fxjwind/p/5168785.html" target="_blank" rel="external">����1</a><br><a href="https://ci.apache.org/projects/flink/flink-docs-release-0.10/apis/programming_guide.html" target="_blank" rel="external">����2</a></p>
+<p>1,ʹ��Rich functions</p>
 <p>Rich functions provide, in addition to the user-defined function (map, reduce, etc), four methods: open, close, getRuntimeContext, and setRuntimeContext.</p>
-<p>Rich functions的使用和普通的function是一样的，不同的就是，多4个接口函数，可以用于一些特殊的场景，比如给function传参，或访问broadcast变量，accumulators和counter，因为这些场景你需要先getRuntimeContext</p>
-<p>2,Broadcast Variables<br>一个算子中在并行实例下可以访问到数据,广播data set的结构是collection,<br>withBroadcastSet(DataSet, String)广播一个dataset<br>getRuntimeContext().getBroadcastVariable(String) at the target operator.访问广播的data set;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">// 1. The DataSet to be broadcasted</div><div class="line">  DataSet&lt;Integer&gt; toBroadcast = env.fromElements(1, 2, 3);</div><div class="line"></div><div class="line">  DataSet&lt;String&gt; data = env.fromElements(&quot;a&quot;, &quot;b&quot;);</div><div class="line"></div><div class="line"> data.map(new RichMapFunction&lt;String, String&gt;() &#123;</div><div class="line">  @Override</div><div class="line">  public void open(Configuration parameters) throws Exception &#123; //open方法会被启用一次,</div><div class="line">    // 3. Access the broadcasted DataSet as a Collection</div><div class="line">    Collection&lt;Integer&gt; broadcastSet = getRuntimeContext().getBroadcastVariable(&quot;broadcastSetName&quot;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line"></div><div class="line">  @Override //map调用的次数是data中的元素个数,</div><div class="line">  public String map(String value) throws Exception &#123;</div><div class="line">      ...</div><div class="line">  &#125;</div><div class="line"> &#125;).withBroadcastSet(toBroadcast, &quot;broadcastSetName&quot;); // 2. Broadcast the DataSet</div></pre></td></tr></table></figure>
-<p>广播数据集，就是有些不大的公共数据，是要被所有的实例访问到的，比如一些查询表,(不大的公共数据)<br>上面的例子，会将toBroadcast设置为广播变量broadcastSetName，这样在运行时，可以用getRuntimeContext().getBroadcastVariable获取该变量使用</p>
-<h2 id="参数传递-在构造函数中使用"><a href="#参数传递-在构造函数中使用" class="headerlink" title="参数传递,在构造函数中使用"></a>参数传递,在构造函数中使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">private static class MyFilter implements FilterFunction&lt;Integer&gt; &#123;</div><div class="line"></div><div class="line">  private final int limit; //参数</div><div class="line"></div><div class="line">  public MyFilter(int limit) &#123;//构造函数</div><div class="line">    this.limit = limit;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override</div><div class="line">  public boolean filter(Integer value) throws Exception &#123;</div><div class="line">    return value &gt; limit;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="使用withParameters-Configuration"><a href="#使用withParameters-Configuration" class="headerlink" title="使用withParameters(Configuration)"></a>使用withParameters(Configuration)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Configuration config = new Configuration();</div><div class="line">config.setInteger(&quot;limit&quot;, 2);</div><div class="line"></div><div class="line">toFilter.filter(new RichFilterFunction&lt;Integer&gt;() &#123;</div><div class="line">    private int limit;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void open(Configuration parameters) throws Exception &#123;</div><div class="line">      limit = parameters.getInteger(&quot;limit&quot;, 0);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean filter(Integer value) throws Exception &#123;</div><div class="line">      return value &gt; limit;</div><div class="line">    &#125;</div><div class="line">&#125;).withParameters(config);</div></pre></td></tr></table></figure>
-<p>可以用withParameters将定义好的config传入function</p>
-<p>然后用RichFunction的Open接口，将参数解析出来使用</p>
+<p>Rich functions��ʹ�ú���ͨ��function��һ���ģ���ͬ�ľ��ǣ���4���ӿں�������������һЩ�����ĳ�����������function���Σ�������broadcast������accumulators��counter����Ϊ��Щ��������Ҫ��getRuntimeContext</p>
+<p>2,Broadcast Variables<br>һ���������ڲ���ʵ���¿��Է��ʵ�����,�㲥data set�Ľṹ��collection,<br>withBroadcastSet(DataSet, String)�㲥һ��dataset<br>getRuntimeContext().getBroadcastVariable(String) at the target operator.���ʹ㲥��data set;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">// 1. The DataSet to be broadcasted</div><div class="line">  DataSet&lt;Integer&gt; toBroadcast = env.fromElements(1, 2, 3);</div><div class="line"></div><div class="line">  DataSet&lt;String&gt; data = env.fromElements(&quot;a&quot;, &quot;b&quot;);</div><div class="line"></div><div class="line"> data.map(new RichMapFunction&lt;String, String&gt;() &#123;</div><div class="line">  @Override</div><div class="line">  public void open(Configuration parameters) throws Exception &#123; //open�����ᱻ����һ��,</div><div class="line">    // 3. Access the broadcasted DataSet as a Collection</div><div class="line">    Collection&lt;Integer&gt; broadcastSet = getRuntimeContext().getBroadcastVariable(&quot;broadcastSetName&quot;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line"></div><div class="line">  @Override //map���õĴ�����data�е�Ԫ�ظ���,</div><div class="line">  public String map(String value) throws Exception &#123;</div><div class="line">      ...</div><div class="line">  &#125;</div><div class="line"> &#125;).withBroadcastSet(toBroadcast, &quot;broadcastSetName&quot;); // 2. Broadcast the DataSet</div></pre></td></tr></table></figure>
+<p>�㲥���ݼ���������Щ�����Ĺ������ݣ���Ҫ�����е�ʵ�����ʵ��ģ�����һЩ��ѯ��,(�����Ĺ�������)<br>���������ӣ��ὫtoBroadcast����Ϊ�㲥����broadcastSetName������������ʱ��������getRuntimeContext().getBroadcastVariable��ȡ�ñ���ʹ��</p>
+<h2 id="��������-�ڹ��캯����ʹ��"><a href="#��������-�ڹ��캯����ʹ��" class="headerlink" title="��������,�ڹ��캯����ʹ��"></a>��������,�ڹ��캯����ʹ��</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">private static class MyFilter implements FilterFunction&lt;Integer&gt; &#123;</div><div class="line"></div><div class="line">  private final int limit; //����</div><div class="line"></div><div class="line">  public MyFilter(int limit) &#123;//���캯��</div><div class="line">    this.limit = limit;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override</div><div class="line">  public boolean filter(Integer value) throws Exception &#123;</div><div class="line">    return value &gt; limit;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="ʹ��withParameters-Configuration"><a href="#ʹ��withParameters-Configuration" class="headerlink" title="ʹ��withParameters(Configuration)"></a>ʹ��withParameters(Configuration)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Configuration config = new Configuration();</div><div class="line">config.setInteger(&quot;limit&quot;, 2);</div><div class="line"></div><div class="line">toFilter.filter(new RichFilterFunction&lt;Integer&gt;() &#123;</div><div class="line">    private int limit;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void open(Configuration parameters) throws Exception &#123;</div><div class="line">      limit = parameters.getInteger(&quot;limit&quot;, 0);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean filter(Integer value) throws Exception &#123;</div><div class="line">      return value &gt; limit;</div><div class="line">    &#125;</div><div class="line">&#125;).withParameters(config);</div></pre></td></tr></table></figure>
+<p>������withParameters�������õ�config����function</p>
+<p>Ȼ����RichFunction��Open�ӿڣ���������������ʹ��</p>
 <hr>
-<h2 id="全局参数"><a href="#全局参数" class="headerlink" title="全局参数"></a>全局参数</h2><p>  (全局参数只能用于参数形式，广播变量可以是任意dataset),但是全局参数,可用于更大的数据集,比如几百万的表数据,广播的话<br>花费就大.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">Configuration conf = new Configuration();</div><div class="line">conf.setString(&quot;mykey&quot;,&quot;myvalue&quot;);</div><div class="line">final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();</div><div class="line">env.getConfig().setGlobalJobParameters(conf);</div><div class="line"></div><div class="line"></div><div class="line">public static final class Tokenizer extends RichFlatMapFunction&lt;String, Tuple2&lt;String, Integer&gt;&gt; &#123;</div><div class="line"></div><div class="line">    private String mykey;</div><div class="line">    @Override</div><div class="line">    public void open(Configuration parameters) throws Exception &#123;</div><div class="line">      super.open(parameters);</div><div class="line">      ExecutionConfig.GlobalJobParameters globalParams = getRuntimeContext().getExecutionConfig().getGlobalJobParameters();</div><div class="line">      Configuration globConf = (Configuration) globalParams;</div><div class="line">      mykey = globConf.getString(&quot;mykey&quot;, null);</div><div class="line">    &#125;</div><div class="line">    // ... more here ...</div></pre></td></tr></table></figure></p>
-<h2 id="richfunction的使用"><a href="#richfunction的使用" class="headerlink" title="richfunction的使用"></a>richfunction的使用</h2><p>Rich functions的使用和普通的function是一样的，不同的就是，多4个接口函数，可以用于一些特殊的场景，比如给function传参，或访问broadcast变量，accumulators和counter，因为这些场景你需要先getRuntimeContext,</p>
+<h2 id="o�ֲ���"><a href="#o�ֲ���" class="headerlink" title="ȫ�ֲ���"></a>ȫ�ֲ���</h2><p>  (ȫ�ֲ���ֻ�����ڲ�����ʽ���㲥��������������dataset),����ȫ�ֲ���,�����ڸ��������ݼ�,���缸�����ı�����,�㲥�Ļ�<br>���Ѿʹ�.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">Configuration conf = new Configuration();</div><div class="line">conf.setString(&quot;mykey&quot;,&quot;myvalue&quot;);</div><div class="line">final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();</div><div class="line">env.getConfig().setGlobalJobParameters(conf);</div><div class="line"></div><div class="line"></div><div class="line">public static final class Tokenizer extends RichFlatMapFunction&lt;String, Tuple2&lt;String, Integer&gt;&gt; &#123;</div><div class="line"></div><div class="line">    private String mykey;</div><div class="line">    @Override</div><div class="line">    public void open(Configuration parameters) throws Exception &#123;</div><div class="line">      super.open(parameters);</div><div class="line">      ExecutionConfig.GlobalJobParameters globalParams = getRuntimeContext().getExecutionConfig().getGlobalJobParameters();</div><div class="line">      Configuration globConf = (Configuration) globalParams;</div><div class="line">      mykey = globConf.getString(&quot;mykey&quot;, null);</div><div class="line">    &#125;</div><div class="line">    // ... more here ...</div></pre></td></tr></table></figure></p>
+<h2 id="richfunction��ʹ��"><a href="#richfunction��ʹ��" class="headerlink" title="richfunction��ʹ��"></a>richfunction��ʹ��</h2><p>Rich functions��ʹ�ú���ͨ��function��һ���ģ���ͬ�ľ��ǣ���4���ӿں�������������һЩ�����ĳ�����������function���Σ�������broadcast������accumulators��counter����Ϊ��Щ��������Ҫ��getRuntimeContext,</p>
 <p>four methods: open, close, getRuntimeContext, and setRuntimeContext.</p>
-<h2 id="state的使用"><a href="#state的使用" class="headerlink" title="state的使用"></a>state的使用</h2><pre><code>Key/Value state 只能用于KeyedStream,
-3种不同类型的state，
+<h2 id="state��ʹ��"><a href="#state��ʹ��" class="headerlink" title="state��ʹ��"></a>state��ʹ��</h2><pre><code>Key/Value state ֻ������KeyedStream,
+3�ֲ�ͬ���͵�state��
 
-ValueState，单值的state，可以通过update(T)或T value()来操作
+ValueState����ֵ��state������ͨ��update(T)��T value()������
 
-ListState&lt;T&gt;， 多值的state，通过add(T)或Iterable&lt;T&gt; get()来操作和访问
-  访问当前存储的元素,
-ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
-    聚集的单个元素,
+ListState&lt;T&gt;�� ��ֵ��state��ͨ��add(T)��Iterable&lt;T&gt; get()�������ͷ���
+  ���ʵ�ǰ�洢��Ԫ��,
+ReducingState&lt;T&gt;����ֵ״̬������ֻ����reduce�Ľ���
+    �ۼ��ĵ���Ԫ��,
 
-并且所有的state，都有clear，来清除状态数据
-</code></pre><p>这些state对象只能被状态接口使用，<br>并且取出的状态对象，取决于input element的key；所以不同的调用user function 得到的state value是不一样的，因为element的key 可能不同</p>
-<p>对于state，需要一个StateDescriptor ，作为name用于reference这个state，如果你定义多个state，他们的StateDescriptor 必须是unique的。<br>不同类型的state，有不同类型的StateDescriptor</p>
+�������е�state������clear��������״̬����
+</code></pre><p>��Щstate����ֻ�ܱ�״̬�ӿ�ʹ�ã�<br>����ȡ����״̬������ȡ����input element��key�����Բ�ͬ�ĵ���user function �õ���state value�ǲ�һ���ģ���Ϊelement��key ���ܲ�ͬ</p>
+<p>����state����Ҫһ��StateDescriptor ����Ϊname����reference����state�������㶨������state�����ǵ�StateDescriptor ������unique�ġ�<br>��ͬ���͵�state���в�ͬ���͵�StateDescriptor</p>
 <p>ValueState<t> getState(ValueStateDescriptor<t>)<br>ReducingState<t> getReducingState(ReducingStateDescriptor<t>)<br>ListState<t> getListState(ListStateDescriptor<t>)</t></t></t></t></t></t></p>
-<p>State对象通过RuntimeContext的接口获取到，当然不同类型的state，对应于不同的接口；<br>关键是，如果要使用state，必须要使用rich function，用普通的function是无法获取到的</p>
-<p><a href="http://blog.csdn.net/lmalds/article/details/52229827" target="_blank" rel="external">http://blog.csdn.net/lmalds/article/details/52229827</a><br>ListState的使用<br><a href="http://blog.csdn.net/codemosi/article/details/51602204" target="_blank" rel="external">http://blog.csdn.net/codemosi/article/details/51602204</a><br>三种state的使用,</p>
-<h2 id="flink-下的向量-矩阵计算"><a href="#flink-下的向量-矩阵计算" class="headerlink" title="flink 下的向量,矩阵计算"></a>flink 下的向量,矩阵计算</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">引入包,</div><div class="line"></div><div class="line">(&quot;org.apache.flink&quot; %% &quot;flink-ml&quot; % flinkVersion).</div><div class="line">                  exclude(&quot;org.apache.flink&quot;,&quot;flink-shaded-hadoop1_2.10&quot;),</div><div class="line"></div><div class="line">import org.apache.flink.ml.math.Vector</div><div class="line">import org.apache.flink.ml.math.VectorBuilder</div><div class="line">import org.apache.flink.ml.math.DenseVector</div><div class="line"></div><div class="line">val vec1 = &quot;12.3,45,55&quot;.split(&quot;,&quot;).map(_.toDouble)</div><div class="line">val flinkVec1 = DenseVector.apply(vec1)</div><div class="line">val vec2 = &quot;12.3,45,55&quot;.split(&quot;,&quot;).map(_.toDouble)</div><div class="line">val flinkVec2 = DenseVector.apply(vec2)</div><div class="line">    </div><div class="line">println(flinkVec1.dot(flinkVec2))</div></pre></td></tr></table></figure>
-<p><a href="http://data-artisans.com/extending-the-yahoo-streaming-benchmark/" target="_blank" rel="external">推特的</a></p>
-<p><a href="https://yahooeng.tumblr.com/post/135321837876/benchmarking-streaming-computation-engines-at" target="_blank" rel="external">雅虎的</a></p>
-<p><a href="http://flink-forward.org/category/news/" target="_blank" rel="external">2015flink会议</a></p>
-<p>使用 <code>RichGroupReduceFunction</code> 实现<code>GroupCombineFunction</code> interface,<br>在shuffle前combining,减少网络负载;<br>另外,reduce实现reduceGroup也可以提高性能,<br>结果再次使用<code>.setCombineHint(CombineHint.HASH)</code> after the reduce.</p>
-<h2 id="flink-读取csv文件的参数含义"><a href="#flink-读取csv文件的参数含义" class="headerlink" title="flink 读取csv文件的参数含义,"></a>flink 读取csv文件的参数含义,</h2><p>val csvInput = env.readCsvFile<a href="&quot;hdfs:///the/CSV/file&quot;,
+<p>State����ͨ��RuntimeContext�Ľӿڻ�ȡ������Ȼ��ͬ���͵�state����Ӧ�ڲ�ͬ�Ľӿڣ�<br>�ؼ��ǣ�����Ҫʹ��state������Ҫʹ��rich function������ͨ��function���޷���ȡ����</p>
+<p><a href="http://blog.csdn.net/lmalds/article/details/52229827" target="_blank" rel="external">http://blog.csdn.net/lmalds/article/details/52229827</a><br>ListState��ʹ��<br><a href="http://blog.csdn.net/codemosi/article/details/51602204" target="_blank" rel="external">http://blog.csdn.net/codemosi/article/details/51602204</a><br>����state��ʹ��,</p>
+<h2 id="flink-�µ�����-��������"><a href="#flink-�µ�����-��������" class="headerlink" title="flink �µ�����,��������"></a>flink �µ�����,��������</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">������,</div><div class="line"></div><div class="line">(&quot;org.apache.flink&quot; %% &quot;flink-ml&quot; % flinkVersion).</div><div class="line">                  exclude(&quot;org.apache.flink&quot;,&quot;flink-shaded-hadoop1_2.10&quot;),</div><div class="line"></div><div class="line">import org.apache.flink.ml.math.Vector</div><div class="line">import org.apache.flink.ml.math.VectorBuilder</div><div class="line">import org.apache.flink.ml.math.DenseVector</div><div class="line"></div><div class="line">val vec1 = &quot;12.3,45,55&quot;.split(&quot;,&quot;).map(_.toDouble)</div><div class="line">val flinkVec1 = DenseVector.apply(vec1)</div><div class="line">val vec2 = &quot;12.3,45,55&quot;.split(&quot;,&quot;).map(_.toDouble)</div><div class="line">val flinkVec2 = DenseVector.apply(vec2)</div><div class="line">    </div><div class="line">println(flinkVec1.dot(flinkVec2))</div></pre></td></tr></table></figure>
+<p><a href="http://data-artisans.com/extending-the-yahoo-streaming-benchmark/" target="_blank" rel="external">���ص�</a></p>
+<p><a href="https://yahooeng.tumblr.com/post/135321837876/benchmarking-streaming-computation-engines-at" target="_blank" rel="external">�Ż���</a></p>
+<p><a href="http://flink-forward.org/category/news/" target="_blank" rel="external">2015flink����</a></p>
+<p>ʹ�� <code>RichGroupReduceFunction</code> ʵ��<code>GroupCombineFunction</code> interface,<br>��shuffleǰcombining,�������縺��;<br>����,reduceʵ��reduceGroupҲ������������,<br>�����ٴ�ʹ��<code>.setCombineHint(CombineHint.HASH)</code> after the reduce.</p>
+<h2 id="flink-��ȡcsv�l��Ĳ�������"><a href="#flink-��ȡcsv�l��Ĳ�������" class="headerlink" title="flink ��ȡcsv�ļ��Ĳ�������,"></a>flink ��ȡcsv�ļ��Ĳ�������,</h2><p>val csvInput = env.readCsvFile<a href="&quot;hdfs:///the/CSV/file&quot;,
   includedFields = Array(0, 3">(String, Double)</a>) // take the first and the fourth field</p>
-<p>lineDelimiter: 行与行之间的分隔符,默认是’\n’.</p>
-<p>fieldDelimiter: 每行数据间的分隔符,默认是 ‘,’.</p>
-<p>includeFields: Array[Int] 需要过滤的字段,也就是每行分割所要留下的哪几列.</p>
-<p>pojoFields: Array[String] 对象实例所要留下的字段.</p>
+<p>lineDelimiter: ������֮���ķָ���,Ĭ����’\n’.</p>
+<p>fieldDelimiter: ÿ�����ݼ��ķָ���,Ĭ���� ‘,’.</p>
+<p>includeFields: Array[Int] ��Ҫ���˵��ֶ�,Ҳ����ÿ�зָ���Ҫ���µ��ļ���.</p>
+<p>pojoFields: Array[String] ����ʵ����Ҫ���µ��ֶ�.</p>
 <p>parseQuotedStrings: Character enables quoted string parsing. Strings are parsed as quoted strings if the first character of the string field is the quote character (leading or tailing whitespaces are not trimmed). Field delimiters within quoted strings are ignored. Quoted string parsing fails if the last character of a quoted string field is not the quote character. If quoted string parsing is enabled and the first character of the field is not the quoting string, the string is parsed as unquoted string. By default, quoted string parsing is disabled.</p>
 <p>ignoreComments: String specifies a comment prefix. All lines that start with the specified comment prefix are not parsed and ignored. By default, no lines are ignored.</p>
 <p>lenient: Boolean enables lenient parsing, i.e., lines that cannot be correctly parsed are ignored. By default, lenient parsing is disabled and invalid lines raise an exception.</p>
-<p>ignoreFirstLine: 是否忽略第一行,因为第一行有时是为了解释用的.</p>
-<h2 id="遍历目录下的所有文件"><a href="#遍历目录下的所有文件" class="headerlink" title="遍历目录下的所有文件,"></a>遍历目录下的所有文件,</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// enable recursive enumeration of nested input files</div><div class="line">val env  = ExecutionEnvironment.getExecutionEnvironment</div><div class="line"></div><div class="line">// create a configuration object</div><div class="line">val parameters = new Configuration</div><div class="line"></div><div class="line">// set the recursive enumeration parameter</div><div class="line">parameters.setBoolean(&quot;recursive.file.enumeration&quot;, true) //将递归遍历目录设置为true</div><div class="line"></div><div class="line">// pass the configuration to the data source</div><div class="line">env.readTextFile(&quot;file:///path/with.nested/files&quot;).withParameters(parameters)</div></pre></td></tr></table></figure>
+<p>ignoreFirstLine: �Ƿ����Ե�һ��,��Ϊ��һ����ʱ��Ϊ�˽����õ�.</p>
+<h2 id="����L¼�µ������l�"><a href="#����L¼�µ������l�" class="headerlink" title="����Ŀ¼�µ������ļ�,"></a>����Ŀ¼�µ������ļ�,</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// enable recursive enumeration of nested input files</div><div class="line">val env  = ExecutionEnvironment.getExecutionEnvironment</div><div class="line"></div><div class="line">// create a configuration object</div><div class="line">val parameters = new Configuration</div><div class="line"></div><div class="line">// set the recursive enumeration parameter</div><div class="line">parameters.setBoolean(&quot;recursive.file.enumeration&quot;, true) //���ݹ�����Ŀ¼����Ϊtrue</div><div class="line"></div><div class="line">// pass the configuration to the data source</div><div class="line">env.readTextFile(&quot;file:///path/with.nested/files&quot;).withParameters(parameters)</div></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -213,13 +213,13 @@ ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Flink/">Flink</a>►<a class="article-category-link" href="/categories/Flink/代码/">代码</a>►<a class="article-category-link" href="/categories/Flink/代码/入门/">入门</a>
+  <a class="article-category-link" href="/categories/Flink/">Flink</a>►<a class="article-category-link" href="/categories/Flink/����/">����</a>►<a class="article-category-link" href="/categories/Flink/����/����/">����</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Flink/">Flink</a><a href="/tags/新手/">新手</a><a href="/tags/入门技巧/">入门技巧</a><a href="/tags/实践经验/">实践经验</a>
+  <span></span> <a href="/tags/����/">����</a><a href="/tags/���z���/">���ż���</a><a href="/tags/ʵ������/">ʵ������</a>
   </div>
 
 </div>
@@ -228,7 +228,7 @@ ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://chlyzzo.github.io/2017/05/19/flink学习/" data-title="Flink学习 | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  <div data-url="https://chlyzzo.github.io/2017/05/19/flink学习/" data-title="Flinkѧϰ | 山上掏金" data-tsina="1724571293" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -242,10 +242,10 @@ ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/06/02/flink在yarn上搭建/" title="Flink在YARN上搭建">
+ <a href="/2017/06/02/flink在yarn上搭建/" title="Flink��YARN�ϴ">
   <strong>上一篇：</strong><br/>
   <span>
-  Flink在YARN上搭建</span>
+  Flink��YARN�ϴ</span>
 </a>
 </div>
 
@@ -263,22 +263,22 @@ ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
 	
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
+  <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-下datastrema的window操作"><span class="toc-number">1.</span> <span class="toc-text">flink 下datastrema的window操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flink下的windows的time类型，"><span class="toc-number">1.1.</span> <span class="toc-text">flink下的windows的time类型，</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink下的窗口定义，"><span class="toc-number">2.</span> <span class="toc-text">flink下的窗口定义，</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WindowedStream"><span class="toc-number">3.</span> <span class="toc-text">WindowedStream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink运行的参数意义"><span class="toc-number">4.</span> <span class="toc-text">flink运行的参数意义,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink架构重新学习"><span class="toc-number">5.</span> <span class="toc-text">flink架构重新学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#并行是怎么操作的"><span class="toc-number">5.1.</span> <span class="toc-text">并行是怎么操作的?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分布式-yarn-集群"><span class="toc-number">6.</span> <span class="toc-text">分布式,yarn,集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非常好的解读flink下的函数和参数"><span class="toc-number">7.</span> <span class="toc-text">非常好的解读flink下的函数和参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数传递-在构造函数中使用"><span class="toc-number">8.</span> <span class="toc-text">参数传递,在构造函数中使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用withParameters-Configuration"><span class="toc-number">9.</span> <span class="toc-text">使用withParameters(Configuration)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#全局参数"><span class="toc-number">10.</span> <span class="toc-text">全局参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#richfunction的使用"><span class="toc-number">11.</span> <span class="toc-text">richfunction的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state的使用"><span class="toc-number">12.</span> <span class="toc-text">state的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-下的向量-矩阵计算"><span class="toc-number">13.</span> <span class="toc-text">flink 下的向量,矩阵计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-读取csv文件的参数含义"><span class="toc-number">14.</span> <span class="toc-text">flink 读取csv文件的参数含义,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遍历目录下的所有文件"><span class="toc-number">15.</span> <span class="toc-text">遍历目录下的所有文件,</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-��datastrema��window����"><span class="toc-number">1.</span> <span class="toc-text">flink ��datastrema��window����</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flink�µ�windows��time���ͣ�"><span class="toc-number">1.1.</span> <span class="toc-text">flink�µ�windows��time���ͣ�</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink�µJ��ڶ��壬"><span class="toc-number">2.</span> <span class="toc-text">flink�µĴ��ڶ��壬</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WindowedStream"><span class="toc-number">3.</span> <span class="toc-text">WindowedStream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink���еĲ�������"><span class="toc-number">4.</span> <span class="toc-text">flink���еĲ�������,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink�ܹ�����ѧϰ"><span class="toc-number">5.</span> <span class="toc-text">flink�ܹ�����ѧϰ</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#��������o������"><span class="toc-number">5.1.</span> <span class="toc-text">��������ô������?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#�ֲ�ʽ-yarn-��A"><span class="toc-number">6.</span> <span class="toc-text">�ֲ�ʽ,yarn,��Ⱥ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#�dz��oL���flink�µl����Ͳ���"><span class="toc-number">7.</span> <span class="toc-text">�ǳ��õĽ���flink�µĺ����Ͳ���</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#��������-�ڹ��캯����ʹ��"><span class="toc-number">8.</span> <span class="toc-text">��������,�ڹ��캯����ʹ��</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ʹ��withParameters-Configuration"><span class="toc-number">9.</span> <span class="toc-text">ʹ��withParameters(Configuration)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#o�ֲ���"><span class="toc-number">10.</span> <span class="toc-text">ȫ�ֲ���</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#richfunction��ʹ��"><span class="toc-number">11.</span> <span class="toc-text">richfunction��ʹ��</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state��ʹ��"><span class="toc-number">12.</span> <span class="toc-text">state��ʹ��</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-�µ�����-��������"><span class="toc-number">13.</span> <span class="toc-text">flink �µ�����,��������</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-��ȡcsv�l��Ĳ�������"><span class="toc-number">14.</span> <span class="toc-text">flink ��ȡcsv�ļ��Ĳ�������,</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#����L¼�µ������l�"><span class="toc-number">15.</span> <span class="toc-text">����Ŀ¼�µ������ļ�,</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">Categories</p>
+	<p class="asidetitle">分类</p>
 		<ul>
 		
 		  
@@ -294,11 +294,11 @@ ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
 		  
 		
 		  
-			<li><a href="/categories/Flink/代码/" title="代码">代码<sup>1</sup></a></li>
+			<li><a href="/categories/Flink/����/" title="����">����<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Flink/代码/入门/" title="入门">入门<sup>1</sup></a></li>
+			<li><a href="/categories/Flink/����/����/" title="����">����<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -307,35 +307,23 @@ ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
 
   
 <div class="tagslist">
-	<p class="asidetitle">Tags</p>
+	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Flink/" title="Flink">Flink<sup>2</sup></a></li>
+				<li><a href="/tags/����/" title="����">����<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/YARN/" title="YARN">YARN<sup>1</sup></a></li>
+				<li><a href="/tags/�/" title="�">�<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/搭建/" title="搭建">搭建<sup>1</sup></a></li>
+				<li><a href="/tags/���z���/" title="���ż���">���ż���<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/运行/" title="运行">运行<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/新手/" title="新手">新手<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/入门技巧/" title="入门技巧">入门技巧<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/实践经验/" title="实践经验">实践经验<sup>1</sup></a></li>
+				<li><a href="/tags/ʵ������/" title="ʵ������">ʵ������<sup>1</sup></a></li>
 			
 		
 			
@@ -351,7 +339,7 @@ ReducingState&lt;T&gt;，多值状态，但是只保留reduce的结果
 
 
   <div class="linkslist">
-  <p class="asidetitle">Links</p>
+  <p class="asidetitle">友情链接</p>
     <ul>
         
           <li>
@@ -589,7 +577,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
