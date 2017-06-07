@@ -3,11 +3,9 @@
 
 
     
-    
-    
   <url>
     <loc>https://chlyzzo.github.io/2017/05/19/flink%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2017-06-07T15:29:37.024Z</lastmod>
+    <lastmod>2017-06-07T15:50:23.315Z</lastmod>
     <data>
         <display>
         <title>Flink学习</title>
@@ -24,16 +22,12 @@
              
               <breadCrumb title="Flink" url="https://chlyzzo.github.io/categories/Flink/"/>
           
-             
-              <breadCrumb title="代码" url="https://chlyzzo.github.io/categories/Flink/%E4%BB%A3%E7%A0%81/"/>
-          
-             
-              <breadCrumb title="入门" url="https://chlyzzo.github.io/categories/Flink/%E4%BB%A3%E7%A0%81/%E5%85%A5%E9%97%A8/"/>
-          
         </display>
     </data>
     </url>
 
+    
+    
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/02/flink%E5%9C%A8yarn%E4%B8%8A%E6%90%AD%E5%BB%BA/</loc>
