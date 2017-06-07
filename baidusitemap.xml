@@ -4,7 +4,7 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/06/02/flink%E5%9C%A8yarn%E4%B8%8A%E6%90%AD%E5%BB%BA/</loc>
+    <loc>https://chlyzzo.github.io/2017/06/02/flink%E5%9C%A8yarn%E4%B8%8A%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2017-06-07T10:47:04.039Z</lastmod>
     <data>
         <display>
@@ -22,10 +22,10 @@
          
            
              
-              <breadCrumb title="Flink" url="http://yoursite.com/categories/Flink/"/>
+              <breadCrumb title="Flink" url="https://chlyzzo.github.io/categories/Flink/"/>
           
              
-              <breadCrumb title="YARN" url="http://yoursite.com/categories/Flink/YARN/"/>
+              <breadCrumb title="YARN" url="https://chlyzzo.github.io/categories/Flink/YARN/"/>
           
         </display>
     </data>
@@ -33,7 +33,7 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/05/19/flink%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://chlyzzo.github.io/2017/05/19/flink%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2017-06-06T03:53:44.436Z</lastmod>
     <data>
         <display>
@@ -51,13 +51,13 @@
          
            
              
-              <breadCrumb title="Flink" url="http://yoursite.com/categories/Flink/"/>
+              <breadCrumb title="Flink" url="https://chlyzzo.github.io/categories/Flink/"/>
           
              
-              <breadCrumb title="代码" url="http://yoursite.com/categories/Flink/%E4%BB%A3%E7%A0%81/"/>
+              <breadCrumb title="代码" url="https://chlyzzo.github.io/categories/Flink/%E4%BB%A3%E7%A0%81/"/>
           
              
-              <breadCrumb title="入门" url="http://yoursite.com/categories/Flink/%E4%BB%A3%E7%A0%81/%E5%85%A5%E9%97%A8/"/>
+              <breadCrumb title="入门" url="https://chlyzzo.github.io/categories/Flink/%E4%BB%A3%E7%A0%81/%E5%85%A5%E9%97%A8/"/>
           
         </display>
     </data>
@@ -65,7 +65,7 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/05/18/hive%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF%E4%BC%98%E5%8C%96/</loc>
+    <loc>https://chlyzzo.github.io/2017/05/18/hive%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF%E4%BC%98%E5%8C%96/</loc>
     <lastmod>2017-05-19T07:30:40.919Z</lastmod>
     <data>
         <display>
@@ -79,7 +79,7 @@
          
            
              
-              <breadCrumb title="hive" url="http://yoursite.com/categories/hive/"/>
+              <breadCrumb title="hive" url="https://chlyzzo.github.io/categories/hive/"/>
           
         </display>
     </data>
@@ -89,7 +89,7 @@
     
     
   <url>
-    <loc>http://yoursite.com/2017/05/01/hello-world/</loc>
+    <loc>https://chlyzzo.github.io/2017/05/01/hello-world/</loc>
     <lastmod>2017-05-01T09:58:21.143Z</lastmod>
     <data>
         <display>
