@@ -1,27 +1,24 @@
 
- <!DOCTYPE HTML>
+  
+    <!DOCTYPE HTML>
 <html >
 <head>
   <meta charset="UTF-8">
   
-    <title>hive笛卡尔积优化 | 山上掏金</title>
+    <title>关于我 | 山上掏金</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="wenxi">
     
 
     
-    <meta name="description" content="hive的笛卡尔积hive中默认不使用笛卡尔积，需要开启才能运行，hive不建议运行笛卡尔积，但是，在实践过程中，难免需要使用到，这时就得开启该功能；然后，hive中做笛卡尔积的结果就是最后的数据运算都集中在一个reduce上，亲测确实如此。那么，该怎么优化呢？ 优化历程笛卡尔积计算需要把数据全部遍历一遍才行，使用笛卡尔积理论上数据需要保存进内存，如果有多个任务运行，那么就得把数据复制多份，然而实">
-<meta name="keywords" content="优化,笛卡尔积">
-<meta property="og:type" content="article">
-<meta property="og:title" content="hive笛卡尔积优化">
-<meta property="og:url" content="https://chlyzzo.github.io/2017/05/18/hive笛卡尔积优化/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="关于我">
+<meta property="og:url" content="https://chlyzzo.github.io/about/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:description" content="hive的笛卡尔积hive中默认不使用笛卡尔积，需要开启才能运行，hive不建议运行笛卡尔积，但是，在实践过程中，难免需要使用到，这时就得开启该功能；然后，hive中做笛卡尔积的结果就是最后的数据运算都集中在一个reduce上，亲测确实如此。那么，该怎么优化呢？ 优化历程笛卡尔积计算需要把数据全部遍历一遍才行，使用笛卡尔积理论上数据需要保存进内存，如果有多个任务运行，那么就得把数据复制多份，然而实">
-<meta property="og:updated_time" content="2017-05-19T07:30:40.919Z">
+<meta property="og:updated_time" content="2017-06-08T16:31:21.852Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hive笛卡尔积优化">
-<meta name="twitter:description" content="hive的笛卡尔积hive中默认不使用笛卡尔积，需要开启才能运行，hive不建议运行笛卡尔积，但是，在实践过程中，难免需要使用到，这时就得开启该功能；然后，hive中做笛卡尔积的结果就是最后的数据运算都集中在一个reduce上，亲测确实如此。那么，该怎么优化呢？ 优化历程笛卡尔积计算需要把数据全部遍历一遍才行，使用笛卡尔积理论上数据需要保存进内存，如果有多个任务运行，那么就得把数据复制多份，然而实">
+<meta name="twitter:title" content="关于我">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -36,9 +33,9 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
-  <body>
-    <header>
-      
+      <body>
+        <header>
+          
 <div>
 		
 			<div id="imglogo">
@@ -73,28 +70,18 @@
 				</ul>
 			</nav>			
 </div>
-    </header>
-    <div id="container" class="post moveMain">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+        </header>
+        <div id="container">
+          <div id="main" class="page" itemscope itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/05/18/hive笛卡尔积优化/" title="hive笛卡尔积优化" itemprop="url">hive笛卡尔积优化</a>
+      <a href="/about/index.html" title="关于我" itemprop="url">关于我</a>
   </h1>
   <div class="article-catetags">
 
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/hive/">hive</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/优化/">优化</a><a href="/tags/笛卡尔积/">笛卡尔积</a>
-  </div>
 
 </div>
 
@@ -104,37 +91,19 @@
 		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
 		
   <p class="article-time">
-    <time datetime="2017-05-18T10:47:17.275Z" itemprop="datePublished"> 发表于 2017-05-18 18:47:17</time>
+    <time datetime="2017-05-14T03:46:46.000Z" itemprop="datePublished"> 发表于 2017-05-14 11:46:46</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hive的笛卡尔积"><span class="toc-number">1.</span> <span class="toc-text">hive的笛卡尔积</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化历程"><span class="toc-number">2.</span> <span class="toc-text">优化历程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-number">3.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后话"><span class="toc-number">4.</span> <span class="toc-text">后话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后的话"><span class="toc-number">5.</span> <span class="toc-text">最后的话</span></a></li></ol>
-		
-		</div>
-		
-		<h2 id="hive的笛卡尔积"><a href="#hive的笛卡尔积" class="headerlink" title="hive的笛卡尔积"></a>hive的笛卡尔积</h2><p>hive中默认不使用笛卡尔积，需要开启才能运行，hive不建议运行笛卡尔积，但是，在实践过程中，难免需要使用到，这时就得开启该功能；然后，hive中做笛卡尔积的结果就是最后的数据运算都集中在一个reduce上，亲测确实如此。那么，该怎么优化呢？</p>
-<h2 id="优化历程"><a href="#优化历程" class="headerlink" title="优化历程"></a>优化历程</h2><p>笛卡尔积计算需要把数据全部遍历一遍才行，使用笛卡尔积理论上数据需要保存进内存，如果有多个任务运行，那么就得把数据复制多份，然而实时却并非如此；因为，笛卡尔积的计算最终是计算出结果，因此，会把数据积压到一个reduce上，而不是多份（虽然难以理解，但是，实践测试多次，还真心如此）。<br>因此，想要优化，必须加大reduce的个数，这时需要有分区（或者分块）的概念，即把数据copy成多份，进行join操作，在计算时把小部分数据与全部数据进行join，达到笛卡尔积的效果。</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>1，获得表a<br>2，copya表成b，注意是拓展的copy，即分区成5份（看资源情况可设置成更多份）：  </p>
-<p>drop table if exists b;<br>create table b<br>as<br>select <em> from<br>(<br>select aa.</em>,’1,2,3,4,5’ as old_part  a aa<br>)b lateral view explode(split(old_part,’,’)) b as part<br>;</p>
-<p>3,把表a的记录进行随机打散：</p>
-<p>drop table if exists aa;<br>create table aa<br>as<br>select aaa.<em><br>       ,cast(round(rand()</em>4+1.0,0) as int) as part from  a aaa<br>;</p>
-<p>4,做一般的join操作</p>
-<p>drop table if exists aab;<br>create table aab<br>as<br>select<br>   a.id<br>   ,b.id as id_tj<br>from aa a<br>join b b<br>on a.part=b.part<br>;</p>
-<p>5，这样就可5个reduce计算，比单独的一个reduce快的多</p>
-<h2 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h2><p>1, hive是分布式计算结构化数据的一个工具，本质上使用map-reduce计算框架；<br>2，hive操作与mysql类似，但有不同，比如表的in操作等；<br>3，使用map-reduce计算的方式，都需要考虑并行和分区概念。</p>
-<h2 id="最后的话"><a href="#最后的话" class="headerlink" title="最后的话"></a>最后的话</h2><p>分享即是收获，动手后才是自己的。</p>
-  
+		  
 	</div>
 		<footer class="article-footer clearfix">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://chlyzzo.github.io/2017/05/18/hive笛卡尔积优化/" data-title="hive笛卡尔积优化 | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  <div data-url="https://chlyzzo.github.io/about/index.html" data-title="关于我 | 山上掏金" data-tsina="1724571293" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -145,32 +114,11 @@
    	       
 	</article>
 	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2017/05/19/flink学习/" title="Flink学习">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Flink学习</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2017/05/01/hello-world/"  title="开始搭建-hexo-git-blog">
- <strong>下一篇：</strong><br/> 
- <span>开始搭建-hexo-git-blog
-</span>
-</a>
-</div>
-
-</nav>
-
 	
 
 </div>  
-    </div>
-    <footer><div id="footer" >
+        </div>
+        <footer><div id="footer" >
 	
 	<div class="line">
 		<span></span>
@@ -213,7 +161,7 @@
 		</p>
 </div>
 </footer>
-    <script src="/js/jquery-2.0.3.min.js"></script>
+        <script src="/js/jquery-2.0.3.min.js"></script>
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 <script src="/js/jquery.qrcode-0.12.0.min.js"></script>
@@ -259,32 +207,6 @@ $(document).ready(function(){
       o.css('display', 'none');
         
     }
-  });
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
   });
 });
 </script>
@@ -436,5 +358,6 @@ var _hmt = _hmt || [];
 
 <!-- Tiny_search End -->
 
-  </body>
-</html>
+      </body>
+     </html>
+     
