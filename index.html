@@ -44,7 +44,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -60,7 +60,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:chlyzzo.github.io">
 					</form>
 					
@@ -72,7 +72,8 @@
     <div id="container">
       <div id="main">
 
-  
+  <div id="asidepart" class="fadeIn fadeOut" style="display: none;"></div>
+
 <section class="post" itemscope itemprop="blogitem">
   
     <a href="/2017/06/02/flink在yarn上搭建/" title="Flink在YARN上搭建" itemprop="url">
@@ -93,7 +94,8 @@
 
 
 
-  
+  <div id="asidepart" class="fadeIn fadeOut" style="display: none;"></div>
+
 <section class="post" itemscope itemprop="blogitem">
   
     <a href="/2017/05/19/flink学习/" title="Flink学习" itemprop="url">
@@ -114,7 +116,8 @@
 
 
 
-  
+  <div id="asidepart" class="fadeIn fadeOut" style="display: none;"></div>
+
 <section class="post" itemscope itemprop="blogitem">
   
     <a href="/2017/05/18/hive笛卡尔积优化/" title="hive笛卡尔积优化" itemprop="url">
@@ -135,7 +138,8 @@
 
 
 
-  
+  <div id="asidepart" class="fadeIn fadeOut" style="display: none;"></div>
+
 <section class="post" itemscope itemprop="blogitem">
   
     <a href="/2017/05/01/hello-world/" title="开始搭建-hexo-git-blog" itemprop="url">
@@ -159,15 +163,15 @@
 
 
 </div>
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">Categories</p>
+	<p class="asidetitle">分类</p>
 		<ul>
 		
 		  
@@ -188,8 +192,16 @@
 
   
 <div class="tagslist">
-	<p class="asidetitle">Tags</p>
+	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/搭建/" title="搭建">搭建<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/运行/" title="运行">运行<sup>1</sup></a></li>
+			
 		
 			
 				<li><a href="/tags/新手/" title="新手">新手<sup>1</sup></a></li>
@@ -201,14 +213,6 @@
 		
 			
 				<li><a href="/tags/实践经验/" title="实践经验">实践经验<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/搭建/" title="搭建">搭建<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/运行/" title="运行">运行<sup>1</sup></a></li>
 			
 		
 			
@@ -224,7 +228,7 @@
 
 
   <div class="linkslist">
-  <p class="asidetitle">Links</p>
+  <p class="asidetitle">友情链接</p>
     <ul>
         
           <li>
@@ -385,7 +389,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
