@@ -11,14 +11,17 @@
     
 
     
-    <meta name="keywords" content="flink实践">
+    <meta name="description" content="讲述把一个Flink的job怎么打包提交到集群上运行，当然也可以在Eclipse本地运行。Flink本地运行不用像Spark那样需要设置本地为master，即setMaster(“local”),可以直接点击Run。 编辑一个简单的Flink程序当sbt eclipse运行成功后，用eclipse打开现有的项目，就在eclipse里看到生成的子项目。在这些字项目中我们可以随意添加程序，即想操作的j">
+<meta name="keywords" content="flink实践">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flink实践-job打包">
 <meta property="og:url" content="https://chlyzzo.github.io/2017/06/09/Flink实践-job打包/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:updated_time" content="2017-06-09T12:44:31.028Z">
+<meta property="og:description" content="讲述把一个Flink的job怎么打包提交到集群上运行，当然也可以在Eclipse本地运行。Flink本地运行不用像Spark那样需要设置本地为master，即setMaster(“local”),可以直接点击Run。 编辑一个简单的Flink程序当sbt eclipse运行成功后，用eclipse打开现有的项目，就在eclipse里看到生成的子项目。在这些字项目中我们可以随意添加程序，即想操作的j">
+<meta property="og:updated_time" content="2017-06-09T14:21:30.867Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flink实践-job打包">
+<meta name="twitter:description" content="讲述把一个Flink的job怎么打包提交到集群上运行，当然也可以在Eclipse本地运行。Flink本地运行不用像Spark那样需要设置本地为master，即setMaster(“local”),可以直接点击Run。 编辑一个简单的Flink程序当sbt eclipse运行成功后，用eclipse打开现有的项目，就在eclipse里看到生成的子项目。在这些字项目中我们可以随意添加程序，即想操作的j">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -46,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -108,13 +111,40 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">目录</strong>
+			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#编辑一个简单的Flink程序"><span class="toc-number">1.</span> <span class="toc-text">编辑一个简单的Flink程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#打包执行"><span class="toc-number">2.</span> <span class="toc-text">打包执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提交包运行"><span class="toc-number">3.</span> <span class="toc-text">提交包运行</span></a></li></ol>
 		
 		</div>
 		
-		  
+		<p>讲述把一个Flink的job怎么打包提交到集群上运行，当然也可以在Eclipse本地运行。Flink本地运行不用像<br>Spark那样需要设置本地为master，即setMaster(“local”),可以直接点击Run。</p>
+<h2 id="编辑一个简单的Flink程序"><a href="#编辑一个简单的Flink程序" class="headerlink" title="编辑一个简单的Flink程序"></a>编辑一个简单的Flink程序</h2><p>当sbt eclipse运行成功后，用eclipse打开现有的项目，就在eclipse里看到生成的子项目。在这些字项目中我们可以<br>随意添加程序，即想操作的job。</p>
+<p>比如我们在example的子项目中，添加一个统计单词次数的job，这时的操作步骤：</p>
+<ul>
+<li>新建一个包，</li>
+<li>新建一个scala Object</li>
+<li>编辑程序</li>
+</ul>
+<p>比如在example下新建test包，然后新建test1.scala的Scala Object。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">package <span class="built_in">test</span></div><div class="line"></div><div class="line">object <span class="built_in">test</span>1 &#123;</div><div class="line">  def main(args:Array[String]):Unit=&#123;</div><div class="line">    println(<span class="string">"in flink"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在项目构建完成后，building workspace，然后选择run scala application，一般用scala语言编辑Flink的job，<br>当然也可以用java语言编写。这时会出现输出的字样。</p>
+<h2 id="打包执行"><a href="#打包执行" class="headerlink" title="打包执行"></a>打包执行</h2><p>本地执行Flink的程序，一是测试用或者练习用。Flink跑job一般是数据量大，需要分布式跑，而是采取流式，<br>我们可以通过socket模拟，后续会有针对的讲解。</p>
+<p>当我们在本地测试程序没有错误，能够得到正确要想的结果时，这时就可以将程序进行打包，提交到集群执行。</p>
+<p>打包的命令如下，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sbt 子项目名/assembly</div></pre></td></tr></table></figure>
+<p>一般在实践中，不会针对某个子项目来进行打包，而是为了通用化，会结合git来进行打包，达到线上和线下代码分离，<br>因此，线下打包可以沿用上述命令。线上则需进行脚本的控制。</p>
+<p>具体的控制有两个方面：</p>
+<p>1，打包时需要拉取最新的代码，与git交互；</p>
+<p>2，打包时带的一些参数，为了隐私和安全，一般在代码中会加以编码，打包时需要进行读取解析，这个后续会单独讲；</p>
+<p>3，打包成功后，Flink的包是存储在子项目的target/scala-2.11目录下，名字会生产，需要进行重命名，以便识别；</p>
+<p>线下打包的脚本配置<br>assembly.sh<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line">MODULE_NAME=<span class="string">"<span class="variable">$1</span>"</span></div><div class="line"></div><div class="line">install -D 配置文件移动 项目的配置文件存放</div><div class="line"></div><div class="line"><span class="built_in">cd</span> 项目的目录</div><div class="line">sbt <span class="variable">$MODULE_NAME</span>/assembly</div><div class="line"></div><div class="line">配置文件的重新移动，保证隐私</div></pre></td></tr></table></figure></p>
+<p>这里所说的配置文件，与Flink的job打包没有任何关系，而是有些job会涉及到一些重要参数，额外采取文件存放，<br>打包时在程序里进行解析，打包后进行还原，达到保护重要参数的目的。如果，不注重参数保护，可以在参数中直接写明。建议把重要的配置<br>参数进行单独文件存放，这需要自定义一个参数获取的函数，后续内容将会放出来。</p>
+<h2 id="提交包运行"><a href="#提交包运行" class="headerlink" title="提交包运行"></a>提交包运行</h2><p>当得到打包好的job时，一个jar文件，这时可以把它提交到集群或者YARN集群运行。如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/home/www/flink-1.1.1/bin/flink run \</div><div class="line">-m yarn-cluster \</div><div class="line">-yn 1 \</div><div class="line">-ys 2 \</div><div class="line">-yjm 4096 \</div><div class="line">-ytm 4096 \</div><div class="line">--class test.test1 \</div><div class="line">--classpath file:///opt/cloudera/parcels/CDH/lib/hbase/hbase-client.jar \</div><div class="line">*****.jar</div></pre></td></tr></table></figure>
+<p>单独运行一个job的命令行。足够了，不建议开启一个Flink会话，然后提交job，一个Flink的job，一次提交比较安全。<br>指定job manager和task manager，以及各自的内存大小即可。所带包可以带，建议不用带，打包时带上。</p>
+<p>所带的参数详见<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.2/setup/config.html" target="_blank" rel="external">Flink的官方文档</a>.</p>
+<p>最后，可以在集群的web页面查看Flink的job运行情况，具体看运行集群的web的设置，当然，Flink的配置也是可以的。<br>最后可<a href="https://chlyzzo.github.io/2017/06/02/flink%E5%9C%A8yarn%E4%B8%8A%E6%90%AD%E5%BB%BA/">参考文章</a>.</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 
