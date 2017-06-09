@@ -2,107 +2,135 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-ML/</loc>
-    
-    <lastmod>2017-06-09T08:42:32.685Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-job%E6%89%93%E5%8C%85/</loc>
     
-    <lastmod>2017-06-09T08:32:50.011Z</lastmod>
+    <lastmod>2017-06-09T12:44:31.028Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%AE%9E%E8%B7%B5%E8%BF%87%E7%A8%8B%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/</loc>
+    <loc>https://chlyzzo.github.io/2017/05/18/hive%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF%E4%BC%98%E5%8C%96/</loc>
     
-    <lastmod>2017-06-09T07:32:39.204Z</lastmod>
+    <lastmod>2017-06-09T12:43:56.161Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/05/01/hello-world/</loc>
+    
+    <lastmod>2017-06-09T12:43:41.649Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/02/flink%E5%9C%A8yarn%E4%B8%8A%E6%90%AD%E5%BB%BA/</loc>
+    
+    <lastmod>2017-06-09T12:43:29.077Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/05/19/flink%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2017-06-09T12:43:15.254Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%AA%97%E5%8F%A3/</loc>
     
-    <lastmod>2017-06-09T07:32:20.410Z</lastmod>
+    <lastmod>2017-06-09T12:43:02.029Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%9C%A8%E7%BA%BF%E5%AE%9E%E6%97%B6%E6%8E%A8%E8%8D%90/</loc>
     
-    <lastmod>2017-06-09T07:31:42.886Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93hanlp/</loc>
-    
-    <lastmod>2017-06-09T07:31:27.568Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7/</loc>
-    
-    <lastmod>2017-06-09T07:31:06.710Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96hbase/</loc>
-    
-    <lastmod>2017-06-09T07:30:46.875Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%8F%90%E4%BA%A4YARN%E8%BF%90%E8%A1%8C/</loc>
-    
-    <lastmod>2017-06-09T07:30:30.566Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96HDFS/</loc>
-    
-    <lastmod>2017-06-09T07:29:53.582Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96rabbitMQ/</loc>
-    
-    <lastmod>2017-06-09T07:29:43.561Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96kafka/</loc>
-    
-    <lastmod>2017-06-09T07:29:31.033Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%96%B0%E5%A2%9Ejob-%E6%B5%81%E5%A4%84%E7%90%86/</loc>
-    
-    <lastmod>2017-06-09T07:28:44.114Z</lastmod>
+    <lastmod>2017-06-09T12:42:51.017Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%96%B0%E5%A2%9Ejob-%E6%89%B9%E5%A4%84%E7%90%86/</loc>
     
-    <lastmod>2017-06-09T07:28:31.671Z</lastmod>
+    <lastmod>2017-06-09T12:42:37.127Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%96%B0%E5%A2%9Ejob-%E6%B5%81%E5%A4%84%E7%90%86/</loc>
+    
+    <lastmod>2017-06-09T12:42:23.744Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%8F%90%E4%BA%A4YARN%E8%BF%90%E8%A1%8C/</loc>
+    
+    <lastmod>2017-06-09T12:42:12.022Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7/</loc>
+    
+    <lastmod>2017-06-09T12:41:54.772Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%AE%9E%E8%B7%B5%E8%BF%87%E7%A8%8B%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/</loc>
+    
+    <lastmod>2017-06-09T12:41:42.207Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96rabbitMQ/</loc>
+    
+    <lastmod>2017-06-09T12:41:31.624Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96kafka/</loc>
+    
+    <lastmod>2017-06-09T12:41:19.860Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96HDFS/</loc>
+    
+    <lastmod>2017-06-09T12:41:05.005Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96hbase/</loc>
+    
+    <lastmod>2017-06-09T12:40:52.218Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93hanlp/</loc>
+    
+    <lastmod>2017-06-09T12:40:41.075Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%90%AD%E5%BB%BAFlink%E9%A1%B9%E7%9B%AE/</loc>
     
-    <lastmod>2017-06-09T07:26:56.722Z</lastmod>
+    <lastmod>2017-06-09T12:40:29.860Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-ML/</loc>
+    
+    <lastmod>2017-06-09T12:40:10.241Z</lastmod>
     
   </url>
   
@@ -110,20 +138,6 @@
     <loc>https://chlyzzo.github.io/about/index.html</loc>
     
     <lastmod>2017-06-08T16:36:52.643Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/02/flink%E5%9C%A8yarn%E4%B8%8A%E6%90%AD%E5%BB%BA/</loc>
-    
-    <lastmod>2017-06-07T23:59:20.489Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/05/19/flink%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2017-06-07T23:34:18.888Z</lastmod>
     
   </url>
   
@@ -138,20 +152,6 @@
     <loc>https://chlyzzo.github.io/categories/index.html</loc>
     
     <lastmod>2017-06-07T15:30:13.659Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/05/18/hive%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF%E4%BC%98%E5%8C%96/</loc>
-    
-    <lastmod>2017-05-19T07:30:40.919Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/05/01/hello-world/</loc>
-    
-    <lastmod>2017-05-01T09:58:21.143Z</lastmod>
     
   </url>
   
