@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chlyzzo.github.io/about/index.html</loc>
+    
+    <lastmod>2017-06-10T00:40:31.564Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-job%E6%89%93%E5%8C%85/</loc>
     
     <lastmod>2017-06-09T14:21:30.867Z</lastmod>
@@ -131,13 +138,6 @@
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-ML/</loc>
     
     <lastmod>2017-06-09T12:40:10.241Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/about/index.html</loc>
-    
-    <lastmod>2017-06-08T16:36:52.643Z</lastmod>
     
   </url>
   
