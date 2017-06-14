@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2017/06/09/Flink实践-job打包/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="讲述把一个Flink的job怎么打包提交到集群上运行，当然也可以在Eclipse本地运行。Flink本地运行不用像Spark那样需要设置本地为master，即setMaster(“local”),可以直接点击Run。 编辑一个简单的Flink程序当sbt eclipse运行成功后，用eclipse打开现有的项目，就在eclipse里看到生成的子项目。在这些字项目中我们可以随意添加程序，即想操作的j">
-<meta property="og:updated_time" content="2017-06-09T14:21:30.867Z">
+<meta property="og:updated_time" content="2017-06-14T08:26:25.290Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flink实践-job打包">
 <meta name="twitter:description" content="讲述把一个Flink的job怎么打包提交到集群上运行，当然也可以在Eclipse本地运行。Flink本地运行不用像Spark那样需要设置本地为master，即setMaster(“local”),可以直接点击Run。 编辑一个简单的Flink程序当sbt eclipse运行成功后，用eclipse打开现有的项目，就在eclipse里看到生成的子项目。在这些字项目中我们可以随意添加程序，即想操作的j">
@@ -49,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -104,14 +104,14 @@
 		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
 		
   <p class="article-time">
-    <time datetime="2017-06-09T07:30:16.000Z" itemprop="datePublished"> 发表于 2017-06-09 15:30:16</time>
+    <time datetime="2017-06-09T07:30:16.000Z" itemprop="datePublished"> 發表於 2017-06-09 15:30:16</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">文章目錄</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#编辑一个简单的Flink程序"><span class="toc-number">1.</span> <span class="toc-text">编辑一个简单的Flink程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#打包执行"><span class="toc-number">2.</span> <span class="toc-text">打包执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提交包运行"><span class="toc-number">3.</span> <span class="toc-text">提交包运行</span></a></li></ol>
 		
@@ -140,7 +140,7 @@
 <p>线下打包的脚本配置<br>assembly.sh<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line">MODULE_NAME=<span class="string">"<span class="variable">$1</span>"</span></div><div class="line"></div><div class="line">install -D 配置文件移动 项目的配置文件存放</div><div class="line"></div><div class="line"><span class="built_in">cd</span> 项目的目录</div><div class="line">sbt <span class="variable">$MODULE_NAME</span>/assembly</div><div class="line"></div><div class="line">配置文件的重新移动，保证隐私</div></pre></td></tr></table></figure></p>
 <p>这里所说的配置文件，与Flink的job打包没有任何关系，而是有些job会涉及到一些重要参数，额外采取文件存放，<br>打包时在程序里进行解析，打包后进行还原，达到保护重要参数的目的。如果，不注重参数保护，可以在参数中直接写明。建议把重要的配置<br>参数进行单独文件存放，这需要自定义一个参数获取的函数，后续内容将会放出来。</p>
 <h2 id="提交包运行"><a href="#提交包运行" class="headerlink" title="提交包运行"></a>提交包运行</h2><p>当得到打包好的job时，一个jar文件，这时可以把它提交到集群或者YARN集群运行。如下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/home/www/flink-1.1.1/bin/flink run \</div><div class="line">-m yarn-cluster \</div><div class="line">-yn 1 \</div><div class="line">-ys 2 \</div><div class="line">-yjm 4096 \</div><div class="line">-ytm 4096 \</div><div class="line">--class test.test1 \</div><div class="line">--classpath file:///opt/cloudera/parcels/CDH/lib/hbase/hbase-client.jar \</div><div class="line">*****.jar</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/home/www/flink-1.1.1/bin/flink run \</div><div class="line">-m yarn-cluster \</div><div class="line">-yn 1 \</div><div class="line">-ys 2 \</div><div class="line">-yjm 4096 \</div><div class="line">-ytm 4096 \</div><div class="line">--class test.test1 \</div><div class="line">--classpath file:///***.jar \</div><div class="line">*****.jar</div></pre></td></tr></table></figure>
 <p>单独运行一个job的命令行。足够了，不建议开启一个Flink会话，然后提交job，一个Flink的job，一次提交比较安全。<br>指定job manager和task manager，以及各自的内存大小即可。所带包可以带，建议不用带，打包时带上。</p>
 <p>所带的参数详见<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.2/setup/config.html" target="_blank" rel="external">Flink的官方文档</a>.</p>
 <p>最后，可以在集群的web页面查看Flink的job运行情况，具体看运行集群的web的设置，当然，Flink的配置也是可以的。<br>最后可<a href="https://chlyzzo.github.io/2017/06/02/flink%E5%9C%A8yarn%E4%B8%8A%E6%90%AD%E5%BB%BA/">参考文章</a>.</p>
@@ -407,7 +407,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
