@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2017/06/09/Flink实践-搭建Flink项目/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="讲述怎么搭建一个Flink的项目，一开始怎么安装环境。开始Flink开发之旅。 准备需要下载的文件有sbt，Eclipse，以及插件的网址。 sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获取更多信息。下面讲述怎么安装sbt，以及验证sbt安装成功与否。 首先，必须确保开发环境的版本一致，由于开发环境涉及其他开源框架，这里统一采用了sbt-0.13.6版本。下载sbt-la">
-<meta property="og:updated_time" content="2017-06-14T13:14:16.599Z">
+<meta property="og:updated_time" content="2017-06-14T13:20:45.198Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flink实践-搭建Flink项目">
 <meta name="twitter:description" content="讲述怎么搭建一个Flink的项目，一开始怎么安装环境。开始Flink开发之旅。 准备需要下载的文件有sbt，Eclipse，以及插件的网址。 sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获取更多信息。下面讲述怎么安装sbt，以及验证sbt安装成功与否。 首先，必须确保开发环境的版本一致，由于开发环境涉及其他开源框架，这里统一采用了sbt-0.13.6版本。下载sbt-la">
@@ -120,13 +120,13 @@
 		<p>讲述怎么搭建一个Flink的项目，一开始怎么安装环境。开始Flink开发之旅。</p>
 <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>需要下载的文件有sbt，Eclipse，以及插件的网址。</p>
 <h3 id="sbt设置"><a href="#sbt设置" class="headerlink" title="sbt设置"></a>sbt设置</h3><p>sbt的作用与maven一样，这里不做讲述，可以从<a href="http://www.scala-sbt.org/" target="_blank" rel="external">sbt官网</a>获取更多信息。下面讲述怎么安装sbt，以及验证sbt安装成功与否。</p>
-<p>首先，必须确保开发环境的版本一致，由于开发环境涉及其他开源框架，这里统一采用了sbt-0.13.6版本。<br>下载<a href="https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.6/sbt-launch.jar" target="_blank" rel="external">sbt-launch.jar</a><br>,并把它放置在$HOME/bin/目录下；然后创建$HOME/bin/sbt文件，更改其模式为755，另外填写如下配置到sbt文件里：</p>
+<p>首先，必须确保开发环境的版本一致，由于开发环境涉及其他开源框架，这里统一采用了sbt-0.13.6版本。<br>下载<a href="https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.6/sbt-launch.jar" target="_blank" rel="external">sbt-launch.jar</a>,并把它放置在$HOME/bin/目录下；然后创建$HOME/bin/sbt文件，更改其模式为755，另外填写如下配置到sbt文件里：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SBT_OPTS=<span class="string">"-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M -Dsbt.override.build.repos=true"</span></div><div class="line">java <span class="variable">$SBT_OPTS</span> -jar `dirname <span class="variable">$0</span>`/sbt-launch.jar <span class="string">"<span class="variable">$@</span>"</span></div></pre></td></tr></table></figure>
 <p>然后，是设置库，即sbt构建项目时从何处查找库，一般按照本地优先，然后是公共库，以及特殊库的顺序设置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">在$HOME/.sbt/repositories文件里填入</div><div class="line"></div><div class="line">[repositories]</div><div class="line">  local</div><div class="line">  my-maven-snapshots:https://repository.apache.org/content/repositories/snapshots/</div><div class="line">  my-sbt-releases:https://repository.apache.org/content/repositories/releases/</div><div class="line">  my-sbt-public:https://repository.apache.org/content/repositories/public/</div><div class="line">  my-maven-public:http://repo.maven.apache.org/maven2/</div></pre></td></tr></table></figure></p>
 <p>其他库亦可添加。</p>
 <p>最后，验证安装是否成功，在命令行输入sbt –version或者sbt sbt-version，出现sbt版本即成功安装。<br>另外，sbt下载的包，均在$HOME/.ivy2/cache目录下。</p>
 <h2 id="Eclipse插件"><a href="#Eclipse插件" class="headerlink" title="Eclipse插件"></a>Eclipse插件</h2><p>开发环境用的是Eclipse，在其中安装scala的插件，打开eclipse点击help下的install new software，然后，填写名字和网站，选择对应的版本，<a href="http://scala-ide.org/download/current.html" target="_blank" rel="external">网址信息</a>查找，按照步骤完成安装。</p>
-<h2 id="sbt使用生产项目"><a href="#sbt使用生产项目" class="headerlink" title="sbt使用生产项目"></a>sbt使用生产项目</h2><p>使用sbt构建项目有多种方法，因为sbt下载依赖的包可以很多方式是设置，下面采取的是一种简单的方式。把各个模块当成是<br>小项目进行生成。</p>
+<h2 id="sbt使用生产项目"><a href="#sbt使用生产项目" class="headerlink" title="sbt使用生产项目"></a>sbt使用生产项目</h2><p>使用sbt构建项目有多种方法，因为sbt下载依赖的包可以很多方式是设置，下面采取的是一种简单的方式。把各个模块当成是小项目进行生成。</p>
 <p>sbt构建项目所需的目录结果和内容，</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">大目录，项目名称（英文小写）</div><div class="line">    build.sbt（是一个文件，用于编辑生成项目所需下载的包）</div><div class="line">    project（目录）</div><div class="line">       plugins.sbt(eclipse版本设置)</div><div class="line">       assembly.sbt（用于打包用）</div></pre></td></tr></table></figure>
 <p>把上述文件建好后，在对应的文件中添加如下信息，</p>
@@ -140,9 +140,9 @@
 <p>构建的解析，</p>
 <p>1，build.sbt里编辑，具体信息可以查找sbt官网获得更多信息，这里提供几个快捷经验，%%会在对应包自动加上scala的版本，比如加上_2.11或者_2.10；</p>
 <p>2，当你不知道某个包的版本号时，可以从<a href="http://repo.maven.apache.org/maven2/" target="_blank" rel="external">maven的开源库</a>中找存在的版本;</p>
-<p>3,provided是在打包时不用加载其中，而使用运行集群中的包，或者提交运行时带上的包；为了减少打包的大小，<br>对通用的包可以使用集群的；为了确保程序运行不报错，建议都带上，即去除provided.</p>
+<p>3,provided是在打包时不用加载其中，而使用运行集群中的包，或者提交运行时带上的包；为了减少打包的大小，对通用的包可以使用集群的；为了确保程序运行不报错，建议都带上，即去除provided.</p>
 <p>4,对于dependsOn的使用，具有传递性，所以不必要把所有的依赖都写上，可以根据传递依赖选择；</p>
-<p>5，在sbt生成项目时，用sbt eclipse命令，会很慢是正常的，最好能连vpn，国外网址来加速，请等待，若出现失败，<br>请根据提示定位哪个包下载失败，或者重新sbt eclipse，多次运行；</p>
+<p>5，在sbt生成项目时，用sbt eclipse命令，会很慢是正常的，最好能连vpn，国外网址来加速，请等待，若出现失败，请根据提示定位哪个包下载失败，或者重新sbt eclipse，多次运行；</p>
 <p>6，单个子项目中，独立添加库，如下例子，单独添加了下载amidsttoolbox的库源，</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.settings(</div><div class="line">        resolvers += <span class="string">"my-amisttools"</span> at <span class="string">"http://maven.amidsttoolbox.com/"</span></div><div class="line">).</div></pre></td></tr></table></figure>
   
