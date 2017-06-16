@@ -11,13 +11,17 @@
     
 
     
-    <meta property="og:type" content="article">
+    <meta name="description" content="讲述Flink读取kafka下topic的消息，并进行处理。 kafka简介分布式消息系统Apache Kafka ，在实际生产中常作为消息传递的工具，其稳定，高并发，接受多个数据源，并可保存数据（自定义数据的周期），在消费端，可以做到相互独立，基于数据的处理工具，可保证数据的有序性。 kafka消费数据以组为单位，一个组里可有多个消费者或消费实例,共享groupId,组内所有消费者一起消费top">
+<meta name="keywords" content="flink实践,kafka">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Flink实践-读取kafka">
 <meta property="og:url" content="https://chlyzzo.github.io/2017/06/09/Flink实践-读取kafka/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:updated_time" content="2017-06-09T12:41:19.860Z">
+<meta property="og:description" content="讲述Flink读取kafka下topic的消息，并进行处理。 kafka简介分布式消息系统Apache Kafka ，在实际生产中常作为消息传递的工具，其稳定，高并发，接受多个数据源，并可保存数据（自定义数据的周期），在消费端，可以做到相互独立，基于数据的处理工具，可保证数据的有序性。 kafka消费数据以组为单位，一个组里可有多个消费者或消费实例,共享groupId,组内所有消费者一起消费top">
+<meta property="og:updated_time" content="2017-06-16T12:55:55.449Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flink实践-读取kafka">
+<meta name="twitter:description" content="讲述Flink读取kafka下topic的消息，并进行处理。 kafka简介分布式消息系统Apache Kafka ，在实际生产中常作为消息传递的工具，其稳定，高并发，接受多个数据源，并可保存数据（自定义数据的周期），在消费端，可以做到相互独立，基于数据的处理工具，可保证数据的有序性。 kafka消费数据以组为单位，一个组里可有多个消费者或消费实例,共享groupId,组内所有消费者一起消费top">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -45,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -81,6 +85,16 @@
   </h1>
   <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/flink/">flink</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/flink实践/">flink实践</a><a href="/tags/kafka/">kafka</a>
+  </div>
 
 </div>
 
@@ -97,13 +111,25 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">目录</strong>
+			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#kafka简介"><span class="toc-number">1.</span> <span class="toc-text">kafka简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink消费kafka"><span class="toc-number">2.</span> <span class="toc-text">Flink消费kafka</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink读取kafka消息的配置"><span class="toc-number">3.</span> <span class="toc-text">Flink读取kafka消息的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消息格式的处理"><span class="toc-number">4.</span> <span class="toc-text">消息格式的处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用例子"><span class="toc-number">5.</span> <span class="toc-text">使用例子</span></a></li></ol>
 		
 		</div>
 		
-		  
+		<p>讲述Flink读取kafka下topic的消息，并进行处理。</p>
+<h2 id="kafka简介"><a href="#kafka简介" class="headerlink" title="kafka简介"></a>kafka简介</h2><p>分布式消息系统<a href="http://kafka.apache.org/" target="_blank" rel="external">Apache Kafka</a> ，在实际生产中常作为消息传递的工具，其稳定，高并发，接受多个数据源，并可保存数据（自定义数据的周期），在消费端，可以做到相互独立，基于数据的处理工具，可保证数据的有序性。</p>
+<p>kafka消费数据以组为单位，一个组里可有多个消费者或消费实例,共享groupId,组内所有消费者一起消费topic的所有分区.一个分区只能由同一个消费组的一个consumer来消费.</p>
+<h2 id="Flink消费kafka"><a href="#Flink消费kafka" class="headerlink" title="Flink消费kafka"></a>Flink消费kafka</h2><p>Flink是流处理框架，合适处理流式数据，在产生数据端把消息写进kafka的topic下，即是流的源头，Flink可实现对数据的处理。在读取消息中，Flink可设置模式，仅一次，至多一次，至少一次。</p>
+<p>为体现Flink的流处理优势，即窗口，可以对流执行多样的处理，Flink的窗口比Spark丰富，不是简单的提供批处理，可以实现更复杂的窗口处理，比如计数，多种时间窗口等。</p>
+<h2 id="Flink读取kafka消息的配置"><a href="#Flink读取kafka消息的配置" class="headerlink" title="Flink读取kafka消息的配置"></a>Flink读取kafka消息的配置</h2><p>读取kafka消息，必须提供kafka的配置信息，broker，zookeeper，groupid,topic等参数，为屏蔽重要参数，在程序中把它们写进配置文件，采取Config()来读取值。</p>
+<p>另外，在Flink下可读取多个topic下消息。以下是两个读取例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">def <span class="built_in">read</span>FromKafkaDataStream(env:StreamExecutionEnvironment,zookeeper:String,broker:String,groupid:String,topic:String):DataStream[String]=&#123;</div><div class="line">    env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)</div><div class="line">    env.enableCheckpointing(5000)</div><div class="line">    env.getCheckpointConfig.setCheckpointingMode(CheckpointingMode.EXACTLY_ONCE)</div><div class="line"></div><div class="line">    val kafkaProps = new Properties()</div><div class="line">    kafkaProps.setProperty(<span class="string">"zookeeper.connect"</span>, zookeeper)</div><div class="line">    kafkaProps.setProperty(<span class="string">"bootstrap.servers"</span>, broker)</div><div class="line">    kafkaProps.setProperty(<span class="string">"group.id"</span>, groupid)</div><div class="line"></div><div class="line">    env.addSource( new FlinkKafkaConsumer08[String](topic, new SimpleStringSchema(), kafkaProps))</div><div class="line">  &#125;</div><div class="line"></div><div class="line">   def <span class="built_in">read</span>FromKafkaDataStream(env:StreamExecutionEnvironment,zookeeper:String,broker:String,groupid:String,topic:List[String]):DataStream[String]=&#123;</div><div class="line">    env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)</div><div class="line">    env.enableCheckpointing(5000)</div><div class="line">    env.getCheckpointConfig.setCheckpointingMode(CheckpointingMode.EXACTLY_ONCE)</div><div class="line"></div><div class="line">    val kafkaProps = new Properties()</div><div class="line">    kafkaProps.setProperty(<span class="string">"zookeeper.connect"</span>, zookeeper)</div><div class="line">    kafkaProps.setProperty(<span class="string">"bootstrap.servers"</span>, broker)</div><div class="line">    kafkaProps.setProperty(<span class="string">"group.id"</span>, groupid)</div><div class="line"></div><div class="line">    env.addSource( new FlinkKafkaConsumer08[String](topic.asJava, new SimpleStringSchema(), kafkaProps))</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>读取的程序，采用仅一次模式，并且设置checkpoint，数据的格式SimpleStringSchema化。</p>
+<h2 id="消息格式的处理"><a href="#消息格式的处理" class="headerlink" title="消息格式的处理"></a>消息格式的处理</h2><p>kafka消息一般采用json串，在处理时需要对其进行解析，采取的是<a href="https://github.com/json4s/json4s" target="_blank" rel="external">json4s</a>。实践中，同一种类的消息格式应统一，可能数据来源不同；消息的格式应保证数据完整，能用一个topic解决就用一个topic，不要为一个业务而采取多个topic的方案。</p>
+<h2 id="使用例子"><a href="#使用例子" class="headerlink" title="使用例子"></a>使用例子</h2><p>使用如下程序调用读取函数，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">object <span class="built_in">read</span>Message &#123;</div><div class="line">  private val ZOOKEEPER_HOST = Config(<span class="string">"***"</span>)</div><div class="line">  private val KAFKA_BROKER = Config(<span class="string">"***"</span>)</div><div class="line"></div><div class="line">  private val TRANSACTION_GROUP = <span class="string">"***"</span></div><div class="line">  private val topics = List(<span class="string">"***"</span>,<span class="string">"***"</span>)</div><div class="line"></div><div class="line">  def main(args:Array[String]):Unit=&#123;</div><div class="line"></div><div class="line">    val env = StreamExecutionEnvironment.getExecutionEnvironment</div><div class="line"></div><div class="line">    //设置job失败重启策略</div><div class="line">    env.setRestartStrategy(RestartStrategies.failureRateRestart(</div><div class="line">         3, // max failures per unit</div><div class="line">         Time.of(5, TimeUnit.MINUTES), //time interval <span class="keyword">for</span> measuring failure rate</div><div class="line">         Time.of(10, TimeUnit.SECONDS) // delay</div><div class="line">     ))</div><div class="line"></div><div class="line">    val opMysqlStream = <span class="built_in">read</span>FromKafkaDataStream(env, ZOOKEEPER_HOST, KAFKA_BROKER, TRANSACTION_GROUP, topics)</div><div class="line">   .......</div><div class="line">   env.execute(<span class="string">"read from kafka"</span>)   </div><div class="line">   &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+  
 	</div>
 		<footer class="article-footer clearfix">
 

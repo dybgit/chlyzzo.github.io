@@ -11,13 +11,17 @@
     
 
     
-    <meta property="og:type" content="article">
+    <meta name="description" content="讲述Flink消费RabbitMQ消息，并进行处理。 RabbitMQRabbitMQ另一种消息发送系统，与kafka类似，但有差别。kafka的消息可以有保存期限，rabbitMQ的消息一般在消费后就焚毁。另外，rabbitMQ的消息有一个唯一id，而kafka则是靠offset来标记数据。 Flink消费rabbitMQ消息与读取kafka的topic相同，也需要配置一些数据，但是，更严，需要">
+<meta name="keywords" content="flink实践,rabbitMQ">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Flink实践-读取rabbitMQ">
 <meta property="og:url" content="https://chlyzzo.github.io/2017/06/09/Flink实践-读取rabbitMQ/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:updated_time" content="2017-06-09T12:41:31.624Z">
+<meta property="og:description" content="讲述Flink消费RabbitMQ消息，并进行处理。 RabbitMQRabbitMQ另一种消息发送系统，与kafka类似，但有差别。kafka的消息可以有保存期限，rabbitMQ的消息一般在消费后就焚毁。另外，rabbitMQ的消息有一个唯一id，而kafka则是靠offset来标记数据。 Flink消费rabbitMQ消息与读取kafka的topic相同，也需要配置一些数据，但是，更严，需要">
+<meta property="og:updated_time" content="2017-06-16T12:58:45.385Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flink实践-读取rabbitMQ">
+<meta name="twitter:description" content="讲述Flink消费RabbitMQ消息，并进行处理。 RabbitMQRabbitMQ另一种消息发送系统，与kafka类似，但有差别。kafka的消息可以有保存期限，rabbitMQ的消息一般在消费后就焚毁。另外，rabbitMQ的消息有一个唯一id，而kafka则是靠offset来标记数据。 Flink消费rabbitMQ消息与读取kafka的topic相同，也需要配置一些数据，但是，更严，需要">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -45,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -81,6 +85,16 @@
   </h1>
   <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/flink/">flink</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/flink实践/">flink实践</a><a href="/tags/rabbitMQ/">rabbitMQ</a>
+  </div>
 
 </div>
 
@@ -97,13 +111,21 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">目录</strong>
+			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RabbitMQ"><span class="toc-number">1.</span> <span class="toc-text">RabbitMQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink消费rabbitMQ消息"><span class="toc-number">2.</span> <span class="toc-text">Flink消费rabbitMQ消息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消息处理"><span class="toc-number">3.</span> <span class="toc-text">消息处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用例子"><span class="toc-number">4.</span> <span class="toc-text">使用例子</span></a></li></ol>
 		
 		</div>
 		
-		  
+		<p>讲述Flink消费RabbitMQ消息，并进行处理。</p>
+<h2 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h2><p><a href="http://www.rabbitmq.com/" target="_blank" rel="external">RabbitMQ</a>另一种消息发送系统，与kafka类似，但有差别。kafka的消息可以有保存期限，rabbitMQ的消息一般在消费后就焚毁。另外，rabbitMQ的消息有一个唯一id，而kafka则是靠offset来标记数据。</p>
+<h2 id="Flink消费rabbitMQ消息"><a href="#Flink消费rabbitMQ消息" class="headerlink" title="Flink消费rabbitMQ消息"></a>Flink消费rabbitMQ消息</h2><p>与读取kafka的topic相同，也需要配置一些数据，但是，更严，需要密码和账号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">def <span class="built_in">read</span>FromRabbitMQDataStream(env:StreamExecutionEnvironment,host:String,port:String,user:String,pass:String,queueName:String):DataStream[String]= &#123;</div><div class="line">  val rmqConnectionConfig=new RMQConnectionConfig.Builder().setHost(host).setPort(port.toInt).setUserName(user).setPassword(pass).setVirtualHost(<span class="string">"/"</span>).build()</div><div class="line">  env.addSource(new RMQSource(rmqConnectionConfig,queueName,new SimpleStringSchema))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>rabbitMQ的消息识别用队列（kafka是topic），同样可以设置checkpoint和消费模式等。</p>
+<h2 id="消息处理"><a href="#消息处理" class="headerlink" title="消息处理"></a>消息处理</h2><p>与kafka一致，消息一般是json格式，保证数据的完整。</p>
+<h2 id="使用例子"><a href="#使用例子" class="headerlink" title="使用例子"></a>使用例子</h2><p>使用如下程序调用读取函数，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">object <span class="built_in">read</span>Message &#123;</div><div class="line"></div><div class="line">  def main(args:Array[String]):Unit=&#123;</div><div class="line"></div><div class="line">    val env = StreamExecutionEnvironment.getExecutionEnvironment</div><div class="line"></div><div class="line">    //设置job失败重启策略</div><div class="line">    env.setRestartStrategy(RestartStrategies.failureRateRestart(</div><div class="line">         3, // max failures per unit</div><div class="line">         Time.of(5, TimeUnit.MINUTES), //time interval <span class="keyword">for</span> measuring failure rate</div><div class="line">         Time.of(10, TimeUnit.SECONDS) // delay</div><div class="line">     ))</div><div class="line"></div><div class="line">    val data = <span class="built_in">read</span>FromRabbitMQDataStream(env,Config(<span class="string">"rmq.host"</span>),Config(<span class="string">"rmq.port"</span>), Config(<span class="string">"rmq.user"</span>), Config(<span class="string">"rmq.pass"</span>),Config(<span class="string">"rmq.queueName"</span>))</div><div class="line">   .......</div><div class="line">   env.execute(<span class="string">"read from rabbitMQ"</span>)   </div><div class="line">   &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+  
 	</div>
 		<footer class="article-footer clearfix">
 
