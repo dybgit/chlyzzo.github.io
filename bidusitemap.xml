@@ -4,8 +4,55 @@
 
     
   <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%96%B0%E5%A2%9Ejob-%E6%89%B9%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2017-06-16T15:30:26.807Z</lastmod>
+    <data>
+        <display>
+        <title>Flink实践-新增job-批处理</title>
+        <pubTime>2017-06-09T07:28:31.000Z</pubTime>
+        
+        <tag>flink实践</tag>
+         
+        <tag>tf-idf</tag>
+         
+         
+           
+             
+              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
+          
+             
+              <breadCrumb title="批处理" url="https://chlyzzo.github.io/categories/flink/%E6%89%B9%E5%A4%84%E7%90%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96hbase/</loc>
+    <lastmod>2017-06-16T15:29:25.099Z</lastmod>
+    <data>
+        <display>
+        <title>Flink实践-读取hbase</title>
+        <pubTime>2017-06-09T07:30:46.000Z</pubTime>
+        
+        <tag>flink实践</tag>
+         
+        <tag>hbase</tag>
+         
+         
+           
+             
+              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96HDFS/</loc>
-    <lastmod>2017-06-16T12:59:45.022Z</lastmod>
+    <lastmod>2017-06-16T14:50:27.560Z</lastmod>
     <data>
         <display>
         <title>Flink实践-读取HDFS</title>
@@ -14,6 +61,30 @@
         <tag>flink实践</tag>
          
         <tag>hdfs</tag>
+         
+        <tag>spark</tag>
+         
+         
+           
+             
+              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96kafka/</loc>
+    <lastmod>2017-06-16T13:02:43.048Z</lastmod>
+    <data>
+        <display>
+        <title>Flink实践-读取kafka</title>
+        <pubTime>2017-06-09T07:29:31.000Z</pubTime>
+        
+        <tag>flink实践</tag>
+         
+        <tag>kafka</tag>
          
          
            
@@ -36,28 +107,6 @@
         <tag>flink实践</tag>
          
         <tag>rabbitMQ</tag>
-         
-         
-           
-             
-              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96kafka/</loc>
-    <lastmod>2017-06-16T12:55:55.449Z</lastmod>
-    <data>
-        <display>
-        <title>Flink实践-读取kafka</title>
-        <pubTime>2017-06-09T07:29:31.000Z</pubTime>
-        
-        <tag>flink实践</tag>
-         
-        <tag>kafka</tag>
          
          
            
@@ -229,21 +278,6 @@
 
     
   <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%96%B0%E5%A2%9Ejob-%E6%89%B9%E5%A4%84%E7%90%86/</loc>
-    <lastmod>2017-06-09T12:42:37.127Z</lastmod>
-    <data>
-        <display>
-        <title>Flink实践-新增job-批处理</title>
-        <pubTime>2017-06-09T07:28:31.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%96%B0%E5%A2%9Ejob-%E6%B5%81%E5%A4%84%E7%90%86/</loc>
     <lastmod>2017-06-09T12:42:23.744Z</lastmod>
     <data>
@@ -259,57 +293,12 @@
 
     
   <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%8F%90%E4%BA%A4YARN%E8%BF%90%E8%A1%8C/</loc>
-    <lastmod>2017-06-09T12:42:12.022Z</lastmod>
-    <data>
-        <display>
-        <title>Flink实践-提交YARN运行</title>
-        <pubTime>2017-06-09T07:30:30.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7/</loc>
-    <lastmod>2017-06-09T12:41:54.772Z</lastmod>
-    <data>
-        <display>
-        <title>Flink实践-实时监控</title>
-        <pubTime>2017-06-09T07:31:06.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%AE%9E%E8%B7%B5%E8%BF%87%E7%A8%8B%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/</loc>
     <lastmod>2017-06-09T12:41:42.207Z</lastmod>
     <data>
         <display>
         <title>Flink实践-实践过程问题集合</title>
         <pubTime>2017-06-09T07:32:39.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96hbase/</loc>
-    <lastmod>2017-06-09T12:40:52.218Z</lastmod>
-    <data>
-        <display>
-        <title>Flink实践-读取hbase</title>
-        <pubTime>2017-06-09T07:30:46.000Z</pubTime>
         
          
            

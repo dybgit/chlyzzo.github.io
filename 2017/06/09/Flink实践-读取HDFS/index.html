@@ -11,14 +11,17 @@
     
 
     
-    <meta name="keywords" content="flink实践,hdfs">
+    <meta name="description" content="讲述Flink读取、写入hdfs文件。 hdfs简介hdfs(Hadoop Distributed File System),Hadoop的分布式文件系统，由google开源实现的。存储文件大，容错性能高，是当前集群环境下文件存储的必备系统，许多计算框架都用此。具体可参考google的开源论文，详解其中架构。 Flink操作hdfsFlink是分布式计算框架，可以从hdfs操作文件。Flink对h">
+<meta name="keywords" content="flink实践,hdfs,spark">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flink实践-读取HDFS">
 <meta property="og:url" content="https://chlyzzo.github.io/2017/06/09/Flink实践-读取HDFS/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:updated_time" content="2017-06-16T12:59:45.022Z">
+<meta property="og:description" content="讲述Flink读取、写入hdfs文件。 hdfs简介hdfs(Hadoop Distributed File System),Hadoop的分布式文件系统，由google开源实现的。存储文件大，容错性能高，是当前集群环境下文件存储的必备系统，许多计算框架都用此。具体可参考google的开源论文，详解其中架构。 Flink操作hdfsFlink是分布式计算框架，可以从hdfs操作文件。Flink对h">
+<meta property="og:updated_time" content="2017-06-16T14:50:27.560Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flink实践-读取HDFS">
+<meta name="twitter:description" content="讲述Flink读取、写入hdfs文件。 hdfs简介hdfs(Hadoop Distributed File System),Hadoop的分布式文件系统，由google开源实现的。存储文件大，容错性能高，是当前集群环境下文件存储的必备系统，许多计算框架都用此。具体可参考google的开源论文，详解其中架构。 Flink操作hdfsFlink是分布式计算框架，可以从hdfs操作文件。Flink对h">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -46,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -90,7 +93,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/flink实践/">flink实践</a><a href="/tags/hdfs/">hdfs</a>
+  <span></span> <a href="/tags/flink实践/">flink实践</a><a href="/tags/hdfs/">hdfs</a><a href="/tags/spark/">spark</a>
   </div>
 
 </div>
@@ -108,13 +111,23 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hdfs简介"><span class="toc-number">1.</span> <span class="toc-text">hdfs简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink操作hdfs"><span class="toc-number">2.</span> <span class="toc-text">Flink操作hdfs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spark下操作hdfs文件"><span class="toc-number">3.</span> <span class="toc-text">spark下操作hdfs文件</span></a></li></ol>
 		
 		</div>
 		
-		  
+		<p>讲述Flink读取、写入hdfs文件。</p>
+<h2 id="hdfs简介"><a href="#hdfs简介" class="headerlink" title="hdfs简介"></a>hdfs简介</h2><p>hdfs(Hadoop Distributed File System),Hadoop的分布式文件系统，由google开源实现的。存储文件大，容错性能高，是当前集群环境下文件存储的必备系统，许多计算框架都用此。<br>具体可参考google的开源论文，详解其中架构。</p>
+<h2 id="Flink操作hdfs"><a href="#Flink操作hdfs" class="headerlink" title="Flink操作hdfs"></a>Flink操作hdfs</h2><p>Flink是分布式计算框架，可以从hdfs操作文件。Flink对hdfs的操作基于hadoop下的hdfs包。Flink读取hdfs文件与读取本地文件没有差别，均可采用同一种方法，只是在执行时，注意hdfs的文件地址与本地的不同。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">val env = ExecutionEnvironment.getExecutionEnvironment</div><div class="line">val file = args(0)</div><div class="line"><span class="comment">#本地，直接传入本地文件地址</span></div><div class="line"><span class="comment">#如果是hdfs，即打包到集群上执行，文件地址需填写绝对路径，</span></div><div class="line"><span class="comment">#hdfs的绝对路径填写： hdfs:///***/**/****</span></div><div class="line"><span class="comment">#而spark下的绝对路径是，/**/***/</span></div><div class="line">val data = env.readTextFile(file).filter(!_.startsWith(<span class="string">"#"</span>)).map &#123; x =&gt;</div><div class="line">...</div><div class="line">&#125;.name(<span class="string">"origin data"</span>)</div><div class="line">env.execute(<span class="string">"read from hdfs."</span>)</div></pre></td></tr></table></figure>
+<p>Flink写入数据进hdfs如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">word2vecSim.map&#123;x=&gt; x._1+<span class="string">"="</span>+x._2.mkString(<span class="string">"&gt;"</span>)&#125;.writeAsText(args(1))</div></pre></td></tr></table></figure>
+<p>一般Flink写入hdfs，采取的是DataSet[String]，以便后续操作，即可以写入hive表里。这里需注意，Flink在写时可以采用覆盖操作，WriteMode.OVERWRITE</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">word2vecSim.map&#123;x=&gt; x._1+<span class="string">"="</span>+x._2.mkString(<span class="string">"&gt;"</span>)&#125;.writeAsText(args(1),WriteMode.OVERWRITE)</div></pre></td></tr></table></figure>
+<h2 id="spark下操作hdfs文件"><a href="#spark下操作hdfs文件" class="headerlink" title="spark下操作hdfs文件"></a>spark下操作hdfs文件</h2><p>在Spark下，可以对hdfs文件进行删除操作，但是在Flink下，实践多次未成功，或许是运行的流程不同导致的。在spark下，可以用以下操作来对存在的hdfs文件进行删除操作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">import org.apache.spark.SparkContext</div><div class="line">import org.apache.hadoop.fs.Path</div><div class="line"></div><div class="line">def deleteHdfsFile(sc: SparkContext,files:List[String]):Unit=&#123;</div><div class="line">     val hadoopConf = sc.hadoopConfiguration</div><div class="line">     val hdfs = org.apache.hadoop.fs.FileSystem.get(hadoopConf)</div><div class="line">     files.foreach &#123; file =&gt;  /*删除保存的文件*/</div><div class="line">          val path1 = new Path(file)</div><div class="line">          <span class="keyword">if</span>(hdfs.exists(path1))&#123;              </div><div class="line">             hdfs.delete(path1,<span class="literal">true</span>)  </div><div class="line">           &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  def deleteHdfsFile(sc: SparkContext,file:String):Unit=&#123;</div><div class="line">     val hadoopConf = sc.hadoopConfiguration</div><div class="line">     val hdfs = org.apache.hadoop.fs.FileSystem.get(hadoopConf)      </div><div class="line">     val path1 = new Path(file)</div><div class="line">     <span class="keyword">if</span>(hdfs.exists(path1))&#123;  </div><div class="line">        hdfs.delete(path1,<span class="literal">true</span>)  </div><div class="line">     &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+  
 	</div>
 		<footer class="article-footer clearfix">
 
