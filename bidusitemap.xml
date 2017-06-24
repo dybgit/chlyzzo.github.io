@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96kafka/</loc>
+    <lastmod>2017-06-24T05:53:52.157Z</lastmod>
+    <data>
+        <display>
+        <title>Flink实践-读取kafka</title>
+        <pubTime>2017-06-09T07:29:31.000Z</pubTime>
+        
+        <tag>flink实践</tag>
+         
+        <tag>kafka</tag>
+         
+         
+           
+             
+              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%AE%9E%E8%B7%B5%E8%BF%87%E7%A8%8B%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/</loc>
-    <lastmod>2017-06-24T05:36:11.911Z</lastmod>
+    <lastmod>2017-06-24T05:49:48.931Z</lastmod>
     <data>
         <display>
         <title>Flink实践-实践过程问题集合</title>
@@ -117,28 +139,6 @@
         <tag>hdfs</tag>
          
         <tag>spark</tag>
-         
-         
-           
-             
-              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96kafka/</loc>
-    <lastmod>2017-06-16T13:02:43.048Z</lastmod>
-    <data>
-        <display>
-        <title>Flink实践-读取kafka</title>
-        <pubTime>2017-06-09T07:29:31.000Z</pubTime>
-        
-        <tag>flink实践</tag>
-         
-        <tag>kafka</tag>
          
          
            
