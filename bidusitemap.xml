@@ -3,10 +3,9 @@
 
 
     
-    
   <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%96%B0%E5%A2%9Ejob-%E6%89%B9%E5%A4%84%E7%90%86/</loc>
-    <lastmod>2017-06-16T15:30:26.807Z</lastmod>
+    <lastmod>2017-06-24T04:52:22.591Z</lastmod>
     <data>
         <display>
         <title>Flink实践-新增job-批处理</title>
@@ -15,6 +14,10 @@
         <tag>flink实践</tag>
          
         <tag>tf-idf</tag>
+         
+        <tag>广播</tag>
+         
+        <tag>richfunction</tag>
          
          
            
@@ -28,6 +31,7 @@
     </data>
     </url>
 
+    
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96hbase/</loc>
@@ -248,21 +252,6 @@
 
     
   <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%AA%97%E5%8F%A3/</loc>
-    <lastmod>2017-06-09T12:43:02.029Z</lastmod>
-    <data>
-        <display>
-        <title>Flink实践-自定义窗口</title>
-        <pubTime>2017-06-09T07:32:20.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%9C%A8%E7%BA%BF%E5%AE%9E%E6%97%B6%E6%8E%A8%E8%8D%90/</loc>
     <lastmod>2017-06-09T12:42:51.017Z</lastmod>
     <data>
@@ -317,28 +306,6 @@
         
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-ML/</loc>
-    <lastmod>2017-06-09T12:40:10.241Z</lastmod>
-    <data>
-        <display>
-        <title>Flink实践-ML</title>
-        <pubTime>2017-06-09T07:31:58.000Z</pubTime>
-        
-        <tag>flink实践</tag>
-         
-        <tag>ml</tag>
-         
-         
-           
-             
-              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
-          
         </display>
     </data>
     </url>
