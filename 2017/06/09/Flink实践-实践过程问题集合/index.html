@@ -11,13 +11,17 @@
     
 
     
-    <meta property="og:type" content="article">
+    <meta name="description" content="1,dataset迪卡尔积计算,出现混乱,   首先,两个大的数据集不建议使用cross操作算子,不仅浪费资源,而且很满很慢.   然后,如果是从文件读取记录,一行一条记录,在broadcast下计算是正常的,flink的dataset是按照记录来计算的;然后,当这个dataset是从其他shuffle过程得到,比如join,造成混乱,再broadcast会造成数据紊乱,解决措施,设置并行度为1;">
+<meta name="keywords" content="flink实践,问题">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Flink实践-实践过程问题集合">
 <meta property="og:url" content="https://chlyzzo.github.io/2017/06/09/Flink实践-实践过程问题集合/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:updated_time" content="2017-06-09T12:41:42.207Z">
+<meta property="og:description" content="1,dataset迪卡尔积计算,出现混乱,   首先,两个大的数据集不建议使用cross操作算子,不仅浪费资源,而且很满很慢.   然后,如果是从文件读取记录,一行一条记录,在broadcast下计算是正常的,flink的dataset是按照记录来计算的;然后,当这个dataset是从其他shuffle过程得到,比如join,造成混乱,再broadcast会造成数据紊乱,解决措施,设置并行度为1;">
+<meta property="og:updated_time" content="2017-06-24T05:32:56.974Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flink实践-实践过程问题集合">
+<meta name="twitter:description" content="1,dataset迪卡尔积计算,出现混乱,   首先,两个大的数据集不建议使用cross操作算子,不仅浪费资源,而且很满很慢.   然后,如果是从文件读取记录,一行一条记录,在broadcast下计算是正常的,flink的dataset是按照记录来计算的;然后,当这个dataset是从其他shuffle过程得到,比如join,造成混乱,再broadcast会造成数据紊乱,解决措施,设置并行度为1;">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -45,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -81,6 +85,16 @@
   </h1>
   <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/flink/">flink</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/flink实践/">flink实践</a><a href="/tags/问题/">问题</a>
+  </div>
 
 </div>
 
@@ -90,20 +104,32 @@
 		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
 		
   <p class="article-time">
-    <time datetime="2017-06-09T07:32:39.000Z" itemprop="datePublished"> 发表于 2017-06-09 15:32:39</time>
+    <time datetime="2017-06-09T07:32:39.000Z" itemprop="datePublished"> 發表於 2017-06-09 15:32:39</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">目录</strong>
+			<strong class="toc-title">文章目錄</strong>
 		
 			
 		
 		</div>
 		
-		  
+		<p>1,dataset迪卡尔积计算,出现混乱,<br>   首先,两个大的数据集不建议使用cross操作算子,不仅浪费资源,而且很满很慢.<br>   然后,如果是从文件读取记录,一行一条记录,在broadcast下计算是正常的,flink的dataset是按照记录来计算的;然后,当这个dataset是从<br>其他shuffle过程得到,比如join,造成混乱,再broadcast会造成数据紊乱,解决措施,设置并行度为1;或者再多次使用broadcast保证一条记录计算.</p>
+<p>2,flink-1.2.0在提交yarn运行时,将habse的包在运行命令里带上,会出现Filter错误,这是因为版本问题(flink-1.1.1没有这个问题),habse的包需要在sbt里带上,即去除provided,这样就可以了.</p>
+<p>3,flink下的背压问题,首先造成背压是因为上游数据太快产生,下游数据处理过慢,导致挤压反向.解决措施在上游和下游设置同样大小内存,<br>即jobmanager和taskmanager内存设置一样(不晓得为啥,job的大,task的小就产生背压)</p>
+<p>4,akka.client.timeout,可以在conf下配置,注意时间是空格带上s或者ms.但是,也不一定能解决,主要是构建job花时间,不要在job起始时使用一个费时间的操作,比如读取很大的数据集,后续却只用其中一部分;或者大数据集生成dataset,是很花时间的.</p>
+<p>5,flink的包冲突或者包版本不对,首先找到该包定位属于那个,然后再唉sbt里进行exclude,但是,一般不晓得在哪个,一个一个去尝试(最笨但是最有效的方法啊)</p>
+<p>6,flink下稀疏向量的计算比密集型的向量计算快一倍至多,各种结构或者算法,优先考虑稀疏的,</p>
+<p>7,flink下的map等各种算子操作,其中带的方法必须是序列化的,否则会出错或者不能运行或者结果达不到预期,尤其是调用外部包,需确定是否实现了序列化(可以自己实现,在java包等下常见)</p>
+<p>8,flink通过每条记录(doc–&gt;array[String])形式计算tf-idf,非常缓慢,主要是在每条doc需要遍历array[String],一小时才计算2000左右;<br>更改计算方法,先单独计算tf和idf,非常快捷;然后对idf进行broadcast,计算tf-idf,再计算tf-idf-vec;但是,在idf计算时已经计算了所有词,无需再次进行计算tf-idf-vec;更改措施是再加上broadcast,即两个广播数据集,idf和词典.</p>
+<p>9,flink下的string不建议用+来连接,</p>
+<p>10,flink在程序中设置job失败重启, env.getConfig.setRestartStrategy(RestartStrategies.fixedDelayRestart(4, 10000))<br>    <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.2/dev/restart_strategies.html" target="_blank" rel="external">https://ci.apache.org/projects/flink/flink-docs-release-1.2/dev/restart_strategies.html</a></p>
+<p>11,flink的流操作使用窗口,必须是KeyedStream,另外自定义窗口函数,用到apply,需重写,<br>    //IN = keyStream的数据类型<br>     //Out=操作后的类型<br>     //key=keyStream的key分组的key类型<br>     //w=窗口类型</p>
+<p>12, scala 的json处理包, “org.scalatestplus.play” %% “scalatestplus-play” % “2.0.0”</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 
@@ -358,7 +384,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%AE%9E%E8%B7%B5%E8%BF%87%E7%A8%8B%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/</loc>
+    <lastmod>2017-06-24T05:32:56.974Z</lastmod>
+    <data>
+        <display>
+        <title>Flink实践-实践过程问题集合</title>
+        <pubTime>2017-06-09T07:32:39.000Z</pubTime>
+        
+        <tag>flink实践</tag>
+         
+        <tag>问题</tag>
+         
+         
+           
+             
+              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93hanlp/</loc>
     <lastmod>2017-06-24T05:29:17.944Z</lastmod>
     <data>
@@ -300,21 +322,6 @@
         <display>
         <title>Flink实践-新增job-流处理</title>
         <pubTime>2017-06-09T07:28:44.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%AE%9E%E8%B7%B5%E8%BF%87%E7%A8%8B%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/</loc>
-    <lastmod>2017-06-09T12:41:42.207Z</lastmod>
-    <data>
-        <display>
-        <title>Flink实践-实践过程问题集合</title>
-        <pubTime>2017-06-09T07:32:39.000Z</pubTime>
         
          
            
