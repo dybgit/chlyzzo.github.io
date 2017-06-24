@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93hanlp/</loc>
+    
+    <lastmod>2017-06-24T05:29:17.944Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%96%B0%E5%A2%9Ejob-%E6%89%B9%E5%A4%84%E7%90%86/</loc>
     
-    <lastmod>2017-06-24T04:52:22.591Z</lastmod>
+    <lastmod>2017-06-24T04:57:00.717Z</lastmod>
     
   </url>
   
@@ -103,13 +110,6 @@
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%AE%9E%E8%B7%B5%E8%BF%87%E7%A8%8B%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/</loc>
     
     <lastmod>2017-06-09T12:41:42.207Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93hanlp/</loc>
-    
-    <lastmod>2017-06-09T12:40:41.075Z</lastmod>
     
   </url>
   
