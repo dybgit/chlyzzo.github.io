@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2017/06/09/Flink实践-实践过程问题集合/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="1,dataset迪卡尔积计算,出现混乱,   首先,两个大的数据集不建议使用cross操作算子,不仅浪费资源,而且很满很慢.   然后,如果是从文件读取记录,一行一条记录,在broadcast下计算是正常的,flink的dataset是按照记录来计算的;然后,当这个dataset是从其他shuffle过程得到,比如join,造成混乱,再broadcast会造成数据紊乱,解决措施,设置并行度为1;">
-<meta property="og:updated_time" content="2017-06-26T12:54:24.524Z">
+<meta property="og:updated_time" content="2017-06-26T13:01:31.610Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flink实践-实践过程问题集合">
 <meta name="twitter:description" content="1,dataset迪卡尔积计算,出现混乱,   首先,两个大的数据集不建议使用cross操作算子,不仅浪费资源,而且很满很慢.   然后,如果是从文件读取记录,一行一条记录,在broadcast下计算是正常的,flink的dataset是按照记录来计算的;然后,当这个dataset是从其他shuffle过程得到,比如join,造成混乱,再broadcast会造成数据紊乱,解决措施,设置并行度为1;">
