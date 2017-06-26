@@ -2,16 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://chlyzzo.github.io/2017/05/19/flink%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-python/</loc>
     
-    <lastmod>2017-06-26T12:46:06.798Z</lastmod>
+    <lastmod>2017-06-26T12:56:56.284Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-caffe/</loc>
+    
+    <lastmod>2017-06-26T12:56:52.676Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E4%B8%80%E4%B8%AA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
+    
+    <lastmod>2017-06-26T12:56:49.670Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%8B%9F%E5%90%88%E5%8E%9F%E7%90%86/</loc>
+    
+    <lastmod>2017-06-26T12:56:45.696Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-deeplearning4j/</loc>
+    
+    <lastmod>2017-06-26T12:54:39.562Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-tensorflow/</loc>
+    
+    <lastmod>2017-06-26T12:54:33.442Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-job%E6%89%93%E5%8C%85/</loc>
     
-    <lastmod>2017-06-26T12:45:53.610Z</lastmod>
+    <lastmod>2017-06-26T12:54:28.825Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%AE%9E%E8%B7%B5%E8%BF%87%E7%A8%8B%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/</loc>
+    
+    <lastmod>2017-06-26T12:54:24.524Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%96%B0%E5%A2%9Ejob-%E6%89%B9%E5%A4%84%E7%90%86/</loc>
+    
+    <lastmod>2017-06-26T12:54:22.318Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/05/19/flink%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2017-06-26T12:46:06.798Z</lastmod>
     
   </url>
   
@@ -114,51 +170,9 @@
   </url>
   
   <url>
-    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-tensorflow/</loc>
-    
-    <lastmod>2017-06-26T12:30:29.291Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-python/</loc>
-    
-    <lastmod>2017-06-26T12:30:17.754Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-deeplearning4j/</loc>
-    
-    <lastmod>2017-06-26T12:30:05.718Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-caffe/</loc>
-    
-    <lastmod>2017-06-26T12:29:47.094Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%BA%94%E7%94%A8%E9%A1%B9%E7%9B%AE/</loc>
     
     <lastmod>2017-06-26T12:29:38.020Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E4%B8%80%E4%B8%AA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
-    
-    <lastmod>2017-06-26T12:29:29.862Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%8B%9F%E5%90%88%E5%8E%9F%E7%90%86/</loc>
-    
-    <lastmod>2017-06-26T12:29:17.408Z</lastmod>
     
   </url>
   
@@ -177,23 +191,9 @@
   </url>
   
   <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%AE%9E%E8%B7%B5%E8%BF%87%E7%A8%8B%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/</loc>
-    
-    <lastmod>2017-06-24T05:57:08.154Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96kafka/</loc>
     
     <lastmod>2017-06-24T05:53:52.157Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%96%B0%E5%A2%9Ejob-%E6%89%B9%E5%A4%84%E7%90%86/</loc>
-    
-    <lastmod>2017-06-24T04:57:00.717Z</lastmod>
     
   </url>
   
