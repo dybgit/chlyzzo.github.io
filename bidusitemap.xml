@@ -5,15 +5,15 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93hanlp/</loc>
-    <lastmod>2017-06-26T13:04:10.690Z</lastmod>
+    <lastmod>2017-06-26T13:07:20.987Z</lastmod>
     <data>
         <display>
-        <title>Flinkʵ��-��������hanlp</title>
+        <title>Flink实践-第三方库hanlp</title>
         <pubTime>2017-06-09T07:31:27.000Z</pubTime>
         
-        <tag>�ִ�</tag>
-         
         <tag>hanlp</tag>
+         
+        <tag>分词</tag>
          
          
            
@@ -21,7 +21,7 @@
               <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
           
              
-              <breadCrumb title="�ı�" url="https://chlyzzo.github.io/categories/flink/%EF%BF%BDi%EF%BF%BD/"/>
+              <breadCrumb title="文本" url="https://chlyzzo.github.io/categories/flink/%E6%96%87%E6%9C%AC/"/>
           
         </display>
     </data>
