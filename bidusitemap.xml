@@ -4,6 +4,360 @@
 
     
   <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/Spark-RDD%E5%92%8CDataFrame/</loc>
+    <lastmod>2017-06-26T12:31:44.544Z</lastmod>
+    <data>
+        <display>
+        <title>Spark--RDD和DataFrame</title>
+        <pubTime>2017-06-26T12:26:44.000Z</pubTime>
+        
+        <tag>spark</tag>
+         
+        <tag>rdd</tag>
+         
+        <tag>DataFrame</tag>
+         
+         
+           
+             
+              <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/Spark-MLlib/</loc>
+    <lastmod>2017-06-26T12:31:16.477Z</lastmod>
+    <data>
+        <display>
+        <title>Spark--MLlib</title>
+        <pubTime>2017-06-26T12:27:08.000Z</pubTime>
+        
+        <tag>spark</tag>
+         
+        <tag>ml，mllib</tag>
+         
+         
+           
+             
+              <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/Spark-%E6%B5%81/</loc>
+    <lastmod>2017-06-26T12:30:53.567Z</lastmod>
+    <data>
+        <display>
+        <title>Spark--流</title>
+        <pubTime>2017-06-26T12:26:58.000Z</pubTime>
+        
+        <tag>spark</tag>
+         
+        <tag>流</tag>
+         
+         
+           
+             
+              <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-tensorflow/</loc>
+    <lastmod>2017-06-26T12:30:29.291Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习--tensorflow</title>
+        <pubTime>2017-06-26T12:25:29.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+        <tag>tensorflow</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-python/</loc>
+    <lastmod>2017-06-26T12:30:17.754Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习--python</title>
+        <pubTime>2017-06-26T12:24:26.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-deeplearning4j/</loc>
+    <lastmod>2017-06-26T12:30:05.718Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习--deeplearning4j</title>
+        <pubTime>2017-06-26T12:25:55.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+        <tag>deeplearning4j</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-caffe/</loc>
+    <lastmod>2017-06-26T12:29:47.094Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习--caffe</title>
+        <pubTime>2017-06-26T12:25:44.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+        <tag>caffe</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%BA%94%E7%94%A8%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2017-06-26T12:29:38.020Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习--应用项目</title>
+        <pubTime>2017-06-26T12:26:18.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+        <tag>应用</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E4%B8%80%E4%B8%AA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
+    <lastmod>2017-06-26T12:29:29.862Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习--一个神经网络</title>
+        <pubTime>2017-06-26T12:24:14.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+        <tag>神经网络</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%8B%9F%E5%90%88%E5%8E%9F%E7%90%86/</loc>
+    <lastmod>2017-06-26T12:29:17.408Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习--拟合原理</title>
+        <pubTime>2017-06-26T12:24:38.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+        <tag>拟合</tag>
+         
+        <tag>原理</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E4%BE%8B%E5%AD%90%E9%9B%86%E5%90%88/</loc>
+    <lastmod>2017-06-26T12:29:05.644Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习--例子集合</title>
+        <pubTime>2017-06-26T12:26:08.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+        <tag>事例</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%9E%84%E5%BB%BA%E7%BD%91%E7%BB%9C/</loc>
+    <lastmod>2017-06-26T12:28:56.549Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习--构建网络</title>
+        <pubTime>2017-06-26T12:25:15.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+        <tag>网络</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E8%A7%A6%E5%8F%91%E5%87%BD%E6%95%B0/</loc>
+    <lastmod>2017-06-26T12:28:45.283Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习--触发函数</title>
+        <pubTime>2017-06-26T12:25:04.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+        <tag>触发函数</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%B1%82/</loc>
+    <lastmod>2017-06-26T12:28:31.482Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习--层</title>
+        <pubTime>2017-06-26T12:24:50.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+        <tag>层</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD-what-%EF%BC%9F/</loc>
+    <lastmod>2017-06-26T12:28:18.904Z</lastmod>
+    <data>
+        <display>
+        <title>人工智能--what ？</title>
+        <pubTime>2017-06-26T12:26:28.000Z</pubTime>
+        
+        <tag>人工智能</tag>
+         
+         
+           
+             
+              <breadCrumb title="人工智能" url="https://chlyzzo.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%84%9F%E7%9F%A5%E5%99%A8%E5%BC%80%E5%A7%8B/</loc>
+    <lastmod>2017-06-26T12:27:56.512Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习--感知器开始</title>
+        <pubTime>2017-06-26T12:21:40.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+        <tag>感知器</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E5%AE%9E%E8%B7%B5%E8%BF%87%E7%A8%8B%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/</loc>
     <lastmod>2017-06-24T05:57:08.154Z</lastmod>
     <data>

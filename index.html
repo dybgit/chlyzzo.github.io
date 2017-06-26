@@ -44,7 +44,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -75,161 +75,15 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/06/09/Flink实践-实践过程问题集合/" title="Flink实践-实践过程问题集合" itemprop="url">
+    <a href="/2017/06/26/Spark-MLlib/" title="Spark--MLlib" itemprop="url">
   
-    <h1 itemprop="name">Flink实践-实践过程问题集合</h1>
-    
-     
-           <p itemprop="description" >1,dataset迪卡尔积计算,出现混乱,   首先,两个大的数据集不建议使用cross操作算子,不仅浪费资源,而且很满很慢.   然后,如果是从文件读取记录,一行一条记录,在broadcast下计算是正常的,flink的dataset是按照记录来计算的;然后,当这个datase</p>
-        
-    
-    <time datetime="2017-06-09T07:32:39.000Z" itemprop="datePublished">2017-06-09 15:32:39</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/06/09/Flink实践-第三方库hanlp/" title="Flink实践-第三方库hanlp" itemprop="url">
-  
-    <h1 itemprop="name">Flink实践-第三方库hanlp</h1>
-    
-     
-           <p itemprop="description" >本文讲述在Flink下使用hanlp包，一个文本分析开源工具，主要是分词，语法分词，依存分词，命名实体识别。本文将只讲分词的应用，其他应用可参考官网文档，自行实现。
-Flink引入开源包Flink项目引入开源的方式，可以在本地项目中导入；或者在构建项目时把第三方包带上。这里以在s</p>
-        
-    
-    <time datetime="2017-06-09T07:31:27.000Z" itemprop="datePublished">2017-06-09 15:31:27</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/06/09/Flink实践-读取hbase/" title="Flink实践-读取hbase" itemprop="url">
-  
-    <h1 itemprop="name">Flink实践-读取hbase</h1>
-    
-     
-           <p itemprop="description" >讲述Flink操作hbase，非结构化数据存储。
-hbase简介Apache Hbase，大数据下不可不提的一个存储数据库，可能有些用redis，mongdb等，但是Hbase作为非结构化的数据库，可以存储多个版本数据，列族和列的设计，让大量数据的存储成为可能，非常适合存储大量数</p>
-        
-    
-    <time datetime="2017-06-09T07:30:46.000Z" itemprop="datePublished">2017-06-09 15:30:46</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/06/09/Flink实践-job打包/" title="Flink实践-job打包" itemprop="url">
-  
-    <h1 itemprop="name">Flink实践-job打包</h1>
-    
-     
-           <p itemprop="description" >讲述把一个Flink的job怎么打包提交到集群上运行，当然也可以在Eclipse本地运行。Flink本地运行不用像Spark那样需要设置本地为master，即setMaster(“local”),可以直接点击Run。
-编辑一个简单的Flink程序当sbt eclipse运行成功后</p>
-        
-    
-    <time datetime="2017-06-09T07:30:16.000Z" itemprop="datePublished">2017-06-09 15:30:16</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/06/09/Flink实践-读取HDFS/" title="Flink实践-读取HDFS" itemprop="url">
-  
-    <h1 itemprop="name">Flink实践-读取HDFS</h1>
-    
-     
-           <p itemprop="description" >讲述Flink读取、写入hdfs文件。
-hdfs简介hdfs(Hadoop Distributed File System),Hadoop的分布式文件系统，由google开源实现的。存储文件大，容错性能高，是当前集群环境下文件存储的必备系统，许多计算框架都用此。具体可参考goog</p>
-        
-    
-    <time datetime="2017-06-09T07:29:53.000Z" itemprop="datePublished">2017-06-09 15:29:53</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/06/09/Flink实践-读取rabbitMQ/" title="Flink实践-读取rabbitMQ" itemprop="url">
-  
-    <h1 itemprop="name">Flink实践-读取rabbitMQ</h1>
-    
-     
-           <p itemprop="description" >讲述Flink消费RabbitMQ消息，并进行处理。
-RabbitMQRabbitMQ另一种消息发送系统，与kafka类似，但有差别。kafka的消息可以有保存期限，rabbitMQ的消息一般在消费后就焚毁。另外，rabbitMQ的消息有一个唯一id，而kafka则是靠offse</p>
-        
-    
-    <time datetime="2017-06-09T07:29:43.000Z" itemprop="datePublished">2017-06-09 15:29:43</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/06/09/Flink实践-读取kafka/" title="Flink实践-读取kafka" itemprop="url">
-  
-    <h1 itemprop="name">Flink实践-读取kafka</h1>
-    
-     
-           <p itemprop="description" >讲述Flink读取kafka下topic的消息，并进行处理。
-kafka简介分布式消息系统Apache Kafka ，在实际生产中常作为消息传递的工具，其稳定，高并发，接受多个数据源，并可保存数据（自定义数据的周期），在消费端，可以做到相互独立，基于数据的处理工具，可保证数据的有</p>
-        
-    
-    <time datetime="2017-06-09T07:29:31.000Z" itemprop="datePublished">2017-06-09 15:29:31</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/06/09/Flink实践-新增job-流处理/" title="Flink实践-新增job-流处理" itemprop="url">
-  
-    <h1 itemprop="name">Flink实践-新增job-流处理</h1>
+    <h1 itemprop="name">Spark--MLlib</h1>
     
      
            <p itemprop="description" ></p>
         
     
-    <time datetime="2017-06-09T07:28:44.000Z" itemprop="datePublished">2017-06-09 15:28:44</time>
+    <time datetime="2017-06-26T12:27:08.000Z" itemprop="datePublished">2017-06-26 20:27:08</time>
   </a>
 </section>
 
@@ -241,16 +95,15 @@ kafka简介分布式消息系统Apache Kafka ，在实际生产中常作为消�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/06/09/Flink实践-新增job-批处理/" title="Flink实践-新增job-批处理" itemprop="url">
+    <a href="/2017/06/26/Spark-流/" title="Spark--流" itemprop="url">
   
-    <h1 itemprop="name">Flink实践-新增job-批处理</h1>
+    <h1 itemprop="name">Spark--流</h1>
     
      
-           <p itemprop="description" >本文讲述在Flink下怎么实现批处理操作，以计算文档的TF-IDF向量为例子。
-批处理Flink下批处理用的数据类型是DataSet，按照一条一条记录存储，可以在多个分区上。Flink操作算子分为不打乱数据的分区和打乱数据分区两种；像map，flatmap这样单条执行的不打乱原有</p>
+           <p itemprop="description" ></p>
         
     
-    <time datetime="2017-06-09T07:28:31.000Z" itemprop="datePublished">2017-06-09 15:28:31</time>
+    <time datetime="2017-06-26T12:26:58.000Z" itemprop="datePublished">2017-06-26 20:26:58</time>
   </a>
 </section>
 
@@ -262,18 +115,155 @@ kafka简介分布式消息系统Apache Kafka ，在实际生产中常作为消�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/06/09/Flink实践-搭建Flink项目/" title="Flink实践-搭建Flink项目" itemprop="url">
+    <a href="/2017/06/26/Spark-RDD和DataFrame/" title="Spark--RDD和DataFrame" itemprop="url">
   
-    <h1 itemprop="name">Flink实践-搭建Flink项目</h1>
+    <h1 itemprop="name">Spark--RDD和DataFrame</h1>
     
      
-           <p itemprop="description" >讲述怎么搭建一个Flink的项目，一开始怎么安装环境。开始Flink开发之旅。
-准备需要下载的文件有sbt，Eclipse，以及插件的网址。
-sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获取更多信息。下面讲述怎么安装sbt，以及验证sbt安装成功与否。
-</p>
+           <p itemprop="description" ></p>
         
     
-    <time datetime="2017-06-09T07:26:56.000Z" itemprop="datePublished">2017-06-09 15:26:56</time>
+    <time datetime="2017-06-26T12:26:44.000Z" itemprop="datePublished">2017-06-26 20:26:44</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/06/26/人工智能-what-？/" title="人工智能--what ？" itemprop="url">
+  
+    <h1 itemprop="name">人工智能--what ？</h1>
+    
+     
+           <p itemprop="description" ></p>
+        
+    
+    <time datetime="2017-06-26T12:26:28.000Z" itemprop="datePublished">2017-06-26 20:26:28</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/06/26/深度学习-应用项目/" title="深度学习--应用项目" itemprop="url">
+  
+    <h1 itemprop="name">深度学习--应用项目</h1>
+    
+     
+           <p itemprop="description" ></p>
+        
+    
+    <time datetime="2017-06-26T12:26:18.000Z" itemprop="datePublished">2017-06-26 20:26:18</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/06/26/深度学习-例子集合/" title="深度学习--例子集合" itemprop="url">
+  
+    <h1 itemprop="name">深度学习--例子集合</h1>
+    
+     
+           <p itemprop="description" ></p>
+        
+    
+    <time datetime="2017-06-26T12:26:08.000Z" itemprop="datePublished">2017-06-26 20:26:08</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/06/26/深度学习-deeplearning4j/" title="深度学习--deeplearning4j" itemprop="url">
+  
+    <h1 itemprop="name">深度学习--deeplearning4j</h1>
+    
+     
+           <p itemprop="description" ></p>
+        
+    
+    <time datetime="2017-06-26T12:25:55.000Z" itemprop="datePublished">2017-06-26 20:25:55</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/06/26/深度学习-caffe/" title="深度学习--caffe" itemprop="url">
+  
+    <h1 itemprop="name">深度学习--caffe</h1>
+    
+     
+           <p itemprop="description" ></p>
+        
+    
+    <time datetime="2017-06-26T12:25:44.000Z" itemprop="datePublished">2017-06-26 20:25:44</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/06/26/深度学习-tensorflow/" title="深度学习--tensorflow" itemprop="url">
+  
+    <h1 itemprop="name">深度学习--tensorflow</h1>
+    
+     
+           <p itemprop="description" ></p>
+        
+    
+    <time datetime="2017-06-26T12:25:29.000Z" itemprop="datePublished">2017-06-26 20:25:29</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/06/26/深度学习-构建网络/" title="深度学习--构建网络" itemprop="url">
+  
+    <h1 itemprop="name">深度学习--构建网络</h1>
+    
+     
+           <p itemprop="description" ></p>
+        
+    
+    <time datetime="2017-06-26T12:25:15.000Z" itemprop="datePublished">2017-06-26 20:25:15</time>
   </a>
 </section>
 
@@ -284,14 +274,14 @@ sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
-      <div class="openaside"><a class="navbutton" href="#" title="显示边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
 <aside class="clearfix">
 
   
@@ -308,7 +298,15 @@ sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获
 		  
 		
 		  
+			<li><a href="/categories/spark/" title="spark">spark<sup>3</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/flink/yarn/" title="yarn">yarn<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/人工智能/" title="人工智能">人工智能<sup>1</sup></a></li>
 		  
 		
 		  
@@ -317,6 +315,10 @@ sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获
 		
 		  
 			<li><a href="/categories/flink/文本/" title="文本">文本<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/深度学习/" title="深度学习">深度学习<sup>12</sup></a></li>
 		  
 		
 		</ul>
@@ -329,19 +331,19 @@ sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/深度学习/" title="深度学习">深度学习<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/flink实践/" title="flink实践">flink实践<sup>9</sup></a></li>
 			
 		
 			
+				<li><a href="/tags/spark/" title="spark">spark<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/搭建/" title="搭建">搭建<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/问题/" title="问题">问题<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/tf-idf/" title="tf-idf">tf-idf<sup>1</sup></a></li>
 			
 		
 			
@@ -353,6 +355,14 @@ sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获
 			
 		
 			
+				<li><a href="/tags/hdfs/" title="hdfs">hdfs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/触发函数/" title="触发函数">触发函数<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/分词/" title="分词">分词<sup>1</sup></a></li>
 			
 		
@@ -361,23 +371,31 @@ sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获
 			
 		
 			
-				<li><a href="/tags/hbase/" title="hbase">hbase<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/笛卡尔积/" title="笛卡尔积">笛卡尔积<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/spark/" title="spark">spark<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/kafka/" title="kafka">kafka<sup>1</sup></a></li>
 			
 		
 			
+				<li><a href="/tags/hbase/" title="hbase">hbase<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ml，mllib/" title="ml，mllib">ml，mllib<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/rabbitMQ/" title="rabbitMQ">rabbitMQ<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/rdd/" title="rdd">rdd<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DataFrame/" title="DataFrame">DataFrame<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/流/" title="流">流<sup>1</sup></a></li>
 			
 		
 			
@@ -389,19 +407,7 @@ sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获
 			
 		
 			
-				<li><a href="/tags/入门技巧/" title="入门技巧">入门技巧<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/实践经验/" title="实践经验">实践经验<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/优化/" title="优化">优化<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/hdfs/" title="hdfs">hdfs<sup>1</sup></a></li>
+				<li><a href="/tags/问题/" title="问题">问题<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -409,7 +415,7 @@ sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获
 
 
   <div class="linkslist">
-  <p class="asidetitle">相关链接</p>
+  <p class="asidetitle">友情链接</p>
     <ul>
         
           <li>
