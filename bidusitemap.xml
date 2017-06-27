@@ -4,72 +4,8 @@
 
     
   <url>
-    <loc>https://chlyzzo.github.io/2017/06/20/Spark-%E6%B5%81/</loc>
-    <lastmod>2017-06-27T00:59:01.684Z</lastmod>
-    <data>
-        <display>
-        <title>Spark--流</title>
-        <pubTime>2017-06-20T12:26:58.000Z</pubTime>
-        
-        <tag>流</tag>
-         
-         
-           
-             
-              <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/20/Spark-MLlib/</loc>
-    <lastmod>2017-06-27T00:58:58.885Z</lastmod>
-    <data>
-        <display>
-        <title>Spark--MLlib</title>
-        <pubTime>2017-06-20T13:27:08.000Z</pubTime>
-        
-        <tag>ml</tag>
-         
-        <tag>mllib</tag>
-         
-         
-           
-             
-              <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/21/Spark-RDD%E5%92%8CDataFrame/</loc>
-    <lastmod>2017-06-27T00:58:55.939Z</lastmod>
-    <data>
-        <display>
-        <title>Spark--RDD和DataFrame</title>
-        <pubTime>2017-06-21T02:26:44.000Z</pubTime>
-        
-        <tag>rdd</tag>
-         
-        <tag>DataFrame</tag>
-         
-         
-           
-             
-              <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chlyzzo.github.io/2017/06/19/%E6%96%87%E6%9C%AC-%E6%91%98%E8%A6%81%E6%8F%90%E5%8F%96/</loc>
-    <lastmod>2017-06-27T00:58:30.993Z</lastmod>
+    <lastmod>2017-06-27T01:03:00.291Z</lastmod>
     <data>
         <display>
         <title>文本--摘要提取</title>
@@ -91,7 +27,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/19/%E6%96%87%E6%9C%AC-%E6%91%98%E8%A6%81%E7%94%9F%E6%88%90/</loc>
-    <lastmod>2017-06-27T00:58:28.128Z</lastmod>
+    <lastmod>2017-06-27T01:02:56.574Z</lastmod>
     <data>
         <display>
         <title>文本--摘要生成</title>
@@ -113,7 +49,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/18/%E6%96%87%E6%9C%AC-%E5%AE%9E%E4%BD%93%E6%8A%BD%E5%8F%96/</loc>
-    <lastmod>2017-06-27T00:58:25.241Z</lastmod>
+    <lastmod>2017-06-27T01:02:53.237Z</lastmod>
     <data>
         <display>
         <title>文本--实体抽取</title>
@@ -135,7 +71,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/18/%E6%96%87%E6%9C%AC-%E7%94%9F%E6%88%90%E8%B5%84%E8%AE%AF/</loc>
-    <lastmod>2017-06-27T00:58:22.707Z</lastmod>
+    <lastmod>2017-06-27T01:02:49.901Z</lastmod>
     <data>
         <display>
         <title>文本--生成资讯</title>
@@ -157,7 +93,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/17/%E6%96%87%E6%9C%AC-%E7%94%9F%E6%88%90%E8%AF%97%E6%AD%8C/</loc>
-    <lastmod>2017-06-27T00:58:20.394Z</lastmod>
+    <lastmod>2017-06-27T01:02:46.446Z</lastmod>
     <data>
         <display>
         <title>文本--生成诗歌</title>
@@ -179,7 +115,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/17/%E6%96%87%E6%9C%AC-%E5%AF%B9%E8%AF%9D%E7%94%9F%E6%88%90/</loc>
-    <lastmod>2017-06-27T00:58:18.173Z</lastmod>
+    <lastmod>2017-06-27T01:02:43.104Z</lastmod>
     <data>
         <display>
         <title>文本--对话生成</title>
@@ -201,7 +137,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-tensorflow/</loc>
-    <lastmod>2017-06-27T00:58:15.851Z</lastmod>
+    <lastmod>2017-06-27T01:02:39.248Z</lastmod>
     <data>
         <display>
         <title>深度学习--tensorflow</title>
@@ -221,7 +157,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-python/</loc>
-    <lastmod>2017-06-27T00:58:13.460Z</lastmod>
+    <lastmod>2017-06-27T01:02:35.812Z</lastmod>
     <data>
         <display>
         <title>深度学习--python</title>
@@ -241,7 +177,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-deeplearning4j/</loc>
-    <lastmod>2017-06-27T00:58:10.935Z</lastmod>
+    <lastmod>2017-06-27T01:02:32.319Z</lastmod>
     <data>
         <display>
         <title>深度学习--deeplearning4j</title>
@@ -261,7 +197,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-caffe/</loc>
-    <lastmod>2017-06-27T00:58:08.114Z</lastmod>
+    <lastmod>2017-06-27T01:02:28.601Z</lastmod>
     <data>
         <display>
         <title>深度学习--caffe</title>
@@ -280,28 +216,8 @@
 
     
   <url>
-    <loc>https://chlyzzo.github.io/2017/06/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E4%B8%80%E4%B8%AA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2017-06-27T00:58:05.636Z</lastmod>
-    <data>
-        <display>
-        <title>深度学习--一个神经网络</title>
-        <pubTime>2017-06-13T12:24:14.000Z</pubTime>
-        
-        <tag>神经网络</tag>
-         
-         
-           
-             
-              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chlyzzo.github.io/2017/06/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%BA%94%E7%94%A8%E9%A1%B9%E7%9B%AE/</loc>
-    <lastmod>2017-06-27T00:58:03.148Z</lastmod>
+    <lastmod>2017-06-27T01:02:23.904Z</lastmod>
     <data>
         <display>
         <title>深度学习--应用项目</title>
@@ -320,8 +236,28 @@
 
     
   <url>
+    <loc>https://chlyzzo.github.io/2017/06/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E4%B8%80%E4%B8%AA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
+    <lastmod>2017-06-27T01:02:20.073Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习--一个神经网络</title>
+        <pubTime>2017-06-13T12:24:14.000Z</pubTime>
+        
+        <tag>神经网络</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chlyzzo.github.io/2017/06/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%8B%9F%E5%90%88%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2017-06-27T00:58:00.222Z</lastmod>
+    <lastmod>2017-06-27T01:02:17.275Z</lastmod>
     <data>
         <display>
         <title>深度学习--拟合原理</title>
@@ -343,7 +279,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E4%BE%8B%E5%AD%90%E9%9B%86%E5%90%88/</loc>
-    <lastmod>2017-06-27T00:57:57.846Z</lastmod>
+    <lastmod>2017-06-27T01:02:14.526Z</lastmod>
     <data>
         <display>
         <title>深度学习--例子集合</title>
@@ -363,7 +299,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%9E%84%E5%BB%BA%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2017-06-27T00:57:54.723Z</lastmod>
+    <lastmod>2017-06-27T01:02:11.380Z</lastmod>
     <data>
         <display>
         <title>深度学习--构建网络</title>
@@ -383,7 +319,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%84%9F%E7%9F%A5%E5%99%A8%E5%BC%80%E5%A7%8B/</loc>
-    <lastmod>2017-06-27T00:57:52.122Z</lastmod>
+    <lastmod>2017-06-27T01:02:07.370Z</lastmod>
     <data>
         <display>
         <title>深度学习--感知器开始</title>
@@ -403,7 +339,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E8%A7%A6%E5%8F%91%E5%87%BD%E6%95%B0/</loc>
-    <lastmod>2017-06-27T00:57:49.712Z</lastmod>
+    <lastmod>2017-06-27T01:02:04.282Z</lastmod>
     <data>
         <display>
         <title>深度学习--触发函数</title>
@@ -423,7 +359,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%B1%82/</loc>
-    <lastmod>2017-06-27T00:57:46.914Z</lastmod>
+    <lastmod>2017-06-27T01:02:01.418Z</lastmod>
     <data>
         <display>
         <title>深度学习--层</title>
@@ -443,7 +379,7 @@
     
   <url>
     <loc>https://chlyzzo.github.io/2017/06/10/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD-what-%EF%BC%9F/</loc>
-    <lastmod>2017-06-27T00:57:44.452Z</lastmod>
+    <lastmod>2017-06-27T01:01:57.921Z</lastmod>
     <data>
         <display>
         <title>人工智能--what ？</title>
@@ -453,6 +389,70 @@
            
              
               <breadCrumb title="人工智能" url="https://chlyzzo.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/21/Spark-RDD%E5%92%8CDataFrame/</loc>
+    <lastmod>2017-06-27T01:01:52.327Z</lastmod>
+    <data>
+        <display>
+        <title>Spark--RDD和DataFrame</title>
+        <pubTime>2017-06-21T02:26:44.000Z</pubTime>
+        
+        <tag>rdd</tag>
+         
+        <tag>DataFrame</tag>
+         
+         
+           
+             
+              <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/20/Spark-MLlib/</loc>
+    <lastmod>2017-06-27T01:01:47.483Z</lastmod>
+    <data>
+        <display>
+        <title>Spark--MLlib</title>
+        <pubTime>2017-06-20T13:27:08.000Z</pubTime>
+        
+        <tag>ml</tag>
+         
+        <tag>mllib</tag>
+         
+         
+           
+             
+              <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/20/Spark-%E6%B5%81/</loc>
+    <lastmod>2017-06-27T01:01:40.079Z</lastmod>
+    <data>
+        <display>
+        <title>Spark--流</title>
+        <pubTime>2017-06-20T12:26:58.000Z</pubTime>
+        
+        <tag>流</tag>
+         
+         
+           
+             
+              <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
           
         </display>
     </data>
