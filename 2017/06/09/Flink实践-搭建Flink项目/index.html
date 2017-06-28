@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2017/06/09/Flink实践-搭建Flink项目/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="讲述怎么搭建一个Flink的项目，一开始怎么安装环境。开始Flink开发之旅。 准备需要下载的文件有sbt，Eclipse，以及插件的网址。 sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获取更多信息。下面讲述怎么安装sbt，以及验证sbt安装成功与否。 首先，必须确保开发环境的版本一致，由于开发环境涉及其他开源框架，这里统一采用了sbt-0.13.6版本。下载sbt-la">
-<meta property="og:updated_time" content="2017-06-26T13:01:08.277Z">
+<meta property="og:updated_time" content="2017-06-28T12:25:34.648Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flink实践-搭建Flink项目">
 <meta name="twitter:description" content="讲述怎么搭建一个Flink的项目，一开始怎么安装环境。开始Flink开发之旅。 准备需要下载的文件有sbt，Eclipse，以及插件的网址。 sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获取更多信息。下面讲述怎么安装sbt，以及验证sbt安装成功与否。 首先，必须确保开发环境的版本一致，由于开发环境涉及其他开源框架，这里统一采用了sbt-0.13.6版本。下载sbt-la">
@@ -49,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -111,7 +111,7 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">目录</strong>
+			<strong class="toc-title">文章目录</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-number">1.</span> <span class="toc-text">准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sbt设置"><span class="toc-number">1.1.</span> <span class="toc-text">sbt设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Eclipse插件"><span class="toc-number">2.</span> <span class="toc-text">Eclipse插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sbt使用生产项目"><span class="toc-number">3.</span> <span class="toc-text">sbt使用生产项目</span></a></li></ol>
 		
@@ -120,7 +120,7 @@
 		<p>讲述怎么搭建一个Flink的项目，一开始怎么安装环境。开始Flink开发之旅。</p>
 <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>需要下载的文件有sbt，Eclipse，以及插件的网址。</p>
 <h3 id="sbt设置"><a href="#sbt设置" class="headerlink" title="sbt设置"></a>sbt设置</h3><p>sbt的作用与maven一样，这里不做讲述，可以从<a href="http://www.scala-sbt.org/" target="_blank" rel="external">sbt官网</a>获取更多信息。下面讲述怎么安装sbt，以及验证sbt安装成功与否。</p>
-<p>首先，必须确保开发环境的版本一致，由于开发环境涉及其他开源框架，这里统一采用了sbt-0.13.6版本。<br>下载<a href="https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.6/sbt-launch.jar" target="_blank" rel="external">sbt-launch.jar</a>,并把它放置在$HOME/bin/目录下；然后创建$HOME/bin/sbt文件，更改其模式为755，另外填写如下配置到sbt文件里：</p>
+<p>首先，必须确保开发环境的版本一致，由于开发环境涉及其他开源框架，这里统一采用了sbt-0.13.6版本。<br>下载<a href="https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.6/sbt-launch.jar" target="_blank" rel="external">sbt-launch.jar</a>,并把它放置在/bin/目录下；然后创建/bin/sbt文件，更改其模式为755，另外填写如下配置到sbt文件里：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SBT_OPTS=<span class="string">"-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M -Dsbt.override.build.repos=true"</span></div><div class="line">java <span class="variable">$SBT_OPTS</span> -jar `dirname <span class="variable">$0</span>`/sbt-launch.jar <span class="string">"<span class="variable">$@</span>"</span></div></pre></td></tr></table></figure>
 <p>然后，是设置库，即sbt构建项目时从何处查找库，一般按照本地优先，然后是公共库，以及特殊库的顺序设置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">在$HOME/.sbt/repositories文件里填入</div><div class="line"></div><div class="line">[repositories]</div><div class="line">  local</div><div class="line">  my-maven-snapshots:https://repository.apache.org/content/repositories/snapshots/</div><div class="line">  my-sbt-releases:https://repository.apache.org/content/repositories/releases/</div><div class="line">  my-sbt-public:https://repository.apache.org/content/repositories/public/</div><div class="line">  my-maven-public:http://repo.maven.apache.org/maven2/</div></pre></td></tr></table></figure></p>
 <p>其他库亦可添加。</p>

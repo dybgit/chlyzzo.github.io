@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2017/06/09/Flink实践-新增job-批处理/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="本文讲述在Flink下怎么实现批处理操作，以计算文档的TF-IDF向量为例子。 批处理Flink下批处理用的数据类型是DataSet，按照一条一条记录存储，可以在多个分区上。Flink操作算子分为不打乱数据的分区和打乱数据分区两种；像map，flatmap这样单条执行的不打乱原有数据分区；而像groupBy，join等，会出现数据的新分区。 Rich 函数Flink下可拓展的函数，并且可以与环境相">
-<meta property="og:updated_time" content="2017-06-26T13:01:35.116Z">
+<meta property="og:updated_time" content="2017-06-28T13:21:54.618Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flink实践-新增job-批处理">
 <meta name="twitter:description" content="本文讲述在Flink下怎么实现批处理操作，以计算文档的TF-IDF向量为例子。 批处理Flink下批处理用的数据类型是DataSet，按照一条一条记录存储，可以在多个分区上。Flink操作算子分为不打乱数据的分区和打乱数据分区两种；像map，flatmap这样单条执行的不打乱原有数据分区；而像groupBy，join等，会出现数据的新分区。 Rich 函数Flink下可拓展的函数，并且可以与环境相">
@@ -49,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -111,7 +111,7 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">目录</strong>
+			<strong class="toc-title">文章目录</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#批处理"><span class="toc-number">1.</span> <span class="toc-text">批处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rich-函数"><span class="toc-number">2.</span> <span class="toc-text">Rich 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#传递参数给函数"><span class="toc-number">2.1.</span> <span class="toc-text">传递参数给函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全局变量"><span class="toc-number">2.2.</span> <span class="toc-text">全局变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#广播"><span class="toc-number">3.</span> <span class="toc-text">广播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TF-IDF计算"><span class="toc-number">4.</span> <span class="toc-text">TF-IDF计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flink实现计算TF-IDF"><span class="toc-number">4.1.</span> <span class="toc-text">Flink实现计算TF-IDF</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TF-IDF向量相似度计算"><span class="toc-number">5.</span> <span class="toc-text">TF-IDF向量相似度计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完整的计算tf-idf"><span class="toc-number">6.</span> <span class="toc-text">完整的计算tf-idf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后的话"><span class="toc-number">7.</span> <span class="toc-text">最后的话</span></a></li></ol>
 		
@@ -137,6 +137,8 @@
 <h2 id="TF-IDF计算"><a href="#TF-IDF计算" class="headerlink" title="TF-IDF计算"></a>TF-IDF计算</h2><p>文本分析中不可或缺的一个特征即TF-IDF。计算方式有多种，这里采取的是标准的计算方式：</p>
 <p>TF：文档的词频，tf[word,doc]，即一个词word在该文档doc中出现的次数；<br>IDF：逆文档频率，即总的训练集中包含该词的文档数与总文档的比值，一般是log[(total+1)/(countDoc+1)];</p>
 <p>代表的含义：</p>
+<p>TF：如果某个词或短语在一篇文章中出现的频率TF高，并在其他文章中很少出现，则认为此词具有很好的区分能力。</p>
+<p>TF-IDF更倾向过滤掉常见的词，留下重要的词。</p>
 <h3 id="Flink实现计算TF-IDF"><a href="#Flink实现计算TF-IDF" class="headerlink" title="Flink实现计算TF-IDF"></a>Flink实现计算TF-IDF</h3><p>在Flink下实现计算TF-IDF，用到的是批处理，是从静态的数据集中计算。分成三个方法进行。</p>
 <p>读取数据集，并要做分词处理，分词后续会讲解，</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">val env = ExecutionEnvironment.getExecutionEnvironment</div><div class="line">//源数据存储的格式 id\tword1空格word2空格word3</div><div class="line">val file = <span class="string">"key_word_test.txt"</span></div><div class="line">val mails = env.readTextFile(file).map&#123;one =&gt;</div><div class="line">val values = one.split(<span class="string">"\t"</span>)</div><div class="line">val id = values.apply(0)</div><div class="line">val words = values.apply(1).split(<span class="string">" "</span>)</div><div class="line">            (id,words)</div><div class="line">&#125;.name(<span class="string">"docs"</span>)</div></pre></td></tr></table></figure>

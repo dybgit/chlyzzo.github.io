@@ -11,17 +11,17 @@
     
 
     
-    <meta name="description" content="讲述把一个Flink的job怎么打包提交到集群上运行，当然也可以在Eclipse本地运行。Flink本地运行不用像Spark那样需要设置本地为master，即setMaster(“local”),可以直接点击Run。 编辑一个简单的Flink程序当sbt eclipse运行成功后，用eclipse打开现有的项目，就在eclipse里看到生成的子项目。在这些字项目中我们可以随意添加程序，即想操作的j">
+    <meta name="description" content="讲述把一个Flink的job怎么打包提交到集群上运行，当然也可以在Eclipse本地运行。Flink本地运行不用像Spark那样需要设置本地为master，即setMaster(“local”),可以直接点击Run。 编辑一个简单的Flink程序当sbt eclipse运行成功后，用eclipse导入项目，在eclipse里看到生成的子项目。在这些字项目中我们可以随意添加程序，即想操作的job。">
 <meta name="keywords" content="assembly">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flink实践-job打包">
 <meta property="og:url" content="https://chlyzzo.github.io/2017/06/09/Flink实践-job打包/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:description" content="讲述把一个Flink的job怎么打包提交到集群上运行，当然也可以在Eclipse本地运行。Flink本地运行不用像Spark那样需要设置本地为master，即setMaster(“local”),可以直接点击Run。 编辑一个简单的Flink程序当sbt eclipse运行成功后，用eclipse打开现有的项目，就在eclipse里看到生成的子项目。在这些字项目中我们可以随意添加程序，即想操作的j">
-<meta property="og:updated_time" content="2017-06-26T13:01:38.116Z">
+<meta property="og:description" content="讲述把一个Flink的job怎么打包提交到集群上运行，当然也可以在Eclipse本地运行。Flink本地运行不用像Spark那样需要设置本地为master，即setMaster(“local”),可以直接点击Run。 编辑一个简单的Flink程序当sbt eclipse运行成功后，用eclipse导入项目，在eclipse里看到生成的子项目。在这些字项目中我们可以随意添加程序，即想操作的job。">
+<meta property="og:updated_time" content="2017-06-28T13:21:19.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flink实践-job打包">
-<meta name="twitter:description" content="讲述把一个Flink的job怎么打包提交到集群上运行，当然也可以在Eclipse本地运行。Flink本地运行不用像Spark那样需要设置本地为master，即setMaster(“local”),可以直接点击Run。 编辑一个简单的Flink程序当sbt eclipse运行成功后，用eclipse打开现有的项目，就在eclipse里看到生成的子项目。在这些字项目中我们可以随意添加程序，即想操作的j">
+<meta name="twitter:description" content="讲述把一个Flink的job怎么打包提交到集群上运行，当然也可以在Eclipse本地运行。Flink本地运行不用像Spark那样需要设置本地为master，即setMaster(“local”),可以直接点击Run。 编辑一个简单的Flink程序当sbt eclipse运行成功后，用eclipse导入项目，在eclipse里看到生成的子项目。在这些字项目中我们可以随意添加程序，即想操作的job。">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -49,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -111,14 +111,14 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">目录</strong>
+			<strong class="toc-title">文章目录</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#编辑一个简单的Flink程序"><span class="toc-number">1.</span> <span class="toc-text">编辑一个简单的Flink程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#打包执行"><span class="toc-number">2.</span> <span class="toc-text">打包执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提交包运行"><span class="toc-number">3.</span> <span class="toc-text">提交包运行</span></a></li></ol>
 		
 		</div>
 		
 		<p>讲述把一个Flink的job怎么打包提交到集群上运行，当然也可以在Eclipse本地运行。Flink本地运行不用像Spark那样需要设置本地为master，即setMaster(“local”),可以直接点击Run。</p>
-<h2 id="编辑一个简单的Flink程序"><a href="#编辑一个简单的Flink程序" class="headerlink" title="编辑一个简单的Flink程序"></a>编辑一个简单的Flink程序</h2><p>当sbt eclipse运行成功后，用eclipse打开现有的项目，就在eclipse里看到生成的子项目。在这些字项目中我们可以随意添加程序，即想操作的job。</p>
+<h2 id="编辑一个简单的Flink程序"><a href="#编辑一个简单的Flink程序" class="headerlink" title="编辑一个简单的Flink程序"></a>编辑一个简单的Flink程序</h2><p>当sbt eclipse运行成功后，用eclipse导入项目，在eclipse里看到生成的子项目。在这些字项目中我们可以随意添加程序，即想操作的job。</p>
 <p>比如我们在example的子项目中，添加一个统计单词次数的job，这时的操作步骤：</p>
 <ul>
 <li>新建一个包，</li>
@@ -128,7 +128,7 @@
 <p>比如在example下新建test包，然后新建test1.scala的Scala Object。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">package <span class="built_in">test</span></div><div class="line"></div><div class="line">object <span class="built_in">test</span>1 &#123;</div><div class="line">  def main(args:Array[String]):Unit=&#123;</div><div class="line">    println(<span class="string">"in flink"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在项目构建完成后，building workspace，然后选择run scala application，一般用scala语言编辑Flink的job，<br>当然也可以用java语言编写。这时会出现输出的字样。</p>
-<h2 id="打包执行"><a href="#打包执行" class="headerlink" title="打包执行"></a>打包执行</h2><p>本地执行Flink的程序，一是测试用或者练习用。Flink跑job一般是数据量大，需要分布式跑，而是采取流式，<br>我们可以通过socket模拟，后续会有针对的讲解。</p>
+<h2 id="打包执行"><a href="#打包执行" class="headerlink" title="打包执行"></a>打包执行</h2><p>本地执行Flink的程序，一是测试用或者练习用。Flink跑job一般是数据量大，需要分布式跑；而是流式项目job，我们可以通过本地socket模拟。</p>
 <p>当我们在本地测试程序没有错误，能够得到正确要想的结果时，这时就可以将程序进行打包，提交到集群执行。打包的命令如下，</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sbt 子项目名/assembly</div></pre></td></tr></table></figure>
 <p>一般在实践中，不会针对某个子项目来进行打包，而是为了通用化，会结合git来进行打包，达到线上和线下代码分离，因此，线下打包可以沿用上述命令。线上则需进行脚本的控制。</p>
