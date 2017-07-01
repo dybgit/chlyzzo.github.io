@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2017/06/09/Flink实践-搭建Flink项目/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="讲述怎么搭建一个Flink的项目，一开始怎么安装环境。开始Flink开发之旅。 准备需要下载的文件有sbt，Eclipse，以及插件的网址。 sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获取更多信息。下面讲述怎么安装sbt，以及验证sbt安装成功与否。 首先，必须确保开发环境的版本一致，由于开发环境涉及其他开源框架，这里统一采用了sbt-0.13.6版本。下载sbt-la">
-<meta property="og:updated_time" content="2017-06-28T12:25:34.648Z">
+<meta property="og:updated_time" content="2017-07-01T04:59:13.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flink实践-搭建Flink项目">
 <meta name="twitter:description" content="讲述怎么搭建一个Flink的项目，一开始怎么安装环境。开始Flink开发之旅。 准备需要下载的文件有sbt，Eclipse，以及插件的网址。 sbt设置sbt的作用与maven一样，这里不做讲述，可以从sbt官网获取更多信息。下面讲述怎么安装sbt，以及验证sbt安装成功与否。 首先，必须确保开发环境的版本一致，由于开发环境涉及其他开源框架，这里统一采用了sbt-0.13.6版本。下载sbt-la">
@@ -49,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -104,14 +104,14 @@
 		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
 		
   <p class="article-time">
-    <time datetime="2017-06-09T07:26:56.000Z" itemprop="datePublished"> 发表于 2017-06-09 15:26:56</time>
+    <time datetime="2017-06-09T07:26:56.000Z" itemprop="datePublished"> 發表於 2017-06-09 15:26:56</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">文章目錄</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-number">1.</span> <span class="toc-text">准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sbt设置"><span class="toc-number">1.1.</span> <span class="toc-text">sbt设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Eclipse插件"><span class="toc-number">2.</span> <span class="toc-text">Eclipse插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sbt使用生产项目"><span class="toc-number">3.</span> <span class="toc-text">sbt使用生产项目</span></a></li></ol>
 		
@@ -145,6 +145,9 @@
 <p>5，在sbt生成项目时，用sbt eclipse命令，会很慢是正常的，最好能连vpn，国外网址来加速，请等待，若出现失败，请根据提示定位哪个包下载失败，或者重新sbt eclipse，多次运行；</p>
 <p>6，单个子项目中，独立添加库，如下例子，单独添加了下载amidsttoolbox的库源，</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.settings(</div><div class="line">        resolvers += <span class="string">"my-amisttools"</span> at <span class="string">"http://maven.amidsttoolbox.com/"</span></div><div class="line">).</div></pre></td></tr></table></figure>
+<p>7,使用sbt可以打包，即sbt projectName/assembly，另在sbt构建项目下，可以设置过滤不要的包，减少打包后的jar大小，具体设置如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">.settings(</div><div class="line">       assemblyExcludedJars <span class="keyword">in</span> assembly := &#123;</div><div class="line">           val cp = (fullClasspath <span class="keyword">in</span> assembly).value</div><div class="line">           cp filter &#123; j =&gt;</div><div class="line">              j.data.getName ==<span class="string">'****.jar'</span>||</div><div class="line">              j.data.getName.contains(<span class="string">"***"</span>)||</div><div class="line">              j.data.getName.startsWith(<span class="string">"***"</span>)</div><div class="line">         &#125;</div><div class="line">       &#125;</div><div class="line">  )</div></pre></td></tr></table></figure></p>
+<p>sbt的项目中使用的一些作用，比如assemblyExcludedJars，assemblyMergeStrategy等，可以从<a href="https://github.com/sbt/sbt-assembly" target="_blank" rel="external">此网站</a>参考；注意的是，如果不知道去除哪些包，可以起初不去除任何包的情况下打包，把记录copy下来，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sbt projectName/assembly &gt; assemblyJar.txt</div></pre></td></tr></table></figure></p>
+<p>然后，在文件assemblyJar.txt中查看include的包有哪些，在确认去除哪些，并且parquet前缀的包记得一定打进去。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -408,7 +411,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

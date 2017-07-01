@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%90%AD%E5%BB%BAFlink%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2017-07-01T04:59:13.465Z</lastmod>
+    <data>
+        <display>
+        <title>Flink实践-搭建Flink项目</title>
+        <pubTime>2017-06-09T07:26:56.000Z</pubTime>
+        
+        <tag>搭建</tag>
+         
+         
+           
+             
+              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%96%B0%E5%A2%9Ejob-%E6%89%B9%E5%A4%84%E7%90%86/</loc>
     <lastmod>2017-06-28T13:21:54.618Z</lastmod>
     <data>
@@ -60,26 +80,6 @@
         
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%90%AD%E5%BB%BAFlink%E9%A1%B9%E7%9B%AE/</loc>
-    <lastmod>2017-06-28T12:25:34.648Z</lastmod>
-    <data>
-        <display>
-        <title>Flink实践-搭建Flink项目</title>
-        <pubTime>2017-06-09T07:26:56.000Z</pubTime>
-        
-        <tag>搭建</tag>
-         
-         
-           
-             
-              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
-          
         </display>
     </data>
     </url>
