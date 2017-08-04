@@ -168,9 +168,9 @@
         <title>文本--摘要提取</title>
         <pubTime>2017-06-19T12:33:58.000Z</pubTime>
         
-        <tag>摘要</tag>
-         
         <tag>抽取</tag>
+         
+        <tag>摘要</tag>
          
          
            
@@ -212,9 +212,9 @@
         <title>文本--实体抽取</title>
         <pubTime>2017-06-18T12:34:30.000Z</pubTime>
         
-        <tag>抽取</tag>
-         
         <tag>实体</tag>
+         
+        <tag>抽取</tag>
          
          
            
