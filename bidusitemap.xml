@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>https://chlyzzo.github.io/2013/02/08/%E6%B6%88%E5%A4%B1%E7%9A%84%E4%BA%8C%E5%88%99/</loc>
+    <lastmod>2017-08-04T16:40:13.571Z</lastmod>
+    <data>
+        <display>
+        <title>消失的二则</title>
+        <pubTime>2013-02-08T05:27:50.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="散文" url="https://chlyzzo.github.io/categories/%E6%95%A3%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chlyzzo.github.io/2016/05/02/%E7%A4%BE%E4%BA%A4%E5%9C%88%E7%9A%84%E4%BD%9C%E7%94%A8/</loc>
     <lastmod>2017-08-04T16:19:09.945Z</lastmod>
     <data>
@@ -150,9 +168,9 @@
         <title>文本--摘要提取</title>
         <pubTime>2017-06-19T12:33:58.000Z</pubTime>
         
-        <tag>摘要</tag>
-         
         <tag>抽取</tag>
+         
+        <tag>摘要</tag>
          
          
            
@@ -194,9 +212,9 @@
         <title>文本--实体抽取</title>
         <pubTime>2017-06-18T12:34:30.000Z</pubTime>
         
-        <tag>抽取</tag>
-         
         <tag>实体</tag>
+         
+        <tag>抽取</tag>
          
          
            
