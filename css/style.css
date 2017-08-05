@@ -929,7 +929,7 @@ article header.article-info >p.article-time {
 @media only screen and (min-width: 768px) {
   article header.article-info >p.article-time {
     float: right;
-    margin-right: 1em;
+    margin-right: 3em;
     padding-top: 0.1em;
     font-size: 0.9em;
   }
