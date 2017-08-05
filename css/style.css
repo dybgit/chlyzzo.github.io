@@ -942,7 +942,7 @@ article header.article-info >p.article-time:before {
   -moz-osx-font-smoothing: grayscale;
 }
 article header.article-info >p.article-count {
-  padding: 1em 4% 2em 0;
+  padding: 0.8em 4% 0.8em 0;
   text-align: right;
   border-bottom: 1px solid #dbdbdb;
 }
