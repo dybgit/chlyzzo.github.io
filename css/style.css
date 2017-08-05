@@ -942,25 +942,9 @@ article header.article-info >p.article-time:before {
   -moz-osx-font-smoothing: grayscale;
 }
 article header.article-info >p.article-count {
-  padding-top: 0.2em;
-  font-size: 0.7em;
-  text-align: center;
-  margin-bottom: -2em;
-}
-@media only screen and (min-width: 768px) {
-  article header.article-info >p.article-count {
-    float: right;
-    margin-right: 0.5em;
-    padding-top: 0.05em;
-    font-size: 0.8em;
-  }
-}
-article header.article-info >p.article-count:before {
-  font-family: "FontAwesome";
-  font-size: 130%;
-  content: "\f017";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0.6em 4% 0.6em 0;
+  text-align: right;
+  border-bottom: 1px solid #dbdbdb;
 }
 article .article-content {
   padding: 1.5em 4%;
