@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Flink实践-第三方库hanlp | 山上掏金</title>
+    <title>Flink实践-第三方库hanlp | ɽ���ͽ�</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="Poq2hMEF9U" />
     
@@ -17,7 +17,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flink实践-第三方库hanlp">
 <meta property="og:url" content="https://chlyzzo.github.io/2017/06/09/Flink实践-第三方库hanlp/index.html">
-<meta property="og:site_name" content="山上掏金">
+<meta property="og:site_name" content="ɽ���ͽ�">
 <meta property="og:description" content="本文讲述在Flink下使用hanlp包，一个文本分析开源工具，主要是分词，语法分词，依存分词，命名实体识别。本文将只讲分词的应用，其他应用可参考官网文档，自行实现。 Flink引入开源包Flink项目引入开源的方式，可以在本地项目中导入；或者在构建项目时把第三方包带上。这里以在sbt构建的项目中，引入第三方开源包hanlp为例，更多参考可见搭建项目。 12345678910111213141516">
 <meta property="og:updated_time" content="2017-06-26T13:12:58.756Z">
 <meta name="twitter:card" content="summary">
@@ -25,7 +25,7 @@
 <meta name="twitter:description" content="本文讲述在Flink下使用hanlp包，一个文本分析开源工具，主要是分词，语法分词，依存分词，命名实体识别。本文将只讲分词的应用，其他应用可参考官网文档，自行实现。 Flink引入开源包Flink项目引入开源的方式，可以在本地项目中导入；或者在构建项目时把第三方包带上。这里以在sbt构建的项目中，引入第三方开源包hanlp为例，更多参考可见搭建项目。 12345678910111213141516">
 
     
-    <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="ɽ���ͽ�" type="application/atom+xml">
     
     
     <link rel="icon" href="/img/favicon.ico">
@@ -48,14 +48,14 @@
 <div>
 		
 			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="山上掏金" title="山上掏金"/></a>
+				<a href="/"><img src="/img/logo.png" alt="ɽ���ͽ�" title="ɽ���ͽ�"/></a>
 			</div>
 			
 			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
-				<h2 class="blog-motto">每天早上起床是为了比昨天更快乐，掏金者新的一天是零的开始.</h2>
+				<h1 class="site-name"><a href="/" title="ɽ���ͽ�">ɽ���ͽ�</a></h1>
+				<h2 class="blog-motto">ÿ������������Ϊ�˱����������֣��ͽ����µ�һ�������Ŀ�ʼ.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -118,7 +118,7 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">目录</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink引入开源包"><span class="toc-number">1.</span> <span class="toc-text">Flink引入开源包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用hanlp的分词"><span class="toc-number">2.</span> <span class="toc-text">使用hanlp的分词</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义词添加"><span class="toc-number">2.1.</span> <span class="toc-text">自定义词添加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分词"><span class="toc-number">2.2.</span> <span class="toc-text">分词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#词性过滤"><span class="toc-number">2.3.</span> <span class="toc-text">词性过滤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后的话"><span class="toc-number">3.</span> <span class="toc-text">最后的话</span></a></li></ol>
 		
@@ -141,7 +141,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://chlyzzo.github.io/2017/06/09/Flink实践-第三方库hanlp/" data-title="Flink实践-第三方库hanlp | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  <div data-url="https://chlyzzo.github.io/2017/06/09/Flink实践-第三方库hanlp/" data-title="Flink实践-第三方库hanlp | ɽ���ͽ�" data-tsina="1724571293" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -186,7 +186,7 @@
 	
 	
 	<section class="info">
-		<p> 分享即是收获，动手后才是自己的. <br/>
+		<p> 分享即是收获，动手后才是自己��? <br/>
 			</p>
 	</section>
 	 
@@ -386,7 +386,7 @@ $(document).ready(function(){
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?429f38d3d6ccb4eb5fdff3bcb2e9bb80";
+  hm.src = "//hm.baidu.com/hm.js?81e8b61e30a0723ad6270902dbcf0bb6";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();
