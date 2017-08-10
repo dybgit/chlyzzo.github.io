@@ -3,6 +3,7 @@
 
 
     
+    
   <url>
     <loc>https://chlyzzo.github.io/2017/05/01/hello-world/</loc>
     <lastmod>2017-08-05T13:55:51.029Z</lastmod>
@@ -17,7 +18,6 @@
     </data>
     </url>
 
-    
     
   <url>
     <loc>https://chlyzzo.github.io/2015/02/08/%E4%B8%80%E6%A3%B5%E6%A0%91/</loc>
@@ -168,9 +168,9 @@
         <title>文本--摘要提取</title>
         <pubTime>2017-06-19T12:33:58.000Z</pubTime>
         
-        <tag>抽取</tag>
-         
         <tag>摘要</tag>
+         
+        <tag>抽取</tag>
          
          
            
@@ -212,9 +212,9 @@
         <title>文本--实体抽取</title>
         <pubTime>2017-06-18T12:34:30.000Z</pubTime>
         
-        <tag>实体</tag>
-         
         <tag>抽取</tag>
+         
+        <tag>实体</tag>
          
          
            
