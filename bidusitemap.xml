@@ -4,6 +4,68 @@
 
     
   <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96hbase/</loc>
+    <lastmod>2017-08-14T03:31:53.333Z</lastmod>
+    <data>
+        <display>
+        <title>Flink实践-读取hbase</title>
+        <pubTime>2017-06-09T07:30:46.000Z</pubTime>
+        
+        <tag>hbase</tag>
+         
+         
+           
+             
+              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93hanlp/</loc>
+    <lastmod>2017-08-14T03:30:50.205Z</lastmod>
+    <data>
+        <display>
+        <title>Flink实践-第三方库hanlp</title>
+        <pubTime>2017-06-09T07:31:27.000Z</pubTime>
+        
+        <tag>分词</tag>
+         
+        <tag>hanlp</tag>
+         
+         
+           
+             
+              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-job%E6%89%93%E5%8C%85/</loc>
+    <lastmod>2017-08-14T03:25:38.216Z</lastmod>
+    <data>
+        <display>
+        <title>Flink实践-job打包</title>
+        <pubTime>2017-06-09T07:30:16.000Z</pubTime>
+        
+        <tag>assembly</tag>
+         
+         
+           
+             
+              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chlyzzo.github.io/2017/05/01/hello-world/</loc>
     <lastmod>2017-08-13T15:43:04.483Z</lastmod>
     <data>
@@ -159,48 +221,6 @@
 
     
   <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-job%E6%89%93%E5%8C%85/</loc>
-    <lastmod>2017-06-28T13:21:19.078Z</lastmod>
-    <data>
-        <display>
-        <title>Flink实践-job打包</title>
-        <pubTime>2017-06-09T07:30:16.000Z</pubTime>
-        
-        <tag>assembly</tag>
-         
-         
-           
-             
-              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93hanlp/</loc>
-    <lastmod>2017-06-26T13:12:58.756Z</lastmod>
-    <data>
-        <display>
-        <title>Flink实践-第三方库hanlp</title>
-        <pubTime>2017-06-09T07:31:27.000Z</pubTime>
-        
-        <tag>分词</tag>
-         
-        <tag>hanlp</tag>
-         
-         
-           
-             
-              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chlyzzo.github.io/2017/05/18/hive%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF%E4%BC%98%E5%8C%96/</loc>
     <lastmod>2017-06-26T13:01:53.411Z</lastmod>
     <data>
@@ -340,26 +360,6 @@
         <tag>hdfs</tag>
          
         <tag>spark</tag>
-         
-         
-           
-             
-              <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E8%AF%BB%E5%8F%96hbase/</loc>
-    <lastmod>2017-06-26T13:01:13.638Z</lastmod>
-    <data>
-        <display>
-        <title>Flink实践-读取hbase</title>
-        <pubTime>2017-06-09T07:30:46.000Z</pubTime>
-        
-        <tag>hbase</tag>
          
          
            
