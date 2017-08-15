@@ -4,8 +4,23 @@
 
     
   <url>
+    <loc>https://chlyzzo.github.io/2017/05/01/hello-world/</loc>
+    <lastmod>2017-08-15T06:45:57.428Z</lastmod>
+    <data>
+        <display>
+        <title>开始搭建-hexo-git-blog</title>
+        <pubTime>2017-05-01T09:14:13.993Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chlyzzo.github.io/2017/05/20/hive%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88/</loc>
-    <lastmod>2017-08-14T10:56:30.973Z</lastmod>
+    <lastmod>2017-08-15T06:43:45.496Z</lastmod>
     <data>
         <display>
         <title>hive命令集合</title>
@@ -80,21 +95,6 @@
              
               <breadCrumb title="flink" url="https://chlyzzo.github.io/categories/flink/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/05/01/hello-world/</loc>
-    <lastmod>2017-08-13T15:43:04.483Z</lastmod>
-    <data>
-        <display>
-        <title>开始搭建-hexo-git-blog</title>
-        <pubTime>2017-05-01T09:14:13.993Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>

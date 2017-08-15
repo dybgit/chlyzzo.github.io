@@ -19,7 +19,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2017/05/20/hive命令集合/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="hive一些操作常用集合命令. 建表构建一个以时间分区的表, 12345678910use 库名;drop table if exists 表名;create table 表名(   a string,   b string,   c int)partitioned by (cal_dt string)row format delimited fields terminated by &apos;\t&apos;;">
-<meta property="og:updated_time" content="2017-08-14T10:56:30.973Z">
+<meta property="og:updated_time" content="2017-08-15T06:43:45.496Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hive命令集合">
 <meta name="twitter:description" content="hive一些操作常用集合命令. 建表构建一个以时间分区的表, 12345678910use 库名;drop table if exists 表名;create table 表名(   a string,   b string,   c int)partitioned by (cal_dt string)row format delimited fields terminated by &apos;\t&apos;;">
@@ -157,9 +157,12 @@
 <p>json串和行转列</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"> select *</div><div class="line">      from</div><div class="line">      (</div><div class="line">        select  *</div><div class="line">               ,regexp_replace(get_json_object(base_info,<span class="string">'$.a'</span>),<span class="string">'\\[|"|\\]'</span>,<span class="string">''</span>)   as a</div><div class="line">               ,regexp_replace(get_json_object(base_info,<span class="string">'$.b'</span>),<span class="string">'\\[|"|\\]'</span>,<span class="string">''</span>)   as b</div><div class="line">        from 表名</div><div class="line">      )a</div><div class="line">      lateral view explode(split(a,<span class="string">','</span>)) b as a</div><div class="line">;</div><div class="line"></div><div class="line">json串解析</div><div class="line">get_json_object(base_info,<span class="string">'$.a'</span>)</div><div class="line"></div><div class="line">一行中多个值转成多行,即多值变成列值,</div><div class="line">lateral view explode(split(as,<span class="string">','</span>)) b as a</div></pre></td></tr></table></figure>
 <h2 id="时间操作"><a href="#时间操作" class="headerlink" title="时间操作"></a>时间操作</h2><p>时间戳转日期,<br>from_unixtime(unix_timestamp(),’yyyy-MM-dd HH:mm:ss’)</p>
-<p>转成日期,2017-01-01形式,<br>select to_date(‘2017-01-01 00:07:59.0’)</p>
+<p>日期转时间戳<br>unix_timestamp(‘2017-05-12 13:45:67’)</p>
+<p>转成日期,2017-01-01形式,<br>to_date(‘2017-01-01 00:07:59.0’)</p>
 <p>时间减,当前固定天数<br>date_sub(${dealDate},59)</p>
-<p>时间减,前面时间减去后面时间,<br>datediff(‘2016-12-07’,’2016-12-08’)</p>
+<p>时间加，在原有日期上加上固定天数<br>date_add</p>
+<p>时间减,前面时间减去后面时间,得到的是相差天数<br>datediff(‘2016-12-07’,’2016-12-08’)</p>
+<p>取日期的year，month，day，hour，minute，second，<br>year(‘2017-05-12 13:45:67’)</p>
   
 	</div>
 		<footer class="article-footer clearfix">
