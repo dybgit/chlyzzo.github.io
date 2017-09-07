@@ -19,7 +19,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2017/05/20/hive命令集合/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="hive一些操作常用集合命令. 建表构建一个以时间分区的表, 12345678910use 库名;drop table if exists 表名;create table 表名(   a string,   b string,   c int)partitioned by (cal_dt string)row format delimited fields terminated by &apos;\t&apos;;">
-<meta property="og:updated_time" content="2017-08-30T09:51:33.769Z">
+<meta property="og:updated_time" content="2017-09-07T08:15:29.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hive命令集合">
 <meta name="twitter:description" content="hive一些操作常用集合命令. 建表构建一个以时间分区的表, 12345678910use 库名;drop table if exists 表名;create table 表名(   a string,   b string,   c int)partitioned by (cal_dt string)row format delimited fields terminated by &apos;\t&apos;;">
@@ -53,7 +53,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床就是为了比昨天更快乐，掏金者的一天是新的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -116,7 +116,7 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">目录</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#建表"><span class="toc-number">1.</span> <span class="toc-text">建表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据导入"><span class="toc-number">2.</span> <span class="toc-text">数据导入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#json串"><span class="toc-number">3.</span> <span class="toc-text">json串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中文"><span class="toc-number">4.</span> <span class="toc-text">中文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则"><span class="toc-number">5.</span> <span class="toc-text">正则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#时间操作"><span class="toc-number">6.</span> <span class="toc-text">时间操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义UDF"><span class="toc-number">7.</span> <span class="toc-text">自定义UDF</span></a></li></ol>
 		
@@ -155,7 +155,7 @@
 <p>json串和行转列</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"> select *</div><div class="line">      from</div><div class="line">      (</div><div class="line">        select  *</div><div class="line">               ,regexp_replace(get_json_object(base_info,<span class="string">'$.a'</span>),<span class="string">'\\[|"|\\]'</span>,<span class="string">''</span>)   as a</div><div class="line">               ,regexp_replace(get_json_object(base_info,<span class="string">'$.b'</span>),<span class="string">'\\[|"|\\]'</span>,<span class="string">''</span>)   as b</div><div class="line">        from 表名</div><div class="line">      )a</div><div class="line">      lateral view explode(split(a,<span class="string">','</span>)) b as a</div><div class="line">;</div><div class="line"></div><div class="line">json串解析</div><div class="line">get_json_object(base_info,<span class="string">'$.a'</span>)</div><div class="line"></div><div class="line">一行中多个值转成多行,即多值变成列值,</div><div class="line">lateral view explode(split(as,<span class="string">','</span>)) b as a</div><div class="line"></div><div class="line">brickhouse-*.*.*.jar包解析json串</div><div class="line">from_json(items,<span class="string">'array&lt;map&lt;string,int&gt;&gt;'</span>)，解析出[&#123;&#125;,&#123;&#125;,...,&#123;&#125;]类型数据，访问则与map一致，map[keyname].</div></pre></td></tr></table></figure>
 <h2 id="时间操作"><a href="#时间操作" class="headerlink" title="时间操作"></a>时间操作</h2><p>时间戳转日期,<br>from_unixtime(unix_timestamp(),’yyyy-MM-dd HH:mm:ss’)</p>
-<p>日期转时间戳<br>unix_timestamp(‘2017-05-12 13:45:67’)</p>
+<p>日期转时间戳，到秒，1494567967，<br>unix_timestamp(‘2017-05-12 13:45:67’)</p>
 <p>转成日期,2017-01-01形式,<br>to_date(‘2017-01-01 00:07:59.0’)</p>
 <p>时间减,当前固定天数<br>date_sub(${dealDate},59)</p>
 <p>时间加，在原有日期上加上固定天数<br>date_add</p>
@@ -432,7 +432,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
