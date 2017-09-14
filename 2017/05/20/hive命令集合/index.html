@@ -19,7 +19,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2017/05/20/hive命令集合/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="hive一些操作常用集合命令. 建表构建一个以时间分区的表, 12345678910use 库名;drop table if exists 表名;create table 表名(   a string,   b string,   c int)partitioned by (cal_dt string)row format delimited fields terminated by &apos;\t&apos;;">
-<meta property="og:updated_time" content="2017-09-07T08:15:29.860Z">
+<meta property="og:updated_time" content="2017-09-14T02:23:44.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hive命令集合">
 <meta name="twitter:description" content="hive一些操作常用集合命令. 建表构建一个以时间分区的表, 12345678910use 库名;drop table if exists 表名;create table 表名(   a string,   b string,   c int)partitioned by (cal_dt string)row format delimited fields terminated by &apos;\t&apos;;">
@@ -53,7 +53,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床就是为了比昨天更快乐，掏金者的一天是新的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -116,7 +116,7 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">目录</strong>
+			<strong class="toc-title">文章目錄</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#建表"><span class="toc-number">1.</span> <span class="toc-text">建表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据导入"><span class="toc-number">2.</span> <span class="toc-text">数据导入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#json串"><span class="toc-number">3.</span> <span class="toc-text">json串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中文"><span class="toc-number">4.</span> <span class="toc-text">中文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则"><span class="toc-number">5.</span> <span class="toc-text">正则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#时间操作"><span class="toc-number">6.</span> <span class="toc-text">时间操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义UDF"><span class="toc-number">7.</span> <span class="toc-text">自定义UDF</span></a></li></ol>
 		
@@ -139,6 +139,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">to_json(collect(c.temp_item)) as new_tr</div></pre></td></tr></table></figure>
 <h2 id="中文"><a href="#中文" class="headerlink" title="中文"></a>中文</h2><p>先提取中文串,判断程度是否大于0.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select length(regexp_extract(<span class="string">'25'</span>,<span class="string">'([\\u4e00-\\u9fa5]+)'</span>))</div></pre></td></tr></table></figure>
+<p>编码转换</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">存储数据时，有时以其他编码存储中文，比如unicode编码，需要对其进行转换，</div><div class="line">如果是unicode编码，可以使用如下函数进行解码转换成中文：</div><div class="line"></div><div class="line">select reflect(<span class="string">"java.net.URLDecoder"</span>, <span class="string">"decode"</span>,desc) as otherdesc</div><div class="line"></div><div class="line">当然也存在编码函数java.net.URLEncoder encode</div><div class="line">select reflect(<span class="string">"java.net.URLEncoder"</span>, <span class="string">"encode"</span>,<span class="string">'你好'</span>) as otherdesc</div></pre></td></tr></table></figure>
 <h2 id="正则"><a href="#正则" class="headerlink" title="正则"></a>正则</h2><p>正则使用的常用字符，</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">^ 开始       $ 结束     . 任意单个字符          * 匹配0或多个前面元素</div><div class="line">\ 转义       [] 匹配集合中的一个   () 组或其内容当成一个元素</div><div class="line">&#123;&#125; 重复      + 一个或多个与前面字符    | 或    ? 匹配0或1个前面元素</div><div class="line">- 特殊字符   </div><div class="line"></div><div class="line">一下是一些简单例子：</div><div class="line">(a|b) a或b   [abc] 单个字符是abc其中一个即可    [^abc] 不是abc的其他字符</div><div class="line">[a-z] a-z的字符   [A-Z] A-Z的字符   [0-7]数字0-7,</div><div class="line"></div><div class="line">特殊字符转义表示：</div><div class="line">\s 空格 \S 不是空格的其他字符  \d 数字  \D 不是数字的其他字符 \w 单词  \W 标点符号</div><div class="line"><span class="variable">$A1</span> 访问A中的第1个</div><div class="line">&#123;x&#125; 重复x，&#123;x,&#125;重复x，</div></pre></td></tr></table></figure>
 <p>有些文本含这些字符,在hive表中显示时会跳行,需剔除掉，</p>
@@ -432,7 +434,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
