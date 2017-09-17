@@ -1,0 +1,441 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>tensorflow学习-回归 | 山上掏金</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="Poq2hMEF9U" />
+    
+    <meta name="author" content="wenxi">
+    
+
+    
+    <meta name="description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tensorflow学习-回归">
+<meta property="og:url" content="https://chlyzzo.github.io/2017/09/17/tensorflow学习-回归/index.html">
+<meta property="og:site_name" content="山上掏金">
+<meta property="og:description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解">
+<meta property="og:updated_time" content="2017-09-17T14:26:06.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tensorflow学习-回归">
+<meta name="twitter:description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解">
+
+    
+    <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span id="busuanzi_container_site_pv">
+    站浏览量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+    站访问人数<span id="busuanzi_value_site_uv"></span>
+  </span>
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
+				<h2 class="blog-motto">每天早上起床就是为了比昨天更快乐，掏金者的一天是新的开始.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:chlyzzo.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post moveMain" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/09/17/tensorflow学习-回归/" title="tensorflow学习-回归" itemprop="url">tensorflow学习-回归</a>
+  </h1>
+  <div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/深度学习/">深度学习</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/笔记/">笔记</a>
+  </div>
+
+</div>
+
+
+  <p class="article-author">By
+       
+		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
+		
+  <p class="article-time">
+    <time datetime="2017-09-17T07:52:50.000Z" itemprop="datePublished"> 2017-09-17 阅读量 <span id="busuanzi_value_page_pv"></span></time>
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#回归"><span class="toc-number">1.</span> <span class="toc-text">回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性回归"><span class="toc-number">2.</span> <span class="toc-text">线性回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回归预测-1"><span class="toc-number">3.</span> <span class="toc-text">回归预测-1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回归预测-2"><span class="toc-number">4.</span> <span class="toc-text">回归预测-2</span></a></li></ol>
+		
+		</div>
+		
+		<p>tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从<a href="http://web.stanford.edu/class/cs20si/syllabus.html" target="_blank" rel="external">CS 20SI: Tensorflow for Deep Learning Research</a>，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解析等。笔记只是读书或者看一些资料留下的笔记，如若未标注来源，还请原创作者原谅，感谢把知识分享出来的各位大牛。</p>
+<h2 id="回归"><a href="#回归" class="headerlink" title="回归"></a>回归</h2><p>在机器学习或者人工智能下，回归即是拟合（浅显的讲），最简单的例子是在二维空间里对散点进行直线（曲线）拟合。拓展开讲，回归解决的问题是目标是连续值的预测，不是离散的标签值预测。回归下可分线性回归和非线性回归，就是是否可以线性可分。在数学讲，能够满足wx+b形式是线性回归（该公式在神经网络中会提及，为啥么需要激活函数）。非线性回归是非线性可分的，二维下是曲线的情况。</p>
+<p>在tensorflow下，使用简单的线性回归来做预测，因此，接下来都是讲线性回归，非线性回归后续再添加内容。</p>
+<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>即wx+b形式，w是各个x变量的权重，b是偏置。线性回归的预测函数就是f(x)=wx+b，喂给模型（预测函数）样本x，不断迭代优化得到好的w和b；优化需要两个重要点：成本函数和优化方法。</p>
+<p>成本函数（也叫损失函数），预测值与真实值之间的差值，衡量预测函数的好坏，比如预测函数Y_predict=X*w+b,那么成本函数L(w,x,b)=square(Y-Y_predict),差的平方。</p>
+<p>优化方法，即根据成本函数，找出最优的w和b，一般是求最小或最大，优化的方法本质是梯度下降法，即沿着梯度方向走，找到最佳点，细节方面会做调整，比如加快训练速度，会用随机梯度，批梯度等。</p>
+<p>tensorflow下有很多优化方法，GradientDescentOptimizer、AdagradOptimizer、MomentumOptimizer、AdamOptimizer 等。</p>
+<p>当成本函数和优化方法选定，接下来就是喂数据进行训练了。</p>
+<h2 id="回归预测-1"><a href="#回归预测-1" class="headerlink" title="回归预测-1"></a>回归预测-1</h2><p>在二维空间中，根据x，y值进行拟合，得到一条直线。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">import os</div><div class="line">from tensorflow.contrib.factorization.examples.mnist import fill_feed_dict</div><div class="line">os.environ[<span class="string">'TF_CPP_MIN_LOG_LEVEL'</span>]=<span class="string">'2'</span></div><div class="line"></div><div class="line">import numpy as np</div><div class="line">import matplotlib.pyplot as plt</div><div class="line">import tensorflow as tf</div><div class="line">import xlrd</div><div class="line"></div><div class="line">DATA_FILE = <span class="string">'E:/workspace/DeepLearnings/tensorflow-learning/data/fire_theft.xls'</span></div><div class="line"></div><div class="line"><span class="comment">#读取数据</span></div><div class="line">book = xlrd.open_workbook(DATA_FILE, encoding_override=<span class="string">'utf-8'</span>)</div><div class="line">sheet = book.sheet_by_index(0)</div><div class="line">data = np.asarray([sheet.row_values(i) <span class="keyword">for</span> i <span class="keyword">in</span> range(1, sheet.nrows)])</div><div class="line">n_samples = sheet.nrows - 1</div><div class="line"></div><div class="line"><span class="comment">#创建输入和输出，即x，y</span></div><div class="line">X = tf.placeholder(dtype=tf.float32, name=<span class="string">'X'</span>)</div><div class="line">Y = tf.placeholder(dtype=tf.float32, name=<span class="string">'Y'</span>)</div><div class="line"><span class="comment"># 初始化w和b，都是0阶，即单个值，因为是线性回归，最终得到一条直线。wx+b，</span></div><div class="line">w = tf.Variable(0.0,name=<span class="string">'weights'</span>)</div><div class="line">b = tf.Variable(0.0,name=<span class="string">'bias'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 预测函数</span></div><div class="line">Y_predicted = X*w+b</div><div class="line"></div><div class="line"><span class="comment"># 成本函数</span></div><div class="line">loss = tf.square(Y-Y_predicted, name=<span class="string">'loss'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 梯度下降，最小化成本函数</span></div><div class="line"><span class="comment">#tf有多种优化方法，</span></div><div class="line">optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.001).minimize(loss)</div><div class="line"></div><div class="line">with tf.Session() as sess:</div><div class="line">    <span class="comment"># 初始化w和b，变量需要在会话中执行初始化</span></div><div class="line">    sess.run(tf.global_variables_initializer())</div><div class="line">    writer = tf.summary.FileWriter(<span class="string">'./graphs/linear_reg'</span>,sess.graph)</div><div class="line">    <span class="comment"># S训练模型，把样本挨个喂给预测函数，一般采取批，即分批喂数据，</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(50): <span class="comment"># 100个批次</span></div><div class="line">        total_loss = 0</div><div class="line">        <span class="keyword">for</span> x, y <span class="keyword">in</span> data:</div><div class="line">            <span class="comment"># 会话里执行优化，获得成本函数值，</span></div><div class="line">            _,l = sess.run([optimizer,loss],feed_dict=&#123;X:x,Y:y&#125;)</div><div class="line">            total_loss += l</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Epoch &#123;0&#125;: &#123;1&#125;"</span>.format(i, total_loss/n_samples))</div><div class="line">    writer.close()</div><div class="line">    w,b = sess.run([w,b])</div><div class="line"></div><div class="line"><span class="comment"># 绘制出样本点和训练好的模型</span></div><div class="line">X, Y = data.T[0], data.T[1]</div><div class="line">plt.plot(X, Y, <span class="string">'bo'</span>, label=<span class="string">'Real data'</span>)</div><div class="line">plt.plot(X, X * w + b, <span class="string">'r'</span>, label=<span class="string">'Predicted data'</span>)</div><div class="line">plt.legend()</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p>总结下几个步骤：<br>0，样本读取，方式或者预处理等不同，最终得到的是训练样本和真实值（真实标签）<br>1，设置placeholder，输入的是样本，输出的是目标值。<br>2，设置变量Variable，需要优化的参数，<br>3，设置预测函数，评判将要的结果值，预测值，<br>4，设置成本函数，即评判预测的好坏，预测与真实的差距，<br>5，挑选优化的方法，即怎么得到参数，使得成本函数最佳，<br>6，喂数据，把样本分成多个批次，每个批次含很多个样本，在每个批次下，优化，<br>7，得到结果，即得到参数值。</p>
+<h2 id="回归预测-2"><a href="#回归预测-2" class="headerlink" title="回归预测-2"></a>回归预测-2</h2><p>从手写数字的图片，把图片拉成一个向量最为x，然后同回归预测来识别数字；这需要在最后进行处理，回归得到的连续值，需要映射成0-9的数字，这里使用softmax，将大的概率那个指定为数字。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">import tensorflow as tf</div><div class="line">from tensorflow.examples.tutorials.mnist import input_data</div><div class="line">from tensorflow.python.training import learning_rate_decay</div><div class="line">from tensorflow.contrib.factorization.examples.mnist import fill_feed_dict</div><div class="line">import time</div><div class="line"></div><div class="line"><span class="comment">#读取数据源，</span></div><div class="line">MNIST = input_data.read_data_sets(<span class="string">'E:/workspace/DeepLearnings/tensorflow-learning/data/mnist'</span>,one_hot=True)</div><div class="line"><span class="comment">#MNIST.train.num_examples 查样本数量，</span></div><div class="line"></div><div class="line"><span class="comment">#设置参数</span></div><div class="line">learning_rate = 0.01</div><div class="line">batch_size = 128</div><div class="line">n_epochs = 25</div><div class="line"></div><div class="line"><span class="comment">#设置placholder，存储样本和标签</span></div><div class="line"><span class="comment">#28*28像素，拉成向量即784维，标签是0-9，即10个值，向量10维</span></div><div class="line"><span class="comment">#batch_size即每个批次的大小，一个批次含多少个样本</span></div><div class="line">X = tf.placeholder(tf.float32,[batch_size,784])</div><div class="line">Y = tf.placeholder(tf.float32,[batch_size,10])</div><div class="line"></div><div class="line"><span class="comment">#设置训练参数，权重w和偏置bias</span></div><div class="line"><span class="comment">#并且初始值，使用概率分布</span></div><div class="line"><span class="comment">#w对应784维的输入，每维有个权重，</span></div><div class="line">w = tf.Variable(tf.random_normal(shape=[784,10],stddev=0.01), name=<span class="string">'weights'</span>)</div><div class="line">b = tf.Variable(tf.zeros(shape=[1,10]), name=<span class="string">'bias'</span>)</div><div class="line"></div><div class="line"><span class="comment">#预测</span></div><div class="line">logits = tf.matmul(X,w) + b</div><div class="line"></div><div class="line"><span class="comment">#定义损失函数</span></div><div class="line"><span class="comment">#多类别输出，softmax，采取交叉熵，</span></div><div class="line">entropy = tf.nn.softmax_cross_entropy_with_logits(logits=logits,labels=Y)</div><div class="line">loss = tf.reduce_mean(entropy)</div><div class="line"></div><div class="line"><span class="comment">#设置即优化方法，批处理，</span></div><div class="line">optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate).minimize(loss)</div><div class="line"></div><div class="line"><span class="comment">#变量参数初始化</span></div><div class="line">init = tf.global_variables_initializer()</div><div class="line"></div><div class="line">with tf.Session() as sess:</div><div class="line">    writer = tf.summary.FileWriter(<span class="string">'./graphs/logistic_reg'</span>, sess.graph)</div><div class="line">    sess.run(init) <span class="comment">#执行变量初始化，</span></div><div class="line">    start_time = time.time()    </div><div class="line"></div><div class="line">    n_batches = int (MNIST.train.num_examples/batch_size)<span class="comment">#训练样本含多少个批次，</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n_epochs):</div><div class="line">        total_loss = 0</div><div class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> range(n_batches):</div><div class="line">            X_batch,Y_batch = MNIST.train.next_batch(batch_size)<span class="comment">#取批次</span></div><div class="line">            <span class="comment">#执行优化方法，获得loss值，</span></div><div class="line">            _,loss_batch = sess.run([optimizer,loss],feed_dict=&#123;X:X_batch,Y:Y_batch&#125;)</div><div class="line">            total_loss += loss_batch</div><div class="line">        <span class="built_in">print</span>(<span class="string">'Average loss epoch &#123;0&#125;: &#123;1&#125;'</span>.format(i, total_loss/n_batches))</div><div class="line">    <span class="built_in">print</span>(<span class="string">'Total time: &#123;0&#125; seconds'</span>.format(time.time() - start_time))            </div><div class="line">    <span class="built_in">print</span>(<span class="string">'Optimization Finished!'</span>)         </div><div class="line"></div><div class="line">    <span class="comment">#测试模型</span></div><div class="line"></div><div class="line">    n_batches = int(MNIST.test.num_examples/batch_size)</div><div class="line"></div><div class="line">    total_correct_preds = 0</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n_batches):</div><div class="line">        X_batch, Y_batch = MNIST.test.next_batch(batch_size)</div><div class="line">        _,loss_batch,logits_batch = sess.run([optimizer,loss,logits], feed_dict=&#123;X: X_batch, Y:Y_batch&#125;)</div><div class="line">        preds = tf.nn.softmax(logits_batch)</div><div class="line">        correct_preds = tf.equal(tf.argmax(preds, 1), tf.argmax(Y_batch, 1))</div><div class="line">        accuracy = tf.reduce_sum(tf.cast(correct_preds, tf.float32))</div><div class="line">        total_correct_preds += sess.run(accuracy)</div><div class="line"></div><div class="line">    <span class="built_in">print</span>(<span class="string">'Accuracy &#123;0&#125;'</span>.format(total_correct_preds/MNIST.test.num_examples))</div><div class="line">    writer.close()</div></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://chlyzzo.github.io/2017/09/17/tensorflow学习-回归/" data-title="tensorflow学习-回归 | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/09/17/tensorflow学习笔记-基础/"  title="tensorflow学习笔记-基础">
+ <strong>下一篇：</strong><br/> 
+ <span>tensorflow学习笔记-基础
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 分享即是收获，动手后才是自己的. <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1724571293" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/chlyzzo" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:rimin515@sina.cn" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by © 2017 
+		
+		<a href="/about" target="_blank" title="wenxi">wenxi</a>
+		
+		
+		</p>
+
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?81e8b61e30a0723ad6270902dbcf0bb6";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

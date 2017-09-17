@@ -1,0 +1,444 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>python爬虫-简单开始 | 山上掏金</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="Poq2hMEF9U" />
+    
+    <meta name="author" content="wenxi">
+    
+
+    
+    <meta name="description" content="使用python爬虫，读取的是xml源码，从源码中抽取所需的信息，使用到BeautifulSoup，以及json的解析和转换，还有编码问题。 json的解析和使用在python中对json的操作，基于json组件，依赖dict类型，即字典。 123456789101112131415import jsonb= &apos;b&apos;c=&apos;c&apos;a=&apos;a&apos;data1 = &apos;&amp;#123;b: 789, c: 456,">
+<meta name="keywords" content="爬虫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python爬虫-简单开始">
+<meta property="og:url" content="https://chlyzzo.github.io/2015/09/10/python爬虫-简单开始/index.html">
+<meta property="og:site_name" content="山上掏金">
+<meta property="og:description" content="使用python爬虫，读取的是xml源码，从源码中抽取所需的信息，使用到BeautifulSoup，以及json的解析和转换，还有编码问题。 json的解析和使用在python中对json的操作，基于json组件，依赖dict类型，即字典。 123456789101112131415import jsonb= &apos;b&apos;c=&apos;c&apos;a=&apos;a&apos;data1 = &apos;&amp;#123;b: 789, c: 456,">
+<meta property="og:updated_time" content="2017-09-17T15:12:13.299Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python爬虫-简单开始">
+<meta name="twitter:description" content="使用python爬虫，读取的是xml源码，从源码中抽取所需的信息，使用到BeautifulSoup，以及json的解析和转换，还有编码问题。 json的解析和使用在python中对json的操作，基于json组件，依赖dict类型，即字典。 123456789101112131415import jsonb= &apos;b&apos;c=&apos;c&apos;a=&apos;a&apos;data1 = &apos;&amp;#123;b: 789, c: 456,">
+
+    
+    <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span id="busuanzi_container_site_pv">
+    站浏览量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+    站访问人数<span id="busuanzi_value_site_uv"></span>
+  </span>
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
+				<h2 class="blog-motto">每天早上起床就是为了比昨天更快乐，掏金者的一天是新的开始.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:chlyzzo.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post moveMain" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/09/10/python爬虫-简单开始/" title="python爬虫-简单开始" itemprop="url">python爬虫-简单开始</a>
+  </h1>
+  <div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/python/">python</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/爬虫/">爬虫</a>
+  </div>
+
+</div>
+
+
+  <p class="article-author">By
+       
+		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
+		
+  <p class="article-time">
+    <time datetime="2015-09-10T14:26:47.000Z" itemprop="datePublished"> 2015-09-10 阅读量 <span id="busuanzi_value_page_pv"></span></time>
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#json的解析和使用"><span class="toc-number">1.</span> <span class="toc-text">json的解析和使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用BeautifulSoup"><span class="toc-number">2.</span> <span class="toc-text">使用BeautifulSoup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#爬取今日头条"><span class="toc-number">3.</span> <span class="toc-text">爬取今日头条</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#爬取京东评论"><span class="toc-number">4.</span> <span class="toc-text">爬取京东评论</span></a></li></ol>
+		
+		</div>
+		
+		<p>使用python爬虫，读取的是xml源码，从源码中抽取所需的信息，使用到BeautifulSoup，以及json的解析和转换，还有编码问题。</p>
+<h2 id="json的解析和使用"><a href="#json的解析和使用" class="headerlink" title="json的解析和使用"></a>json的解析和使用</h2><p>在python中对json的操作，基于json组件，依赖dict类型，即字典。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">import json</div><div class="line">b= <span class="string">'b'</span></div><div class="line">c=<span class="string">'c'</span></div><div class="line">a=<span class="string">'a'</span></div><div class="line">data1 = <span class="string">'&#123;b: 789, c: 456, a: 123&#125;'</span></div><div class="line">dictData = <span class="built_in">eval</span>(data1)<span class="comment">#eval是把串转为dict</span></div><div class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(dictData),dictData)</div><div class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(dictData))</div><div class="line">encode_json = json.dumps(dictData)<span class="comment">#dumps是把字典转为str串</span></div><div class="line"><span class="built_in">print</span> (<span class="built_in">type</span>(encode_json), encode_json)</div><div class="line"></div><div class="line">decode_json = json.loads(encode_json)<span class="comment">#loads将str串转为dict形式，注意key必须用""，双冒号，</span></div><div class="line"><span class="built_in">print</span> (<span class="built_in">type</span>(decode_json))</div><div class="line"><span class="built_in">print</span> (decode_json[<span class="string">'a'</span>])</div><div class="line"><span class="built_in">print</span> (decode_json)</div></pre></td></tr></table></figure>
+<h2 id="使用BeautifulSoup"><a href="#使用BeautifulSoup" class="headerlink" title="使用BeautifulSoup"></a>使用BeautifulSoup</h2><p>xml源码，用了很多属性items，需要对其进行解析，获取节点，以及子节点。一下是两个曾经使用过的例子。其他的<a href="https://www.crummy.com/software/BeautifulSoup/bs3/documentation.zh.html" target="_blank" rel="external">使用文档</a>。</p>
+<h2 id="爬取今日头条"><a href="#爬取今日头条" class="headerlink" title="爬取今日头条"></a>爬取今日头条</h2><p>根据今日头条的url获取xml的源码，查看源码的内容，需要获取的内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">var BASE_DATA=&#123;</div><div class="line">  userInfo: &#123;</div><div class="line">     id: 0,</div><div class="line">     userName: <span class="string">''</span>,</div><div class="line">     avatarUrl: <span class="string">''</span>,</div><div class="line">     isPgc: <span class="literal">false</span>,</div><div class="line">     isOwner: <span class="literal">false</span></div><div class="line">   &#125;,</div><div class="line">   headerInfo: &#123;</div><div class="line">     id: 0,</div><div class="line">     isPgc: <span class="literal">false</span>,</div><div class="line">     userName: <span class="string">''</span>,</div><div class="line">     avatarUrl: <span class="string">''</span>,</div><div class="line">     isHomePage: <span class="literal">false</span>,</div><div class="line">     chineseTag: <span class="string">'房产'</span>,</div><div class="line">     crumbTag: <span class="string">'search/?keyword=%E6%88%BF%E4%BA%A7'</span>,</div><div class="line">     hasBar: <span class="literal">true</span></div><div class="line">   &#125;,</div><div class="line">   articleInfo: &#123;</div><div class="line">     title: <span class="string">'开学季已至，徐州中小学生开始报到 教育难题你考虑解决吗'</span>,</div><div class="line">     content: <span class="string">'&amp;lt;p</span></div><div class="line">     ....</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以下是python实现爬取的代码，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import urllib</div><div class="line">from bs4 import BeautifulSoup</div><div class="line">import json</div><div class="line">import re</div><div class="line"></div><div class="line">invalid_escape = re.compile(r<span class="string">'\\[0-7]&#123;1,3&#125;'</span>)  <span class="comment"># up to 3 digits for byte values up to FF</span></div><div class="line"></div><div class="line">def replace_with_byte(match):</div><div class="line">    <span class="built_in">return</span> chr(int(match.group(0)[1:], 8))</div><div class="line"></div><div class="line">def repair(brokenjson):</div><div class="line">    <span class="built_in">return</span> invalid_escape.sub(replace_with_byte, brokenjson)        </div><div class="line"></div><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line">根据url获取今日头条的文章等信息，有些字符还是无法去除干净，</div><div class="line">"<span class="string">""</span></div><div class="line">def getArticleFromUrl(url):</div><div class="line">    try:</div><div class="line">        resp = urllib.request.urlopen(url)</div><div class="line">    except Exception:</div><div class="line">        <span class="built_in">print</span>(<span class="string">'url open error'</span>)</div><div class="line">        <span class="built_in">return</span> None</div><div class="line">    respHtml = resp.read()</div><div class="line">    resp.close()</div><div class="line">    soup = BeautifulSoup(respHtml,from_encoding=<span class="string">"utf-8"</span>)</div><div class="line">    content=<span class="string">'null'</span></div><div class="line">    scripts = soup.find_all(<span class="string">'script'</span>)</div><div class="line">    <span class="keyword">for</span> sc <span class="keyword">in</span> scripts: <span class="comment">#sc 是bs4.element.Tag,name是名字，</span></div><div class="line">        line = str(sc)</div><div class="line">        <span class="keyword">if</span> line.startswith(<span class="string">'&lt;script&gt;var BASE_DATA ='</span>):</div><div class="line">            lineRes = line.replace(<span class="string">'&lt;script&gt;var BASE_DATA ='</span>, <span class="string">''</span>).replace(<span class="string">';&lt;/script&gt;'</span>, <span class="string">''</span>).replace(<span class="string">'.replace(/&lt;br \/&gt;|\\n|\\r/ig, \'</span>\<span class="string">')'</span>, <span class="string">''</span>).replace(<span class="string">'.replace(/&lt;br \/&gt;/ig, \'</span>\<span class="string">')'</span>, <span class="string">''</span>)</div><div class="line">            res = lineRes.replace(<span class="string">'    '</span>, <span class="string">''</span>).replace(<span class="string">'  '</span>, <span class="string">''</span>)</div><div class="line">            vs = res.split(<span class="string">'\n'</span>)</div><div class="line">            chineseTag = vs[14]</div><div class="line">            title = vs[19]</div><div class="line">            content = re.sub(<span class="string">'&lt;[^&lt;]*&gt;|&amp;[a-z]+\073|\/p'</span>,<span class="string">''</span>,vs[20])</div><div class="line">            abstract = vs[33]</div><div class="line">    <span class="built_in">return</span> content    </div><div class="line"></div><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line">根据给定的url集合，获取今日头条的文章等信息，</div><div class="line">集合从一个txt文件中获得，返回对应的文章等信息，</div><div class="line">写入txt文件</div><div class="line">"<span class="string">""</span></div><div class="line">def getArticlesFromUrls(urlsPath,savefile):</div><div class="line">    f = open(urlsPath,encoding=<span class="string">'utf-8'</span>)</div><div class="line">    save = open(savefile,<span class="string">"a"</span>,encoding=<span class="string">'utf-8'</span>)</div><div class="line">    line = f.readline()</div><div class="line">    <span class="keyword">while</span> 1:</div><div class="line">        <span class="keyword">if</span> not line:</div><div class="line">            <span class="built_in">break</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            line = line.replace(<span class="string">'\n'</span>,<span class="string">''</span>)</div><div class="line">            content = getArticleFromUrl(line)</div><div class="line">            <span class="keyword">if</span> content is not None:</div><div class="line">                res = (line+<span class="string">'\t'</span>+content).replace(<span class="string">'\u200d'</span>,<span class="string">''</span>).replace(<span class="string">'\xa3'</span>,<span class="string">''</span>).replace(<span class="string">'\ue20c'</span>,<span class="string">''</span>)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                res = line+<span class="string">'\t'</span>+<span class="string">'null'</span></div><div class="line">            <span class="comment">#得到内容写进txt文件</span></div><div class="line">            save.write(res+<span class="string">'\n'</span>)</div><div class="line">            line = f.readline()</div><div class="line">    save.close()</div><div class="line"></div><div class="line"><span class="comment">#根据url集合获得文章信息</span></div><div class="line">urlsPath=r<span class="string">'E:\workspace\data\JRtoutiaoArticle\urls.txt'</span></div><div class="line">savefile=r<span class="string">'E:\workspace\data\JRtoutiaoArticle\urls_articles.txt'</span></div><div class="line"></div><div class="line">getArticlesFromUrls(urlsPath,savefile)</div></pre></td></tr></table></figure>
+<h2 id="爬取京东评论"><a href="#爬取京东评论" class="headerlink" title="爬取京东评论"></a>爬取京东评论</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding=utf-8</span></div><div class="line"></div><div class="line"><span class="string">''</span><span class="string">'</span></div><div class="line">抓取京东商品的评论数据；</div><div class="line">decode的作用是将其他编码的字符串转换成unicode编码，如str1.decode('gb2312<span class="string">')，表示将gb2312编码的字符串str1转换成unicode编码。</span></div><div class="line">encode的作用是将unicode编码转换成其他编码的字符串，如str2.encode('gb2312<span class="string">')，表示将unicode编码的字符串str2转换成gb2312编码。</span></div><div class="line">'<span class="string">''</span></div><div class="line">import urllib2</div><div class="line">import re,bs4</div><div class="line">from bs4 import BeautifulSoup</div><div class="line"></div><div class="line">url=<span class="string">"http://club.jd.com/review/1721312-1-1-0.html"</span><span class="comment">#1721312</span></div><div class="line">四个数好3、中2、差1、全部0、有图片4</div><div class="line">req = urllib2.Request(url)</div><div class="line">resp = urllib2.urlopen(req)</div><div class="line">respHtml = resp.read()</div><div class="line">resp.close()</div><div class="line">soup = BeautifulSoup(respHtml,from_encoding=<span class="string">"gbk"</span>)</div><div class="line"><span class="comment">#得到总的页数</span></div><div class="line">Page=soup.find(<span class="string">"div"</span>,class_=<span class="string">"pagin fr"</span>)</div><div class="line">conts=(str(Page).replace(<span class="string">'&lt;div class="pagin fr"&gt;'</span>,<span class="string">''</span>).replace(<span class="string">'&lt;/div&gt;'</span>,<span class="string">''</span>))<span class="comment">#得到包含总页数的那段网页源码内容</span></div><div class="line">totlePage=0</div><div class="line">try:</div><div class="line">     totlePage=int(conts.split(<span class="string">'&lt;/a&gt;'</span>)[3].split(<span class="string">'&gt;'</span>)[3])<span class="comment">#得到总页数的那个值</span></div><div class="line">except Exception, e:</div><div class="line">    <span class="built_in">print</span>(<span class="string">'the productor is not have evaluates'</span>)</div><div class="line"><span class="comment"># print(totlePage)</span></div><div class="line"><span class="comment">############################################################################</span></div><div class="line"><span class="comment">#找到该类别下的所有评论</span></div><div class="line"><span class="comment"># for currPage in range(totlePage):</span></div><div class="line"><span class="comment">#      print(currPage)</span></div><div class="line"><span class="comment">#      newurl="http://club.jd.com/review/1721312-1-"+str(currPage+1)+"-1.html"</span></div><div class="line"><span class="comment">#      req = urllib2.Request(newurl)</span></div><div class="line"><span class="comment">#      resp = urllib2.urlopen(req)</span></div><div class="line"><span class="comment">#      respHtml = resp.read()</span></div><div class="line"><span class="comment">#      resp.close()</span></div><div class="line"><span class="comment">#      soup = BeautifulSoup(respHtml,from_encoding="gbk")</span></div><div class="line"><span class="comment">#      m = soup.findAll("div",&#123;'class':"comment-content"&#125;)</span></div><div class="line"><span class="comment">#      #存入txt文件</span></div><div class="line"><span class="comment">#      import codecs</span></div><div class="line"><span class="comment">#      evaluate_z=open("tr_c.txt","a")</span></div><div class="line"><span class="comment">#      for obj in m:</span></div><div class="line"><span class="comment">#             con=''.join(obj.find('dd').contents).replace('\n','')</span></div><div class="line"><span class="comment">#             print con</span></div><div class="line"><span class="comment">#             evaluate_z.write(con.encode('utf8')+'\t'+'class=bad'+'\n')</span></div><div class="line"><span class="comment">#      evaluate_z.close()</span></div><div class="line"></div><div class="line"><span class="comment">############################################################################</span></div><div class="line"><span class="comment">#爬取全部的，</span></div><div class="line">evaluate_z=open(<span class="string">"tr_all.txt"</span>,<span class="string">"a"</span>)</div><div class="line"><span class="keyword">for</span> currPage <span class="keyword">in</span> range(totlePage):</div><div class="line">     <span class="built_in">print</span>(currPage)</div><div class="line">     newurl=<span class="string">"http://club.jd.com/review/1721312-1-"</span>+str(currPage+1)+<span class="string">"-0.html"</span></div><div class="line">     req = urllib2.Request(newurl)</div><div class="line">     resp = urllib2.urlopen(req)</div><div class="line">     respHtml = resp.read()</div><div class="line">     resp.close()</div><div class="line">     soup = BeautifulSoup(respHtml,from_encoding=<span class="string">"gbk"</span>)</div><div class="line">     m = soup.findAll(<span class="string">"div"</span>,&#123;<span class="string">'class'</span>:<span class="string">"i-item"</span>&#125;)</div><div class="line">     <span class="keyword">for</span> obj <span class="keyword">in</span> m:</div><div class="line">        star=str(obj.find(<span class="string">'span'</span>))[20:21]<span class="comment">#获得星标</span></div><div class="line">        content=str(obj.find(<span class="string">'dd'</span>)).replace(<span class="string">'\n'</span>,<span class="string">''</span>).replace(<span class="string">'&lt;dd&gt;'</span>,<span class="string">''</span>).replace(<span class="string">'&lt;/dd&gt;'</span>,<span class="string">''</span>)<span class="comment">#获得评价内容</span></div><div class="line">        <span class="built_in">print</span> content+<span class="string">'\t'</span>+star</div><div class="line">        evaluate_z.write(content+<span class="string">'\t'</span>+<span class="string">'star='</span>+star+<span class="string">'\n'</span>)</div><div class="line">evaluate_z.close()</div></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://chlyzzo.github.io/2015/09/10/python爬虫-简单开始/" data-title="python爬虫-简单开始 | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/09/14/深度学习笔记集合/" title="深度学习笔记集合">
+  <strong>上一篇：</strong><br/>
+  <span>
+  深度学习笔记集合</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/06/02/数据化运营笔记/"  title="数据化运营笔记">
+ <strong>下一篇：</strong><br/> 
+ <span>数据化运营笔记
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 分享即是收获，动手后才是自己的. <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1724571293" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/chlyzzo" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:rimin515@sina.cn" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by © 2017 
+		
+		<a href="/about" target="_blank" title="wenxi">wenxi</a>
+		
+		
+		</p>
+
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?81e8b61e30a0723ad6270902dbcf0bb6";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
