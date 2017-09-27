@@ -1,0 +1,437 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>通过python，java，spark，hive以post提交数据 | 山上掏金</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="Poq2hMEF9U" />
+    
+    <meta name="author" content="wenxi">
+    
+
+    
+    <meta name="description" content="通过http形式提供服务，有两大类，一是get形式，请求服务；二是post形式，push消息得到服务，以下使用不同语言实现get和post数据形式，基础源自于java和python，scala则是通过调用java的方式实现，hive中也是，其中hive需要自定义udf。 get服务通过传入参数，发出请求，获取到数据， 1234567891011121314151617181920212223242">
+<meta name="keywords" content="spark,笔记,hive,python,post">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过python，java，spark，hive以post提交数据">
+<meta property="og:url" content="https://chlyzzo.github.io/2017/09/21/通过python，java，spark，hive以post提交数据/index.html">
+<meta property="og:site_name" content="山上掏金">
+<meta property="og:description" content="通过http形式提供服务，有两大类，一是get形式，请求服务；二是post形式，push消息得到服务，以下使用不同语言实现get和post数据形式，基础源自于java和python，scala则是通过调用java的方式实现，hive中也是，其中hive需要自定义udf。 get服务通过传入参数，发出请求，获取到数据， 1234567891011121314151617181920212223242">
+<meta property="og:updated_time" content="2017-09-27T11:14:24.132Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通过python，java，spark，hive以post提交数据">
+<meta name="twitter:description" content="通过http形式提供服务，有两大类，一是get形式，请求服务；二是post形式，push消息得到服务，以下使用不同语言实现get和post数据形式，基础源自于java和python，scala则是通过调用java的方式实现，hive中也是，其中hive需要自定义udf。 get服务通过传入参数，发出请求，获取到数据， 1234567891011121314151617181920212223242">
+
+    
+    <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span id="busuanzi_container_site_pv">
+    站浏览量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+    站访问人数<span id="busuanzi_value_site_uv"></span>
+  </span>
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
+				<h2 class="blog-motto">每天早上起床就是为了比昨天更快乐，掏金者的一天是新的开始.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:chlyzzo.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post moveMain" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/09/21/通过python，java，spark，hive以post提交数据/" title="通过python，java，spark，hive以post提交数据" itemprop="url">通过python，java，spark，hive以post提交数据</a>
+  </h1>
+  <div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/post数据/">post数据</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/spark/">spark</a><a href="/tags/笔记/">笔记</a><a href="/tags/hive/">hive</a><a href="/tags/python/">python</a><a href="/tags/post/">post</a>
+  </div>
+
+</div>
+
+
+  <p class="article-author">By
+       
+		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
+		
+  <p class="article-time">
+    <time datetime="2017-09-21T09:57:15.000Z" itemprop="datePublished"> 2017-09-21 阅读量 <span id="busuanzi_value_page_pv"></span></time>
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#get服务"><span class="toc-number">1.</span> <span class="toc-text">get服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#post数据"><span class="toc-number">2.</span> <span class="toc-text">post数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python的post方式"><span class="toc-number">3.</span> <span class="toc-text">python的post方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scala中post"><span class="toc-number">4.</span> <span class="toc-text">scala中post</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hive的udf实现"><span class="toc-number">5.</span> <span class="toc-text">hive的udf实现</span></a></li></ol>
+		
+		</div>
+		
+		<p>通过http形式提供服务，有两大类，一是get形式，请求服务；二是post形式，push消息得到服务，以下使用不同语言实现get和post数据形式，基础源自于java和python，scala则是通过调用java的方式实现，hive中也是，其中hive需要自定义udf。</p>
+<h2 id="get服务"><a href="#get服务" class="headerlink" title="get服务"></a>get服务</h2><p>通过传入参数，发出请求，获取到数据，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">public String getData(String inputParams) &#123;</div><div class="line">		String output=null;</div><div class="line">	    String targetURL = <span class="string">"*****"</span>;</div><div class="line">	    try &#123;</div><div class="line">	    	    targetURL = targetURL +<span class="string">"?"</span> +inputParams;</div><div class="line">	            URL restServiceURL = new URL(targetURL);</div><div class="line">	            HttpURLConnection httpConnection = (HttpURLConnection) restServiceURL.openConnection();</div><div class="line">	            httpConnection.setRequestMethod(<span class="string">"GET"</span>);</div><div class="line">	            httpConnection.setRequestProperty(<span class="string">"Accept"</span>, <span class="string">"application/json"</span>);</div><div class="line">	            httpConnection.setDoOutput(<span class="literal">false</span>);// 是否输入参数，参数已经当成url连接一部分了</div><div class="line"></div><div class="line">	            <span class="keyword">if</span> (httpConnection.getResponseCode() != 200) &#123;</div><div class="line">	                   throw new RuntimeException(<span class="string">"HTTP GET Request Failed with Error code : "</span></div><div class="line">	                                          + httpConnection.getResponseCode());</div><div class="line">	            &#125;</div><div class="line">	            BufferedReader responseBuffer = new BufferedReader(new InputStreamReader(</div><div class="line">	                     (httpConnection.getInputStream())));</div><div class="line">	            output = responseBuffer.readLine();</div><div class="line">	            httpConnection.disconnect();</div><div class="line"></div><div class="line">	    &#125; catch (MalformedURLException e) &#123;</div><div class="line">	                    e.printStackTrace();</div><div class="line">	    &#125; catch (IOException e) &#123;</div><div class="line">	             e.printStackTrace();</div><div class="line">	   &#125;	  </div><div class="line">	    <span class="built_in">return</span> output;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>缺点是每次请求需要建立一次连接，并且需要把参数进行拼接好，a=1&amp;b=2&amp;c=3形式；</p>
+<h2 id="post数据"><a href="#post数据" class="headerlink" title="post数据"></a>post数据</h2><p>提交数据量大，不适于在url中当做参数传值；或者请求第三方服务，使用post方式提交数据获取服务的结果。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">public String jsonPost(String strURL, String params) &#123;  </div><div class="line">        try &#123;  </div><div class="line">            URL url = new URL(strURL);// 创建连接  </div><div class="line">            HttpURLConnection connection = (HttpURLConnection) url.openConnection();  </div><div class="line">            connection.setDoOutput(<span class="literal">true</span>);  </div><div class="line">            connection.setDoInput(<span class="literal">true</span>);  </div><div class="line">            connection.setUseCaches(<span class="literal">false</span>);  </div><div class="line">            connection.setInstanceFollowRedirects(<span class="literal">true</span>);  </div><div class="line">            connection.setRequestMethod(<span class="string">"POST"</span>); // 设置请求方式  </div><div class="line">            connection.setRequestProperty(<span class="string">"Accept"</span>, <span class="string">"application/json"</span>); // 设置接收数据的格式  </div><div class="line">            connection.setRequestProperty(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>); // 设置发送数据的格式  </div><div class="line">            connection.connect();  </div><div class="line">            OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream(), <span class="string">"UTF-8"</span>);</div><div class="line">            out.append(params);  </div><div class="line">            out.flush();  </div><div class="line">            out.close();  </div><div class="line"></div><div class="line">            int code = connection.getResponseCode();  </div><div class="line">            InputStream is = null;  </div><div class="line">            <span class="keyword">if</span> (code == 200) &#123;  </div><div class="line">                is = connection.getInputStream();  </div><div class="line">            &#125; <span class="keyword">else</span> &#123;  </div><div class="line">                is = connection.getErrorStream();  </div><div class="line">            &#125;  </div><div class="line">            // 读取响应  </div><div class="line">            int length = (int) connection.getContentLength();// 获取长度  </div><div class="line">            <span class="keyword">if</span> (length != -1) &#123;  </div><div class="line">                byte[] data = new byte[length];  </div><div class="line">                byte[] temp = new byte[512];  </div><div class="line">                int <span class="built_in">read</span>Len = 0;  </div><div class="line">                int destPos = 0;  </div><div class="line">                <span class="keyword">while</span> ((<span class="built_in">read</span>Len = is.read(temp)) &gt; 0) &#123;  </div><div class="line">                    System.arraycopy(temp, 0, data, destPos, <span class="built_in">read</span>Len);  </div><div class="line">                    destPos += <span class="built_in">read</span>Len;  </div><div class="line">                &#125;  </div><div class="line">                String result = new String(data, <span class="string">"UTF-8"</span>);</div><div class="line">                <span class="built_in">return</span> result;  </div><div class="line">            &#125;  </div><div class="line"></div><div class="line">        &#125; catch (IOException e) &#123;  </div><div class="line">           <span class="built_in">return</span> <span class="string">"error"</span>;</div><div class="line">        &#125;  </div><div class="line">        <span class="built_in">return</span> <span class="string">"error"</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="python的post方式"><a href="#python的post方式" class="headerlink" title="python的post方式"></a>python的post方式</h2><p>python的提交方式与java的原理一样，只是需要对中文进行编码，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding=utf-8</span></div><div class="line"></div><div class="line">import urllib</div><div class="line">from urllib import parse</div><div class="line">from urllib import request</div><div class="line"></div><div class="line">data=&#123;&#125;</div><div class="line">data[<span class="string">'cityId'</span>]=49</div><div class="line">data[<span class="string">'mid'</span>]=1</div><div class="line">data[<span class="string">'type'</span>]=2</div><div class="line">url=<span class="string">'******'</span></div><div class="line">post_data = parse.urlencode(data).encode(encoding=<span class="string">'UTF8'</span>)</div><div class="line"><span class="built_in">print</span>(post_data.decode(<span class="string">'utf-8'</span>))</div><div class="line">req = request.urlopen(url, post_data)</div><div class="line">content = req.read()</div><div class="line"><span class="built_in">print</span>(content.decode(<span class="string">'utf-8'</span>))</div></pre></td></tr></table></figure></p>
+<h2 id="scala中post"><a href="#scala中post" class="headerlink" title="scala中post"></a>scala中post</h2><p>在scala里调用java的方法即可，如果是批量，则最好先建立一个长连接。</p>
+<h2 id="hive的udf实现"><a href="#hive的udf实现" class="headerlink" title="hive的udf实现"></a>hive的udf实现</h2><p>hive的udf实现，实际上是java实现的，相当于在udf里新增一个post数据的方法，参考<a href="http://chloy.com/2017/05/20/hive%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88/" target="_blank" rel="external">hive的udf写法</a>。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://chlyzzo.github.io/2017/09/21/通过python，java，spark，hive以post提交数据/" data-title="通过python，java，spark，hive以post提交数据 | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/09/17/tensorflow学习-回归/"  title="tensorflow学习-回归">
+ <strong>下一篇：</strong><br/> 
+ <span>tensorflow学习-回归
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 分享即是收获，动手后才是自己的. <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1724571293" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/chlyzzo" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:rimin515@sina.cn" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by © 2017 
+		
+		<a href="/about" target="_blank" title="wenxi">wenxi</a>
+		
+		
+		</p>
+
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?81e8b61e30a0723ad6270902dbcf0bb6";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
