@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Flink实践-实践过程问题集合 | 山上掏金</title>
+    <title>tensorflow学习-word2vec | 山上掏金</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="Poq2hMEF9U" />
     
@@ -12,17 +12,17 @@
     
 
     
-    <meta name="description" content="1,dataset迪卡尔积计算,出现混乱,   首先,两个大的数据集不建议使用cross操作算子,不仅浪费资源,而且很满很慢.   然后,如果是从文件读取记录,一行一条记录,在broadcast下计算是正常的,flink的dataset是按照记录来计算的;然后,当这个dataset是从其他shuffle过程得到,比如join,造成混乱,再broadcast会造成数据紊乱,解决措施,设置并行度为1;">
-<meta name="keywords" content="问题">
+    <meta name="description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解">
+<meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Flink实践-实践过程问题集合">
-<meta property="og:url" content="https://chlyzzo.github.io/2017/06/09/Flink实践-实践过程问题集合/index.html">
+<meta property="og:title" content="tensorflow学习-word2vec">
+<meta property="og:url" content="https://chlyzzo.github.io/2017/09/28/tensorflow学习-word2vec/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:description" content="1,dataset迪卡尔积计算,出现混乱,   首先,两个大的数据集不建议使用cross操作算子,不仅浪费资源,而且很满很慢.   然后,如果是从文件读取记录,一行一条记录,在broadcast下计算是正常的,flink的dataset是按照记录来计算的;然后,当这个dataset是从其他shuffle过程得到,比如join,造成混乱,再broadcast会造成数据紊乱,解决措施,设置并行度为1;">
-<meta property="og:updated_time" content="2017-06-26T13:01:31.610Z">
+<meta property="og:description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解">
+<meta property="og:updated_time" content="2017-09-28T09:33:37.980Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Flink实践-实践过程问题集合">
-<meta name="twitter:description" content="1,dataset迪卡尔积计算,出现混乱,   首先,两个大的数据集不建议使用cross操作算子,不仅浪费资源,而且很满很慢.   然后,如果是从文件读取记录,一行一条记录,在broadcast下计算是正常的,flink的dataset是按照记录来计算的;然后,当这个dataset是从其他shuffle过程得到,比如join,造成混乱,再broadcast会造成数据紊乱,解决措施,设置并行度为1;">
+<meta name="twitter:title" content="tensorflow学习-word2vec">
+<meta name="twitter:description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -86,19 +86,19 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/06/09/Flink实践-实践过程问题集合/" title="Flink实践-实践过程问题集合" itemprop="url">Flink实践-实践过程问题集合</a>
+      <a href="/2017/09/28/tensorflow学习-word2vec/" title="tensorflow学习-word2vec" itemprop="url">tensorflow学习-word2vec</a>
   </h1>
   <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/flink/">flink</a>
+  <a class="article-category-link" href="/categories/深度学习/">深度学习</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/问题/">问题</a>
+  <span></span> <a href="/tags/笔记/">笔记</a>
   </div>
 
 </div>
@@ -109,7 +109,7 @@
 		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
 		
   <p class="article-time">
-    <time datetime="2017-06-09T07:32:39.000Z" itemprop="datePublished"> 2017-06-09 阅读量 <span id="busuanzi_value_page_pv"></span></time>
+    <time datetime="2017-09-28T07:05:07.000Z" itemprop="datePublished"> 2017-09-28 阅读量 <span id="busuanzi_value_page_pv"></span></time>
   </p>
 </header>
 
@@ -118,31 +118,25 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#word2vec"><span class="toc-number">1.</span> <span class="toc-text">word2vec</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#skip-model训练过程"><span class="toc-number">2.</span> <span class="toc-text">skip-model训练过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nce-loss"><span class="toc-number">2.1.</span> <span class="toc-text">nce_loss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#训练步骤"><span class="toc-number">2.2.</span> <span class="toc-text">训练步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用"><span class="toc-number">4.</span> <span class="toc-text">应用</span></a></li></ol>
 		
 		</div>
 		
-		<p>1,dataset迪卡尔积计算,出现混乱,<br>   首先,两个大的数据集不建议使用cross操作算子,不仅浪费资源,而且很满很慢.<br>   然后,如果是从文件读取记录,一行一条记录,在broadcast下计算是正常的,flink的dataset是按照记录来计算的;然后,当这个dataset是从其他shuffle过程得到,比如join,造成混乱,再broadcast会造成数据紊乱,解决措施,设置并行度为1;或者再多次使用broadcast保证一条记录计算.</p>
-<p>2,flink-1.2.0在提交yarn运行时,将habse的包在运行命令里带上,会出现Filter错误,这是因为版本问题(flink-1.1.1没有这个问题),habse的包需要在sbt里带上,即去除provided,这样就可以了.</p>
-<p>3,flink下的背压问题,首先造成背压是因为上游数据太快产生,下游数据处理过慢,导致挤压反向.解决措施在上游和下游设置同样大小内存,即jobmanager和taskmanager内存设置一样(不晓得为啥,job的大,task的小就产生背压)</p>
-<p>4,akka.client.timeout,可以在conf下配置,注意时间是空格带上s或者ms.但是,也不一定能解决,主要是构建job花时间,不要在job起始时使用一个费时间的操作,比如读取很大的数据集,后续却只用其中一部分;或者大数据集生成dataset,是很花时间的.</p>
-<p>5,flink的包冲突或者包版本不对,首先找到该包定位属于那个,然后再唉sbt里进行exclude,但是,一般不晓得在哪个,一个一个去尝试(最笨但是最有效的方法啊)</p>
-<p>6,flink下稀疏向量的计算比密集型的向量计算快一倍至多,各种结构或者算法,优先考虑稀疏的,</p>
-<p>7,flink下的map等各种算子操作,其中带的方法必须是序列化的,否则会出错或者不能运行或者结果达不到预期,尤其是调用外部包,需确定是否实现了序列化(可以自己实现,在java包等下常见)</p>
-<p>8,flink通过每条记录(doc–&gt;array[String])形式计算tf-idf,非常缓慢,主要是在每条doc需要遍历array[String],一小时才计算2000左右;更改计算方法,先单独计算tf和idf,非常快捷;然后对idf进行broadcast,计算tf-idf,再计算tf-idf-vec;但是,在idf计算时已经计算了所有词,无需再次进行计算tf-idf-vec;更改措施是再加上broadcast,即两个广播数据集,idf和词典.</p>
-<p>9,flink下的string不建议用+来连接,</p>
-<p>10,flink在程序中设置job失败重启, env.getConfig.setRestartStrategy(RestartStrategies.fixedDelayRestart(4, 10000))<br>    <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.2/dev/restart_strategies.html" target="_blank" rel="external">重启策略</a></p>
-<p>11,flink的流操作使用窗口,必须是KeyedStream,另外自定义窗口函数,用到apply,需重写,<br>   //IN = keyStream的数据类型<br>   //Out=操作后的类型<br>   //key=keyStream的key分组的key类型<br>   //w=窗口类型</p>
-<p>简单的窗口例子</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">val lines = <span class="built_in">read</span>FromKafkaDataStream(env, ZOOKEEPER_HOST, KAFKA_BROKER, TRANSACTION_GROUP, topic)</div><div class="line"></div><div class="line">//默认给一个key，相同的key，是由于窗口必须对keyed类型操作，</div><div class="line">val logs = lines.map&#123; line =&gt;</div><div class="line">       sojParsers.parseLine(line)</div><div class="line">    &#125;.filter(new MustCountFilter).map &#123; x =&gt; (1,x) &#125;</div><div class="line"></div><div class="line">//设置时间类型，没有水位设置，使用处理时间。</div><div class="line">env.setStreamTimeCharacteristic(TimeCharacteristic.ProcessingTime)</div><div class="line">val htKeyedLogs = logs.keyBy(_._1)</div><div class="line">        .timeWindow(Time.seconds(3))</div><div class="line">        .apply(new MyWindowFunction())</div><div class="line"></div><div class="line">//自定义窗口函数</div><div class="line">class MyWindowFunction extends WindowFunction[(Int, CountImp),String,Int,TimeWindow] &#123;</div><div class="line">   override def apply(key: Int, window: TimeWindow, input: Iterable[(Int, CountImp)], out: Collector[String]):Unit=&#123;</div><div class="line">      val Sojs = input.map(_._2)</div><div class="line"></div><div class="line">      val rows = Sojs.map &#123; <span class="built_in">log</span> =&gt;</div><div class="line">        ......</div><div class="line">      &#125;.toList</div><div class="line">      out.collect(rows.size.toString())</div><div class="line">     &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>12, scala 的json处理包, “org.scalatestplus.play” %% “scalatestplus-play” % “2.0.0”</p>
-  
+		<p>tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从<a href="http://web.stanford.edu/class/cs20si/syllabus.html" target="_blank" rel="external">CS 20SI: Tensorflow for Deep Learning Research</a>，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解析等。笔记只是读书或者看一些资料留下的笔记，如若未标注来源，还请原创作者原谅，感谢把知识分享出来的各位大牛。</p>
+<h2 id="word2vec"><a href="#word2vec" class="headerlink" title="word2vec"></a>word2vec</h2><p>词转成向量的好处是可以把抽象的词数字化，从而在模型（数学公式）中可应用；word2vec是一种词嵌入编码，与之相当的有one-hot编码，即0/1标示；word2vec的理解是把词映射到一个多维空间内，相同或相似的词会在空间内离得很近。这种空间映射在不同语言的翻译中体现在，意思相同的词在各自语言的空间所处的位置是一样的。</p>
+<p>总之，词嵌入的word2vec，是把词映射成一维向量，后续的应用可以基于向量来操作。</p>
+<p>训练word2vec的方法有很多，两种常见的大类模型是skip-model和cbow-model；在skip-model中，是基于中心词得到其前后skip个词，组成词对作为训练样本；而cbow是在中心词的前后c个词与中心组成一个对作为正样本，而非中心词的都是负样本，NEG(w)。这里对cbow不细讲，主要讲skip-model的训练。</p>
+<h2 id="skip-model训练过程"><a href="#skip-model训练过程" class="headerlink" title="skip-model训练过程"></a>skip-model训练过程</h2><p>首先，必须了解使用模型训练，要先给定样本、参数、损失函数、优化器。skip-model中样本是中心词前后skip个词构成的词对，参数是神经网络的权重，损失函数用nce，优化器是批梯度下降法。除了样本需要自定义生成外，其他的在tensorflow中均有封装函数可使用，这里会着重讲下nce损失函数，只是个人阅读后的见解。</p>
+<h3 id="nce-loss"><a href="#nce-loss" class="headerlink" title="nce_loss"></a>nce_loss</h3><p>噪声对比估计损失，可想看<a href="http://www.jmlr.org/proceedings/papers/v9/gutmann10a/gutmann10a.pdf" target="_blank" rel="external">论文</a>,详见tensorflow的<a href="http://www.tensorfly.cn/tfdoc/api_docs/python/nn.html#nce_loss" target="_blank" rel="external">官方文档</a>介绍,以及<a href="https://github.com/tensorflow/tensorflow/blob/e55574f28257bdacd744dcdba86c839e661b1b2a/tensorflow/python/ops/nn_impl.py" target="_blank" rel="external">tensorflow的源码</a>,</p>
+<p>值得注意的几点：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">1,num_true大于1，即预测目标的概率和为1；</div><div class="line">2，参数详解：</div><div class="line">weights,[num_classes,dim]的张量，</div><div class="line">biases，[num_classes]的张量，</div><div class="line">inputs,[batch_size,dim]的张量，前向激活网络的输入，</div><div class="line">labels，[batch_size,num_true],int64,目标类，</div><div class="line">num_sampled,每个batch中随机选的类数量，</div><div class="line">num_classes,所有可能的类别数量，</div><div class="line">num_true,每个训练样本的目标类别数（真实的）</div><div class="line">sampled_values，采样的方法</div><div class="line">remove_accidental_hits，样本如果与目标类一致是否删除，设计到计算 loss的方法。</div><div class="line"></div><div class="line">3，返回[batch_size,d]为的nce损失值，是一个向量。</div></pre></td></tr></table></figure></p>
+<p>sigmoid_cross_entropy_with_logits，多目标，可属于多个目标，<br>softmax_cross_entropy_with_logits，多分类，结果只能属于一个类，</p>
+<h3 id="训练步骤"><a href="#训练步骤" class="headerlink" title="训练步骤"></a>训练步骤</h3><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2>  
 	</div>
 		<footer class="article-footer clearfix">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://chlyzzo.github.io/2017/06/09/Flink实践-实践过程问题集合/" data-title="Flink实践-实践过程问题集合 | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  <div data-url="https://chlyzzo.github.io/2017/09/28/tensorflow学习-word2vec/" data-title="tensorflow学习-word2vec | 山上掏金" data-tsina="1724571293" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -155,19 +149,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/06/10/上海浦东新区公租房申请/" title="上海浦东新区公租房申请">
-  <strong>上一篇：</strong><br/>
-  <span>
-  上海浦东新区公租房申请</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/06/09/Flink实践-第三方库hanlp/"  title="Flink实践-第三方库hanlp">
+<a href="/2017/09/21/通过python，java，spark，hive以post提交数据/"  title="通过python，java，spark，hive以post提交数据">
  <strong>下一篇：</strong><br/> 
- <span>Flink实践-第三方库hanlp
+ <span>通过python，java，spark，hive以post提交数据
 </span>
 </a>
 </div>
