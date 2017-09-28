@@ -19,7 +19,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2017/09/28/tensorflow学习-word2vec/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解">
-<meta property="og:updated_time" content="2017-09-28T09:33:37.980Z">
+<meta property="og:updated_time" content="2017-09-28T13:23:10.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tensorflow学习-word2vec">
 <meta name="twitter:description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解">
@@ -53,7 +53,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床就是为了比昨天更快乐，掏金者的一天是新的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -116,7 +116,7 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">目录</strong>
+			<strong class="toc-title">文章目錄</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#word2vec"><span class="toc-number">1.</span> <span class="toc-text">word2vec</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#skip-model训练过程"><span class="toc-number">2.</span> <span class="toc-text">skip-model训练过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nce-loss"><span class="toc-number">2.1.</span> <span class="toc-text">nce_loss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#训练步骤"><span class="toc-number">2.2.</span> <span class="toc-text">训练步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用"><span class="toc-number">4.</span> <span class="toc-text">应用</span></a></li></ol>
 		
@@ -128,7 +128,8 @@
 <p>训练word2vec的方法有很多，两种常见的大类模型是skip-model和cbow-model；在skip-model中，是基于中心词得到其前后skip个词，组成词对作为训练样本；而cbow是在中心词的前后c个词与中心组成一个对作为正样本，而非中心词的都是负样本，NEG(w)。这里对cbow不细讲，主要讲skip-model的训练。</p>
 <h2 id="skip-model训练过程"><a href="#skip-model训练过程" class="headerlink" title="skip-model训练过程"></a>skip-model训练过程</h2><p>首先，必须了解使用模型训练，要先给定样本、参数、损失函数、优化器。skip-model中样本是中心词前后skip个词构成的词对，参数是神经网络的权重，损失函数用nce，优化器是批梯度下降法。除了样本需要自定义生成外，其他的在tensorflow中均有封装函数可使用，这里会着重讲下nce损失函数，只是个人阅读后的见解。</p>
 <h3 id="nce-loss"><a href="#nce-loss" class="headerlink" title="nce_loss"></a>nce_loss</h3><p>噪声对比估计损失，可想看<a href="http://www.jmlr.org/proceedings/papers/v9/gutmann10a/gutmann10a.pdf" target="_blank" rel="external">论文</a>,详见tensorflow的<a href="http://www.tensorfly.cn/tfdoc/api_docs/python/nn.html#nce_loss" target="_blank" rel="external">官方文档</a>介绍,以及<a href="https://github.com/tensorflow/tensorflow/blob/e55574f28257bdacd744dcdba86c839e661b1b2a/tensorflow/python/ops/nn_impl.py" target="_blank" rel="external">tensorflow的源码</a>,</p>
-<p>值得注意的几点：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">1,num_true大于1，即预测目标的概率和为1；</div><div class="line">2，参数详解：</div><div class="line">weights,[num_classes,dim]的张量，</div><div class="line">biases，[num_classes]的张量，</div><div class="line">inputs,[batch_size,dim]的张量，前向激活网络的输入，</div><div class="line">labels，[batch_size,num_true],int64,目标类，</div><div class="line">num_sampled,每个batch中随机选的类数量，</div><div class="line">num_classes,所有可能的类别数量，</div><div class="line">num_true,每个训练样本的目标类别数（真实的）</div><div class="line">sampled_values，采样的方法</div><div class="line">remove_accidental_hits，样本如果与目标类一致是否删除，设计到计算 loss的方法。</div><div class="line"></div><div class="line">3，返回[batch_size,d]为的nce损失值，是一个向量。</div></pre></td></tr></table></figure></p>
+<p>nce是为了加快多分类的速度，多分类下需要对每个可能类计算概率（100万个每个样本就得计算100万个概率），而在nce中，可以随机选几个类，计算概率，然后使用逻辑函数进行计算其他类别的概率。</p>
+<p>值得注意的几点：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">1,num_true大于1，即预测目标的概率和为1；</div><div class="line">2，参数详解：</div><div class="line">weights,[num_classes,dim]的张量，</div><div class="line">biases，[num_classes]的张量，</div><div class="line">inputs,[batch_size,dim]的张量，前向激活网络的输入，喂入模型的训练数据，中心词</div><div class="line">labels，[batch_size,num_true],int64,目标类，目标词，</div><div class="line">num_sampled,每个batch中随机选的类数量，在word2vec中即随机选的负样本数（不是中心词本身），</div><div class="line">num_classes,所有可能的类别数量，</div><div class="line">num_true,每个训练样本的目标类别数（真实的）</div><div class="line">sampled_values，采样的方法</div><div class="line">remove_accidental_hits，样本如果与目标类一致是否删除，设计到计算 loss的方法。</div><div class="line"></div><div class="line">其中inputs与labels是配对关系，</div><div class="line"></div><div class="line">3，返回[batch_size,d]为的nce损失值，是一个向量。</div></pre></td></tr></table></figure></p>
 <p>sigmoid_cross_entropy_with_logits，多目标，可属于多个目标，<br>softmax_cross_entropy_with_logits，多分类，结果只能属于一个类，</p>
 <h3 id="训练步骤"><a href="#训练步骤" class="headerlink" title="训练步骤"></a>训练步骤</h3><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2>  
 	</div>
@@ -387,7 +388,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
