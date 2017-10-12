@@ -4,26 +4,8 @@
 
     
   <url>
-    <loc>https://chlyzzo.github.io/2007/10/11/%E6%99%9A%E5%A4%9C/</loc>
-    <lastmod>2017-10-11T13:59:37.206Z</lastmod>
-    <data>
-        <display>
-        <title>晚夜</title>
-        <pubTime>2007-10-11T13:31:30.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="散文" url="https://chlyzzo.github.io/categories/%E6%95%A3%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chlyzzo.github.io/2017/09/28/tensorflow%E5%AD%A6%E4%B9%A0-word2vec/</loc>
-    <lastmod>2017-09-30T06:50:19.796Z</lastmod>
+    <lastmod>2017-10-12T03:22:01.511Z</lastmod>
     <data>
         <display>
         <title>tensorflow学习-word2vec</title>
@@ -35,6 +17,44 @@
            
              
               <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/10/12/spark%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2017-10-12T03:02:46.364Z</lastmod>
+    <data>
+        <display>
+        <title>spark笔记</title>
+        <pubTime>2017-10-12T02:55:24.000Z</pubTime>
+        
+        <tag>笔记</tag>
+         
+         
+           
+             
+              <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2007/10/11/%E6%99%9A%E5%A4%9C/</loc>
+    <lastmod>2017-10-11T13:59:37.206Z</lastmod>
+    <data>
+        <display>
+        <title>晚夜</title>
+        <pubTime>2007-10-11T13:31:30.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="散文" url="https://chlyzzo.github.io/categories/%E6%95%A3%E6%96%87/"/>
           
         </display>
     </data>
