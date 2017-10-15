@@ -19,7 +19,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2017/09/28/tensorflow学习-word2vec/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解">
-<meta property="og:updated_time" content="2017-10-12T07:50:47.241Z">
+<meta property="og:updated_time" content="2017-10-15T01:19:29.105Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tensorflow学习-word2vec">
 <meta name="twitter:description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解">
@@ -118,7 +118,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#word2vec"><span class="toc-number">1.</span> <span class="toc-text">word2vec</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#skip-model训练过程"><span class="toc-number">2.</span> <span class="toc-text">skip-model训练过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nce-loss"><span class="toc-number">2.1.</span> <span class="toc-text">nce_loss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#训练步骤"><span class="toc-number">2.2.</span> <span class="toc-text">训练步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用"><span class="toc-number">4.</span> <span class="toc-text">应用</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#word2vec"><span class="toc-number">1.</span> <span class="toc-text">word2vec</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#skip-model训练过程"><span class="toc-number">2.</span> <span class="toc-text">skip-model训练过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nce-loss"><span class="toc-number">2.1.</span> <span class="toc-text">nce_loss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#训练步骤"><span class="toc-number">2.2.</span> <span class="toc-text">训练步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用"><span class="toc-number">4.</span> <span class="toc-text">应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模型复用"><span class="toc-number">5.</span> <span class="toc-text">模型复用</span></a></li></ol>
 		
 		</div>
 		
@@ -187,6 +187,9 @@
 <h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>把词转为词向量后，即把中文词转换成了数字，并且是一维向量，可以在很多数学模型中使用。</p>
 <p>比如，作为其他模型的特征输入；向量之间计算词的相似性；通过词计算短语或句子的向量（当然有其他模型训练短语和句子的向量）；</p>
 <p>总之，词向量的得到，可以作为其他应用的辅助或基础，另外，词向量的作用与lda-主题模型同理，可以得到词的向量表示。然而，主题模型，可以把词形象的标记在不同主题的概率，而词向量只是在同一空间内，把词进行重新分置，视具体的应用场景选择lda的向量表示还是词向量的表示。</p>
+<h2 id="模型复用"><a href="#模型复用" class="headerlink" title="模型复用"></a>模型复用</h2><p>上述训练word2vec，可以看出代码没有类，使得代码在使用上欠缺复用性，下面把训练的模型做改变，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class SkipGramModel:</div><div class="line">    def __init__(self, params):</div><div class="line">       pass</div><div class="line">    def _create_placeholders(self):</div><div class="line">       pass</div><div class="line">    def _create_embedding(self):</div><div class="line">       pass</div><div class="line">    def _create_loss(self):</div><div class="line">       pass</div><div class="line">    def _create_optimizer(self):</div><div class="line">       pass</div><div class="line">    def _create_summaries(self):</div><div class="line">       pass</div><div class="line">    def build_graph(self):</div><div class="line">       pass</div></pre></td></tr></table></figure>
+<p>之后，把相关的逻辑填充在类的方法里即可。<a href="https://github.com/chlyzzo/DeepLearnings/blob/master/tensorflow-learning/word2vec/04_word2vec_visualize.py" target="_blank" rel="external">详细的代码实现</a>.</p>
   
 	</div>
 		<footer class="article-footer clearfix">
