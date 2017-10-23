@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>社交圈的作用 | 山上掏金</title>
+    <title>tensorflow-学习笔记集合 | 山上掏金</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="Poq2hMEF9U" />
     
@@ -12,16 +12,17 @@
     
 
     
-    <meta name="description" content="已经好几年不写博文了,想写是因为快答辩了,复习得很无聊就写写吧.. 社交圈,在现今互联网和移动端的快速发展下,人们的生活已经离不开这个了,带动的经济效益非常明显,一个时短的脱口秀广告可以卖2200万,一个贴标签的可以卖出上亿的货,只要有足够的人关注.这些使得公司逐渐关注社交媒体,并且进行收购和并购. 那么首先,社交怎么变得这么有作用呢? 去过菜市场买菜/去过超市买东西都知道,冷清的摊子卖不出去货,">
+    <meta name="description" content="checpoint，每一步图参数的保存； 在训练过程中，将会创建很多checkpoints，每一步的训练后得到一个参数，就是global_step， global_step初始化为0，不需要训练和优化该参数，会随着训练而自增。self . global_step = tf . Variable ( 0 , dtype = tf . int32 , trainable = False , name">
+<meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="社交圈的作用">
-<meta property="og:url" content="https://chlyzzo.github.io/2016/05/02/社交圈的作用/index.html">
+<meta property="og:title" content="tensorflow-学习笔记集合">
+<meta property="og:url" content="https://chlyzzo.github.io/2017/10/15/tensorflow-学习笔记集合/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:description" content="已经好几年不写博文了,想写是因为快答辩了,复习得很无聊就写写吧.. 社交圈,在现今互联网和移动端的快速发展下,人们的生活已经离不开这个了,带动的经济效益非常明显,一个时短的脱口秀广告可以卖2200万,一个贴标签的可以卖出上亿的货,只要有足够的人关注.这些使得公司逐渐关注社交媒体,并且进行收购和并购. 那么首先,社交怎么变得这么有作用呢? 去过菜市场买菜/去过超市买东西都知道,冷清的摊子卖不出去货,">
-<meta property="og:updated_time" content="2017-08-04T16:19:09.945Z">
+<meta property="og:description" content="checpoint，每一步图参数的保存； 在训练过程中，将会创建很多checkpoints，每一步的训练后得到一个参数，就是global_step， global_step初始化为0，不需要训练和优化该参数，会随着训练而自增。self . global_step = tf . Variable ( 0 , dtype = tf . int32 , trainable = False , name">
+<meta property="og:updated_time" content="2017-10-15T02:35:17.534Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="社交圈的作用">
-<meta name="twitter:description" content="已经好几年不写博文了,想写是因为快答辩了,复习得很无聊就写写吧.. 社交圈,在现今互联网和移动端的快速发展下,人们的生活已经离不开这个了,带动的经济效益非常明显,一个时短的脱口秀广告可以卖2200万,一个贴标签的可以卖出上亿的货,只要有足够的人关注.这些使得公司逐渐关注社交媒体,并且进行收购和并购. 那么首先,社交怎么变得这么有作用呢? 去过菜市场买菜/去过超市买东西都知道,冷清的摊子卖不出去货,">
+<meta name="twitter:title" content="tensorflow-学习笔记集合">
+<meta name="twitter:description" content="checpoint，每一步图参数的保存； 在训练过程中，将会创建很多checkpoints，每一步的训练后得到一个参数，就是global_step， global_step初始化为0，不需要训练和优化该参数，会随着训练而自增。self . global_step = tf . Variable ( 0 , dtype = tf . int32 , trainable = False , name">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -85,15 +86,20 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/05/02/社交圈的作用/" title="社交圈的作用" itemprop="url">社交圈的作用</a>
+      <a href="/2017/10/15/tensorflow-学习笔记集合/" title="tensorflow-学习笔记集合" itemprop="url">tensorflow-学习笔记集合</a>
   </h1>
   <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/散文/">散文</a>
+  <a class="article-category-link" href="/categories/深度学习/">深度学习</a>
 </div>
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/笔记/">笔记</a>
+  </div>
 
 </div>
 
@@ -103,7 +109,7 @@
 		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
 		
   <p class="article-time">
-    <time datetime="2016-05-02T12:09:50.000Z" itemprop="datePublished"> 2016-05-02 阅读量 <span id="busuanzi_value_page_pv"></span></time>
+    <time datetime="2017-10-15T02:05:43.000Z" itemprop="datePublished"> 2017-10-15 阅读量 <span id="busuanzi_value_page_pv"></span></time>
   </p>
 </header>
 
@@ -116,26 +122,20 @@
 		
 		</div>
 		
-		<p>已经好几年不写博文了,想写是因为快答辩了,复习得很无聊就写写吧..</p>
-<p>社交圈,在现今互联网和移动端的快速发展下,人们的生活已经离不开这个了,带动的经济效益非常明显,一个时短的脱口秀广告可以卖2200万,一个贴标签的可以卖出上亿的货,只要有足够的人关注.这些使得公司逐渐关注社交媒体,并且进行收购和并购.</p>
-<p>那么首先,社交怎么变得这么有作用呢?</p>
-<p>去过菜市场买菜/去过超市买东西都知道,冷清的摊子卖不出去货,人挤人的摊子永远那么好卖,这是因为心理作用,人气多说明货好;但在网络上,怎么体现人气,靠的是拉人,关注多,则人气多,所以做买卖就容易多.</p>
-<p>哪些公司在构建社交?</p>
-<p>没有一家不在干，从今天开始，或者从吃过社交亏开始。企鹅是做得最好的社交，然后是新浪，人人已经淡出人们视线了，（自作不看好移动端造成的）。微信有超越企鹅的潜力，但是终究还是敌不过，这企鹅生态融入生活有关。当一个社交融入生活了，会发生什么影响。</p>
-<p>以前的媒体是制造商制造新闻，读者只能看，发展到，制造商和读者也能发新闻，社交工具变得让新闻，通过读者发送，制造商淡出。这让新闻量大，杂。当社交圈人多时，关注一个新闻时就发生了舆论洪水。这种冲击就像深睡时，一大波海水把你冲掉的感觉。</p>
-<p>当没有新浪微薄，没有搜狐等新闻客户端时，官方媒体的新闻造不成舆论洪波。量不足。​​</p>
-<p>​阿里为啥要来往？为啥要盯盯？为啥要脉脉？社交圈各种圈地，因为想分流，量，用户量。如果用户量被一家控制，社交的导向被人家管控，发生事件时，不可控，公司的公关无从下手。百度事件，是一个例证，如果百度有自己的圈，，分了流量，这些东西一下子就能管控住了。</p>
-<p>这就是为啥没有看到猫上的假毛新闻，没有看到那些使用不合格的产品发生哭诉的新闻，这就是为啥没有假货形成如今日这般“则西”洪水。</p>
-<p>但是，百度有贴吧，社交，这个​算是社交吗？是吗？之前的医疗吧 ，大家就可知了。。贴吧不是社交的本质是，它是吐嘲的，没有像新闻传送的线路，只是一群人在一个地点说着当地的话，这是琐事，不成新闻。像新浪微薄等，它把各地的唠嗑呈现出来，所有地方的人，说着不同话的人可见，这就是新闻。</p>
-<p>百度为啥不构建自己的社交？或者并购其他社交?因为它在赚钱，社交起初是不赚的，只有用户量上去才有价值。</p>
-<p>阿里已经有自己的生活圈，不断让人的生活离不开它。而百度在朝着人们的“欲望”走向，底下的支持不看重。</p>
+		<p>checpoint，每一步图参数的保存；</p>
+<p>在训练过程中，将会创建很多checkpoints，每一步的训练后得到一个参数，就是global_step，</p>
+<p>global_step初始化为0，不需要训练和优化该参数，会随着训练而自增。<br>self . global_step = tf . Variable ( 0 , dtype = tf . int32 , trainable = False , name = ‘global_step’)</p>
+<p>global_step需要传入优化器中，才知道每一步训练后需要自增，<br>self . optimizer = tf . train . GradientDescentOptimizer ( self . lr ). minimize ( self . loss ,<br>global_step = self . global_step)</p>
+<p>tf . train . Saver . save ( sess , save_path , global_step = None , latest_filename = None ,<br>meta_graph_suffix = ‘meta’ , write_meta_graph = True , write_state = True)</p>
+<p>saver . save ( sess , ‘checkpoints/skip-gram’ , global_step = model . global_step)</p>
+<p>saver . restore ( sess , ‘checkpoints/skip-gram-10000’)</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://chlyzzo.github.io/2016/05/02/社交圈的作用/" data-title="社交圈的作用 | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  <div data-url="https://chlyzzo.github.io/2017/10/15/tensorflow-学习笔记集合/" data-title="tensorflow-学习笔记集合 | 山上掏金" data-tsina="1724571293" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -148,19 +148,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/05/01/hello-world/" title="开始搭建-hexo-git-blog">
-  <strong>上一篇：</strong><br/>
-  <span>
-  开始搭建-hexo-git-blog</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/09/14/深度学习笔记集合/"  title="深度学习笔记集合">
+<a href="/2017/10/12/spark笔记/"  title="spark笔记">
  <strong>下一篇：</strong><br/> 
- <span>深度学习笔记集合
+ <span>spark笔记
 </span>
 </a>
 </div>
