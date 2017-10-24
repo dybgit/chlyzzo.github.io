@@ -3,6 +3,24 @@
 
 
     
+  <url>
+    <loc>https://chlyzzo.github.io/2007/10/11/%E6%99%9A%E5%A4%9C/</loc>
+    <lastmod>2017-10-24T13:31:00.725Z</lastmod>
+    <data>
+        <display>
+        <title>晚夜</title>
+        <pubTime>2007-10-11T13:31:30.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="散文" url="https://chlyzzo.github.io/categories/%E6%95%A3%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>https://chlyzzo.github.io/2017/10/15/tensorflow-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E9%9B%86%E5%90%88/</loc>
@@ -58,24 +76,6 @@
            
              
               <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2007/10/11/%E6%99%9A%E5%A4%9C/</loc>
-    <lastmod>2017-10-11T13:59:37.206Z</lastmod>
-    <data>
-        <display>
-        <title>晚夜</title>
-        <pubTime>2007-10-11T13:31:30.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="散文" url="https://chlyzzo.github.io/categories/%E6%95%A3%E6%96%87/"/>
           
         </display>
     </data>
