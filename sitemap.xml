@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chlyzzo.github.io/2017/04/01/workk%E8%AE%A4%E7%9F%A5/</loc>
+    
+    <lastmod>2017-10-27T07:33:54.149Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/09/17/tensorflow%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9F%BA%E7%A1%80/</loc>
+    
+    <lastmod>2017-10-27T07:21:45.781Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/09/28/tensorflow%E5%AD%A6%E4%B9%A0-word2vec/</loc>
+    
+    <lastmod>2017-10-27T07:21:12.761Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chlyzzo.github.io/about/index.html</loc>
     
     <lastmod>2017-10-25T07:52:02.521Z</lastmod>
@@ -23,13 +44,6 @@
   </url>
   
   <url>
-    <loc>https://chlyzzo.github.io/2017/09/28/tensorflow%E5%AD%A6%E4%B9%A0-word2vec/</loc>
-    
-    <lastmod>2017-10-15T01:19:29.105Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://chlyzzo.github.io/2017/10/12/spark%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2017-10-12T03:02:46.364Z</lastmod>
@@ -40,13 +54,6 @@
     <loc>https://chlyzzo.github.io/2017/09/21/%E9%80%9A%E8%BF%87python%EF%BC%8Cjava%EF%BC%8Cspark%EF%BC%8Chive%E4%BB%A5post%E6%8F%90%E4%BA%A4%E6%95%B0%E6%8D%AE/</loc>
     
     <lastmod>2017-09-27T11:14:24.132Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/09/17/tensorflow%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9F%BA%E7%A1%80/</loc>
-    
-    <lastmod>2017-09-18T08:31:07.499Z</lastmod>
     
   </url>
   

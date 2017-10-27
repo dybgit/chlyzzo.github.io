@@ -12,17 +12,17 @@
     
 
     
-    <meta name="description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，大部分内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorfl">
+    <meta name="description" content="tensorflow学习笔记系列原始内容，可从CS 20SI: Tensorflow for Deep Learning Research。另还有几本关于tensorflow的书籍，比如tensorflow实战，tensorflow解析等。感谢把知识分享出来的各位大牛。 最初的话tensorflow是一个深度学习开源库，大多学习深度学习，会建议从tensorflow的官方文档开始学习，当然可以看一">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tensorflow学习笔记-基础">
 <meta property="og:url" content="https://chlyzzo.github.io/2017/09/17/tensorflow学习笔记-基础/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，大部分内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorfl">
-<meta property="og:updated_time" content="2017-09-18T08:31:07.499Z">
+<meta property="og:description" content="tensorflow学习笔记系列原始内容，可从CS 20SI: Tensorflow for Deep Learning Research。另还有几本关于tensorflow的书籍，比如tensorflow实战，tensorflow解析等。感谢把知识分享出来的各位大牛。 最初的话tensorflow是一个深度学习开源库，大多学习深度学习，会建议从tensorflow的官方文档开始学习，当然可以看一">
+<meta property="og:updated_time" content="2017-10-27T07:21:45.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tensorflow学习笔记-基础">
-<meta name="twitter:description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，大部分内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorfl">
+<meta name="twitter:description" content="tensorflow学习笔记系列原始内容，可从CS 20SI: Tensorflow for Deep Learning Research。另还有几本关于tensorflow的书籍，比如tensorflow实战，tensorflow解析等。感谢把知识分享出来的各位大牛。 最初的话tensorflow是一个深度学习开源库，大多学习深度学习，会建议从tensorflow的官方文档开始学习，当然可以看一">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -122,7 +122,7 @@
 		
 		</div>
 		
-		<p>tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，大部分内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从<a href="http://web.stanford.edu/class/cs20si/syllabus.html" target="_blank" rel="external">CS 20SI: Tensorflow for Deep Learning Research</a>，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解析等。笔记只是读书或者看一些资料留下的笔记，一般会标明来源，如若未标注，是太忙碌或疏忽未记下来源，还请原创作者原谅。感谢把知识分享出来的各位大牛。</p>
+		<p>tensorflow学习笔记系列原始内容，可从<a href="http://web.stanford.edu/class/cs20si/syllabus.html" target="_blank" rel="external">CS 20SI: Tensorflow for Deep Learning Research</a>。另还有几本关于tensorflow的书籍，比如tensorflow实战，tensorflow解析等。感谢把知识分享出来的各位大牛。</p>
 <h2 id="最初的话"><a href="#最初的话" class="headerlink" title="最初的话"></a>最初的话</h2><p>tensorflow是一个深度学习开源库，大多学习深度学习，会建议从<a href="http://www.tensorflow.org/" target="_blank" rel="external">tensorflow的官方文档</a>开始学习，当然可以看一些机器学习的书籍。对于tensorflow的作用，为什么要使用它，不再论述。一个工具能够解决实际问题，并能稳定快速可靠实现业务就是好的工具。深度学习还有其他很多工具可供使用。</p>
 <h2 id="开始写tensorflow程序"><a href="#开始写tensorflow程序" class="headerlink" title="开始写tensorflow程序"></a>开始写tensorflow程序</h2><p>当然得安装tensorflow，很多教程，也可以看官网，我是在windows下安装tensorflow的，使用cpu版本，python3.5；</p>
 <p>tensor和flow是两个概念，tensor是张量，多维数组；flow是流，标示张量的计算过程。tensorflow用图方式表达计算过程。一个计算图中的张量和运算相互独立，不共享，图也可以指定资源设备。</p>

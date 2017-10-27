@@ -12,17 +12,17 @@
     
 
     
-    <meta name="description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解">
+    <meta name="description" content="tensorflow学习笔记系列原始内容，可从CS 20SI: Tensorflow for Deep Learning Research。另还有几本关于tensorflow的书籍，比如tensorflow实战，tensorflow解析等。感谢把知识分享出来的各位大牛。 word2vec词转成向量的好处是可以把抽象的词数字化，从而在模型（数学公式）中可应用；word2vec是一种词嵌入编码，与之相">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tensorflow学习-word2vec">
 <meta property="og:url" content="https://chlyzzo.github.io/2017/09/28/tensorflow学习-word2vec/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解">
-<meta property="og:updated_time" content="2017-10-15T01:19:29.105Z">
+<meta property="og:description" content="tensorflow学习笔记系列原始内容，可从CS 20SI: Tensorflow for Deep Learning Research。另还有几本关于tensorflow的书籍，比如tensorflow实战，tensorflow解析等。感谢把知识分享出来的各位大牛。 word2vec词转成向量的好处是可以把抽象的词数字化，从而在模型（数学公式）中可应用；word2vec是一种词嵌入编码，与之相">
+<meta property="og:updated_time" content="2017-10-27T07:21:12.761Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tensorflow学习-word2vec">
-<meta name="twitter:description" content="tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从CS 20SI: Tensorflow for Deep Learning Research，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解">
+<meta name="twitter:description" content="tensorflow学习笔记系列原始内容，可从CS 20SI: Tensorflow for Deep Learning Research。另还有几本关于tensorflow的书籍，比如tensorflow实战，tensorflow解析等。感谢把知识分享出来的各位大牛。 word2vec词转成向量的好处是可以把抽象的词数字化，从而在模型（数学公式）中可应用；word2vec是一种词嵌入编码，与之相">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -122,7 +122,7 @@
 		
 		</div>
 		
-		<p>tensorflow学习笔记系列是从斯坦福公开的课程学习记录的，内容源自于该课程，不是作者原创，只是在学习过程中，把一些点记录下来，方便后续查找，再次说明，如需找原始内容，可从<a href="http://web.stanford.edu/class/cs20si/syllabus.html" target="_blank" rel="external">CS 20SI: Tensorflow for Deep Learning Research</a>，下载自行学习研究。另外还有几本关于tensorflow的书籍，国内的大牛写的，比如tensorflow实战，tensorflow解析等。笔记只是读书或者看一些资料留下的笔记，如若未标注来源，还请原创作者原谅，感谢把知识分享出来的各位大牛。</p>
+		<p>tensorflow学习笔记系列原始内容，可从<a href="http://web.stanford.edu/class/cs20si/syllabus.html" target="_blank" rel="external">CS 20SI: Tensorflow for Deep Learning Research</a>。另还有几本关于tensorflow的书籍，比如tensorflow实战，tensorflow解析等。感谢把知识分享出来的各位大牛。</p>
 <h2 id="word2vec"><a href="#word2vec" class="headerlink" title="word2vec"></a>word2vec</h2><p>词转成向量的好处是可以把抽象的词数字化，从而在模型（数学公式）中可应用；word2vec是一种词嵌入编码，与之相当的有one-hot编码，即0/1标示；word2vec的理解是把词映射到一个多维空间内，相同或相似的词会在空间内离得很近。这种空间映射在不同语言的翻译中体现在，意思相同的词在各自语言的空间所处的位置是一样的。</p>
 <p>总之，词嵌入的word2vec，是把词映射成一维向量，后续的应用可以基于向量来操作。</p>
 <p>训练word2vec的方法有很多，两种常见的大类模型是skip-model和cbow-model；在skip-model中，是基于中心词得到其前后skip个词，组成词对作为训练样本；而cbow是在中心词的前后c个词与中心组成一个对作为正样本，而非中心词的都是负样本，NEG(w)。这里对cbow不细讲，主要讲skip-model的训练。</p>

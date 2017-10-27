@@ -3,6 +3,61 @@
 
 
     
+  <url>
+    <loc>https://chlyzzo.github.io/2017/04/01/workk%E8%AE%A4%E7%9F%A5/</loc>
+    <lastmod>2017-10-27T07:33:54.149Z</lastmod>
+    <data>
+        <display>
+        <title>work认知</title>
+        <pubTime>2017-04-01T09:03:20.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/09/17/tensorflow%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2017-10-27T07:21:45.781Z</lastmod>
+    <data>
+        <display>
+        <title>tensorflow学习笔记-基础</title>
+        <pubTime>2017-09-17T02:42:31.000Z</pubTime>
+        
+        <tag>笔记</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/09/28/tensorflow%E5%AD%A6%E4%B9%A0-word2vec/</loc>
+    <lastmod>2017-10-27T07:21:12.761Z</lastmod>
+    <data>
+        <display>
+        <title>tensorflow学习-word2vec</title>
+        <pubTime>2017-09-28T07:05:07.000Z</pubTime>
+        
+        <tag>笔记</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>https://chlyzzo.github.io/2007/10/11/%E6%99%9A%E5%A4%9C/</loc>
@@ -29,26 +84,6 @@
         <display>
         <title>tensorflow-学习笔记集合</title>
         <pubTime>2017-10-15T02:05:43.000Z</pubTime>
-        
-        <tag>笔记</tag>
-         
-         
-           
-             
-              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/09/28/tensorflow%E5%AD%A6%E4%B9%A0-word2vec/</loc>
-    <lastmod>2017-10-15T01:19:29.105Z</lastmod>
-    <data>
-        <display>
-        <title>tensorflow学习-word2vec</title>
-        <pubTime>2017-09-28T07:05:07.000Z</pubTime>
         
         <tag>笔记</tag>
          
@@ -104,26 +139,6 @@
            
              
               <breadCrumb title="post数据" url="https://chlyzzo.github.io/categories/post%E6%95%B0%E6%8D%AE/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/09/17/tensorflow%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2017-09-18T08:31:07.499Z</lastmod>
-    <data>
-        <display>
-        <title>tensorflow学习笔记-基础</title>
-        <pubTime>2017-09-17T02:42:31.000Z</pubTime>
-        
-        <tag>笔记</tag>
-         
-         
-           
-             
-              <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
           
         </display>
     </data>
