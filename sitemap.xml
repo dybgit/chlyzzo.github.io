@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chlyzzo.github.io/about/index.html</loc>
+    
+    <lastmod>2017-10-31T06:42:17.751Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chlyzzo.github.io/2017/04/01/workk%E8%AE%A4%E7%9F%A5/</loc>
     
     <lastmod>2017-10-27T16:29:03.575Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://chlyzzo.github.io/2017/09/28/tensorflow%E5%AD%A6%E4%B9%A0-word2vec/</loc>
     
     <lastmod>2017-10-27T07:21:12.761Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/about/index.html</loc>
-    
-    <lastmod>2017-10-25T07:52:02.521Z</lastmod>
     
   </url>
   
