@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chlyzzo.github.io/2017/10/10/tensorflow-%E5%8D%B7%E7%A7%AF/</loc>
+    
+    <lastmod>2017-11-02T13:00:40.434Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2015/09/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E9%9B%86%E5%90%88/</loc>
+    
+    <lastmod>2017-11-02T12:29:59.102Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/09/17/tensorflow%E5%AD%A6%E4%B9%A0-%E5%9B%9E%E5%BD%92/</loc>
+    
+    <lastmod>2017-11-02T12:23:11.277Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/09/17/tensorflow%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9F%BA%E7%A1%80/</loc>
+    
+    <lastmod>2017-11-02T12:23:04.920Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chlyzzo.github.io/about/index.html</loc>
     
     <lastmod>2017-11-01T01:22:58.944Z</lastmod>
@@ -19,13 +47,6 @@
     <loc>https://chlyzzo.github.io/2017/05/18/hive%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF%E4%BC%98%E5%8C%96/</loc>
     
     <lastmod>2017-10-27T08:27:26.428Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/09/17/tensorflow%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9F%BA%E7%A1%80/</loc>
-    
-    <lastmod>2017-10-27T07:21:45.781Z</lastmod>
     
   </url>
   
@@ -72,13 +93,6 @@
   </url>
   
   <url>
-    <loc>https://chlyzzo.github.io/2017/09/17/tensorflow%E5%AD%A6%E4%B9%A0-%E5%9B%9E%E5%BD%92/</loc>
-    
-    <lastmod>2017-09-17T14:26:06.806Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://chlyzzo.github.io/2017/06/10/%E4%B8%8A%E6%B5%B7%E6%B5%A6%E4%B8%9C%E6%96%B0%E5%8C%BA%E5%85%AC%E7%A7%9F%E6%88%BF%E7%94%B3%E8%AF%B7/</loc>
     
     <lastmod>2017-09-16T11:43:29.811Z</lastmod>
@@ -89,13 +103,6 @@
     <loc>https://chlyzzo.github.io/2008/04/08/%E4%B8%80%E6%A3%B5%E6%A0%91/</loc>
     
     <lastmod>2017-09-14T12:04:59.366Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2015/09/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E9%9B%86%E5%90%88/</loc>
-    
-    <lastmod>2017-09-14T10:27:15.363Z</lastmod>
     
   </url>
   

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>深度学习笔记集合 | 山上掏金</title>
+    <title>tensorflow-卷积 | 山上掏金</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="Poq2hMEF9U" />
     
@@ -12,17 +12,17 @@
     
 
     
-    <meta name="description" content="随手记录阅读资料的笔记，关于神经网络，深度学习的一些点，供自己后续查询。 感知器神经网络的神经元,激活函数(例sigmoid),操作算子; 感知机(感知模型)y=f(wx+b),线性模型,可解决与或非等问题,一开始是不能解决异或问题; 多层感知机解决非线性问题,参数的暴涨,怎么训练得到? 从感知机开始,工作的流程, 1234567x-&amp;gt;o-&amp;gt;outputwx,w是代表输入的参数对输出的">
+    <meta name="description" content="卷积解决重要的事情是，可以自动组织高阶特征，而不用其他辅助工具来构造高阶或衍生特征。另外，卷积的另一个贡献是，能够大量减少参数，因为卷积核可以共享参数。 卷积与视觉神经元雷同，每个神经元只处理一小块视觉图像， 卷积的操作 图像经不同卷积核，加偏置，提取到局部特征，每个卷积核映射出新的2d图像； 将新的2d图像经非线性激活，如relu 对激活后的结果进行池化，降采样，比如22–&amp;gt;11，最大池化">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度学习笔记集合">
-<meta property="og:url" content="https://chlyzzo.github.io/2015/09/14/深度学习笔记集合/index.html">
+<meta property="og:title" content="tensorflow-卷积">
+<meta property="og:url" content="https://chlyzzo.github.io/2017/10/10/tensorflow-卷积/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:description" content="随手记录阅读资料的笔记，关于神经网络，深度学习的一些点，供自己后续查询。 感知器神经网络的神经元,激活函数(例sigmoid),操作算子; 感知机(感知模型)y=f(wx+b),线性模型,可解决与或非等问题,一开始是不能解决异或问题; 多层感知机解决非线性问题,参数的暴涨,怎么训练得到? 从感知机开始,工作的流程, 1234567x-&amp;gt;o-&amp;gt;outputwx,w是代表输入的参数对输出的">
-<meta property="og:updated_time" content="2017-11-02T12:29:59.102Z">
+<meta property="og:description" content="卷积解决重要的事情是，可以自动组织高阶特征，而不用其他辅助工具来构造高阶或衍生特征。另外，卷积的另一个贡献是，能够大量减少参数，因为卷积核可以共享参数。 卷积与视觉神经元雷同，每个神经元只处理一小块视觉图像， 卷积的操作 图像经不同卷积核，加偏置，提取到局部特征，每个卷积核映射出新的2d图像； 将新的2d图像经非线性激活，如relu 对激活后的结果进行池化，降采样，比如22–&amp;gt;11，最大池化">
+<meta property="og:updated_time" content="2017-11-02T13:00:40.434Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深度学习笔记集合">
-<meta name="twitter:description" content="随手记录阅读资料的笔记，关于神经网络，深度学习的一些点，供自己后续查询。 感知器神经网络的神经元,激活函数(例sigmoid),操作算子; 感知机(感知模型)y=f(wx+b),线性模型,可解决与或非等问题,一开始是不能解决异或问题; 多层感知机解决非线性问题,参数的暴涨,怎么训练得到? 从感知机开始,工作的流程, 1234567x-&amp;gt;o-&amp;gt;outputwx,w是代表输入的参数对输出的">
+<meta name="twitter:title" content="tensorflow-卷积">
+<meta name="twitter:description" content="卷积解决重要的事情是，可以自动组织高阶特征，而不用其他辅助工具来构造高阶或衍生特征。另外，卷积的另一个贡献是，能够大量减少参数，因为卷积核可以共享参数。 卷积与视觉神经元雷同，每个神经元只处理一小块视觉图像， 卷积的操作 图像经不同卷积核，加偏置，提取到局部特征，每个卷积核映射出新的2d图像； 将新的2d图像经非线性激活，如relu 对激活后的结果进行池化，降采样，比如22–&amp;gt;11，最大池化">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -86,7 +86,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/09/14/深度学习笔记集合/" title="深度学习笔记集合" itemprop="url">深度学习笔记集合</a>
+      <a href="/2017/10/10/tensorflow-卷积/" title="tensorflow-卷积" itemprop="url">tensorflow-卷积</a>
   </h1>
   <div class="article-catetags">
 
@@ -109,7 +109,7 @@
 		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
 		
   <p class="article-time">
-    <time datetime="2015-09-14T10:16:56.000Z" itemprop="datePublished"> 2015-09-14 阅读量 <span id="busuanzi_value_page_pv"></span></time>
+    <time datetime="2017-10-10T12:32:06.000Z" itemprop="datePublished"> 2017-10-10 阅读量 <span id="busuanzi_value_page_pv"></span></time>
   </p>
 </header>
 
@@ -118,57 +118,26 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#感知器"><span class="toc-number">1.</span> <span class="toc-text">感知器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#卷积"><span class="toc-number">2.</span> <span class="toc-text">卷积</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特征相关"><span class="toc-number">3.</span> <span class="toc-text">特征相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化相关"><span class="toc-number">4.</span> <span class="toc-text">优化相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dropout"><span class="toc-number">4.1.</span> <span class="toc-text">dropout</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关资料链接"><span class="toc-number">5.</span> <span class="toc-text">相关资料链接</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#卷积的操作"><span class="toc-number">1.</span> <span class="toc-text">卷积的操作</span></a></li></ol>
 		
 		</div>
 		
-		<p>随手记录阅读资料的笔记，关于神经网络，深度学习的一些点，供自己后续查询。</p>
-<h2 id="感知器"><a href="#感知器" class="headerlink" title="感知器"></a>感知器</h2><p>神经网络的神经元,激活函数(例sigmoid),操作算子;</p>
-<p>感知机(感知模型)y=f(wx+b),线性模型,可解决与或非等问题,一开始是不能解决异或问题;</p>
-<p>多层感知机解决非线性问题,参数的暴涨,怎么训练得到?</p>
-<p>从感知机开始,工作的流程,</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">x-&gt;o-&gt;output</div><div class="line"></div><div class="line">wx,w是代表输入的参数对输出的重要性程度;</div><div class="line"></div><div class="line">输出sum(wx),值是0/1,</div><div class="line"></div><div class="line">以阈值区分,小于&lt;=threshold是0;否则是1.</div></pre></td></tr></table></figure>
-<p>参数是考证结果的指标(比如出游,考量的是天气,意愿程度,距离远近),把指标变成输入的x,然后对其赋值,完成输入,再设置w权重,最后设置阈值.</p>
-<p>添加小的变化得到学习优化w,输入是不变的;—这就是学习.</p>
-<p>Sigmoid neurons (逐步的渐变学习过程)–相当于是感知器,</p>
-<p>输入是(0,1)之间的数值,输出不是0/1,而是sigmoid函数值,f(x)=1/(1+e^-x),</p>
-<p>f(wx+b)</p>
-<p>Sigmoid函数,值域(0,1),变量(-nan,+nan)</p>
-<p>变化值=求偏导,线性变化,神经网络可认为是多层感知器.</p>
-<p>在图像处理中,输入一副图像64*64的灰度图像,则是4096个神经元,4096维,灰度用0/1表示,有4096^2种可能性,</p>
-<p>前向神经网络,前层输出是后层的输入,没有环,没有反馈,(不允许有环,这样输入就依赖于输出),</p>
-<p>递归神经网络让环成为可能,但不是立即改变,而是随着时间会对其他神经元的输入改变,递归网络的解决的问题可以很多,很复杂,</p>
-<p>输入是像素,隐层可以调,输出是10维向量,表示数字,另外用4个神经元,2^4=16,足够表示10个数字.为什么用10个输出神经元呢?<br>整体和局部,分成4个表示,就是把图像进行了分割,当然还有其他更聪明的算法使得4个输出就足够了.<br>比如多加一层,</p>
-<p>成本函数,必须用光滑的,这样做一点小改变,就会产生变化(非光滑的不好优化),怎么判断一个函数光滑,求导!!</p>
-<p>成本函数不唯一,能够达到优化目标即可,但得选择最好的(怎么定义最好)?</p>
-<p>梯度下降,找的是全局最优(参数会有多个,一维和二维比较直观能找到).</p>
-<p>通过微积分找到最小解,求导找极值.但是,大的网络会有上万个参数,用微积分求极值变得不可能,</p>
-<p>梯度,梯度向量,参数的偏导,批梯度下降,</p>
-<p>三点注意:<br>大量有效的数据(避免过拟合),<br>合适的成本函数(避免学习太慢),<br>权重初始化(避免学习太慢,由于神经云饱和),</p>
-<h2 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h2><p>卷积看成是信息的混合,每个桶有自己的配方,约定怎么跟另一个桶混合,卷积是有序的交织两个来源的数据.</p>
-<p>图像为什么需要卷积?图像有长宽两个维度,混合两个桶信息:<br>第一个桶:图像信息,<br>     像素矩阵,三个rgb通道;一个像素是[0,255]之间的整数;三个矩阵,rgb的<br>第二个桶:卷积核函数,浮点数矩阵,模式和大小对输入图像进行了重切割,利用卷积的核函数,<br>     输出则是图像对应的特征,(在深度学习中的叫法)</p>
-<p>把图像的轮廓保留,去除图像其他东西,称之为过滤,filter,核函数也被称为filter,</p>
-<p>输入,转换输入和修正格式适于算法,—特征引擎.</p>
-<p>递归神经网络,在固定输入数据下,可训练得到一批有序列有标记的输出.<br>在当前输入序列和上一次输入序列下,最大化似然概率,</p>
-<p>特征往往不是人具备的角度可视化,需要机器角度的表示,比手动表示更佳.—表示学习;</p>
-<p>例子:前馈网络或多层感知机(将一组输入映射到输出的数学函数),</p>
-<p>5000标注样本情况下可实现可接受的性能;当至少1000万标注样本时将达到或超过人类表现.</p>
-<p>比水蛭神经元还小的网络达不到人工智能效果也就正常.</p>
-<h2 id="特征相关"><a href="#特征相关" class="headerlink" title="特征相关"></a>特征相关</h2><p>任何高阶特征都是由底层特征组合而成的；自编码器，使用高阶特征编码自己，像稀疏编码一样，通过高阶特征重构自己；</p>
-<p>没有隐含层的网络是线性的，与线性回归一样；隐含层是对特征进行抽象变换，</p>
-<h2 id="优化相关"><a href="#优化相关" class="headerlink" title="优化相关"></a>优化相关</h2><h3 id="dropout"><a href="#dropout" class="headerlink" title="dropout"></a>dropout</h3><p>神经网络存在的缺陷是参数会很多，会过拟合，参数比数据多，dropout可以丢弃掉节点，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tf.nn.dropout，随机把部分节点置为0，用keep_prop参数保留数据而不为0的比例，</div></pre></td></tr></table></figure></p>
-<p>##激活函数</p>
-<p>sigmoid梯度会消失，<br>relu抑制梯度消失，</p>
-<h2 id="相关资料链接"><a href="#相关资料链接" class="headerlink" title="相关资料链接"></a>相关资料链接</h2><p><a href="http://qbview.url.cn/getResourceInfo?appid=31&amp;url=http%3A%2F%2Fwww.cnblogs.com%2Fmaybe2030%2Fp%2F5597716.html%3Fnsukey%3DjdZ7nR69JHsbYO9Q0edriz%252Fo%252Bb8cWOQOuIgHtRboWbGEykOImWvri6M5RM1hyXvg135ehhdA8gEuGQiXMiTalBdujmO56Avy15Iz1vc8dIencdxkUr%252BqRQ8INCQ%252FBpfZMH9h64Ly5NLLak%252F3zAn0Nl3z2UIg%252FhcoCQSEGROeui7C5L0e9WnjYnand%252F4DJe6L&amp;version=10000&amp;doview=1&amp;ua=Mozilla%2F5.0+(X11%3B+Linux+x86_64" target="_blank" rel="external">神经网络基础</a></p>
-<p><a href="http://timdettmers.com/2015/03/26/convolution-deep-learning/" target="_blank" rel="external">卷积神经网络</a></p>
-<p><a href="http://neuralnetworksanddeeplearning.com/chap1.html" target="_blank" rel="external">从感知机开始</a></p>
+		<p>卷积解决重要的事情是，可以自动组织高阶特征，而不用其他辅助工具来构造高阶或衍生特征。另外，卷积的另一个贡献是，能够大量减少参数，因为卷积核可以共享参数。</p>
+<p>卷积与视觉神经元雷同，每个神经元只处理一小块视觉图像，</p>
+<h2 id="卷积的操作"><a href="#卷积的操作" class="headerlink" title="卷积的操作"></a>卷积的操作</h2><ul>
+<li>图像经不同卷积核，加偏置，提取到局部特征，每个卷积核映射出新的2d图像；</li>
+<li>将新的2d图像经非线性激活，如relu</li>
+<li>对激活后的结果进行池化，降采样，比如2<em>2–&gt;1</em>1，最大池化即保留最显著的特征；</li>
+</ul>
+<p>一个卷积层可拥有多个卷积核，如下所示:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">一个卷积核    -----&gt;     一种图片特征   ====  一个feature map</div><div class="line">   ||</div><div class="line">共享权重参数             存在多个卷积核m</div><div class="line">n*n+1个参数             参数个数=m*(n*n+1)</div></pre></td></tr></table></figure></p>
+<p>同一个新2d图像的点来自同一个卷积核；参数个数只与卷积核大小(n*n)有关;卷积核足够多，就可以得到边和各种形态的点。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://chlyzzo.github.io/2015/09/14/深度学习笔记集合/" data-title="深度学习笔记集合 | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  <div data-url="https://chlyzzo.github.io/2017/10/10/tensorflow-卷积/" data-title="tensorflow-卷积 | 山上掏金" data-tsina="1724571293" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -182,18 +151,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/05/02/社交圈的作用/" title="社交圈的作用">
+ <a href="/2017/10/12/spark笔记/" title="spark笔记">
   <strong>上一篇：</strong><br/>
   <span>
-  社交圈的作用</span>
+  spark笔记</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/09/10/python爬虫-简单开始/"  title="python爬虫-简单开始">
+<a href="/2017/09/28/tensorflow学习-word2vec/"  title="tensorflow学习-word2vec">
  <strong>下一篇：</strong><br/> 
- <span>python爬虫-简单开始
+ <span>tensorflow学习-word2vec
 </span>
 </a>
 </div>
