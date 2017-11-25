@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://chlyzzo.github.io/2017/10/25/nlp%E5%A4%87%E4%BB%BD%E9%9B%86%E5%90%88/</loc>
+    <lastmod>2017-11-25T03:11:50.650Z</lastmod>
+    <data>
+        <display>
+        <title>nlp备份集合</title>
+        <pubTime>2017-10-25T02:15:54.000Z</pubTime>
+        
+        <tag>笔记</tag>
+         
+         
+           
+             
+              <breadCrumb title="nlp" url="https://chlyzzo.github.io/categories/nlp/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chlyzzo.github.io/2017/05/20/hive%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88/</loc>
     <lastmod>2017-11-24T05:56:09.336Z</lastmod>
     <data>
@@ -227,9 +247,9 @@
         <title>通过python，java，spark，hive以post提交数据</title>
         <pubTime>2017-09-21T09:57:15.000Z</pubTime>
         
-        <tag>笔记</tag>
-         
         <tag>spark</tag>
+         
+        <tag>笔记</tag>
          
         <tag>hive</tag>
          
