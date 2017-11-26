@@ -1,0 +1,447 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>spark-ml classify | 山上掏金</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="Poq2hMEF9U" />
+    
+    <meta name="author" content="wenxi">
+    
+
+    
+    <meta name="description" content="spark-2.1版本后，提供了很多的机器学习模块，使得更方便去构建自己的模型。也新出了DataFrame数据存储结构—与结构化sql表的形式类似，让样本数据更容易操作，代码也更简洁。另外，不管是旧版本还是新版本，都提供了两种方式训练，pipeline类同于流方式训练，可以在离线和批处理时加快速度，但是存在应用时不好获取模型以及快速预测新样本不方便的缺陷，另一个方式是正常的读取样本进行训练，然后保">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spark-ml classify">
+<meta property="og:url" content="https://chlyzzo.github.io/2017/10/26/spark-ml-classify/index.html">
+<meta property="og:site_name" content="山上掏金">
+<meta property="og:description" content="spark-2.1版本后，提供了很多的机器学习模块，使得更方便去构建自己的模型。也新出了DataFrame数据存储结构—与结构化sql表的形式类似，让样本数据更容易操作，代码也更简洁。另外，不管是旧版本还是新版本，都提供了两种方式训练，pipeline类同于流方式训练，可以在离线和批处理时加快速度，但是存在应用时不好获取模型以及快速预测新样本不方便的缺陷，另一个方式是正常的读取样本进行训练，然后保">
+<meta property="og:updated_time" content="2017-11-26T02:23:51.074Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spark-ml classify">
+<meta name="twitter:description" content="spark-2.1版本后，提供了很多的机器学习模块，使得更方便去构建自己的模型。也新出了DataFrame数据存储结构—与结构化sql表的形式类似，让样本数据更容易操作，代码也更简洁。另外，不管是旧版本还是新版本，都提供了两种方式训练，pipeline类同于流方式训练，可以在离线和批处理时加快速度，但是存在应用时不好获取模型以及快速预测新样本不方便的缺陷，另一个方式是正常的读取样本进行训练，然后保">
+
+    
+    <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span id="busuanzi_container_site_pv">
+    站浏览量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+    站访问人数<span id="busuanzi_value_site_uv"></span>
+  </span>
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
+				<h2 class="blog-motto">每天早上起床就是为了比昨天更快乐，掏金者的一天是新的开始.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">作者</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:chlyzzo.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post moveMain" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/10/26/spark-ml-classify/" title="spark-ml classify" itemprop="url">spark-ml classify</a>
+  </h1>
+  <div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/spark/">spark</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/笔记/">笔记</a>
+  </div>
+
+</div>
+
+
+  <p class="article-author">By
+       
+		<a href="/about" title="wenxi" target="_blank" itemprop="author">wenxi</a>
+		
+  <p class="article-time">
+    <time datetime="2017-10-26T01:23:42.000Z" itemprop="datePublished"> 2017-10-26 阅读量 <span id="busuanzi_value_page_pv"></span></time>
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#新建build-sbt"><span class="toc-number">1.</span> <span class="toc-text">新建build.sbt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pipeline训练方式"><span class="toc-number">2.</span> <span class="toc-text">pipeline训练方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#norm-model"><span class="toc-number">3.</span> <span class="toc-text">norm-model</span></a></li></ol>
+		
+		</div>
+		
+		<p>spark-2.1版本后，提供了很多的机器学习模块，使得更方便去构建自己的模型。也新出了DataFrame数据存储结构—与结构化sql表的形式类似，让样本数据更容易操作，代码也更简洁。另外，不管是旧版本还是新版本，都提供了两种方式训练，pipeline类同于流方式训练，可以在离线和批处理时加快速度，但是存在应用时不好获取模型以及快速预测新样本不方便的缺陷，另一个方式是正常的读取样本进行训练，然后保存模型，再读取预测，这种方式虽然牺牲训练的时间，但是，在实践时，读取模型和预测新样本时更方便操作，利于实践。</p>
+<h2 id="新建build-sbt"><a href="#新建build-sbt" class="headerlink" title="新建build.sbt"></a>新建build.sbt</h2><p>开启一个spark的模型训练模块，从构建build.sbt开始，当然采取其他方式构建也是可以的，作者使用sbt较为频繁而已。值得注意的是scala版本最好用2.11，不要使用2.10。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">lazy val commonSettings = Seq(</div><div class="line">  scalaVersion := <span class="string">"2.11.8"</span>,</div><div class="line">  libraryDependencies ++= Seq(</div><div class="line">    <span class="string">"org.apache.spark"</span> %% <span class="string">"spark-core"</span> % sparkVersion % <span class="string">"provided"</span>,</div><div class="line">    <span class="string">"org.scalatest"</span> %% <span class="string">"scalatest"</span> % <span class="string">"2.2.1"</span> % <span class="string">"test"</span>,</div><div class="line">    <span class="string">"org.slf4j"</span> % <span class="string">"slf4j-log4j12"</span> % <span class="string">"1.7.12"</span></div><div class="line">  )</div><div class="line">)</div><div class="line"></div><div class="line">val sparkVersion = <span class="string">"2.1.0"</span></div><div class="line"></div><div class="line">lazy val sparkMilibMl = project.dependsOn(<span class="built_in">read</span>OtherMl).</div><div class="line">  settings(commonSettings: _*).</div><div class="line">  settings(</div><div class="line">    libraryDependencies ++= Seq(</div><div class="line">      <span class="string">"net.databinder.dispatch"</span> %% <span class="string">"dispatch-core"</span> % <span class="string">"0.11.2"</span>,</div><div class="line">      <span class="string">"org.apache.spark"</span> %% <span class="string">"spark-mllib"</span> % sparkVersion % <span class="string">"provided"</span></div><div class="line">    )</div><div class="line">  ).</div><div class="line">  settings(runMain <span class="keyword">in</span> Compile &lt;&lt;= Defaults.runMainTask(fullClasspath <span class="keyword">in</span> Compile, runner <span class="keyword">in</span>(Compile, run)))</div></pre></td></tr></table></figure>
+<p>更多关于<a href="http://chloy.com/2017/06/09/Flink%E5%AE%9E%E8%B7%B5-%E6%90%AD%E5%BB%BAFlink%E9%A1%B9%E7%9B%AE/" target="_blank" rel="external">sbt信息参考</a>.</p>
+<h2 id="pipeline训练方式"><a href="#pipeline训练方式" class="headerlink" title="pipeline训练方式"></a>pipeline训练方式</h2><p>pipeline训练方式把数据当做通道流，这样读取数据，训练，以及最后的预测都是在一个通道完成，时间会加速。其方式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">import org.apache.spark.ml.Pipeline</div><div class="line">import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator</div><div class="line">import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator</div><div class="line">import org.apache.spark.ml.feature.&#123;IndexToString, StringIndexer, VectorIndexer&#125;</div><div class="line">import org.apache.spark.sql.SparkSession</div><div class="line">import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics</div><div class="line">import org.apache.spark.mllib.regression.LabeledPoint</div><div class="line">import org.apache.spark.ml.classification.&#123;GBTClassificationModel, GBTClassifier&#125;</div><div class="line">import org.apache.spark.ml.linalg.Vector</div><div class="line"></div><div class="line"></div><div class="line">object gBTClassify &#123;</div><div class="line"></div><div class="line">  def main(args:Array[String]):Unit=&#123;</div><div class="line"></div><div class="line">    val spark = SparkSession.builder.master(<span class="string">"local"</span>).appName(<span class="string">"randomForestClassify"</span>).getOrCreate()</div><div class="line"></div><div class="line">    val train = spark.read.format(<span class="string">"libsvm"</span>).load(<span class="string">"/***/train_libsvm"</span>)</div><div class="line">    val <span class="built_in">test</span> = spark.read.format(<span class="string">"libsvm"</span>).load(<span class="string">"/****/test_libsvm"</span>)</div><div class="line"></div><div class="line">    val labelIndexer = new StringIndexer()</div><div class="line">                          .setInputCol(<span class="string">"label"</span>)</div><div class="line">                          .setOutputCol(<span class="string">"indexedLabel"</span>)</div><div class="line">                          .fit(train)</div><div class="line"></div><div class="line">    val featureIndexer = new VectorIndexer()</div><div class="line">                          .setInputCol(<span class="string">"features"</span>)</div><div class="line">                          .setOutputCol(<span class="string">"indexedFeatures"</span>)</div><div class="line">                          .fit(train)</div><div class="line"></div><div class="line">    val gbt = new GBTClassifier()</div><div class="line">              .setLabelCol(<span class="string">"indexedLabel"</span>)</div><div class="line">              .setFeaturesCol(<span class="string">"indexedFeatures"</span>)</div><div class="line">              .setMaxIter(10)</div><div class="line"></div><div class="line">    val labelConverter = new IndexToString()</div><div class="line">              .setInputCol(<span class="string">"prediction"</span>)</div><div class="line">              .setOutputCol(<span class="string">"predictedLabel"</span>)</div><div class="line">              .setLabels(labelIndexer.labels)         </div><div class="line"></div><div class="line">    val pipeline = new Pipeline()</div><div class="line">              .setStages(Array(labelIndexer, featureIndexer, gbt, labelConverter))          </div><div class="line"></div><div class="line">    val model = pipeline.fit(train)</div><div class="line">    val predictions = model.transform(<span class="built_in">test</span>)       </div><div class="line"></div><div class="line">    model.write.overwrite().save(<span class="string">"/****/gbt_classfy_model"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>pipeline的构建在于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">val pipeline = new Pipeline()</div><div class="line">    .setStages(Array(labelIndexer, featureIndexer, gbt, labelConverter))</div></pre></td></tr></table></figure>
+<p>把样本，模型都放在同一个通道里。</p>
+<h2 id="norm-model"><a href="#norm-model" class="headerlink" title="norm-model"></a>norm-model</h2><p>接下来，是正常的训练方式，即读取数据、训练、保存模型、读取模型、预测新样本，这里需要多读取数据进行转换，因为不是所有的数据都是按照libsvm格式存储的，通常的数据格式是[id label feature1 feature2 ….]，所以会做一个数据的转换。</p>
+<p>另外，模型的保存和读取，使用了hdfs文件，在hadoop生态里，hdfs是很方便的，不需额外的搭建，把模型放置在hdfs上，这样可以保证在同集群下，所有机器都能访问到，跨集群的访问还是在研究中，猜测是可以实现的，只要拥有足够的权限（分布式数据的存储只要能拿到zookeeper的访问权限，其实是可以获取到数据的）。</p>
+<p>详细的实现如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">import org.apache.spark.ml.classification.&#123;GBTClassificationModel, GBTClassifier&#125;</div><div class="line">import org.apache.spark.sql.SparkSession</div><div class="line">import org.apache.spark.sql.Row</div><div class="line">import org.apache.spark.sql.types.AnyDataType</div><div class="line">import org.apache.spark.sql.SQLContext</div><div class="line">import org.apache.spark.ml.feature.&#123;IndexToString, StringIndexer, VectorIndexer&#125;</div><div class="line">import org.apache.spark.SparkConf</div><div class="line">import org.apache.spark.SparkContext</div><div class="line">import org.apache.spark.ml.linalg.&#123;Vector, Vectors&#125;</div><div class="line">import org.apache.spark.sql.types.&#123;DataTypes, StructField, StructType&#125;</div><div class="line">import org.apache.spark.ml.linalg.VectorUDT</div><div class="line">import classifyOperate.evaluateAUCAccuracyResult</div><div class="line"></div><div class="line">object gbtClassify &#123;</div><div class="line"></div><div class="line">  def main(args:Array[String]):Unit=&#123;</div><div class="line"></div><div class="line">    val conf = new SparkConf().setAppName(<span class="string">"test"</span>).setMaster(<span class="string">"local"</span>) // 调试的时候一定不要用<span class="built_in">local</span>[*]</div><div class="line">    val sc = new SparkContext(conf)</div><div class="line">    val sqlContext = new SQLContext(sc)</div><div class="line">    val data = sc.textFile(<span class="string">"/***/train.txt"</span>)</div><div class="line">    .map&#123;x =&gt;</div><div class="line">         val vs = x.split(<span class="string">"\t"</span>)</div><div class="line">         val numFeatures = vs.size</div><div class="line">         val label = vs.apply(0).toDouble</div><div class="line">         val features = vs.slice(1, numFeatures)</div><div class="line">         val featu = Vectors.dense(features.map&#123;y =&gt;<span class="keyword">if</span> (<span class="string">"NULL"</span>.equals(y)) 0.0 <span class="keyword">else</span> y.toDouble &#125;)</div><div class="line">         (label,featu)</div><div class="line">    &#125;</div><div class="line">    val train = sqlContext.createDataFrame(data).toDF(<span class="string">"label"</span>,<span class="string">"features"</span>)</div><div class="line">    val gbt = new GBTClassifier()</div><div class="line">              .setLabelCol(<span class="string">"label"</span>)</div><div class="line">              .setFeaturesCol(<span class="string">"features"</span>)</div><div class="line">              .setMaxIter(10)</div><div class="line"></div><div class="line">    val model = gbt.fit(train)</div><div class="line">    model.save(<span class="string">"/****/gbt_classfy_model"</span>)</div><div class="line">    sc.stop()</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>读取样本然后转化成DataFrame，注意列名和rdd的数据形式一致即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">val train = sqlContext.createDataFrame(data).toDF(&quot;label&quot;,&quot;features&quot;)</div></pre></td></tr></table></figure>
+<p>上述的实现是把训练集数据训练模型，并且保存模型在hdfs上，接着要读取训练好的模型，对新的样本进行预测，并且评估预测的效果。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">import org.apache.spark.ml.classification.&#123;GBTClassificationModel, GBTClassifier&#125;</div><div class="line">import org.apache.spark.sql.SQLContext</div><div class="line">import org.apache.spark.ml.feature.&#123;IndexToString, StringIndexer, VectorIndexer&#125;</div><div class="line">import org.apache.spark.SparkConf</div><div class="line">import org.apache.spark.SparkContext</div><div class="line">import classifyOperate.evaluateAUCAccuracyResult</div><div class="line">import org.apache.spark.ml.linalg.&#123;Vector, Vectors&#125;</div><div class="line"></div><div class="line">object judgeModelCorrect &#123;</div><div class="line"></div><div class="line">  def main(args:Array[String]):Unit=&#123;</div><div class="line"></div><div class="line">    val conf = new SparkConf().setAppName(<span class="string">"test"</span>).setMaster(<span class="string">"local"</span>) // 调试的时候一定不要用<span class="built_in">local</span>[*]</div><div class="line">    val sc = new SparkContext(conf)</div><div class="line">    val sqlContext = new SQLContext(sc)</div><div class="line">    //读取模型</div><div class="line">    val gbtModel = GBTClassificationModel.load(<span class="string">"/home/min/workspace/data/report/report_judge_model/gbt_classfy_model"</span>)</div><div class="line"></div><div class="line">    val data = sc.textFile(<span class="string">"/home/min/workspace/data/report/report_judge_model/test.txt"</span>)</div><div class="line">    .map&#123;x =&gt;</div><div class="line">         val vs = x.split(<span class="string">"\t"</span>)</div><div class="line">         val numFeatures = vs.size</div><div class="line">         val report_id = vs.apply(0)</div><div class="line">         val label = vs.apply(1).toDouble</div><div class="line">         val features = vs.slice(2, numFeatures)</div><div class="line">         val featu = Vectors.dense(features.map&#123;y =&gt;<span class="keyword">if</span> (<span class="string">"NULL"</span>.equals(y)) 0.0 <span class="keyword">else</span> y.toDouble &#125;)</div><div class="line">         (report_id,label,featu)</div><div class="line">    &#125;</div><div class="line">    val <span class="built_in">test</span> = sqlContext.createDataFrame(data).toDF(<span class="string">"reportId"</span>,<span class="string">"label"</span>,<span class="string">"features"</span>)</div><div class="line"></div><div class="line">    val <span class="built_in">test</span>Result = gbtModel.transform(<span class="built_in">test</span>).select(<span class="string">"reportId"</span>,<span class="string">"label"</span>,<span class="string">"features"</span>,<span class="string">"prediction"</span>)</div><div class="line"></div><div class="line">    val auc = evaluateAUCAccuracyResult.getPredictAUC(<span class="built_in">test</span>Result, <span class="string">"label"</span>, <span class="string">"prediction"</span>)</div><div class="line">    val accurcy = evaluateAUCAccuracyResult.getPredictAccuracy(<span class="built_in">test</span>Result, <span class="string">"label"</span>, <span class="string">"prediction"</span>)</div><div class="line">    val f1 = evaluateAUCAccuracyResult.getPredictF1(<span class="built_in">test</span>Result, <span class="string">"label"</span>, <span class="string">"prediction"</span>)</div><div class="line">    evaluateAUCAccuracyResult.getPredictConfusionMatrix(<span class="built_in">test</span>Result, <span class="string">"label"</span>, <span class="string">"prediction"</span>)</div><div class="line">    println(<span class="string">"auc="</span>+auc+<span class="string">",accurcy="</span>+accurcy+<span class="string">",f1="</span>+f1)</div><div class="line"></div><div class="line">   //<span class="built_in">test</span>Result.toJSON.rdd.saveAsTextFile(<span class="string">"/***/test_data_judge_result2"</span>)</div><div class="line">   sc.stop()</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>要注意的是训练集和测试集的源数据是不同格式，测试时加了样本id，所以，获取样本时要考虑到样本的起始位置，以免出错。</p>
+<p>下面是评估的方法集合，把效果评估整合在一个函数里，可以进行拓展，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line">import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator</div><div class="line">import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator</div><div class="line">import org.apache.spark.sql.DataFrame</div><div class="line">import org.apache.spark.mllib.evaluation.MulticlassMetrics</div><div class="line">import org.apache.spark.sql.&#123;Dataset, Row&#125;</div><div class="line">import org.apache.spark.ml.linalg.&#123;Vector, VectorUDT&#125;</div><div class="line">import org.apache.spark.ml.util.SchemaUtils</div><div class="line">import org.apache.spark.sql.types.DoubleType</div><div class="line">import org.apache.spark.sql.functions._</div><div class="line"></div><div class="line">object evaluateAUCAccuracyResult &#123;</div><div class="line"></div><div class="line">    /**获得auc指标***/</div><div class="line">    def getPredictAUC(predictions: DataFrame,label:String,predict:String):Double=&#123;</div><div class="line"></div><div class="line">       val evaluatorAUC = new BinaryClassificationEvaluator()</div><div class="line">                       .setLabelCol(label)</div><div class="line">                       .setRawPredictionCol(predict)</div><div class="line">                       .setMetricName(<span class="string">"areaUnderROC"</span>)</div><div class="line"></div><div class="line">        val auc = evaluatorAUC.evaluate(predictions)</div><div class="line">        auc</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /***获得准确率***/</div><div class="line">    def getPredictAccuracy(predictions: DataFrame,label:String,predict:String):Double=&#123;</div><div class="line">         val evaluatorAccuracy = new MulticlassClassificationEvaluator()</div><div class="line">                       .setLabelCol(label)</div><div class="line">                       .setPredictionCol(predict)</div><div class="line">                       .setMetricName(<span class="string">"accuracy"</span>)</div><div class="line"></div><div class="line">        val accuracy = evaluatorAccuracy.evaluate(predictions)</div><div class="line">        accuracy</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**获得f1指标***/</div><div class="line">    def getPredictF1(predictions: DataFrame,label:String,predict:String):Double=&#123;</div><div class="line">         val evaluator = new MulticlassClassificationEvaluator()</div><div class="line">                       .setLabelCol(label)</div><div class="line">                       .setPredictionCol(predict)</div><div class="line">                       .setMetricName(<span class="string">"f1"</span>)</div><div class="line"></div><div class="line">         val f1 = evaluator.evaluate(predictions)</div><div class="line">         f1</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**获得召回率指标***/</div><div class="line">    def getPredictRecall(predictions: DataFrame,label:String,predict:String):Double=&#123;</div><div class="line">         val evaluator = new MulticlassClassificationEvaluator()</div><div class="line">                       .setLabelCol(label)</div><div class="line">                       .setPredictionCol(predict)</div><div class="line">                       .setMetricName(<span class="string">"weightedRecall"</span>)</div><div class="line"></div><div class="line">         val recall = evaluator.evaluate(predictions)</div><div class="line">         recall</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**获得精确率指标***/</div><div class="line">    def getPredictPrecision(predictions: DataFrame,label:String,predict:String):Double=&#123;</div><div class="line">         val evaluator = new MulticlassClassificationEvaluator()</div><div class="line">                       .setLabelCol(label)</div><div class="line">                       .setPredictionCol(predict)</div><div class="line">                       .setMetricName(<span class="string">"weightedPrecision"</span>)</div><div class="line"></div><div class="line">         val pre = evaluator.evaluate(predictions)</div><div class="line">         pre</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**获取混淆矩阵**/</div><div class="line">    def getPredictConfusionMatrix(predictions: DataFrame,label:String,predict:String):Unit=&#123;</div><div class="line"></div><div class="line">         val schema = predictions.schema</div><div class="line"></div><div class="line">         val predictionAndLabels = predictions.select(col(predict), col(label).cast(DoubleType)).rdd.map &#123;</div><div class="line">              <span class="keyword">case</span> Row(rawPrediction: Vector, label: Double) =&gt; (rawPrediction(1), label)</div><div class="line">              <span class="keyword">case</span> Row(rawPrediction: Double, label: Double) =&gt; (rawPrediction, label)</div><div class="line">          &#125;</div><div class="line"></div><div class="line">         val metrics = new MulticlassMetrics(predictionAndLabels)</div><div class="line">         println(<span class="string">"Confusion matrix:"</span>)</div><div class="line">         println(metrics.confusionMatrix)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://chlyzzo.github.io/2017/10/26/spark-ml-classify/" data-title="spark-ml classify | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/10/25/nlp备份集合/"  title="nlp备份集合">
+ <strong>下一篇：</strong><br/> 
+ <span>nlp备份集合
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 分享即是收获，动手后才是自己的. <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1724571293" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/chlyzzo" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:rimin515@sina.cn" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by © 2017 
+		
+		<a href="/about" target="_blank" title="wenxi">wenxi</a>
+		
+		
+		</p>
+
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?81e8b61e30a0723ad6270902dbcf0bb6";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

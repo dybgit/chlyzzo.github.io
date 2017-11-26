@@ -3,21 +3,26 @@
 
 
     
-    
   <url>
-    <loc>https://chlyzzo.github.io/2017/11/26/spark-ml-classify/</loc>
-    <lastmod>2017-11-26T01:23:42.968Z</lastmod>
+    <loc>https://chlyzzo.github.io/2017/10/26/spark-ml-classify/</loc>
+    <lastmod>2017-11-26T02:23:51.074Z</lastmod>
     <data>
         <display>
         <title>spark-ml classify</title>
-        <pubTime>2017-11-26T01:23:42.000Z</pubTime>
+        <pubTime>2017-10-26T01:23:42.000Z</pubTime>
         
+        <tag>笔记</tag>
+         
          
            
+             
+              <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
+          
         </display>
     </data>
     </url>
 
+    
     
   <url>
     <loc>https://chlyzzo.github.io/2017/10/25/nlp%E5%A4%87%E4%BB%BD%E9%9B%86%E5%90%88/</loc>
