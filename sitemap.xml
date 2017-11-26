@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chlyzzo.github.io/about/index.html</loc>
+    
+    <lastmod>2017-11-26T01:44:45.082Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chlyzzo.github.io/2017/11/26/spark-ml-classify/</loc>
+    
+    <lastmod>2017-11-26T01:23:42.968Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chlyzzo.github.io/2017/10/25/nlp%E5%A4%87%E4%BB%BD%E9%9B%86%E5%90%88/</loc>
     
     <lastmod>2017-11-25T03:11:50.650Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>https://chlyzzo.github.io/2017/05/20/hive%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88/</loc>
     
     <lastmod>2017-11-24T05:56:09.336Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/about/index.html</loc>
-    
-    <lastmod>2017-11-11T14:24:20.854Z</lastmod>
     
   </url>
   
