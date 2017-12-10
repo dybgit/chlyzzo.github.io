@@ -303,13 +303,13 @@
         <title>通过python，java，spark，hive以post提交数据</title>
         <pubTime>2017-09-21T09:57:15.000Z</pubTime>
         
+        <tag>spark</tag>
+         
         <tag>笔记</tag>
          
         <tag>hive</tag>
          
         <tag>python</tag>
-         
-        <tag>spark</tag>
          
         <tag>post</tag>
          
@@ -654,9 +654,9 @@
         <title>Flink实践-读取HDFS</title>
         <pubTime>2017-06-09T07:29:53.000Z</pubTime>
         
-        <tag>spark</tag>
-         
         <tag>hdfs</tag>
+         
+        <tag>spark</tag>
          
          
            
