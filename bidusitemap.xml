@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://chlyzzo.github.io/2017/10/26/spark-ml-classify/</loc>
+    <lastmod>2017-12-10T02:30:18.594Z</lastmod>
+    <data>
+        <display>
+        <title>spark-ml classify</title>
+        <pubTime>2017-10-26T01:23:42.000Z</pubTime>
+        
+        <tag>笔记</tag>
+         
+         
+           
+             
+              <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chlyzzo.github.io/2007/10/11/%E6%99%9A%E5%A4%9C/</loc>
     <lastmod>2017-12-10T02:21:35.523Z</lastmod>
     <data>
@@ -71,26 +91,6 @@
            
              
               <breadCrumb title="散文" url="https://chlyzzo.github.io/categories/%E6%95%A3%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/10/26/spark-ml-classify/</loc>
-    <lastmod>2017-11-26T02:32:15.108Z</lastmod>
-    <data>
-        <display>
-        <title>spark-ml classify</title>
-        <pubTime>2017-10-26T01:23:42.000Z</pubTime>
-        
-        <tag>笔记</tag>
-         
-         
-           
-             
-              <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
           
         </display>
     </data>

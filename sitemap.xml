@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chlyzzo.github.io/2017/10/26/spark-ml-classify/</loc>
+    
+    <lastmod>2017-12-10T02:30:18.594Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chlyzzo.github.io/2007/10/11/%E6%99%9A%E5%A4%9C/</loc>
     
     <lastmod>2017-12-10T02:21:35.523Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://chlyzzo.github.io/2008/02/08/%E5%88%AB%E7%A6%BB/</loc>
     
     <lastmod>2017-11-26T02:42:17.737Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/2017/10/26/spark-ml-classify/</loc>
-    
-    <lastmod>2017-11-26T02:32:15.108Z</lastmod>
     
   </url>
   
