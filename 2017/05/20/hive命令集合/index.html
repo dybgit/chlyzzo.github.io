@@ -19,7 +19,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2017/05/20/hive命令集合/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="hive一些操作常用集合命令. 建表构建一个以时间分区的表, 12345678910use 库名;drop table if exists 表名;create table 表名(   a string,   b string,   c int)partitioned by (cal_dt string)row format delimited fields terminated by &apos;\t&apos;;">
-<meta property="og:updated_time" content="2017-11-24T05:56:09.336Z">
+<meta property="og:updated_time" content="2017-12-12T11:22:09.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hive命令集合">
 <meta name="twitter:description" content="hive一些操作常用集合命令. 建表构建一个以时间分区的表, 12345678910use 库名;drop table if exists 表名;create table 表名(   a string,   b string,   c int)partitioned by (cal_dt string)row format delimited fields terminated by &apos;\t&apos;;">
@@ -137,8 +137,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">named_struct(<span class="string">'a'</span>,a,<span class="string">'b'</span>,b,<span class="string">'c'</span>,c) as temp_item</div></pre></td></tr></table></figure>
 <p>2,多行转成json,</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">to_json(collect(c.temp_item)) as new_tr</div></pre></td></tr></table></figure>
-<h2 id="中文"><a href="#中文" class="headerlink" title="中文"></a>中文</h2><p>先提取中文串,判断程度是否大于0.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select length(regexp_extract(<span class="string">'25'</span>,<span class="string">'([\\u4e00-\\u9fa5]+)'</span>))</div></pre></td></tr></table></figure>
+<h2 id="中文"><a href="#中文" class="headerlink" title="中文"></a>中文</h2><p>先提取替换掉非中文串,判断程度是否大于0.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select length(regexp_replace(<span class="string">'25'</span>,<span class="string">'([^\\u4e00-\\u9fa5]+)'</span>,<span class="string">''</span>))</div></pre></td></tr></table></figure>
 <p>编码转换</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">存储数据时，有时以其他编码存储中文，比如unicode编码，需要对其进行转换，</div><div class="line">如果是unicode编码，可以使用如下函数进行解码转换成中文：</div><div class="line"></div><div class="line">select reflect(<span class="string">"java.net.URLDecoder"</span>, <span class="string">"decode"</span>,desc) as otherdesc</div><div class="line"></div><div class="line">当然也存在编码函数java.net.URLEncoder encode</div><div class="line">select reflect(<span class="string">"java.net.URLEncoder"</span>, <span class="string">"encode"</span>,<span class="string">'你好'</span>) as otherdesc</div></pre></td></tr></table></figure>
 <h2 id="正则"><a href="#正则" class="headerlink" title="正则"></a>正则</h2><p>正则使用的常用字符，</p>
