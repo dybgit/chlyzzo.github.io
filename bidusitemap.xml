@@ -77,24 +77,6 @@
 
     
   <url>
-    <loc>https://chlyzzo.github.io/2017/12/10/nlp%E7%94%9F%E6%88%90%E6%96%87%E6%9C%AC%E7%B3%BB%E5%88%972-%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/</loc>
-    <lastmod>2017-12-10T04:47:01.490Z</lastmod>
-    <data>
-        <display>
-        <title>nlp生成文本系列2-网络模型</title>
-        <pubTime>2017-12-10T04:38:55.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="nlp" url="https://chlyzzo.github.io/categories/nlp/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chlyzzo.github.io/2017/06/02/flink%E5%9C%A8yarn%E4%B8%8A%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2017-12-10T04:46:38.602Z</lastmod>
     <data>
@@ -209,21 +191,6 @@
         
         <tag>笔记</tag>
          
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/12/10/nlp%E7%94%9F%E6%88%90%E6%96%87%E6%9C%AC%E7%B3%BB%E5%88%971-%E7%BA%AF%E6%A6%82%E7%8E%87%E5%92%8C%E8%A7%84%E5%88%99/</loc>
-    <lastmod>2017-12-10T04:37:36.444Z</lastmod>
-    <data>
-        <display>
-        <title>nlp生成文本系列1-纯概率和规则</title>
-        <pubTime>2017-12-10T04:37:36.000Z</pubTime>
-        
          
            
         </display>
