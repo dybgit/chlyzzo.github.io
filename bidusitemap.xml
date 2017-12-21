@@ -4,12 +4,30 @@
 
     
   <url>
-    <loc>https://chlyzzo.github.io/2017/12/17/text-generate-by-statistic/</loc>
-    <lastmod>2017-12-20T12:51:28.370Z</lastmod>
+    <loc>https://chlyzzo.github.io/2017/12/13/%E6%94%BB%E5%87%BB%E4%B8%8E%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/</loc>
+    <lastmod>2017-12-21T06:24:30.980Z</lastmod>
     <data>
         <display>
-        <title>text generate by statistic</title>
-        <pubTime>2017-12-17T11:39:50.000Z</pubTime>
+        <title>攻击与异常检测</title>
+        <pubTime>2017-12-13T06:16:06.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="检测" url="https://chlyzzo.github.io/categories/%E6%A3%80%E6%B5%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2017/12/19/text-generate-by-sequence-model/</loc>
+    <lastmod>2017-12-21T06:23:06.831Z</lastmod>
+    <data>
+        <display>
+        <title>text generate by sequence model</title>
+        <pubTime>2017-12-19T12:39:11.000Z</pubTime>
         
          
            
@@ -22,15 +40,18 @@
 
     
   <url>
-    <loc>https://chlyzzo.github.io/2017/12/20/text-generate-by-sequence-model/</loc>
-    <lastmod>2017-12-20T12:39:11.444Z</lastmod>
+    <loc>https://chlyzzo.github.io/2017/12/17/text-generate-by-statistic/</loc>
+    <lastmod>2017-12-20T13:50:40.717Z</lastmod>
     <data>
         <display>
-        <title>text generate by sequence model</title>
-        <pubTime>2017-12-20T12:39:11.000Z</pubTime>
+        <title>text generate by statistic</title>
+        <pubTime>2017-12-17T11:39:50.000Z</pubTime>
         
          
            
+             
+              <breadCrumb title="nlp" url="https://chlyzzo.github.io/categories/nlp/"/>
+          
         </display>
     </data>
     </url>
