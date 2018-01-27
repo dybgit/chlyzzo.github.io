@@ -12,12 +12,12 @@
     
 
     
-    <meta name="description" content="分词隐马尔可夫，从字的状态中训练得到概率，可用于其他识别，如地名、人名等；条件随机场是搭配与提取用的有效方法；序列模型，RNN,LSTM是神经网络模型，从N-gram的不同序列中训练得到预测的概率，这里的预测可以是字、词、句子等；词性tags的分析，可引申出组块的抽取；句法和依存关系，类似于状态打标签，根据词的不同状态，得到依赖关系；      架构中除顶层红色外，都是已经上线在已有业务中的应用">
+    <meta name="description" content="分词隐马尔可夫，从字的状态中训练得到概率，可用于其他识别，如地名、人名等；条件随机场是搭配与提取用的有效方法；序列模型，RNN,LSTM是神经网络模型，从N-gram的不同序列中训练得到预测的概率，这里的预测可以是字、词、句子等；词性tags的分析，可引申出组块的抽取；句法和依存关系，类似于状态打标签，根据词的不同状态，得到依赖关系；       架构中除顶层红色外，都是已经上线在已有业务中的应用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nlp--generate text document">
 <meta property="og:url" content="https://chlyzzo.github.io/2018/01/12/nlp-generate-text-document/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:description" content="分词隐马尔可夫，从字的状态中训练得到概率，可用于其他识别，如地名、人名等；条件随机场是搭配与提取用的有效方法；序列模型，RNN,LSTM是神经网络模型，从N-gram的不同序列中训练得到预测的概率，这里的预测可以是字、词、句子等；词性tags的分析，可引申出组块的抽取；句法和依存关系，类似于状态打标签，根据词的不同状态，得到依赖关系；      架构中除顶层红色外，都是已经上线在已有业务中的应用">
+<meta property="og:description" content="分词隐马尔可夫，从字的状态中训练得到概率，可用于其他识别，如地名、人名等；条件随机场是搭配与提取用的有效方法；序列模型，RNN,LSTM是神经网络模型，从N-gram的不同序列中训练得到预测的概率，这里的预测可以是字、词、句子等；词性tags的分析，可引申出组块的抽取；句法和依存关系，类似于状态打标签，根据词的不同状态，得到依赖关系；       架构中除顶层红色外，都是已经上线在已有业务中的应用">
 <meta property="og:image" content="https://chlyzzo.github.io/images/nlp2.PNG">
 <meta property="og:image" content="https://chlyzzo.github.io/images/nlp3.PNG">
 <meta property="og:image" content="https://chlyzzo.github.io/images/nlp4.PNG">
@@ -27,10 +27,10 @@
 <meta property="og:image" content="https://chlyzzo.github.io/images/nlp8.PNG">
 <meta property="og:image" content="https://chlyzzo.github.io/images/nlp9.PNG">
 <meta property="og:image" content="https://chlyzzo.github.io/images/nlp11.PNG">
-<meta property="og:updated_time" content="2018-01-27T10:10:01.079Z">
+<meta property="og:updated_time" content="2018-01-27T10:14:04.618Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nlp--generate text document">
-<meta name="twitter:description" content="分词隐马尔可夫，从字的状态中训练得到概率，可用于其他识别，如地名、人名等；条件随机场是搭配与提取用的有效方法；序列模型，RNN,LSTM是神经网络模型，从N-gram的不同序列中训练得到预测的概率，这里的预测可以是字、词、句子等；词性tags的分析，可引申出组块的抽取；句法和依存关系，类似于状态打标签，根据词的不同状态，得到依赖关系；      架构中除顶层红色外，都是已经上线在已有业务中的应用">
+<meta name="twitter:description" content="分词隐马尔可夫，从字的状态中训练得到概率，可用于其他识别，如地名、人名等；条件随机场是搭配与提取用的有效方法；序列模型，RNN,LSTM是神经网络模型，从N-gram的不同序列中训练得到预测的概率，这里的预测可以是字、词、句子等；词性tags的分析，可引申出组块的抽取；句法和依存关系，类似于状态打标签，根据词的不同状态，得到依赖关系；       架构中除顶层红色外，都是已经上线在已有业务中的应用">
 <meta name="twitter:image" content="https://chlyzzo.github.io/images/nlp2.PNG">
 
     
@@ -126,8 +126,8 @@
 		
 		</div>
 		
-		<p><img src="/images/nlp2.PNG" alt=""></p>
-<p>分词隐马尔可夫，从字的状态中训练得到概率，可用于其他识别，如地名、人名等；<br>条件随机场是搭配与提取用的有效方法；<br>序列模型，RNN,LSTM是神经网络模型，从N-gram的不同序列中训练得到预测的概率，这里的预测可以是字、词、句子等；<br>词性tags的分析，可引申出组块的抽取；<br>句法和依存关系，类似于状态打标签，根据词的不同状态，得到依赖关系；</p>
+		<p>分词隐马尔可夫，从字的状态中训练得到概率，可用于其他识别，如地名、人名等；<br>条件随机场是搭配与提取用的有效方法；<br>序列模型，RNN,LSTM是神经网络模型，从N-gram的不同序列中训练得到预测的概率，这里的预测可以是字、词、句子等；<br>词性tags的分析，可引申出组块的抽取；<br>句法和依存关系，类似于状态打标签，根据词的不同状态，得到依赖关系；</p>
+<p><img src="/images/nlp2.PNG" alt=""></p>
 <p><img src="/images/nlp3.PNG" alt=""></p>
 <p><img src="/images/nlp4.PNG" alt=""></p>
 <p><img src="/images/nlp5.PNG" alt=""></p>
