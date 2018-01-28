@@ -1,0 +1,443 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>python爬虫-简单开始 | 山上掏金</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="Poq2hMEF9U" />
+    
+    <meta name="author" content="文皓">
+    
+
+    
+    <meta name="description" content="python爬取网页信息，最简单的就是用BeautifulSoup等解析工具，解析出预定值，但是在具体实践中，依靠第三方的解析包远远不能达到目的，必须依赖正则方法，也是最基本的方法。 另外，爬取到信息后，需要保存，存储在文件、数据库等文件系统中。 爬虫，不能“裸奔”，以免被网站封住，所以，需要时长变换代理，以及ip等信息。 正则提取正则的概念是模糊匹配，满足一定的预定格式，将被提取出或替换掉，以下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python爬虫-简单开始">
+<meta property="og:url" content="https://chlyzzo.github.io/2015/10/10/python爬虫-系列2/index.html">
+<meta property="og:site_name" content="山上掏金">
+<meta property="og:description" content="python爬取网页信息，最简单的就是用BeautifulSoup等解析工具，解析出预定值，但是在具体实践中，依靠第三方的解析包远远不能达到目的，必须依赖正则方法，也是最基本的方法。 另外，爬取到信息后，需要保存，存储在文件、数据库等文件系统中。 爬虫，不能“裸奔”，以免被网站封住，所以，需要时长变换代理，以及ip等信息。 正则提取正则的概念是模糊匹配，满足一定的预定格式，将被提取出或替换掉，以下">
+<meta property="og:updated_time" content="2018-01-28T02:39:34.244Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python爬虫-简单开始">
+<meta name="twitter:description" content="python爬取网页信息，最简单的就是用BeautifulSoup等解析工具，解析出预定值，但是在具体实践中，依靠第三方的解析包远远不能达到目的，必须依赖正则方法，也是最基本的方法。 另外，爬取到信息后，需要保存，存储在文件、数据库等文件系统中。 爬虫，不能“裸奔”，以免被网站封住，所以，需要时长变换代理，以及ip等信息。 正则提取正则的概念是模糊匹配，满足一定的预定格式，将被提取出或替换掉，以下">
+
+    
+    <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span id="busuanzi_container_site_pv">
+    站浏览量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+    站访问人数<span id="busuanzi_value_site_uv"></span>
+  </span>
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
+				<h2 class="blog-motto">每天早上起床就是为了比昨天更快乐，掏金者的一天是新的开始.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">作者</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:chlyzzo.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post moveMain" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/10/10/python爬虫-系列2/" title="python爬虫-简单开始" itemprop="url">python爬虫-简单开始</a>
+  </h1>
+  <div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/爬虫/">爬虫</a>
+</div>
+
+
+</div>
+
+
+  <p class="article-author">By
+       
+		<a href="/about" title="文皓" target="_blank" itemprop="author">文皓</a>
+		
+  <p class="article-time">
+    <time datetime="2015-10-10T12:15:29.000Z" itemprop="datePublished"> 2015-10-10 阅读量 <span id="busuanzi_value_page_pv"></span></time>
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#正则提取"><span class="toc-number">1.</span> <span class="toc-text">正则提取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代理配置"><span class="toc-number">2.</span> <span class="toc-text">代理配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#连接数据库"><span class="toc-number">3.</span> <span class="toc-text">连接数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#爬取图片"><span class="toc-number">4.</span> <span class="toc-text">爬取图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#爬取百度周边信息"><span class="toc-number">5.</span> <span class="toc-text">爬取百度周边信息</span></a></li></ol>
+		
+		</div>
+		
+		<p>python爬取网页信息，最简单的就是用BeautifulSoup等解析工具，解析出预定值，但是在具体实践中，依靠第三方的解析包远远不能达到目的，必须依赖正则方法，也是最基本的方法。</p>
+<p>另外，爬取到信息后，需要保存，存储在文件、数据库等文件系统中。</p>
+<p>爬虫，不能“裸奔”，以免被网站封住，所以，需要时长变换代理，以及ip等信息。</p>
+<h2 id="正则提取"><a href="#正则提取" class="headerlink" title="正则提取"></a>正则提取</h2><p>正则的概念是模糊匹配，满足一定的预定格式，将被提取出或替换掉，以下是一个例子，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">原始数据：</div><div class="line">data-original=<span class="string">"http://ww3.sinaimg.cn/bmiddle/9150e4e5ly1fnty5s6wqzj205005mjrc.jpg"</span> alt=<span class="string">"吸猫女大佬"</span></div><div class="line"></div><div class="line">目标：</div><div class="line">提取出url和中文描述；</div><div class="line"></div><div class="line">方案：</div><div class="line">1，把需要提取的值去掉，用括号括起来；</div><div class="line">2，针对提取的值进行正则编辑；</div><div class="line">data-original=<span class="string">"(.*?)"</span> .*?alt=<span class="string">"(.*?)"</span></div><div class="line">因此，上述两个括号就是要提取的值；</div><div class="line"></div><div class="line">接着是逻辑的编辑：</div><div class="line">import re</div><div class="line">reg = r<span class="string">'data-original="(.*?)" .*?alt="(.*?)"'</span></div><div class="line">reg = re.compile(reg, re.S)<span class="comment">#正则元组，正则有两个提取元素，两个括号匹配的，</span></div><div class="line">result = re.findall(reg,respHtml)<span class="comment">#返回数组</span></div><div class="line">result就是元组数组，即找到的所有匹配。</div></pre></td></tr></table></figure></p>
+<h2 id="代理配置"><a href="#代理配置" class="headerlink" title="代理配置"></a>代理配置</h2><p>使用python3.5下的urllib来get网页的信息，如果网站没有做防爬虫措施，可以不用代理，但是，当做了防爬虫时，get信息时需要变换代理，并且调用的频率要限制。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">设置多个代理，</div><div class="line">user_agents = [  </div><div class="line">    <span class="string">'Opera/9.25 (Windows NT 5.1; U; en)'</span>,  </div><div class="line">    <span class="string">'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)'</span>,  </div><div class="line">    <span class="string">'Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Kubuntu)'</span>,  </div><div class="line">    <span class="string">'Lynx/2.8.5rel.1 libwww-FM/2.14 SSL-MM/1.4.1 GNUTLS/1.2.9'</span>,</div><div class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)"</span>,  </div><div class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; AOL 9.5; AOLBuild 4337.35; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)"</span>,  </div><div class="line">]</div><div class="line"></div><div class="line">get访问网页信息时，随机设置代理，</div><div class="line">headers = &#123;&#125;</div><div class="line">headers[<span class="string">'User-Agent'</span>]=random.choice(user_agents)</div><div class="line">resp = urllib.request.Request(url=query,headers=headers)</div><div class="line">respHtml = urllib.request.urlopen(resp).read().decode(<span class="string">'utf-8'</span>)</div><div class="line">注意headers=是一个dict，并且key是User-Agent，value才是代理的值。</div></pre></td></tr></table></figure>
+<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><p>爬取到数据后把数据保存进本地文件或者进数据库，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">存储进本地文件，</div><div class="line"></div><div class="line">line = 爬取到值串+<span class="string">'\n'</span></div><div class="line">with open(filePath,<span class="string">'a'</span>,encoding=<span class="string">'utf-8'</span>) as f:  </div><div class="line">        f.write(line)</div><div class="line">使用with open不需要close()操作，另外编码用utf-8，采用追加写模式；</div><div class="line">------------------------------------------------------------------</div><div class="line"></div><div class="line">存储数据进数据库，</div><div class="line"></div><div class="line">import pymysql</div><div class="line">构建连接实例，</div><div class="line">db = pymysql.connect&#123;</div><div class="line">    host = <span class="string">''</span>,</div><div class="line">    port = <span class="string">''</span>,</div><div class="line">    user = <span class="string">''</span>,</div><div class="line">    password = <span class="string">''</span>,</div><div class="line">    db = <span class="string">''</span>,</div><div class="line">    charset=<span class="string">'utf-8'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">游标实例</div><div class="line">cursor = db.cursor()</div><div class="line"></div><div class="line">插入数据</div><div class="line">cursor.execute(<span class="string">"insert into image(`name`,`url`) values(</span></div><div class="line">'&#123;&#125;','&#123;&#125;')".format(i[1],i[0]))</div><div class="line">提交执行，</div><div class="line">db.commit()</div><div class="line">断开连接，在所有写完。</div><div class="line">db.close()</div></pre></td></tr></table></figure>
+<h2 id="爬取图片"><a href="#爬取图片" class="headerlink" title="爬取图片"></a>爬取图片</h2><p>首选查看网页的结构，获取需要解析的数据处于哪一部分，有什么明显的区分性，然后设置正则进行提取，或其他逻辑操作进行提取，接着把信息提取出来进行保存；最后是多页面怎么循环；另外，还需考虑调用的时间。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">filePath = <span class="string">'d:/spider_data_output.txt'</span></div><div class="line"></div><div class="line">user_agents = [  </div><div class="line">    <span class="string">'Opera/9.25 (Windows NT 5.1; U; en)'</span>,  </div><div class="line">    <span class="string">'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)'</span>,  </div><div class="line">    <span class="string">'Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Kubuntu)'</span>,  </div><div class="line">    <span class="string">'Lynx/2.8.5rel.1 libwww-FM/2.14 SSL-MM/1.4.1 GNUTLS/1.2.9'</span>,</div><div class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)"</span>,  </div><div class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; AOL 9.5; AOLBuild 4337.35; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)"</span>,  </div><div class="line">]</div><div class="line">def getImagesList(page=1):</div><div class="line">    query = <span class="string">'http://www.doutula.com/photo/list/?page=&#123;&#125;'</span>.format(page)</div><div class="line">    headers = &#123;&#125;</div><div class="line">    headers[<span class="string">'User-Agent'</span>]=random.choice(user_agents)</div><div class="line">    resp = urllib.request.Request(url=query,headers=headers)</div><div class="line">    respHtml = urllib.request.urlopen(resp).read().decode(<span class="string">'utf-8'</span>)</div><div class="line">    respHtml = respHtml.replace(<span class="string">'\r\n'</span>,<span class="string">''</span>).replace(<span class="string">'\n'</span>,<span class="string">''</span>)</div><div class="line">    reg = r<span class="string">'data-original="(.*?)" .*?alt="(.*?)"'</span></div><div class="line">    reg = re.compile(reg, re.S)<span class="comment">#正则元组，正则有两个提取元素，两个括号匹配的，</span></div><div class="line">    imageslist = re.findall(reg,respHtml)<span class="comment">#返回数组</span></div><div class="line">    <span class="comment">#数据进行保存</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> imageslist:</div><div class="line">        <span class="comment"># i=(url,name)</span></div><div class="line">        line = i[1]+<span class="string">'\t'</span>+i[0]+<span class="string">'\n'</span></div><div class="line">        with open(filePath,<span class="string">'a'</span>,encoding=<span class="string">'utf-8'</span>) as f:  </div><div class="line">                f.write(line)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(1,1004):      </div><div class="line">    <span class="built_in">print</span>(<span class="string">"正在爬取第&#123;&#125;页数据."</span>.format(i))</div><div class="line">    time.sleep(2)</div><div class="line">    getImagesList(i)</div></pre></td></tr></table></figure>
+<h2 id="爬取百度周边信息"><a href="#爬取百度周边信息" class="headerlink" title="爬取百度周边信息"></a>爬取百度周边信息</h2><p>百度地图开放的接口，可以获取多种信息，更多<a href="http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-placeapi" target="_blank" rel="external">参考开发调用</a><br>,这里爬取的是给定百度的经纬度信息，获取周边指定半径内的地理信息，即搜索出周边的地点。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div></pre></td><td class="code"><pre><div class="line">import urllib</div><div class="line">from bs4 import BeautifulSoup</div><div class="line">import json</div><div class="line">import time</div><div class="line"></div><div class="line">noResultfilePath=<span class="string">'d:/noresult_comm_baidu_mess.txt'</span></div><div class="line"></div><div class="line"><span class="string">''</span><span class="string">'</span></div><div class="line">返回的值串：</div><div class="line">百度返回的数据ListMap解析成Array[String]</div><div class="line">'<span class="string">''</span></div><div class="line">def getOneListMapToSting(listMap,label):</div><div class="line">    result = []</div><div class="line">    <span class="keyword">if</span> listMap is not None:</div><div class="line">        <span class="keyword">for</span> map <span class="keyword">in</span> listMap:</div><div class="line">            location = map.get(<span class="string">'location'</span>,<span class="string">'&#123;&#125;'</span>)</div><div class="line">            lat = location.get(<span class="string">'lat'</span>,<span class="string">'0'</span>)</div><div class="line">            lng = location.get(<span class="string">'lng'</span>,<span class="string">'0'</span>)</div><div class="line">            uid = map.get(<span class="string">'uid'</span>,<span class="string">'default'</span>)</div><div class="line">            name = map.get(<span class="string">'name'</span>,<span class="string">'default'</span>)</div><div class="line">            address = map.get(<span class="string">'address'</span>,<span class="string">'default'</span>)</div><div class="line">            detail = map.get(<span class="string">'detail'</span>,<span class="string">'default'</span>)</div><div class="line">            street_id  = map.get(<span class="string">'street_id'</span>,<span class="string">'0'</span>) <span class="comment">#默认值</span></div><div class="line">            <span class="comment">#组合结果输出</span></div><div class="line">            line = uid+<span class="string">'\t'</span>+name+<span class="string">'\t'</span>+street_id+<span class="string">'\t'</span>+str(lat)+<span class="string">'\t'</span>+str(lng)+<span class="string">'\t'</span>+address+<span class="string">'\t'</span>+str(detail)+<span class="string">'\t'</span>+label</div><div class="line">            result.append(line)</div><div class="line">        <span class="comment">#所有元素</span></div><div class="line">    <span class="built_in">return</span> result</div><div class="line"></div><div class="line"></div><div class="line"><span class="string">''</span><span class="string">'</span></div><div class="line">array[String]写数据进表里，一个小区多条，即一个小区多行，写文件是追加的写,</div><div class="line"></div><div class="line">f=open('路径/文件名<span class="string">', '</span>读写格式<span class="string">', '</span>编码方式<span class="string">', '</span>错误处理方式<span class="string">')</span></div><div class="line"></div><div class="line">'<span class="string">''</span>    </div><div class="line"></div><div class="line">def appendWriteCommDataBase(arrayString,comm_id,filePath):</div><div class="line">    <span class="keyword">if</span> arrayString is not None:</div><div class="line">        <span class="keyword">for</span> oneData <span class="keyword">in</span> arrayString:</div><div class="line">            writeLine = str(comm_id)+<span class="string">'\t'</span>+oneData+<span class="string">'\r\n'</span></div><div class="line">            with open(filePath,<span class="string">'a'</span>,encoding=<span class="string">'utf-8'</span>) as f:  </div><div class="line">                f.write(writeLine)  </div><div class="line"></div><div class="line"></div><div class="line"><span class="string">''</span><span class="string">'</span></div><div class="line">读取小区的经纬度等信息，获取小区的附近数据点，</div><div class="line">comm_id,lat,lng,queryWord,</div><div class="line"></div><div class="line">'<span class="string">''</span></div><div class="line">def <span class="built_in">read</span>CommLatLngGetBaiduMess(file,saveFile,label):</div><div class="line">    f = open(file,<span class="string">'r'</span>,encoding=<span class="string">'utf-8'</span>)</div><div class="line">    line = f.readline()</div><div class="line">    vs = line.split(<span class="string">'\t'</span>)</div><div class="line">    <span class="keyword">while</span> 1:</div><div class="line">        <span class="keyword">if</span> line is not None and len(vs)==4:</div><div class="line">            commId = vs[0]</div><div class="line">            lat = vs[2]</div><div class="line">            lng = vs[3]</div><div class="line">            listMap = getListMapMessByCommMess(commId,lat,lng,label)<span class="comment">#获得信息</span></div><div class="line">            outResult = getOneListMapToSting(listMap,label)<span class="comment">#信息格式处理</span></div><div class="line">            appendWriteCommDataBase(outResult,commId,saveFile)<span class="comment">#写进保存文件中</span></div><div class="line">            time.sleep(2)</div><div class="line">            line = f.readline()</div><div class="line">            vs = line.split(<span class="string">'\t'</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="built_in">break</span>   </div><div class="line"></div><div class="line">    f.close()              </div><div class="line"></div><div class="line"><span class="string">''</span><span class="string">'</span></div><div class="line">根据一个小区的经纬度信息，爬取其周边指定的标签数据</div><div class="line">返回一个listMap</div><div class="line"></div><div class="line">query=银行$酒店，查询地点关键字</div><div class="line">http://lbsyun.baidu.com/index.php?title=lbscloud/poitags</div><div class="line"></div><div class="line">tag=一级行业分类，二级行业分类，</div><div class="line">ak</div><div class="line">'<span class="string">''</span>    </div><div class="line">def getListMapMessByCommMess(commId,lat,lng,label):</div><div class="line">    key=<span class="string">'ak=DqBFd4FXWonuaMNfGDRU0eEm'</span></div><div class="line">    <span class="comment">#url查询</span></div><div class="line">    location=<span class="string">'location='</span>+str(lat)+<span class="string">','</span>+str(lng)</div><div class="line">    queryPath = <span class="string">'http://api.map.baidu.com/place/v2/search?radius=2000&amp;output=json'</span></div><div class="line">    queryUrlCode = urllib.parse.quote(label) <span class="comment">#编码url形式</span></div><div class="line">    query = queryPath+<span class="string">'&amp;'</span>+<span class="string">'query='</span>+queryUrlCode+<span class="string">'&amp;'</span>+key+<span class="string">'&amp;'</span>+location</div><div class="line">    result=<span class="string">'&#123;&#125;'</span></div><div class="line">    try:</div><div class="line">        resp = urllib.request.urlopen(query)</div><div class="line">        respHtml = resp.read().decode(<span class="string">'utf-8'</span>)</div><div class="line">        resp.close()</div><div class="line">        soup = BeautifulSoup(respHtml,from_encoding=<span class="string">"utf-8"</span>)</div><div class="line">        result = str(soup).replace(<span class="string">'&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'</span>,<span class="string">''</span>).replace(<span class="string">'&lt;/body&gt;&lt;/html&gt;'</span>,<span class="string">''</span>)</div><div class="line">        <span class="built_in">print</span>(result)</div><div class="line">    except urllib.error.URLError:</div><div class="line">        <span class="comment">#url获取错误</span></div><div class="line">        time.sleep(20)<span class="comment">#休息20秒</span></div><div class="line">    except Exception:</div><div class="line">        <span class="comment">#其他异常</span></div><div class="line">        time.sleep(10)<span class="comment">#休息20秒      </span></div><div class="line">    <span class="comment">#json串转成List[Map[]]</span></div><div class="line">    listMap = json.loads(result).get(<span class="string">'results'</span>,None)</div><div class="line">    <span class="comment">#如果没有获取到数据，则额外存储该小区，待后续再查</span></div><div class="line">    <span class="keyword">if</span> listMap is None:</div><div class="line">        with open(noResultfilePath,<span class="string">'a'</span>,encoding=<span class="string">'utf-8'</span>) as f:  </div><div class="line">            f.write(str(commId)+<span class="string">'\t'</span>+str(lat)+<span class="string">'\t'</span>+str(lng)+<span class="string">'\n'</span>)  </div><div class="line">    <span class="built_in">return</span> listMap</div><div class="line"></div><div class="line"><span class="comment">#-------------------------------------------------------------------</span></div><div class="line"></div><div class="line"><span class="string">''</span><span class="string">'</span></div><div class="line">主函数开始</div><div class="line">'<span class="string">''</span></div><div class="line">file = <span class="string">'d:/input_comm_lat_lng.txt'</span></div><div class="line">saveFile = <span class="string">'d:/output_comm_baidu_mess.txt'</span></div><div class="line"><span class="built_in">read</span>CommLatLngGetBaiduMess(file,saveFile,<span class="string">'银行'</span>)</div></pre></td></tr></table></figure>
+<p>这里需要注意的几个点：<br>1，查询的url编码是url的编码，即传入的中文串是%E8这种形式；<br>2，ak秘钥每天是有量限制的，需要多个ak；<br>3，json的解析，注意key不存在的情况，需要设置默认值；<br>4，url的get不是都能成功的，为了让程序继续执行，加入try；<br>5，没有成功的调用需要额外保存下来，待下回接着爬；</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://chlyzzo.github.io/2015/10/10/python爬虫-系列2/" data-title="python爬虫-简单开始 | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/05/02/社交圈的作用/" title="社交圈的作用">
+  <strong>上一篇：</strong><br/>
+  <span>
+  社交圈的作用</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/09/14/深度学习笔记集合/"  title="深度学习笔记集合">
+ <strong>下一篇：</strong><br/> 
+ <span>深度学习笔记集合
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 分享即是收获，动手后才是自己的. <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1724571293" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/chlyzzo" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:rimin515@sina.cn" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by © 2018 
+		
+		<a href="/about" target="_blank" title="文皓">文皓</a>
+		
+		
+		</p>
+
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?81e8b61e30a0723ad6270902dbcf0bb6";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

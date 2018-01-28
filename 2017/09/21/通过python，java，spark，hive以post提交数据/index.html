@@ -13,7 +13,7 @@
 
     
     <meta name="description" content="通过http形式提供服务，有两大类，一是get形式，请求服务；二是post形式，push消息得到服务，以下使用不同语言实现get和post数据形式，基础源自于java和python，scala则是通过调用java的方式实现，hive中也是，其中hive需要自定义udf。 get服务通过传入参数，发出请求，获取到数据， 1234567891011121314151617181920212223242">
-<meta name="keywords" content="spark,笔记,hive,python,post">
+<meta name="keywords" content="spark,笔记,python,hive,post">
 <meta property="og:type" content="article">
 <meta property="og:title" content="通过python，java，spark，hive以post提交数据">
 <meta property="og:url" content="https://chlyzzo.github.io/2017/09/21/通过python，java，spark，hive以post提交数据/index.html">
@@ -53,7 +53,7 @@
 				<h1 class="site-name"><a href="/" title="山上掏金">山上掏金</a></h1>
 				<h2 class="blog-motto">每天早上起床就是为了比昨天更快乐，掏金者的一天是新的开始.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -93,7 +93,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/spark/">spark</a><a href="/tags/笔记/">笔记</a><a href="/tags/hive/">hive</a><a href="/tags/python/">python</a><a href="/tags/post/">post</a>
+  <span></span> <a href="/tags/spark/">spark</a><a href="/tags/笔记/">笔记</a><a href="/tags/python/">python</a><a href="/tags/hive/">hive</a><a href="/tags/post/">post</a>
   </div>
 
 </div>
@@ -111,7 +111,7 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">目录</strong>
+			<strong class="toc-title">文章目录</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#get服务"><span class="toc-number">1.</span> <span class="toc-text">get服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#post数据"><span class="toc-number">2.</span> <span class="toc-text">post数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python的post方式"><span class="toc-number">3.</span> <span class="toc-text">python的post方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scala中post"><span class="toc-number">4.</span> <span class="toc-text">scala中post</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hive的udf实现"><span class="toc-number">5.</span> <span class="toc-text">hive的udf实现</span></a></li></ol>
 		

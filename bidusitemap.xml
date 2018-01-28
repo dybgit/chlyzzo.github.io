@@ -4,6 +4,44 @@
 
     
   <url>
+    <loc>https://chlyzzo.github.io/2015/10/10/python%E7%88%AC%E8%99%AB-%E7%B3%BB%E5%88%972/</loc>
+    <lastmod>2018-01-28T02:39:34.244Z</lastmod>
+    <data>
+        <display>
+        <title>python爬虫-简单开始</title>
+        <pubTime>2015-10-10T12:15:29.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="爬虫" url="https://chlyzzo.github.io/categories/%E7%88%AC%E8%99%AB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chlyzzo.github.io/2015/09/10/python%E7%88%AC%E8%99%AB-%E7%AE%80%E5%8D%95%E5%BC%80%E5%A7%8B/</loc>
+    <lastmod>2018-01-28T01:19:16.902Z</lastmod>
+    <data>
+        <display>
+        <title>python爬虫-简单开始</title>
+        <pubTime>2015-09-10T14:26:47.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="爬虫" url="https://chlyzzo.github.io/categories/%E7%88%AC%E8%99%AB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chlyzzo.github.io/2018/01/12/nlp-generate-text-document/</loc>
     <lastmod>2018-01-27T10:14:04.618Z</lastmod>
     <data>
@@ -276,9 +314,9 @@
          
         <tag>笔记</tag>
          
-        <tag>hive</tag>
-         
         <tag>python</tag>
+         
+        <tag>hive</tag>
          
         <tag>post</tag>
          
@@ -536,26 +574,6 @@
            
              
               <breadCrumb title="spark" url="https://chlyzzo.github.io/categories/spark/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2015/09/10/python%E7%88%AC%E8%99%AB-%E7%AE%80%E5%8D%95%E5%BC%80%E5%A7%8B/</loc>
-    <lastmod>2017-09-17T15:12:13.299Z</lastmod>
-    <data>
-        <display>
-        <title>python爬虫-简单开始</title>
-        <pubTime>2015-09-10T14:26:47.000Z</pubTime>
-        
-        <tag>爬虫</tag>
-         
-         
-           
-             
-              <breadCrumb title="python" url="https://chlyzzo.github.io/categories/python/"/>
           
         </display>
     </data>
