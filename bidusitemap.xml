@@ -3,6 +3,28 @@
 
 
     
+  <url>
+    <loc>https://chlyzzo.github.io/2017/05/18/hive%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2018-02-02T02:56:31.184Z</lastmod>
+    <data>
+        <display>
+        <title>hive笛卡尔积优化</title>
+        <pubTime>2017-05-18T10:47:17.275Z</pubTime>
+        
+        <tag>优化</tag>
+         
+        <tag>笛卡尔积</tag>
+         
+         
+           
+             
+              <breadCrumb title="hive" url="https://chlyzzo.github.io/categories/hive/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>https://chlyzzo.github.io/2015/10/10/python%E7%88%AC%E8%99%AB-%E7%B3%BB%E5%88%972/</loc>
@@ -492,28 +514,6 @@
            
              
               <breadCrumb title="深度学习" url="https://chlyzzo.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/05/18/hive%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF%E4%BC%98%E5%8C%96/</loc>
-    <lastmod>2017-10-27T08:27:26.428Z</lastmod>
-    <data>
-        <display>
-        <title>hive笛卡尔积优化</title>
-        <pubTime>2017-05-18T10:47:17.275Z</pubTime>
-        
-        <tag>优化</tag>
-         
-        <tag>笛卡尔积</tag>
-         
-         
-           
-             
-              <breadCrumb title="hive" url="https://chlyzzo.github.io/categories/hive/"/>
           
         </display>
     </data>
