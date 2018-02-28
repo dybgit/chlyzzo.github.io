@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>nlp--generate text document | 山上掏金</title>
+    <title>NLP 18年规划 | 山上掏金</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="Poq2hMEF9U" />
     
@@ -12,26 +12,21 @@
     
 
     
-    <meta name="description" content="分词隐马尔可夫，从字的状态中训练得到概率，可用于其他识别，如地名、人名等；条件随机场是搭配与提取用的有效方法；序列模型，RNN,LSTM是神经网络模型，从N-gram的不同序列中训练得到预测的概率，这里的预测可以是字、词、句子等；词性tags的分析，可引申出组块的抽取；句法和依存关系，类似于状态打标签，根据词的不同状态，得到依赖关系；       架构中除顶层红色外，都是已经上线在已有业务中的应用">
+    <meta name="description" content="内容在17年经过头条的爆发后，内容在18年将是个风口；各大互联生态拉新用户的手段已经接近黔驴技穷了，在传统上无法指数增长用户，留下两条路径：一是收购其他平台，补充用户；而是做好已有的用户留存率。而内容平台就是其中之一。 各个公司在AI的应用都瞄准精简人力，客服、问答、审核等密集型业务；在推荐、连接等意图型业务中也在不断优化提升。  在过去的一年时光里，从推荐开始，慢慢接收文本类业务，单页的推荐资讯">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nlp--generate text document">
-<meta property="og:url" content="https://chlyzzo.github.io/2018/01/12/nlp-generate-text-document/index.html">
+<meta property="og:title" content="NLP 18年规划">
+<meta property="og:url" content="https://chlyzzo.github.io/2018/02/27/NLP-18年规划/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:description" content="分词隐马尔可夫，从字的状态中训练得到概率，可用于其他识别，如地名、人名等；条件随机场是搭配与提取用的有效方法；序列模型，RNN,LSTM是神经网络模型，从N-gram的不同序列中训练得到预测的概率，这里的预测可以是字、词、句子等；词性tags的分析，可引申出组块的抽取；句法和依存关系，类似于状态打标签，根据词的不同状态，得到依赖关系；       架构中除顶层红色外，都是已经上线在已有业务中的应用">
-<meta property="og:image" content="https://chlyzzo.github.io/images/nlp2.PNG">
-<meta property="og:image" content="https://chlyzzo.github.io/images/nlp3.PNG">
-<meta property="og:image" content="https://chlyzzo.github.io/images/nlp4.PNG">
-<meta property="og:image" content="https://chlyzzo.github.io/images/nlp5.PNG">
-<meta property="og:image" content="https://chlyzzo.github.io/images/nlp6.PNG">
-<meta property="og:image" content="https://chlyzzo.github.io/images/nlp7.PNG">
-<meta property="og:image" content="https://chlyzzo.github.io/images/nlp8.PNG">
-<meta property="og:image" content="https://chlyzzo.github.io/images/nlp9.PNG">
-<meta property="og:image" content="https://chlyzzo.github.io/images/nlp11.PNG">
-<meta property="og:updated_time" content="2018-01-27T10:14:04.618Z">
+<meta property="og:description" content="内容在17年经过头条的爆发后，内容在18年将是个风口；各大互联生态拉新用户的手段已经接近黔驴技穷了，在传统上无法指数增长用户，留下两条路径：一是收购其他平台，补充用户；而是做好已有的用户留存率。而内容平台就是其中之一。 各个公司在AI的应用都瞄准精简人力，客服、问答、审核等密集型业务；在推荐、连接等意图型业务中也在不断优化提升。  在过去的一年时光里，从推荐开始，慢慢接收文本类业务，单页的推荐资讯">
+<meta property="og:image" content="https://chlyzzo.github.io/images/nlp-18-1.PNG">
+<meta property="og:image" content="https://chlyzzo.github.io/images/nlp-18-2.PNG">
+<meta property="og:image" content="https://chlyzzo.github.io/images/nlp-18-3.PNG">
+<meta property="og:image" content="https://chlyzzo.github.io/images/nlp-18-4.PNG">
+<meta property="og:updated_time" content="2018-02-28T07:02:20.737Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nlp--generate text document">
-<meta name="twitter:description" content="分词隐马尔可夫，从字的状态中训练得到概率，可用于其他识别，如地名、人名等；条件随机场是搭配与提取用的有效方法；序列模型，RNN,LSTM是神经网络模型，从N-gram的不同序列中训练得到预测的概率，这里的预测可以是字、词、句子等；词性tags的分析，可引申出组块的抽取；句法和依存关系，类似于状态打标签，根据词的不同状态，得到依赖关系；       架构中除顶层红色外，都是已经上线在已有业务中的应用">
-<meta name="twitter:image" content="https://chlyzzo.github.io/images/nlp2.PNG">
+<meta name="twitter:title" content="NLP 18年规划">
+<meta name="twitter:description" content="内容在17年经过头条的爆发后，内容在18年将是个风口；各大互联生态拉新用户的手段已经接近黔驴技穷了，在传统上无法指数增长用户，留下两条路径：一是收购其他平台，补充用户；而是做好已有的用户留存率。而内容平台就是其中之一。 各个公司在AI的应用都瞄准精简人力，客服、问答、审核等密集型业务；在推荐、连接等意图型业务中也在不断优化提升。  在过去的一年时光里，从推荐开始，慢慢接收文本类业务，单页的推荐资讯">
+<meta name="twitter:image" content="https://chlyzzo.github.io/images/nlp-18-1.PNG">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -95,7 +90,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/01/12/nlp-generate-text-document/" title="nlp--generate text document" itemprop="url">nlp--generate text document</a>
+      <a href="/2018/02/27/NLP-18年规划/" title="NLP 18年规划" itemprop="url">NLP 18年规划</a>
   </h1>
   <div class="article-catetags">
 
@@ -113,7 +108,7 @@
 		<a href="/about" title="文皓" target="_blank" itemprop="author">文皓</a>
 		
   <p class="article-time">
-    <time datetime="2018-01-12T08:30:02.000Z" itemprop="datePublished"> 2018-01-12 阅读量 <span id="busuanzi_value_page_pv"></span></time>
+    <time datetime="2018-02-27T05:50:43.000Z" itemprop="datePublished"> 2018-02-27 阅读量 <span id="busuanzi_value_page_pv"></span></time>
   </p>
 </header>
 
@@ -126,32 +121,27 @@
 		
 		</div>
 		
-		<p>分词隐马尔可夫，从字的状态中训练得到概率，可用于其他识别，如地名、人名等；<br>条件随机场是搭配与提取用的有效方法；<br>序列模型，RNN,LSTM是神经网络模型，从N-gram的不同序列中训练得到预测的概率，这里的预测可以是字、词、句子等；<br>词性tags的分析，可引申出组块的抽取；<br>句法和依存关系，类似于状态打标签，根据词的不同状态，得到依赖关系；</p>
-<p><img src="/images/nlp2.PNG" alt=""></p>
-<p><img src="/images/nlp3.PNG" alt=""></p>
-<p><img src="/images/nlp4.PNG" alt=""></p>
-<p><img src="/images/nlp5.PNG" alt=""></p>
-<p><img src="/images/nlp6.PNG" alt=""></p>
-<p><img src="/images/nlp7.PNG" alt=""></p>
-<p>架构中除顶层红色外，都是已经上线在已有业务中的应用，顶层的红色是今后将研究与实现的应用。在已经应用的项目里，各个模块比较分散，还需进一步整合，达到调用方便。</p>
-<p>此外，还需拓展中间层的处理和多种模型尝试。</p>
-<p><img src="/images/nlp8.PNG" alt=""></p>
-<p>目前已有的生成模型主流是概率推算，分统计概率和学习概率，统计概率主要是传统的统计数据求概率，已词频为特征；而学习概率以神经网络的序列模型为主，借助n-gram的上下文，庞大的序列串，以及能够存储少许记忆的LSTM神经元，训练得到一批推算概率的权重，从而预测出下一个字、词、句子。</p>
-<p>而目前在句法上，神经网络难以达到人的理解水平，注意力机制也是很难符合预期效果。在实际业务中，采取规则的方法颇多，即主要关键信息可单独拎出来计算，然后其余的描述信息人为给定足够多的模板，以及替代的变换词、句子，最后组装成文本，效果上能够达到人编辑的目标。但是，模板终究是有限的，</p>
-<p><img src="/images/nlp9.PNG" alt=""></p>
-<p>因此，统计概率是最简单的，但是无法解决语义，即“人吃草”的问题，学习概率可以弥补这一缺陷，受限于n-gram的序列长度，不能照顾太长的序列；而神经网路一是神经元数量少，与文本语言的目标不相符合，另外语言是网结构，需要发散、需要其他辅助、需要沉淀，不是链式结构，从前几个状态就能够推导出的；</p>
-<p>突破的点，个人认为在以下几个方面：<br>1，加大序列，体现更长久的记忆，能够弥补语义以及环境，但是，不是长久之计；<br>2，领域资料，即构建符合语言的网结构，把词与相关的领域做一个存储网状，或嵌套，虽然笨重但是是最有效的；<br>3，目前网络是链式的训练，以图像识别为例，输入图像、卷积、池化、LRN、卷积、池化、全连接、softmax等，这些操作是链接上一个再操作的，无法获取到额外信息，语言是变动的，不是静态的，静态的可以用这种链式的不断迭代去优化，语言却不行（个人意见，欢迎拍砖）。所以，需要新的网络结构来训练语言，</p>
-<p><img src="/images/nlp11.PNG" alt=""></p>
-<p>流计算是当前最为火的工具，Flink已经被阿里改造城Blink，并且反哺了社区，在经过阿里集团内部的实践后，新的Flink版本能够解决诸多业务问题，也是十分稳健的；</p>
-<p>流数据的关键是要把流与静态表映射，业务型的当前已表结构多，需要吞吐量大，以及可靠的文件系统，还需要保证性的流处理；</p>
-<p>再者，在标签上，用户的轨迹不在是单个的，而是多维的，这些多维的体现在一个公司的生态中，也体现在社会广大的生态中，存储轨迹的方式需要做新的更新，不再是以前条记录的形式，而是能够随时间拓展、随业务拓展的结构，并且格式需要能够快速插入和更新，是一种嵌套和索引的方式。</p>
+		<p>内容在17年经过头条的爆发后，内容在18年将是个风口；各大互联生态拉新用户的手段已经接近黔驴技穷了，在传统上无法指数增长用户，留下两条路径：<br>一是收购其他平台，补充用户；而是做好已有的用户留存率。而内容平台就是其中之一。</p>
+<p>各个公司在AI的应用都瞄准精简人力，客服、问答、审核等密集型业务；在推荐、连接等意图型业务中也在不断优化提升。</p>
+<p><img src="/images/nlp-18-1.PNG" alt=""></p>
+<p>在过去的一年时光里，从推荐开始，慢慢接收文本类业务，单页的推荐资讯从协同过滤、热度、用户喜好等推荐方式出发，到精准推问题、增加问题的曝光、拉升新增问题、优化内容排序等，到后续慢慢起步的资讯个性化推荐，涉及的文本技术从基础型慢慢地向理解型转变。</p>
+<p>信息治理应用于描述信息中脏数据或认定非法的检测；热词源于对昨日资讯的点击，便于观测词的注意力度，可应用于问题的生成，提升回答率和点击率；自动标签的生成，主要在资讯上，仅限于统计数据的标签还未细化到语义层面，下一步可将其往深处拓展，延伸标签背后的语义，丰富偏好；</p>
+<p>模板化生成文本已经在问题中试水，每日带来问题量以及回复人数，比其他问题的效果明显，这部分将可以借助外部数据源，生成更多更丰富的问题；<br>在推荐和推送中，紧跟“相关性”的度量，考虑到曝光度和回复的比值关系，一方面背后挖掘人的相关点，另一方面控制页面的类别排序，还有活动的激励，总之，紧跟两个原则，一是给出感兴趣的，二是拉动活跃；</p>
+<p>在偏好和用户浏览轨迹上，目前仅仅是统计用户在某一个时间点或时间段的标签值，没有可回溯单个用户偏好的数据源，可以设计新的存储方式，把时间带上，使用不断嵌套方式，这样在做用户画像或者推荐时，获取用户的偏好就更快捷和精准；</p>
+<p>树状的知识图谱在查询中能够体现好的作用，而在识别意图中，需要的是网状，并且额外的延伸信息；<br>在特定场合下或领域下，某些词是具有吸引力的，能够抓住用户的注意力，通过这方面的挖掘、抽取和生成，可以实现高吸引的文本；<br>另外，命题式的生成是一个挑战，即给定一个主题，完成既定字数的文章，需要很大的词汇组织，以及领域图谱；</p>
+<p><img src="/images/nlp-18-2.PNG" alt=""></p>
+<p>NLP的实践，从数据源出发，到预处理，模型构建，应用输出。数据源除了人工录入外，可爬虫获得；文本的预处理离不开格式和编码规范，在同一个平台下需要统一格式统一编码；之后的分词、提取、过滤等也是NLP不可或缺的操作，才生的结果可以是中间结果，也可以应用到简单的业务场景，比如词的统计，以及语义的延伸等；之后的模型构建，针对不同的目标进行训练和保存，当前有词向量和生成文本等；对外的应用紧跟产品需求，当新的需求加进来，也许需要从源头数据源开始，重复如此步骤。</p>
+<p>除了顶层的理解型构建，其余模块可进行整合，也可以进行拆分，为了整体耦合，最好是整合在一个平台内，对外提供调用；然后，新增的在各个模块进行添加。</p>
+<p><img src="/images/nlp-18-3.PNG" alt=""></p>
+<p>NLP的任务，最多是跟数据打交道，需要了解数据源开始，把数据源进行整理，达到简单可用的地步；然后是，对数据的预处理，得到切分好的原材料；<br>还有很多值得研究的地方，值得探索的当是意向图谱的构建和命题式的生成。</p>
+<p><img src="/images/nlp-18-4.PNG" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://chlyzzo.github.io/2018/01/12/nlp-generate-text-document/" data-title="nlp--generate text document | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  <div data-url="https://chlyzzo.github.io/2018/02/27/NLP-18年规划/" data-title="NLP 18年规划 | 山上掏金" data-tsina="1724571293" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -164,19 +154,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/02/27/NLP-18年规划/" title="NLP 18年规划">
-  <strong>上一篇：</strong><br/>
-  <span>
-  NLP 18年规划</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/12/24/慢慢长大/"  title="慢慢长大">
+<a href="/2018/01/12/nlp-generate-text-document/"  title="nlp--generate text document">
  <strong>下一篇：</strong><br/> 
- <span>慢慢长大
+ <span>nlp--generate text document
 </span>
 </a>
 </div>
