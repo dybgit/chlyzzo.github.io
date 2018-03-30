@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2014/12/30/ML-学习汇总笔记/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="机器学习是从大量样本中训练，依照评估指标，不断优化得到自动评判新数据的策略；如果有标签，可分为有监督学习，以及无监督学习；根据目标的离散与否，分为回归分析还是分类分析；依照模型的复杂度，可有集成学习、深度学习等。通过学习ML的方法，可以了解方法的原理、适用范围、以及实践经验等。以下是学习过程的一些记录，基础学习可参加对应的论文和书籍。 线性回归属于回归分析，预测连续性目标，梯度方向寻找最优参数；特">
-<meta property="og:updated_time" content="2018-03-30T15:38:04.773Z">
+<meta property="og:updated_time" content="2018-03-30T15:41:51.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML-学习汇总笔记">
 <meta name="twitter:description" content="机器学习是从大量样本中训练，依照评估指标，不断优化得到自动评判新数据的策略；如果有标签，可分为有监督学习，以及无监督学习；根据目标的离散与否，分为回归分析还是分类分析；依照模型的复杂度，可有集成学习、深度学习等。通过学习ML的方法，可以了解方法的原理、适用范围、以及实践经验等。以下是学习过程的一些记录，基础学习可参加对应的论文和书籍。 线性回归属于回归分析，预测连续性目标，梯度方向寻找最优参数；特">
@@ -129,7 +129,7 @@
 <p>线性回归的每个特征值范围相差不大最好，如果量级差太大，对w的训练结果不好；</p>
 <p>在训练前，最好做每个特征的统计分析，把异常点去除，比如计算每个特征的均差等；</p>
 <h2 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h2><p>与线性回归完全不同原理的分析，对离散值的预测，一般的逻辑回归是对二元0/1的预测，简单的分类问题，最后的激活值函数是sigmoid函数；预测的是概率；一般的逻辑回归是0/1的概率事件，属于伯努利事件，因此，前提假设问题是伯努利分布是很必要的。</p>
-<p>logistic函数也即是sigmoid函数，$\sigma (x)=\frac{1}{1+e^{-x}}$，对于逻辑回归，我们需要计算的目标是下面两个：<br>$$p(y=1|X)=h_{\theta }(x)=\frac{1}{1+e^{-\theta ^{T}x}}=\sigma (\theta ^{T}x)$$<br>$$p(y=0|X)=1-p(y=1|X)=1-h_{\theta }(x)$$<br>显然，sigmoid函数值域是[0,1]，即把$\theta ^{T}x$映射到[0,1]之间，是一个概率值；因此，我们的目标是当样本属于1时，$h_{\theta }(x)$的概率要越大；当样本属于0时，$1-h_{\theta }(x)$的概率要越大；因为，二值问题${(x^{i},y^{i});i=1,2,3,…,n}$的成本函数如下：<br>$$J(\theta )=-\sum_{i}^{N}\left [ y^{i}log(h\theta (x^{i}))+(1-y^{i})log(1-h\theta (x^{i}))\right ]$$<br>最小化$J(\theta )$,同样利用梯度下降法求得最佳解。</p>
+<p>logistic函数也即是sigmoid函数，$\sigma (x)=\frac{1}{1+e^{-x}}$，对于逻辑回归，我们需要计算的目标是下面两个：<br>$$p(y=1|X)=h_{\theta }(x)=\frac{1}{1+e^{-\theta ^{T}x}}=\sigma (\theta ^{T}x)$$<br>$$p(y=0|X)=1-p(y=1|X)=1-h_{\theta }(x)$$<br>显然，sigmoid函数值域是[0,1]，即把$\theta ^{T}x$映射到[0,1]之间，是一个概率值；因此，我们的目标是当样本属于1时，$h_{\theta }(x)$的概率要越大；当样本属于0时，$1-h_{\theta }(x)$的概率要越大；因为，二值问题${(x^{i},y^{i});i=1,2,3,…,n}$的成本函数如下：<br>$$J(\theta )=-\sum_{i}^{N}\left [ y^{i}log(h_{\theta}(x^{i}))+(1-y^{i})log(1-h_{\theta}(x^{i}))\right ]$$<br>最小化$J(\theta )$,同样利用梯度下降法求得最佳解。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
