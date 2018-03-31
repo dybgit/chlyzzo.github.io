@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://chlyzzo.github.io/2014/12/30/ML-学习汇总笔记/index.html">
 <meta property="og:site_name" content="山上掏金">
 <meta property="og:description" content="机器学习是从大量样本中训练，依照评估指标，不断优化得到自动评判新数据的策略；如果有标签，可分为有监督学习，以及无监督学习；根据目标的离散与否，分为回归分析还是分类分析；依照模型的复杂度，可有集成学习、深度学习等。通过学习ML的方法，可以了解方法的原理、适用范围、以及实践经验等。以下是学习过程的一些记录，基础学习可参加对应的论文和书籍。 线性回归属于回归分析，预测连续性目标，梯度方向寻找最优参数；特">
-<meta property="og:updated_time" content="2018-03-31T07:26:06.322Z">
+<meta property="og:updated_time" content="2018-03-31T07:33:20.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML-学习汇总笔记">
 <meta name="twitter:description" content="机器学习是从大量样本中训练，依照评估指标，不断优化得到自动评判新数据的策略；如果有标签，可分为有监督学习，以及无监督学习；根据目标的离散与否，分为回归分析还是分类分析；依照模型的复杂度，可有集成学习、深度学习等。通过学习ML的方法，可以了解方法的原理、适用范围、以及实践经验等。以下是学习过程的一些记录，基础学习可参加对应的论文和书籍。 线性回归属于回归分析，预测连续性目标，梯度方向寻找最优参数；特">
@@ -133,8 +133,8 @@
 <h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><p>SVM（(support vector machine）支持向量机，依据样本间的间隔，把样本进行分类；位于分界面上的点是支持向量。SVM是分割面的间隔最大化；</p>
 <p>几何间隔是点到线的距离，函数间隔是函数值；SVM的原理是找到分割面$f(x)=w^{T}x+b$，然后最大化边界，几何间隔$\frac{w(x^{+}-x^{-})}{\left | w \right |}=\frac{2}{\left | w \right |}$，支持向量满足$y^{i}(w^{T}x^{i}+b)=1$。</p>
 <p>目标是最大化几何间隔$max\frac{2}{\left | w \right |}=&gt;min \left | w \right |^{2}=&gt;\phi (w)=\frac{1}{2}\left | w \right |^{2}$，其中的约束条件是$y^{i}(w^{T}x^{i}+b)\geqslant 1$，当是支持向量时为1，其他样本是大于1.</p>
-<p>求解的方法也是梯度方向，但是需要对目标函数进行改造，利用拉格朗日，讲目标函数转化为最小化如下成本函数：<br>$$L(w,b,a)=\frac{1}{2}\left | w \right |^{2}-\sum_{i=1}^{N}a^{i}(y^{i}(w^{T}x^{i}+b)-1)$$<br>然后就转为对偶问题求解，最大化如下函数，<br>$$L_{D}=w(a)=\sum_{i=1}^{N}a^{i}-\frac{1}{2}\sum_{i,j=1}^{N}y^{i}y^{j}a^{i}a^{j}<x^{i},x^{j}>$$<br>计算的方法是求偏导，得到如下两个公式：<br>$$\frac{\partial L}{\partial b}=0 =&gt; \sum_{i=1}^{N}y^{i}a^{i}=0,a^{i}\geq 0$$<br>$$\frac{\partial L}{\partial w}=0 =&gt; w=\sum_{i=1}^{N}a^{i}y^{i}x^{i}$$<br>可以采取SMO方法不断交替的优化，得到a。</x^{i},x^{j}></p>
-<p>最后的预测时，采取如下计算即可$w^{T}x+b=\sum_{i=1}^{N}a^{i}y^{i}<x^{i},x>+b$。</x^{i},x></p>
+<p>求解的方法也是梯度方向，但是需要对目标函数进行改造，利用拉格朗日，讲目标函数转化为最小化如下成本函数：<br>$$L(w,b,a)=\frac{1}{2}\left | w \right |^{2}-\sum_{i=1}^{N}a^{i}(y^{i}(w^{T}x^{i}+b)-1)$$<br>然后就转为对偶问题求解，最大化如下函数，<br>$$L_{D}=w(a)=\sum_{i=1}^{N}a^{i}-\frac{1}{2}\sum_{i,j=1}^{N}y^{i}y^{j}a^{i}a^{j}(x^{i},x^{j})$$<br>计算的方法是求偏导，得到如下两个公式：<br>$$\frac{\partial L}{\partial b}=0 =&gt; \sum_{i=1}^{N}y^{i}a^{i}=0,a^{i}\geq 0$$<br>$$\frac{\partial L}{\partial w}=0 =&gt; w=\sum_{i=1}^{N}a^{i}y^{i}x^{i}$$<br>可以采取SMO方法不断交替的优化，得到a。</p>
+<p>最后的预测时，采取如下计算即可$w^{T}x+b=\sum_{i=1}^{N}a^{i}y^{i}(x^{i},x)+b$。</p>
 <p>SVM是实践中效果佳的二分类方法，也可以用于多分类问题下，当线性不可分时，需要对核函数进行操作，即把x映射到新的空间中，再采取分割面的原理分类；</p>
   
 	</div>
