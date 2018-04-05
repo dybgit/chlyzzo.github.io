@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>text generate by statistic | 山上掏金</title>
+    <title>ML-学习汇总笔记2 | 山上掏金</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="Poq2hMEF9U" />
     
@@ -12,13 +12,18 @@
     
 
     
-    <meta property="og:type" content="article">
-<meta property="og:title" content="text generate by statistic">
-<meta property="og:url" content="https://chlyzzo.github.io/2017/12/17/text-generate-by-statistic/index.html">
+    <meta name="description" content="感知器，一个线性的判别器，能够实现简单的逻辑运算，比如与非门等；更进一步，引入偏置bias，则在实践中体现便捷；当把感知器整合成神经元，进而通过链式的网络结构，把这些神经元连接，就得到了神经网络，然而神经网络并非如此简单，需要在每个神经元上加入激活函数，不加激活函数便成为完全的线性，与线性回归一致。 在激活函数的变换下，以及网络的结构，发展出很多不同类型的神经网络方法，解决各种不同领域的问题。 感">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ML-学习汇总笔记2">
+<meta property="og:url" content="https://chlyzzo.github.io/2015/02/20/ML-学习汇总笔记2/index.html">
 <meta property="og:site_name" content="山上掏金">
-<meta property="og:updated_time" content="2017-12-20T13:50:40.717Z">
+<meta property="og:description" content="感知器，一个线性的判别器，能够实现简单的逻辑运算，比如与非门等；更进一步，引入偏置bias，则在实践中体现便捷；当把感知器整合成神经元，进而通过链式的网络结构，把这些神经元连接，就得到了神经网络，然而神经网络并非如此简单，需要在每个神经元上加入激活函数，不加激活函数便成为完全的线性，与线性回归一致。 在激活函数的变换下，以及网络的结构，发展出很多不同类型的神经网络方法，解决各种不同领域的问题。 感">
+<meta property="og:image" content="https://chlyzzo.github.io/images/感知器1.png">
+<meta property="og:updated_time" content="2018-04-05T02:13:30.435Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="text generate by statistic">
+<meta name="twitter:title" content="ML-学习汇总笔记2">
+<meta name="twitter:description" content="感知器，一个线性的判别器，能够实现简单的逻辑运算，比如与非门等；更进一步，引入偏置bias，则在实践中体现便捷；当把感知器整合成神经元，进而通过链式的网络结构，把这些神经元连接，就得到了神经网络，然而神经网络并非如此简单，需要在每个神经元上加入激活函数，不加激活函数便成为完全的线性，与线性回归一致。 在激活函数的变换下，以及网络的结构，发展出很多不同类型的神经网络方法，解决各种不同领域的问题。 感">
+<meta name="twitter:image" content="https://chlyzzo.github.io/images/感知器1.png">
 
     
     <link rel="alternative" href="/atom.xml" title="山上掏金" type="application/atom+xml">
@@ -82,13 +87,13 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/12/17/text-generate-by-statistic/" title="text generate by statistic" itemprop="url">text generate by statistic</a>
+      <a href="/2015/02/20/ML-学习汇总笔记2/" title="ML-学习汇总笔记2" itemprop="url">ML-学习汇总笔记2</a>
   </h1>
   <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/nlp/">nlp</a>
+  <a class="article-category-link" href="/categories/ML/">ML</a>
 </div>
 
 
@@ -100,7 +105,7 @@
 		<a href="/about" title="文皓" target="_blank" itemprop="author">文皓</a>
 		
   <p class="article-time">
-    <time datetime="2017-12-17T11:39:50.000Z" itemprop="datePublished"> 2017-12-17 阅读量 <span id="busuanzi_value_page_pv"></span></time>
+    <time datetime="2015-02-20T10:16:45.000Z" itemprop="datePublished"> 2015-02-20 阅读量 <span id="busuanzi_value_page_pv"></span></time>
   </p>
 </header>
 
@@ -109,17 +114,41 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#感知器"><span class="toc-number">1.</span> <span class="toc-text">感知器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#激活函数"><span class="toc-number">2.</span> <span class="toc-text">激活函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#神经网络过程"><span class="toc-number">3.</span> <span class="toc-text">神经网络过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#反向传播"><span class="toc-number">3.1.</span> <span class="toc-text">反向传播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#学习率慢问题"><span class="toc-number">3.2.</span> <span class="toc-text">学习率慢问题</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		  
+		<p>感知器，一个线性的判别器，能够实现简单的逻辑运算，比如与非门等；更进一步，引入偏置bias，则在实践中体现便捷；当把感知器整合成神经元，进而通过链式的网络结构，把这些神经元连接，就得到了神经网络，然而神经网络并非如此简单，需要在每个神经元上加入激活函数，不加激活函数便成为完全的线性，与线性回归一致。</p>
+<p>在激活函数的变换下，以及网络的结构，发展出很多不同类型的神经网络方法，解决各种不同领域的问题。</p>
+<h2 id="感知器"><a href="#感知器" class="headerlink" title="感知器"></a>感知器</h2><p>即一个sigmoid神经元，如下图所示，<br><img src="/images/感知器1.png" alt=""><br>直观地理解，决策前考虑的因素是$x_{j}$，特定因素所对决策的重要性是$w_{j}$。</p>
+<p>进一步改进感知器，是引入偏度bias，wx+b，加入b在实践中可以调整。<br>比较像线性回归，拟合曲线一样，其实线性回归可以用最小二乘法拟合，梯度是另一种求解思路。</p>
+<h2 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h2><p>神经网络需要神经元的激活函数，当权重变化时，则会引起后续神经元变化，从而引起output变化，不断与实际值接近；这样就可以不断调整权重，从而使得预测值与实际值接近。</p>
+<p>sigmoid函数是$\sigma (x)=\frac{1}{1+e^{-x}}$,其导数是${\sigma (x)}’=\sigma (x)(1-\sigma (x))$，</p>
+<p>当权重和偏置变化时，则会引起输出的变化：$\Delta output\approx \sum_{j}^{N}(\frac{\partial ouput}{\partial w_{j}}\Delta w_{j}+\frac{\partial output}{\partial b}\Delta b)$。</p>
+<p>评价w和b的好坏，成本函数最小化，$C(w,b)=\frac{1}{2N}\sum_{x}^{N}\left | y(x)-a \right |^{2}$，</p>
+<p>在实践中，我们常用mini_batch的方式来优化w和b，因此，权重和偏置的优化公式分别如下：<br>$$w_{k}=w_{k}-\frac{\eta }{m}\sum_{j}^{m}\frac{\partial C_{xj}}{\partial w_{k}}$$<br>$$b_{l}=b_{l}-\frac{\eta }{m}\sum_{j}^{m}\frac{\partial C_{xj}}{\partial b_{l}}$$,</p>
+<h2 id="神经网络过程"><a href="#神经网络过程" class="headerlink" title="神经网络过程"></a>神经网络过程</h2><p>采取如下表示：<br>$w_{jk}^{level}$,第level-1层连接到level层，level-1层的第k个神经元连接到底level层的第j个神经元，即目的j源k。</p>
+<p>$b_{j}^{level}$，第level层的第j个神经元的bias；</p>
+<p>$a_{j}^{level}$，第level层的第j个神经元的激活函数；</p>
+<p>$a_{j}^{level}=\sigma (\sum_{k}^{n}w_{jk}^{level}a_{k}^{level-1}+b_{j}^{level})$，上一层所有神经元指向第level层的第j个神经元。</p>
+<p>每一层level定义神经元矩阵$w^{level}$，每层的weight矩阵n*m不同，因此，level层的矩阵weight中的第j行k列$w_{jk}^{level}$。</p>
+<p>向量计算方式，比如下面简单的例子：<br>$f(x)=x^{2},f(\begin{bmatrix}2\\3\end{bmatrix})=\begin{bmatrix}f(2)\\f(3)\end{bmatrix}=\begin{bmatrix}4\\9\end{bmatrix}$，因此，神经网络计算可以转为向量的计算$a^{level}=\sigma (w^{level}a^{level-1}+b^{level})$，所以在代码里，会有个中间结果存储$z^{level}=w^{level}a^{level-1}+b^{level}$，</p>
+<h3 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h3><p>如上，则计算单个样本的成本函数是$\frac{1}{2}\sum_{j}^{m}(y_{j}-a_{j}^{L})^{2}$，其中L是最后一层，即输出层；<br>接着就是把输出层的error反向传播出去，每一层会产生该层的error，不断优化每一层的w和b。<br>$\xi_{j}^{level}$，表示level层的第j个神经元的error。反向传播的伪代码如下：</p>
+<p>1，输入x，设置对应的激活函数a；</p>
+<p>2，前向：每一层level计算$z^{level}=w^{level}a^{level-1}+b^{level}$，$a^{level}=\sigma (z^{level})$;</p>
+<p>3,输出error，$\xi^{L}=\Delta_{a}C\bigodot{\sigma }’(z^{L})=(a^{L}-y)\bigodot{\sigma }’(z^{L})$;</p>
+<p>4,后向传播error，level=L-1,L-2,…,2，计算$\xi^{level}=(w^{level+1}\xi^{level+1}) \bigodot {\sigma }’(z^{level})$；</p>
+<h3 id="学习率慢问题"><a href="#学习率慢问题" class="headerlink" title="学习率慢问题"></a>学习率慢问题</h3><p>神经网络的学习是成本函数的偏导作为学习率，学习慢意味着偏导很小，那么为什么会很小？因为用sigmoid函数时，偏导一定含有${\sigma }’(x)$，观察sigmoid函数曲线发现，输出接近1时导数接近0，即偏导很小值；</p>
+<p>如何解决这一问题，采取方式是交叉熵构造成本函数，是的偏导函数中取决于${\sigma }(x)-y$。</p>
+<p>成本函数的构造有不同方式，softmax等，交叉熵等，为的是不同的目标，或者计算过程优化；神经网络过程中的激活函数也有不同作用，像sigmoid会导致梯度越来越小，会使用relu等，tanh等。</p>
+<p>线性回归使用L1正则或L2正则，为的是不过拟合</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://chlyzzo.github.io/2017/12/17/text-generate-by-statistic/" data-title="text generate by statistic | 山上掏金" data-tsina="1724571293" class="share clearfix">
+	  <div data-url="https://chlyzzo.github.io/2015/02/20/ML-学习汇总笔记2/" data-title="ML-学习汇总笔记2 | 山上掏金" data-tsina="1724571293" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -133,18 +162,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/12/19/text-generate-by-sequence-model/" title="text generate by sequence model">
+ <a href="/2015/06/02/数据化运营笔记/" title="数据化运营笔记">
   <strong>上一篇：</strong><br/>
   <span>
-  text generate by sequence model</span>
+  数据化运营笔记</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/12/13/攻击与异常检测/"  title="攻击与异常检测">
+<a href="/2014/12/30/ML-学习汇总笔记/"  title="ML-学习汇总笔记">
  <strong>下一篇：</strong><br/> 
- <span>攻击与异常检测
+ <span>ML-学习汇总笔记
 </span>
 </a>
 </div>
