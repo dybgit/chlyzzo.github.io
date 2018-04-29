@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chlyzzo.github.io/about/index.html</loc>
+    
+    <lastmod>2018-04-29T13:54:05.172Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chlyzzo.github.io/2015/02/20/ML-%E5%AD%A6%E4%B9%A0%E6%B1%87%E6%80%BB%E7%AC%94%E8%AE%B02/</loc>
     
     <lastmod>2018-04-05T02:13:30.435Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>https://chlyzzo.github.io/2017/05/18/hive%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF%E4%BC%98%E5%8C%96/</loc>
     
     <lastmod>2018-02-02T10:23:26.590Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chlyzzo.github.io/about/index.html</loc>
-    
-    <lastmod>2018-01-28T02:57:50.689Z</lastmod>
     
   </url>
   
