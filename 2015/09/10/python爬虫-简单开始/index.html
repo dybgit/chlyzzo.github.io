@@ -56,7 +56,7 @@
                         <div id="music163player">
                              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=260 height=80 src="//music.163.com/outchain/player?type=2&id=27890740&auto=1&height=66"></iframe>
                         </div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -119,7 +119,7 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">目录</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#json的解析和使用"><span class="toc-number">1.</span> <span class="toc-text">json的解析和使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用BeautifulSoup"><span class="toc-number">2.</span> <span class="toc-text">使用BeautifulSoup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#爬取今日头条"><span class="toc-number">3.</span> <span class="toc-text">爬取今日头条</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#爬取京东评论"><span class="toc-number">4.</span> <span class="toc-text">爬取京东评论</span></a></li></ol>
 		
@@ -135,6 +135,112 @@
 <h2 id="爬取京东评论"><a href="#爬取京东评论" class="headerlink" title="爬取京东评论"></a>爬取京东评论</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding=utf-8</span></div><div class="line"></div><div class="line"><span class="string">''</span><span class="string">'</span></div><div class="line">抓取京东商品的评论数据；</div><div class="line">decode的作用是将其他编码的字符串转换成unicode编码，如str1.decode('gb2312<span class="string">')，表示将gb2312编码的字符串str1转换成unicode编码。</span></div><div class="line">encode的作用是将unicode编码转换成其他编码的字符串，如str2.encode('gb2312<span class="string">')，表示将unicode编码的字符串str2转换成gb2312编码。</span></div><div class="line">'<span class="string">''</span></div><div class="line">import urllib2</div><div class="line">import re,bs4</div><div class="line">from bs4 import BeautifulSoup</div><div class="line"></div><div class="line">url=<span class="string">"http://club.jd.com/review/1721312-1-1-0.html"</span><span class="comment">#1721312</span></div><div class="line">四个数好3、中2、差1、全部0、有图片4</div><div class="line">req = urllib2.Request(url)</div><div class="line">resp = urllib2.urlopen(req)</div><div class="line">respHtml = resp.read()</div><div class="line">resp.close()</div><div class="line">soup = BeautifulSoup(respHtml,from_encoding=<span class="string">"gbk"</span>)</div><div class="line"><span class="comment">#得到总的页数</span></div><div class="line">Page=soup.find(<span class="string">"div"</span>,class_=<span class="string">"pagin fr"</span>)</div><div class="line">conts=(str(Page).replace(<span class="string">'&lt;div class="pagin fr"&gt;'</span>,<span class="string">''</span>).replace(<span class="string">'&lt;/div&gt;'</span>,<span class="string">''</span>))<span class="comment">#得到包含总页数的那段网页源码内容</span></div><div class="line">totlePage=0</div><div class="line">try:</div><div class="line">     totlePage=int(conts.split(<span class="string">'&lt;/a&gt;'</span>)[3].split(<span class="string">'&gt;'</span>)[3])<span class="comment">#得到总页数的那个值</span></div><div class="line">except Exception, e:</div><div class="line">    <span class="built_in">print</span>(<span class="string">'the productor is not have evaluates'</span>)</div><div class="line"><span class="comment"># print(totlePage)</span></div><div class="line"><span class="comment">############################################################################</span></div><div class="line"><span class="comment">#找到该类别下的所有评论</span></div><div class="line"><span class="comment"># for currPage in range(totlePage):</span></div><div class="line"><span class="comment">#      print(currPage)</span></div><div class="line"><span class="comment">#      newurl="http://club.jd.com/review/1721312-1-"+str(currPage+1)+"-1.html"</span></div><div class="line"><span class="comment">#      req = urllib2.Request(newurl)</span></div><div class="line"><span class="comment">#      resp = urllib2.urlopen(req)</span></div><div class="line"><span class="comment">#      respHtml = resp.read()</span></div><div class="line"><span class="comment">#      resp.close()</span></div><div class="line"><span class="comment">#      soup = BeautifulSoup(respHtml,from_encoding="gbk")</span></div><div class="line"><span class="comment">#      m = soup.findAll("div",&#123;'class':"comment-content"&#125;)</span></div><div class="line"><span class="comment">#      #存入txt文件</span></div><div class="line"><span class="comment">#      import codecs</span></div><div class="line"><span class="comment">#      evaluate_z=open("tr_c.txt","a")</span></div><div class="line"><span class="comment">#      for obj in m:</span></div><div class="line"><span class="comment">#             con=''.join(obj.find('dd').contents).replace('\n','')</span></div><div class="line"><span class="comment">#             print con</span></div><div class="line"><span class="comment">#             evaluate_z.write(con.encode('utf8')+'\t'+'class=bad'+'\n')</span></div><div class="line"><span class="comment">#      evaluate_z.close()</span></div><div class="line"></div><div class="line"><span class="comment">############################################################################</span></div><div class="line"><span class="comment">#爬取全部的，</span></div><div class="line">evaluate_z=open(<span class="string">"tr_all.txt"</span>,<span class="string">"a"</span>)</div><div class="line"><span class="keyword">for</span> currPage <span class="keyword">in</span> range(totlePage):</div><div class="line">     <span class="built_in">print</span>(currPage)</div><div class="line">     newurl=<span class="string">"http://club.jd.com/review/1721312-1-"</span>+str(currPage+1)+<span class="string">"-0.html"</span></div><div class="line">     req = urllib2.Request(newurl)</div><div class="line">     resp = urllib2.urlopen(req)</div><div class="line">     respHtml = resp.read()</div><div class="line">     resp.close()</div><div class="line">     soup = BeautifulSoup(respHtml,from_encoding=<span class="string">"gbk"</span>)</div><div class="line">     m = soup.findAll(<span class="string">"div"</span>,&#123;<span class="string">'class'</span>:<span class="string">"i-item"</span>&#125;)</div><div class="line">     <span class="keyword">for</span> obj <span class="keyword">in</span> m:</div><div class="line">        star=str(obj.find(<span class="string">'span'</span>))[20:21]<span class="comment">#获得星标</span></div><div class="line">        content=str(obj.find(<span class="string">'dd'</span>)).replace(<span class="string">'\n'</span>,<span class="string">''</span>).replace(<span class="string">'&lt;dd&gt;'</span>,<span class="string">''</span>).replace(<span class="string">'&lt;/dd&gt;'</span>,<span class="string">''</span>)<span class="comment">#获得评价内容</span></div><div class="line">        <span class="built_in">print</span> content+<span class="string">'\t'</span>+star</div><div class="line">        evaluate_z.write(content+<span class="string">'\t'</span>+<span class="string">'star='</span>+star+<span class="string">'\n'</span>)</div><div class="line">evaluate_z.close()</div></pre></td></tr></table></figure>
   
 	</div>
+        
+	<!-- css -->
+	<style type="text/css">
+	    .center {
+	        text-align: center;
+	    }
+	    .hidden {
+	        display: none;
+	    }
+		.donate_bar a.btn_donate{
+			display: inline-block;
+			width: 82px;
+			height: 82px;
+			background: url("http://7xsl28.com1.z0.glb.clouddn.com/btn_reward.gif") no-repeat;
+			_background: url("http://7xsl28.com1.z0.glb.clouddn.com/btn_reward.gif") no-repeat;
+
+			<!-- http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif
+			     ��Ϊ�� hexo ���ɵĲ������õ� theme �� a:hover ������Ч����
+				 Ϊ�����ô��Ͱ�ť��ʾЧ������ �� ���������¼��� css��
+				 Ƕ����������ʱ��һ��Ҫ���ǡ� -->
+			-webkit-transition: background 0s;
+			-moz-transition: background 0s;
+			-o-transition: background 0s;
+			-ms-transition: background 0s;
+			transition: background 0s;
+			<!-- /�ô��Ͱ�ť��Ч����ʾ���� �� ���ӵļ��� css ���˽��� -->
+		}
+
+		.donate_bar a.btn_donate:hover{ background-position: 0px -82px;}
+		.donate_bar .donate_txt {
+			display: block;
+			color: #9d9d9d;
+			font: 14px/2 "Microsoft Yahei";
+		}
+		.bold{ font-weight: bold; }
+	</style>
+	<!-- /css -->
+
+    <!-- Donate Module -->
+    <div id="donate_module">
+
+	<!-- btn_donate & tips -->
+	<div id="donate_board" class="donate_bar center">
+	    <br>
+	    ------------------------------------------------------------------------------------------------------------------------------
+	    <br>
+		<a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate ����"></a>
+		<span class="donate_txt">
+			只卖艺不卖身，客官打赏，给您来段50的
+		</span>
+			
+		
+	</div>
+	<!-- /btn_donate & tips -->
+
+	<!-- donate guide -->
+    
+	<div id="donate_guide" class="donate_bar center hidden">
+        <br>
+	    ------------------------------------------------------------------------------------------------------------------------------
+	    <br>
+	    
+	    <div width="100%" align="center"><div name="dashmain" id="dash-main-id-87895f" class="dash-main-3 87895f-0.99"></div></div>
+		<script type="text/javascript" charset="utf-8" src="http://www.dashangcloud.com/static/ds.js"></script>
+		
+
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="��΢��ɨһɨŶ~" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="΢�Ŵ��� Donate" height="190px" width="auto"/>
+		</a>
+        
+        &nbsp;&nbsp;
+
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="��֧����ɨһɨ����~" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="֧�������� Donate" height="190px" width="auto"/>
+		</a>
+
+		<span class="donate_txt">
+			只卖艺不卖身，客官打赏，给您来段50的
+		</span>
+
+	</div>
+	<!-- /donate guide -->
+
+	<!-- donate script -->
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function() {
+			$('#donate_board').addClass('hidden');
+	    $('#donate_guide').removeClass('hidden');
+		}
+
+		function donate_on_web(){
+			$('#donate').submit();
+        }
+
+		var original_window_onload = window.onload;
+        window.onload = function () {
+            if (original_window_onload) {
+                original_window_onload();
+            }
+            document.getElementById('donate_board_wdg').className = 'hidden';
+		}
+	</script>
+	<!-- /donate script -->
+</div>
+<!-- /Donate Module -->
+    
 		<footer class="article-footer clearfix">
 
 	<div class="article-share" id="share">

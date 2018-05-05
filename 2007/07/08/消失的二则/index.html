@@ -55,7 +55,7 @@
                         <div id="music163player">
                              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=260 height=80 src="//music.163.com/outchain/player?type=2&id=27890740&auto=1&height=66"></iframe>
                         </div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -113,7 +113,7 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">目录</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一则"><span class="toc-number">1.</span> <span class="toc-text">一则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二则"><span class="toc-number">2.</span> <span class="toc-text">二则</span></a></li></ol>
 		
@@ -132,6 +132,112 @@
 <p>呜呼哀哉！欲罢不能、欲求不得、欲思不出何其痛哉！</p>
   
 	</div>
+        
+	<!-- css -->
+	<style type="text/css">
+	    .center {
+	        text-align: center;
+	    }
+	    .hidden {
+	        display: none;
+	    }
+		.donate_bar a.btn_donate{
+			display: inline-block;
+			width: 82px;
+			height: 82px;
+			background: url("http://7xsl28.com1.z0.glb.clouddn.com/btn_reward.gif") no-repeat;
+			_background: url("http://7xsl28.com1.z0.glb.clouddn.com/btn_reward.gif") no-repeat;
+
+			<!-- http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif
+			     ��Ϊ�� hexo ���ɵĲ������õ� theme �� a:hover ������Ч����
+				 Ϊ�����ô��Ͱ�ť��ʾЧ������ �� ���������¼��� css��
+				 Ƕ����������ʱ��һ��Ҫ���ǡ� -->
+			-webkit-transition: background 0s;
+			-moz-transition: background 0s;
+			-o-transition: background 0s;
+			-ms-transition: background 0s;
+			transition: background 0s;
+			<!-- /�ô��Ͱ�ť��Ч����ʾ���� �� ���ӵļ��� css ���˽��� -->
+		}
+
+		.donate_bar a.btn_donate:hover{ background-position: 0px -82px;}
+		.donate_bar .donate_txt {
+			display: block;
+			color: #9d9d9d;
+			font: 14px/2 "Microsoft Yahei";
+		}
+		.bold{ font-weight: bold; }
+	</style>
+	<!-- /css -->
+
+    <!-- Donate Module -->
+    <div id="donate_module">
+
+	<!-- btn_donate & tips -->
+	<div id="donate_board" class="donate_bar center">
+	    <br>
+	    ------------------------------------------------------------------------------------------------------------------------------
+	    <br>
+		<a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate ����"></a>
+		<span class="donate_txt">
+			只卖艺不卖身，客官打赏，给您来段50的
+		</span>
+			
+		
+	</div>
+	<!-- /btn_donate & tips -->
+
+	<!-- donate guide -->
+    
+	<div id="donate_guide" class="donate_bar center hidden">
+        <br>
+	    ------------------------------------------------------------------------------------------------------------------------------
+	    <br>
+	    
+	    <div width="100%" align="center"><div name="dashmain" id="dash-main-id-87895f" class="dash-main-3 87895f-0.99"></div></div>
+		<script type="text/javascript" charset="utf-8" src="http://www.dashangcloud.com/static/ds.js"></script>
+		
+
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="��΢��ɨһɨŶ~" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="΢�Ŵ��� Donate" height="190px" width="auto"/>
+		</a>
+        
+        &nbsp;&nbsp;
+
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="��֧����ɨһɨ����~" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="֧�������� Donate" height="190px" width="auto"/>
+		</a>
+
+		<span class="donate_txt">
+			只卖艺不卖身，客官打赏，给您来段50的
+		</span>
+
+	</div>
+	<!-- /donate guide -->
+
+	<!-- donate script -->
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function() {
+			$('#donate_board').addClass('hidden');
+	    $('#donate_guide').removeClass('hidden');
+		}
+
+		function donate_on_web(){
+			$('#donate').submit();
+        }
+
+		var original_window_onload = window.onload;
+        window.onload = function () {
+            if (original_window_onload) {
+                original_window_onload();
+            }
+            document.getElementById('donate_board_wdg').className = 'hidden';
+		}
+	</script>
+	<!-- /donate script -->
+</div>
+<!-- /Donate Module -->
+    
 		<footer class="article-footer clearfix">
 
 	<div class="article-share" id="share">
