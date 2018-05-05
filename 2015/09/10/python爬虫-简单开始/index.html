@@ -85,7 +85,7 @@
     <div id="container">
       <div id="main" class="post moveMain" itemscope itemprop="blogPost">
   
-	<article itemprop="articleBody"> 
+	<article itemprop="articleBody">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
@@ -133,7 +133,7 @@
 <p>以下是python实现爬取的代码，</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import urllib</div><div class="line">from bs4 import BeautifulSoup</div><div class="line">import json</div><div class="line">import re</div><div class="line"></div><div class="line">invalid_escape = re.compile(r<span class="string">'\\[0-7]&#123;1,3&#125;'</span>)  <span class="comment"># up to 3 digits for byte values up to FF</span></div><div class="line"></div><div class="line">def replace_with_byte(match):</div><div class="line">    <span class="built_in">return</span> chr(int(match.group(0)[1:], 8))</div><div class="line"></div><div class="line">def repair(brokenjson):</div><div class="line">    <span class="built_in">return</span> invalid_escape.sub(replace_with_byte, brokenjson)        </div><div class="line"></div><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line">根据url获取今日头条的文章等信息，有些字符还是无法去除干净，</div><div class="line">"<span class="string">""</span></div><div class="line">def getArticleFromUrl(url):</div><div class="line">    try:</div><div class="line">        resp = urllib.request.urlopen(url)</div><div class="line">    except Exception:</div><div class="line">        <span class="built_in">print</span>(<span class="string">'url open error'</span>)</div><div class="line">        <span class="built_in">return</span> None</div><div class="line">    respHtml = resp.read()</div><div class="line">    resp.close()</div><div class="line">    soup = BeautifulSoup(respHtml,from_encoding=<span class="string">"utf-8"</span>)</div><div class="line">    content=<span class="string">'null'</span></div><div class="line">    scripts = soup.find_all(<span class="string">'script'</span>)</div><div class="line">    <span class="keyword">for</span> sc <span class="keyword">in</span> scripts: <span class="comment">#sc 是bs4.element.Tag,name是名字，</span></div><div class="line">        line = str(sc)</div><div class="line">        <span class="keyword">if</span> line.startswith(<span class="string">'&lt;script&gt;var BASE_DATA ='</span>):</div><div class="line">            lineRes = line.replace(<span class="string">'&lt;script&gt;var BASE_DATA ='</span>, <span class="string">''</span>).replace(<span class="string">';&lt;/script&gt;'</span>, <span class="string">''</span>).replace(<span class="string">'.replace(/&lt;br \/&gt;|\\n|\\r/ig, \'</span>\<span class="string">')'</span>, <span class="string">''</span>).replace(<span class="string">'.replace(/&lt;br \/&gt;/ig, \'</span>\<span class="string">')'</span>, <span class="string">''</span>)</div><div class="line">            res = lineRes.replace(<span class="string">'    '</span>, <span class="string">''</span>).replace(<span class="string">'  '</span>, <span class="string">''</span>)</div><div class="line">            vs = res.split(<span class="string">'\n'</span>)</div><div class="line">            chineseTag = vs[14]</div><div class="line">            title = vs[19]</div><div class="line">            content = re.sub(<span class="string">'&lt;[^&lt;]*&gt;|&amp;[a-z]+\073|\/p'</span>,<span class="string">''</span>,vs[20])</div><div class="line">            abstract = vs[33]</div><div class="line">    <span class="built_in">return</span> content    </div><div class="line"></div><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line">根据给定的url集合，获取今日头条的文章等信息，</div><div class="line">集合从一个txt文件中获得，返回对应的文章等信息，</div><div class="line">写入txt文件</div><div class="line">"<span class="string">""</span></div><div class="line">def getArticlesFromUrls(urlsPath,savefile):</div><div class="line">    f = open(urlsPath,encoding=<span class="string">'utf-8'</span>)</div><div class="line">    save = open(savefile,<span class="string">"a"</span>,encoding=<span class="string">'utf-8'</span>)</div><div class="line">    line = f.readline()</div><div class="line">    <span class="keyword">while</span> 1:</div><div class="line">        <span class="keyword">if</span> not line:</div><div class="line">            <span class="built_in">break</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            line = line.replace(<span class="string">'\n'</span>,<span class="string">''</span>)</div><div class="line">            content = getArticleFromUrl(line)</div><div class="line">            <span class="keyword">if</span> content is not None:</div><div class="line">                res = (line+<span class="string">'\t'</span>+content).replace(<span class="string">'\u200d'</span>,<span class="string">''</span>).replace(<span class="string">'\xa3'</span>,<span class="string">''</span>).replace(<span class="string">'\ue20c'</span>,<span class="string">''</span>)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                res = line+<span class="string">'\t'</span>+<span class="string">'null'</span></div><div class="line">            <span class="comment">#得到内容写进txt文件</span></div><div class="line">            save.write(res+<span class="string">'\n'</span>)</div><div class="line">            line = f.readline()</div><div class="line">    save.close()</div><div class="line"></div><div class="line"><span class="comment">#根据url集合获得文章信息</span></div><div class="line">urlsPath=r<span class="string">'E:\workspace\data\JRtoutiaoArticle\urls.txt'</span></div><div class="line">savefile=r<span class="string">'E:\workspace\data\JRtoutiaoArticle\urls_articles.txt'</span></div><div class="line"></div><div class="line">getArticlesFromUrls(urlsPath,savefile)</div></pre></td></tr></table></figure>
 <h2 id="爬取京东评论"><a href="#爬取京东评论" class="headerlink" title="爬取京东评论"></a>爬取京东评论</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding=utf-8</span></div><div class="line"></div><div class="line"><span class="string">''</span><span class="string">'</span></div><div class="line">抓取京东商品的评论数据；</div><div class="line">decode的作用是将其他编码的字符串转换成unicode编码，如str1.decode('gb2312<span class="string">')，表示将gb2312编码的字符串str1转换成unicode编码。</span></div><div class="line">encode的作用是将unicode编码转换成其他编码的字符串，如str2.encode('gb2312<span class="string">')，表示将unicode编码的字符串str2转换成gb2312编码。</span></div><div class="line">'<span class="string">''</span></div><div class="line">import urllib2</div><div class="line">import re,bs4</div><div class="line">from bs4 import BeautifulSoup</div><div class="line"></div><div class="line">url=<span class="string">"http://club.jd.com/review/1721312-1-1-0.html"</span><span class="comment">#1721312</span></div><div class="line">四个数好3、中2、差1、全部0、有图片4</div><div class="line">req = urllib2.Request(url)</div><div class="line">resp = urllib2.urlopen(req)</div><div class="line">respHtml = resp.read()</div><div class="line">resp.close()</div><div class="line">soup = BeautifulSoup(respHtml,from_encoding=<span class="string">"gbk"</span>)</div><div class="line"><span class="comment">#得到总的页数</span></div><div class="line">Page=soup.find(<span class="string">"div"</span>,class_=<span class="string">"pagin fr"</span>)</div><div class="line">conts=(str(Page).replace(<span class="string">'&lt;div class="pagin fr"&gt;'</span>,<span class="string">''</span>).replace(<span class="string">'&lt;/div&gt;'</span>,<span class="string">''</span>))<span class="comment">#得到包含总页数的那段网页源码内容</span></div><div class="line">totlePage=0</div><div class="line">try:</div><div class="line">     totlePage=int(conts.split(<span class="string">'&lt;/a&gt;'</span>)[3].split(<span class="string">'&gt;'</span>)[3])<span class="comment">#得到总页数的那个值</span></div><div class="line">except Exception, e:</div><div class="line">    <span class="built_in">print</span>(<span class="string">'the productor is not have evaluates'</span>)</div><div class="line"><span class="comment"># print(totlePage)</span></div><div class="line"><span class="comment">############################################################################</span></div><div class="line"><span class="comment">#找到该类别下的所有评论</span></div><div class="line"><span class="comment"># for currPage in range(totlePage):</span></div><div class="line"><span class="comment">#      print(currPage)</span></div><div class="line"><span class="comment">#      newurl="http://club.jd.com/review/1721312-1-"+str(currPage+1)+"-1.html"</span></div><div class="line"><span class="comment">#      req = urllib2.Request(newurl)</span></div><div class="line"><span class="comment">#      resp = urllib2.urlopen(req)</span></div><div class="line"><span class="comment">#      respHtml = resp.read()</span></div><div class="line"><span class="comment">#      resp.close()</span></div><div class="line"><span class="comment">#      soup = BeautifulSoup(respHtml,from_encoding="gbk")</span></div><div class="line"><span class="comment">#      m = soup.findAll("div",&#123;'class':"comment-content"&#125;)</span></div><div class="line"><span class="comment">#      #存入txt文件</span></div><div class="line"><span class="comment">#      import codecs</span></div><div class="line"><span class="comment">#      evaluate_z=open("tr_c.txt","a")</span></div><div class="line"><span class="comment">#      for obj in m:</span></div><div class="line"><span class="comment">#             con=''.join(obj.find('dd').contents).replace('\n','')</span></div><div class="line"><span class="comment">#             print con</span></div><div class="line"><span class="comment">#             evaluate_z.write(con.encode('utf8')+'\t'+'class=bad'+'\n')</span></div><div class="line"><span class="comment">#      evaluate_z.close()</span></div><div class="line"></div><div class="line"><span class="comment">############################################################################</span></div><div class="line"><span class="comment">#爬取全部的，</span></div><div class="line">evaluate_z=open(<span class="string">"tr_all.txt"</span>,<span class="string">"a"</span>)</div><div class="line"><span class="keyword">for</span> currPage <span class="keyword">in</span> range(totlePage):</div><div class="line">     <span class="built_in">print</span>(currPage)</div><div class="line">     newurl=<span class="string">"http://club.jd.com/review/1721312-1-"</span>+str(currPage+1)+<span class="string">"-0.html"</span></div><div class="line">     req = urllib2.Request(newurl)</div><div class="line">     resp = urllib2.urlopen(req)</div><div class="line">     respHtml = resp.read()</div><div class="line">     resp.close()</div><div class="line">     soup = BeautifulSoup(respHtml,from_encoding=<span class="string">"gbk"</span>)</div><div class="line">     m = soup.findAll(<span class="string">"div"</span>,&#123;<span class="string">'class'</span>:<span class="string">"i-item"</span>&#125;)</div><div class="line">     <span class="keyword">for</span> obj <span class="keyword">in</span> m:</div><div class="line">        star=str(obj.find(<span class="string">'span'</span>))[20:21]<span class="comment">#获得星标</span></div><div class="line">        content=str(obj.find(<span class="string">'dd'</span>)).replace(<span class="string">'\n'</span>,<span class="string">''</span>).replace(<span class="string">'&lt;dd&gt;'</span>,<span class="string">''</span>).replace(<span class="string">'&lt;/dd&gt;'</span>,<span class="string">''</span>)<span class="comment">#获得评价内容</span></div><div class="line">        <span class="built_in">print</span> content+<span class="string">'\t'</span>+star</div><div class="line">        evaluate_z.write(content+<span class="string">'\t'</span>+<span class="string">'star='</span>+star+<span class="string">'\n'</span>)</div><div class="line">evaluate_z.close()</div></pre></td></tr></table></figure>
-  
+
 	</div>
         
 	<!-- css -->
@@ -152,15 +152,13 @@
 			_background: url("http://7xsl28.com1.z0.glb.clouddn.com/btn_reward.gif") no-repeat;
 
 			<!-- http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif
-			     ��Ϊ�� hexo ���ɵĲ������õ� theme �� a:hover ������Ч����
-				 Ϊ�����ô��Ͱ�ť��ʾЧ������ �� ���������¼��� css��
-				 Ƕ����������ʱ��һ��Ҫ���ǡ� -->
+      因为本 hexo 生成的博客所用的 theme 的 a:hover 带动画效果，为了在让打赏按钮显示效果正常 而 添加了以下几行 css，嵌入其它博客时不一定要它们。 -->
 			-webkit-transition: background 0s;
 			-moz-transition: background 0s;
 			-o-transition: background 0s;
 			-ms-transition: background 0s;
 			transition: background 0s;
-			<!-- /�ô��Ͱ�ť��Ч����ʾ���� �� ���ӵļ��� css ���˽��� -->
+			<!-- 让打赏按钮的效果显示正常 而 添加的几行 css 到此结束 -->
 		}
 
 		.donate_bar a.btn_donate:hover{ background-position: 0px -82px;}
@@ -181,17 +179,17 @@
 	    <br>
 	    ------------------------------------------------------------------------------------------------------------------------------
 	    <br>
-		<a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate ����"></a>
+		<a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate 打赏"></a>
 		<span class="donate_txt">
 			只卖艺不卖身，客官打赏，给您来段50的
 		</span>
-			
-		
+
+
 	</div>
 	<!-- /btn_donate & tips -->
 
 	<!-- donate guide -->
-    
+
 	<div id="donate_guide" class="donate_bar center hidden">
         <br>
 	    ------------------------------------------------------------------------------------------------------------------------------
@@ -201,14 +199,14 @@
 		<script type="text/javascript" charset="utf-8" src="http://www.dashangcloud.com/static/ds.js"></script>
 		
 
-		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="��΢��ɨһɨŶ~" class="fancybox" rel="article0">
-			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="΢�Ŵ��� Donate" height="190px" width="auto"/>
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="微信扫一扫" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="微信打赏 Donate" height="190px" width="auto"/>
 		</a>
-        
+
         &nbsp;&nbsp;
 
-		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="��֧����ɨһɨ����~" class="fancybox" rel="article0">
-			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="֧�������� Donate" height="190px" width="auto"/>
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="支付宝扫一扫" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="֧支付宝打赏 Donate" height="190px" width="auto"/>
 		</a>
 
 		<span class="donate_txt">
@@ -240,7 +238,7 @@
 	<!-- /donate script -->
 </div>
 <!-- /Donate Module -->
-    
+   
 		<footer class="article-footer clearfix">
 
 	<div class="article-share" id="share">
@@ -253,7 +251,7 @@
 
 </footer>
 
-   	       
+
 	</article>
 	
 <nav class="article-nav clearfix">
@@ -279,7 +277,8 @@
 
 	
 
-</div>  
+</div>
+
     </div>
     <footer><div id="footer" >
 	

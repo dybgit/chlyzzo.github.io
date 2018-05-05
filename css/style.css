@@ -444,6 +444,11 @@ body >header a {
     width: 5.5em;
   }
 }
+#music163player {
+  float: right;
+  width: 15em;
+  height: 5em;
+}
 #textlogo {
   float: left;
   width: 75%;

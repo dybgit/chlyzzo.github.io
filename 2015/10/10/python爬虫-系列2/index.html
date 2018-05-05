@@ -84,7 +84,7 @@
     <div id="container">
       <div id="main" class="post moveMain" itemscope itemprop="blogPost">
   
-	<article itemprop="articleBody"> 
+	<article itemprop="articleBody">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
@@ -132,7 +132,7 @@
 <h2 id="爬取百度周边信息"><a href="#爬取百度周边信息" class="headerlink" title="爬取百度周边信息"></a>爬取百度周边信息</h2><p>百度地图开放的接口，可以获取多种信息，更多<a href="http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-placeapi" target="_blank" rel="external">参考开发调用</a><br>,这里爬取的是给定百度的经纬度信息，获取周边指定半径内的地理信息，即搜索出周边的地点。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div></pre></td><td class="code"><pre><div class="line">import urllib</div><div class="line">from bs4 import BeautifulSoup</div><div class="line">import json</div><div class="line">import time</div><div class="line"></div><div class="line">noResultfilePath=<span class="string">'d:/noresult_comm_baidu_mess.txt'</span></div><div class="line"></div><div class="line"><span class="string">''</span><span class="string">'</span></div><div class="line">返回的值串：</div><div class="line">百度返回的数据ListMap解析成Array[String]</div><div class="line">'<span class="string">''</span></div><div class="line">def getOneListMapToSting(listMap,label):</div><div class="line">    result = []</div><div class="line">    <span class="keyword">if</span> listMap is not None:</div><div class="line">        <span class="keyword">for</span> map <span class="keyword">in</span> listMap:</div><div class="line">            location = map.get(<span class="string">'location'</span>,<span class="string">'&#123;&#125;'</span>)</div><div class="line">            lat = location.get(<span class="string">'lat'</span>,<span class="string">'0'</span>)</div><div class="line">            lng = location.get(<span class="string">'lng'</span>,<span class="string">'0'</span>)</div><div class="line">            uid = map.get(<span class="string">'uid'</span>,<span class="string">'default'</span>)</div><div class="line">            name = map.get(<span class="string">'name'</span>,<span class="string">'default'</span>)</div><div class="line">            address = map.get(<span class="string">'address'</span>,<span class="string">'default'</span>)</div><div class="line">            detail = map.get(<span class="string">'detail'</span>,<span class="string">'default'</span>)</div><div class="line">            street_id  = map.get(<span class="string">'street_id'</span>,<span class="string">'0'</span>) <span class="comment">#默认值</span></div><div class="line">            <span class="comment">#组合结果输出</span></div><div class="line">            line = uid+<span class="string">'\t'</span>+name+<span class="string">'\t'</span>+street_id+<span class="string">'\t'</span>+str(lat)+<span class="string">'\t'</span>+str(lng)+<span class="string">'\t'</span>+address+<span class="string">'\t'</span>+str(detail)+<span class="string">'\t'</span>+label</div><div class="line">            result.append(line)</div><div class="line">        <span class="comment">#所有元素</span></div><div class="line">    <span class="built_in">return</span> result</div><div class="line"></div><div class="line"></div><div class="line"><span class="string">''</span><span class="string">'</span></div><div class="line">array[String]写数据进表里，一个小区多条，即一个小区多行，写文件是追加的写,</div><div class="line"></div><div class="line">f=open('路径/文件名<span class="string">', '</span>读写格式<span class="string">', '</span>编码方式<span class="string">', '</span>错误处理方式<span class="string">')</span></div><div class="line"></div><div class="line">'<span class="string">''</span>    </div><div class="line"></div><div class="line">def appendWriteCommDataBase(arrayString,comm_id,filePath):</div><div class="line">    <span class="keyword">if</span> arrayString is not None:</div><div class="line">        <span class="keyword">for</span> oneData <span class="keyword">in</span> arrayString:</div><div class="line">            writeLine = str(comm_id)+<span class="string">'\t'</span>+oneData+<span class="string">'\r\n'</span></div><div class="line">            with open(filePath,<span class="string">'a'</span>,encoding=<span class="string">'utf-8'</span>) as f:  </div><div class="line">                f.write(writeLine)  </div><div class="line"></div><div class="line"></div><div class="line"><span class="string">''</span><span class="string">'</span></div><div class="line">读取小区的经纬度等信息，获取小区的附近数据点，</div><div class="line">comm_id,lat,lng,queryWord,</div><div class="line"></div><div class="line">'<span class="string">''</span></div><div class="line">def <span class="built_in">read</span>CommLatLngGetBaiduMess(file,saveFile,label):</div><div class="line">    f = open(file,<span class="string">'r'</span>,encoding=<span class="string">'utf-8'</span>)</div><div class="line">    line = f.readline()</div><div class="line">    vs = line.split(<span class="string">'\t'</span>)</div><div class="line">    <span class="keyword">while</span> 1:</div><div class="line">        <span class="keyword">if</span> line is not None and len(vs)==4:</div><div class="line">            commId = vs[0]</div><div class="line">            lat = vs[2]</div><div class="line">            lng = vs[3]</div><div class="line">            listMap = getListMapMessByCommMess(commId,lat,lng,label)<span class="comment">#获得信息</span></div><div class="line">            outResult = getOneListMapToSting(listMap,label)<span class="comment">#信息格式处理</span></div><div class="line">            appendWriteCommDataBase(outResult,commId,saveFile)<span class="comment">#写进保存文件中</span></div><div class="line">            time.sleep(2)</div><div class="line">            line = f.readline()</div><div class="line">            vs = line.split(<span class="string">'\t'</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="built_in">break</span>   </div><div class="line"></div><div class="line">    f.close()              </div><div class="line"></div><div class="line"><span class="string">''</span><span class="string">'</span></div><div class="line">根据一个小区的经纬度信息，爬取其周边指定的标签数据</div><div class="line">返回一个listMap</div><div class="line"></div><div class="line">query=银行$酒店，查询地点关键字</div><div class="line">http://lbsyun.baidu.com/index.php?title=lbscloud/poitags</div><div class="line"></div><div class="line">tag=一级行业分类，二级行业分类，</div><div class="line">ak</div><div class="line">'<span class="string">''</span>    </div><div class="line">def getListMapMessByCommMess(commId,lat,lng,label):</div><div class="line">    key=<span class="string">'ak=DqBFd4FXWonuaMNfGDRU0eEm'</span></div><div class="line">    <span class="comment">#url查询</span></div><div class="line">    location=<span class="string">'location='</span>+str(lat)+<span class="string">','</span>+str(lng)</div><div class="line">    queryPath = <span class="string">'http://api.map.baidu.com/place/v2/search?radius=2000&amp;output=json'</span></div><div class="line">    queryUrlCode = urllib.parse.quote(label) <span class="comment">#编码url形式</span></div><div class="line">    query = queryPath+<span class="string">'&amp;'</span>+<span class="string">'query='</span>+queryUrlCode+<span class="string">'&amp;'</span>+key+<span class="string">'&amp;'</span>+location</div><div class="line">    result=<span class="string">'&#123;&#125;'</span></div><div class="line">    try:</div><div class="line">        resp = urllib.request.urlopen(query)</div><div class="line">        respHtml = resp.read().decode(<span class="string">'utf-8'</span>)</div><div class="line">        resp.close()</div><div class="line">        soup = BeautifulSoup(respHtml,from_encoding=<span class="string">"utf-8"</span>)</div><div class="line">        result = str(soup).replace(<span class="string">'&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'</span>,<span class="string">''</span>).replace(<span class="string">'&lt;/body&gt;&lt;/html&gt;'</span>,<span class="string">''</span>)</div><div class="line">        <span class="built_in">print</span>(result)</div><div class="line">    except urllib.error.URLError:</div><div class="line">        <span class="comment">#url获取错误</span></div><div class="line">        time.sleep(20)<span class="comment">#休息20秒</span></div><div class="line">    except Exception:</div><div class="line">        <span class="comment">#其他异常</span></div><div class="line">        time.sleep(10)<span class="comment">#休息20秒      </span></div><div class="line">    <span class="comment">#json串转成List[Map[]]</span></div><div class="line">    listMap = json.loads(result).get(<span class="string">'results'</span>,None)</div><div class="line">    <span class="comment">#如果没有获取到数据，则额外存储该小区，待后续再查</span></div><div class="line">    <span class="keyword">if</span> listMap is None:</div><div class="line">        with open(noResultfilePath,<span class="string">'a'</span>,encoding=<span class="string">'utf-8'</span>) as f:  </div><div class="line">            f.write(str(commId)+<span class="string">'\t'</span>+str(lat)+<span class="string">'\t'</span>+str(lng)+<span class="string">'\n'</span>)  </div><div class="line">    <span class="built_in">return</span> listMap</div><div class="line"></div><div class="line"><span class="comment">#-------------------------------------------------------------------</span></div><div class="line"></div><div class="line"><span class="string">''</span><span class="string">'</span></div><div class="line">主函数开始</div><div class="line">'<span class="string">''</span></div><div class="line">file = <span class="string">'d:/input_comm_lat_lng.txt'</span></div><div class="line">saveFile = <span class="string">'d:/output_comm_baidu_mess.txt'</span></div><div class="line"><span class="built_in">read</span>CommLatLngGetBaiduMess(file,saveFile,<span class="string">'银行'</span>)</div></pre></td></tr></table></figure>
 <p>这里需要注意的几个点：<br>1，查询的url编码是url的编码，即传入的中文串是%E8这种形式；<br>2，ak秘钥每天是有量限制的，需要多个ak；<br>3，json的解析，注意key不存在的情况，需要设置默认值；<br>4，url的get不是都能成功的，为了让程序继续执行，加入try；<br>5，没有成功的调用需要额外保存下来，待下回接着爬；</p>
-  
+
 	</div>
         
 	<!-- css -->
@@ -151,15 +151,13 @@
 			_background: url("http://7xsl28.com1.z0.glb.clouddn.com/btn_reward.gif") no-repeat;
 
 			<!-- http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif
-			     ��Ϊ�� hexo ���ɵĲ������õ� theme �� a:hover ������Ч����
-				 Ϊ�����ô��Ͱ�ť��ʾЧ������ �� ���������¼��� css��
-				 Ƕ����������ʱ��һ��Ҫ���ǡ� -->
+      因为本 hexo 生成的博客所用的 theme 的 a:hover 带动画效果，为了在让打赏按钮显示效果正常 而 添加了以下几行 css，嵌入其它博客时不一定要它们。 -->
 			-webkit-transition: background 0s;
 			-moz-transition: background 0s;
 			-o-transition: background 0s;
 			-ms-transition: background 0s;
 			transition: background 0s;
-			<!-- /�ô��Ͱ�ť��Ч����ʾ���� �� ���ӵļ��� css ���˽��� -->
+			<!-- 让打赏按钮的效果显示正常 而 添加的几行 css 到此结束 -->
 		}
 
 		.donate_bar a.btn_donate:hover{ background-position: 0px -82px;}
@@ -180,17 +178,17 @@
 	    <br>
 	    ------------------------------------------------------------------------------------------------------------------------------
 	    <br>
-		<a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate ����"></a>
+		<a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate 打赏"></a>
 		<span class="donate_txt">
 			只卖艺不卖身，客官打赏，给您来段50的
 		</span>
-			
-		
+
+
 	</div>
 	<!-- /btn_donate & tips -->
 
 	<!-- donate guide -->
-    
+
 	<div id="donate_guide" class="donate_bar center hidden">
         <br>
 	    ------------------------------------------------------------------------------------------------------------------------------
@@ -200,14 +198,14 @@
 		<script type="text/javascript" charset="utf-8" src="http://www.dashangcloud.com/static/ds.js"></script>
 		
 
-		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="��΢��ɨһɨŶ~" class="fancybox" rel="article0">
-			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="΢�Ŵ��� Donate" height="190px" width="auto"/>
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="微信扫一扫" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="微信打赏 Donate" height="190px" width="auto"/>
 		</a>
-        
+
         &nbsp;&nbsp;
 
-		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="��֧����ɨһɨ����~" class="fancybox" rel="article0">
-			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="֧�������� Donate" height="190px" width="auto"/>
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="支付宝扫一扫" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="֧支付宝打赏 Donate" height="190px" width="auto"/>
 		</a>
 
 		<span class="donate_txt">
@@ -239,7 +237,7 @@
 	<!-- /donate script -->
 </div>
 <!-- /Donate Module -->
-    
+   
 		<footer class="article-footer clearfix">
 
 	<div class="article-share" id="share">
@@ -252,7 +250,7 @@
 
 </footer>
 
-   	       
+
 	</article>
 	
 <nav class="article-nav clearfix">
@@ -278,7 +276,8 @@
 
 	
 
-</div>  
+</div>
+
     </div>
     <footer><div id="footer" >
 	

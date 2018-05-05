@@ -84,7 +84,7 @@
     <div id="container">
       <div id="main" class="post moveMain" itemscope itemprop="blogPost">
   
-	<article itemprop="articleBody"> 
+	<article itemprop="articleBody">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
@@ -139,7 +139,7 @@
 <p>求解的方法也是梯度方向，但是需要对目标函数进行改造，利用拉格朗日，讲目标函数转化为最小化如下成本函数：<br>$$L(w,b,a)=\frac{1}{2}\left | w \right |^{2}-\sum_{i=1}^{N}a^{i}(y^{i}(w^{T}x^{i}+b)-1)$$<br>然后就转为对偶问题求解，最大化如下函数，<br>$$L_{D}=w(a)=\sum_{i=1}^{N}a^{i}-\frac{1}{2}\sum_{i,j=1}^{N}y^{i}y^{j}a^{i}a^{j}(x^{i},x^{j})$$<br>计算的方法是求偏导，得到如下两个公式：<br>$$\frac{\partial L}{\partial b}=0 =&gt; \sum_{i=1}^{N}y^{i}a^{i}=0,a^{i}\geq 0$$<br>$$\frac{\partial L}{\partial w}=0 =&gt; w=\sum_{i=1}^{N}a^{i}y^{i}x^{i}$$<br>可以采取SMO方法不断交替的优化，得到a。</p>
 <p>最后的预测时，采取如下计算即可$w^{T}x+b=\sum_{i=1}^{N}a^{i}y^{i}(x^{i},x)+b$。</p>
 <p>SVM是实践中效果佳的二分类方法，也可以用于多分类问题下，当线性不可分时，需要对核函数进行操作，即把x映射到新的空间中，再采取分割面的原理分类；</p>
-  
+
 	</div>
         
 	<!-- css -->
@@ -158,15 +158,13 @@
 			_background: url("http://7xsl28.com1.z0.glb.clouddn.com/btn_reward.gif") no-repeat;
 
 			<!-- http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif
-			     ��Ϊ�� hexo ���ɵĲ������õ� theme �� a:hover ������Ч����
-				 Ϊ�����ô��Ͱ�ť��ʾЧ������ �� ���������¼��� css��
-				 Ƕ����������ʱ��һ��Ҫ���ǡ� -->
+      因为本 hexo 生成的博客所用的 theme 的 a:hover 带动画效果，为了在让打赏按钮显示效果正常 而 添加了以下几行 css，嵌入其它博客时不一定要它们。 -->
 			-webkit-transition: background 0s;
 			-moz-transition: background 0s;
 			-o-transition: background 0s;
 			-ms-transition: background 0s;
 			transition: background 0s;
-			<!-- /�ô��Ͱ�ť��Ч����ʾ���� �� ���ӵļ��� css ���˽��� -->
+			<!-- 让打赏按钮的效果显示正常 而 添加的几行 css 到此结束 -->
 		}
 
 		.donate_bar a.btn_donate:hover{ background-position: 0px -82px;}
@@ -187,17 +185,17 @@
 	    <br>
 	    ------------------------------------------------------------------------------------------------------------------------------
 	    <br>
-		<a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate ����"></a>
+		<a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate 打赏"></a>
 		<span class="donate_txt">
 			只卖艺不卖身，客官打赏，给您来段50的
 		</span>
-			
-		
+
+
 	</div>
 	<!-- /btn_donate & tips -->
 
 	<!-- donate guide -->
-    
+
 	<div id="donate_guide" class="donate_bar center hidden">
         <br>
 	    ------------------------------------------------------------------------------------------------------------------------------
@@ -207,14 +205,14 @@
 		<script type="text/javascript" charset="utf-8" src="http://www.dashangcloud.com/static/ds.js"></script>
 		
 
-		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="��΢��ɨһɨŶ~" class="fancybox" rel="article0">
-			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="΢�Ŵ��� Donate" height="190px" width="auto"/>
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="微信扫一扫" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="微信打赏 Donate" height="190px" width="auto"/>
 		</a>
-        
+
         &nbsp;&nbsp;
 
-		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="��֧����ɨһɨ����~" class="fancybox" rel="article0">
-			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="֧�������� Donate" height="190px" width="auto"/>
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="支付宝扫一扫" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="֧支付宝打赏 Donate" height="190px" width="auto"/>
 		</a>
 
 		<span class="donate_txt">
@@ -246,7 +244,7 @@
 	<!-- /donate script -->
 </div>
 <!-- /Donate Module -->
-    
+   
 		<footer class="article-footer clearfix">
 
 	<div class="article-share" id="share">
@@ -259,7 +257,7 @@
 
 </footer>
 
-   	       
+
 	</article>
 	
 <nav class="article-nav clearfix">
@@ -285,7 +283,8 @@
 
 	
 
-</div>  
+</div>
+
     </div>
     <footer><div id="footer" >
 	

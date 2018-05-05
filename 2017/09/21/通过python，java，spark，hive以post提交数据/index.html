@@ -85,7 +85,7 @@
     <div id="container">
       <div id="main" class="post moveMain" itemscope itemprop="blogPost">
   
-	<article itemprop="articleBody"> 
+	<article itemprop="articleBody">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
@@ -129,7 +129,7 @@
 <h2 id="python的post方式"><a href="#python的post方式" class="headerlink" title="python的post方式"></a>python的post方式</h2><p>python的提交方式与java的原理一样，只是需要对中文进行编码，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding=utf-8</span></div><div class="line"></div><div class="line">import urllib</div><div class="line">from urllib import parse</div><div class="line">from urllib import request</div><div class="line"></div><div class="line">data=&#123;&#125;</div><div class="line">data[<span class="string">'cityId'</span>]=49</div><div class="line">data[<span class="string">'mid'</span>]=1</div><div class="line">data[<span class="string">'type'</span>]=2</div><div class="line">url=<span class="string">'******'</span></div><div class="line">post_data = parse.urlencode(data).encode(encoding=<span class="string">'UTF8'</span>)</div><div class="line"><span class="built_in">print</span>(post_data.decode(<span class="string">'utf-8'</span>))</div><div class="line">req = request.urlopen(url, post_data)</div><div class="line">content = req.read()</div><div class="line"><span class="built_in">print</span>(content.decode(<span class="string">'utf-8'</span>))</div></pre></td></tr></table></figure></p>
 <h2 id="scala中post"><a href="#scala中post" class="headerlink" title="scala中post"></a>scala中post</h2><p>在scala里调用java的方法即可，如果是批量，则最好先建立一个长连接。</p>
 <h2 id="hive的udf实现"><a href="#hive的udf实现" class="headerlink" title="hive的udf实现"></a>hive的udf实现</h2><p>hive的udf实现，实际上是java实现的，相当于在udf里新增一个post数据的方法，参考<a href="http://chloy.com/2017/05/20/hive%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88/" target="_blank" rel="external">hive的udf写法</a>。</p>
-  
+
 	</div>
         
 	<!-- css -->
@@ -148,15 +148,13 @@
 			_background: url("http://7xsl28.com1.z0.glb.clouddn.com/btn_reward.gif") no-repeat;
 
 			<!-- http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif
-			     ��Ϊ�� hexo ���ɵĲ������õ� theme �� a:hover ������Ч����
-				 Ϊ�����ô��Ͱ�ť��ʾЧ������ �� ���������¼��� css��
-				 Ƕ����������ʱ��һ��Ҫ���ǡ� -->
+      因为本 hexo 生成的博客所用的 theme 的 a:hover 带动画效果，为了在让打赏按钮显示效果正常 而 添加了以下几行 css，嵌入其它博客时不一定要它们。 -->
 			-webkit-transition: background 0s;
 			-moz-transition: background 0s;
 			-o-transition: background 0s;
 			-ms-transition: background 0s;
 			transition: background 0s;
-			<!-- /�ô��Ͱ�ť��Ч����ʾ���� �� ���ӵļ��� css ���˽��� -->
+			<!-- 让打赏按钮的效果显示正常 而 添加的几行 css 到此结束 -->
 		}
 
 		.donate_bar a.btn_donate:hover{ background-position: 0px -82px;}
@@ -177,17 +175,17 @@
 	    <br>
 	    ------------------------------------------------------------------------------------------------------------------------------
 	    <br>
-		<a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate ����"></a>
+		<a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate 打赏"></a>
 		<span class="donate_txt">
 			只卖艺不卖身，客官打赏，给您来段50的
 		</span>
-			
-		
+
+
 	</div>
 	<!-- /btn_donate & tips -->
 
 	<!-- donate guide -->
-    
+
 	<div id="donate_guide" class="donate_bar center hidden">
         <br>
 	    ------------------------------------------------------------------------------------------------------------------------------
@@ -197,14 +195,14 @@
 		<script type="text/javascript" charset="utf-8" src="http://www.dashangcloud.com/static/ds.js"></script>
 		
 
-		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="��΢��ɨһɨŶ~" class="fancybox" rel="article0">
-			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="΢�Ŵ��� Donate" height="190px" width="auto"/>
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="微信扫一扫" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="微信打赏 Donate" height="190px" width="auto"/>
 		</a>
-        
+
         &nbsp;&nbsp;
 
-		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="��֧����ɨһɨ����~" class="fancybox" rel="article0">
-			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="֧�������� Donate" height="190px" width="auto"/>
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="支付宝扫一扫" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="֧支付宝打赏 Donate" height="190px" width="auto"/>
 		</a>
 
 		<span class="donate_txt">
@@ -236,7 +234,7 @@
 	<!-- /donate script -->
 </div>
 <!-- /Donate Module -->
-    
+   
 		<footer class="article-footer clearfix">
 
 	<div class="article-share" id="share">
@@ -249,7 +247,7 @@
 
 </footer>
 
-   	       
+
 	</article>
 	
 <nav class="article-nav clearfix">
@@ -275,7 +273,8 @@
 
 	
 
-</div>  
+</div>
+
     </div>
     <footer><div id="footer" >
 	

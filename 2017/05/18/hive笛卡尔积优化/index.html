@@ -85,7 +85,7 @@
     <div id="container">
       <div id="main" class="post moveMain" itemscope itemprop="blogPost">
   
-	<article itemprop="articleBody"> 
+	<article itemprop="articleBody">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
@@ -139,7 +139,7 @@
 <h2 id="smbJoin"><a href="#smbJoin" class="headerlink" title="smbJoin"></a>smbJoin</h2><p>当两个大表做笛卡尔积时，可将数据进行分桶，把数据切块，然后每个桶中进行join操作，最后再进行merge。但是，为了加快速度，每个桶中的记录条数不能过多，否则就起不到优化的效果，因此，设置桶数量时，要根据数据总量来变动设置，保证每个桶的记录数在1万左右。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">先设置一个分桶的空表，注意需要分区和排序，</div><div class="line"></div><div class="line">use 库名;</div><div class="line">drop table if exists 表名;</div><div class="line">create table 表名</div><div class="line">(</div><div class="line">   a int,</div><div class="line">   b int,</div><div class="line">   c int</div><div class="line">)</div><div class="line">clustered by(a,b) sorted by(a,b) into 8 buckets</div><div class="line">row format delimited fields terminated by &apos;\t&apos;</div><div class="line">stored as textfile;</div><div class="line">;</div><div class="line"></div><div class="line">再把数据进行插入，插入数据时需要设置bucket等参数，否则元数据存储的文件数量还是1.</div><div class="line"></div><div class="line">set mapreduce.job.reduces=60;</div><div class="line">set hive.enforce.bucketing = true;  </div><div class="line">set hive.optimize.bucketmapjoin=true;</div><div class="line">set hive.optimize.bucketmapjoin.sortedmerge=true;</div><div class="line">set hive.enforce.sortmergebucketmapjoin=false;</div><div class="line">set hive.auto.convert.sortmerge.join=true;</div><div class="line"></div><div class="line">use 库名;</div><div class="line">insert overwrite table 表名  </div><div class="line">select a</div><div class="line">		,b</div><div class="line">		,c</div><div class="line">     from 来源表</div><div class="line">;</div><div class="line"></div><div class="line"></div><div class="line">最后做正常的join操作即可。</div><div class="line">select /*+ Mapjoin(a) */</div><div class="line">.....</div><div class="line">from 表 a</div><div class="line">join 表 b on (a.user_id=b.user_id)</div><div class="line">where ....</div><div class="line">group by ...</div></pre></td></tr></table></figure>
 <h2 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h2><p>1, hive是分布式计算结构化数据的一个工具，本质上使用map-reduce计算框架；<br>2，hive操作与mysql类似，但有不同，比如表的in操作等；<br>3，使用map-reduce计算的方式，都需要考虑并行和分区概念。<br>4，上述方法将数据进行分区，类似于hive的分箱操作，但是，在大量数据比如20万条数据下做笛卡尔积，虽然使用了分区扩展，运行起来也是十分慢，因为20万笛卡尔积需要每条数据计算20万次，所以，这时需要做一些业务上或者牺牲精度上选择，减少每次计算的次数，比如每条数据尽量不要与全部的20万条计算，可以加一些过滤条件，这些条件在计算笛卡尔积前就设置好，然后做join时在on条件带上；<br>5，除了使用hive的笛卡尔积计算记录两两关系，还可以使用spark或flink下计算，这时可以操纵计算出的结果值，避免后续排序再选前100条时不用全量排序再选。这样做一个job就变成了两个(spark计算完，再从hdfs导入hive里)，虽然麻烦，但是时间优化很快。</p>
-  
+
 	</div>
         
 	<!-- css -->
@@ -158,15 +158,13 @@
 			_background: url("http://7xsl28.com1.z0.glb.clouddn.com/btn_reward.gif") no-repeat;
 
 			<!-- http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif
-			     ��Ϊ�� hexo ���ɵĲ������õ� theme �� a:hover ������Ч����
-				 Ϊ�����ô��Ͱ�ť��ʾЧ������ �� ���������¼��� css��
-				 Ƕ����������ʱ��һ��Ҫ���ǡ� -->
+      因为本 hexo 生成的博客所用的 theme 的 a:hover 带动画效果，为了在让打赏按钮显示效果正常 而 添加了以下几行 css，嵌入其它博客时不一定要它们。 -->
 			-webkit-transition: background 0s;
 			-moz-transition: background 0s;
 			-o-transition: background 0s;
 			-ms-transition: background 0s;
 			transition: background 0s;
-			<!-- /�ô��Ͱ�ť��Ч����ʾ���� �� ���ӵļ��� css ���˽��� -->
+			<!-- 让打赏按钮的效果显示正常 而 添加的几行 css 到此结束 -->
 		}
 
 		.donate_bar a.btn_donate:hover{ background-position: 0px -82px;}
@@ -187,17 +185,17 @@
 	    <br>
 	    ------------------------------------------------------------------------------------------------------------------------------
 	    <br>
-		<a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate ����"></a>
+		<a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate 打赏"></a>
 		<span class="donate_txt">
 			只卖艺不卖身，客官打赏，给您来段50的
 		</span>
-			
-		
+
+
 	</div>
 	<!-- /btn_donate & tips -->
 
 	<!-- donate guide -->
-    
+
 	<div id="donate_guide" class="donate_bar center hidden">
         <br>
 	    ------------------------------------------------------------------------------------------------------------------------------
@@ -207,14 +205,14 @@
 		<script type="text/javascript" charset="utf-8" src="http://www.dashangcloud.com/static/ds.js"></script>
 		
 
-		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="��΢��ɨһɨŶ~" class="fancybox" rel="article0">
-			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="΢�Ŵ��� Donate" height="190px" width="auto"/>
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="微信扫一扫" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="微信打赏 Donate" height="190px" width="auto"/>
 		</a>
-        
+
         &nbsp;&nbsp;
 
-		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="��֧����ɨһɨ����~" class="fancybox" rel="article0">
-			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="֧�������� Donate" height="190px" width="auto"/>
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="支付宝扫一扫" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="֧支付宝打赏 Donate" height="190px" width="auto"/>
 		</a>
 
 		<span class="donate_txt">
@@ -246,7 +244,7 @@
 	<!-- /donate script -->
 </div>
 <!-- /Donate Module -->
-    
+   
 		<footer class="article-footer clearfix">
 
 	<div class="article-share" id="share">
@@ -259,7 +257,7 @@
 
 </footer>
 
-   	       
+
 	</article>
 	
 <nav class="article-nav clearfix">
@@ -285,7 +283,8 @@
 
 	
 
-</div>  
+</div>
+
     </div>
     <footer><div id="footer" >
 	

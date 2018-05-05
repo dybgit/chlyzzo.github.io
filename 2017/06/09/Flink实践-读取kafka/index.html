@@ -85,7 +85,7 @@
     <div id="container">
       <div id="main" class="post moveMain" itemscope itemprop="blogPost">
   
-	<article itemprop="articleBody"> 
+	<article itemprop="articleBody">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
@@ -138,7 +138,7 @@
 <h2 id="消息格式的处理"><a href="#消息格式的处理" class="headerlink" title="消息格式的处理"></a>消息格式的处理</h2><p>kafka消息一般采用json串，在处理时需要对其进行解析，采取的是<a href="https://github.com/json4s/json4s" target="_blank" rel="external">json4s</a>。实践中，同一种类的消息格式应统一，可能数据来源不同；消息的格式应保证数据完整，能用一个topic解决就用一个topic，不要为一个业务而采取多个topic的方案。</p>
 <h2 id="使用例子"><a href="#使用例子" class="headerlink" title="使用例子"></a>使用例子</h2><p>使用如下程序调用读取函数，</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">object <span class="built_in">read</span>Message &#123;</div><div class="line">  private val ZOOKEEPER_HOST = Config(<span class="string">"***"</span>)</div><div class="line">  private val KAFKA_BROKER = Config(<span class="string">"***"</span>)</div><div class="line"></div><div class="line">  private val TRANSACTION_GROUP = <span class="string">"***"</span></div><div class="line">  private val topics = List(<span class="string">"***"</span>,<span class="string">"***"</span>)</div><div class="line"></div><div class="line">  def main(args:Array[String]):Unit=&#123;</div><div class="line"></div><div class="line">    val env = StreamExecutionEnvironment.getExecutionEnvironment</div><div class="line"></div><div class="line">    //设置job失败重启策略</div><div class="line">    env.setRestartStrategy(RestartStrategies.failureRateRestart(</div><div class="line">         3, // max failures per unit</div><div class="line">         Time.of(5, TimeUnit.MINUTES), //time interval <span class="keyword">for</span> measuring failure rate</div><div class="line">         Time.of(10, TimeUnit.SECONDS) // delay</div><div class="line">     ))</div><div class="line"></div><div class="line">    val opMysqlStream = <span class="built_in">read</span>FromKafkaDataStream(env, ZOOKEEPER_HOST, KAFKA_BROKER, TRANSACTION_GROUP, topics)</div><div class="line">   .......</div><div class="line">   env.execute(<span class="string">"read from kafka"</span>)   </div><div class="line">   &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-  
+
 	</div>
         
 	<!-- css -->
@@ -157,15 +157,13 @@
 			_background: url("http://7xsl28.com1.z0.glb.clouddn.com/btn_reward.gif") no-repeat;
 
 			<!-- http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif
-			     ��Ϊ�� hexo ���ɵĲ������õ� theme �� a:hover ������Ч����
-				 Ϊ�����ô��Ͱ�ť��ʾЧ������ �� ���������¼��� css��
-				 Ƕ����������ʱ��һ��Ҫ���ǡ� -->
+      因为本 hexo 生成的博客所用的 theme 的 a:hover 带动画效果，为了在让打赏按钮显示效果正常 而 添加了以下几行 css，嵌入其它博客时不一定要它们。 -->
 			-webkit-transition: background 0s;
 			-moz-transition: background 0s;
 			-o-transition: background 0s;
 			-ms-transition: background 0s;
 			transition: background 0s;
-			<!-- /�ô��Ͱ�ť��Ч����ʾ���� �� ���ӵļ��� css ���˽��� -->
+			<!-- 让打赏按钮的效果显示正常 而 添加的几行 css 到此结束 -->
 		}
 
 		.donate_bar a.btn_donate:hover{ background-position: 0px -82px;}
@@ -186,17 +184,17 @@
 	    <br>
 	    ------------------------------------------------------------------------------------------------------------------------------
 	    <br>
-		<a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate ����"></a>
+		<a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate 打赏"></a>
 		<span class="donate_txt">
 			只卖艺不卖身，客官打赏，给您来段50的
 		</span>
-			
-		
+
+
 	</div>
 	<!-- /btn_donate & tips -->
 
 	<!-- donate guide -->
-    
+
 	<div id="donate_guide" class="donate_bar center hidden">
         <br>
 	    ------------------------------------------------------------------------------------------------------------------------------
@@ -206,14 +204,14 @@
 		<script type="text/javascript" charset="utf-8" src="http://www.dashangcloud.com/static/ds.js"></script>
 		
 
-		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="��΢��ɨһɨŶ~" class="fancybox" rel="article0">
-			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="΢�Ŵ��� Donate" height="190px" width="auto"/>
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="微信扫一扫" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/wechatpay.png" title="微信打赏 Donate" height="190px" width="auto"/>
 		</a>
-        
+
         &nbsp;&nbsp;
 
-		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="��֧����ɨһɨ����~" class="fancybox" rel="article0">
-			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="֧�������� Donate" height="190px" width="auto"/>
+		<a href="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="支付宝扫一扫" class="fancybox" rel="article0">
+			<img src="https://github.com/chlyzzo/chlyzzo.github.io/tree/master/images/alipay.png" title="֧支付宝打赏 Donate" height="190px" width="auto"/>
 		</a>
 
 		<span class="donate_txt">
@@ -245,7 +243,7 @@
 	<!-- /donate script -->
 </div>
 <!-- /Donate Module -->
-    
+   
 		<footer class="article-footer clearfix">
 
 	<div class="article-share" id="share">
@@ -258,7 +256,7 @@
 
 </footer>
 
-   	       
+
 	</article>
 	
 <nav class="article-nav clearfix">
@@ -284,7 +282,8 @@
 
 	
 
-</div>  
+</div>
+
     </div>
     <footer><div id="footer" >
 	
