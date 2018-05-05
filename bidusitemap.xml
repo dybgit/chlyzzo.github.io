@@ -3,6 +3,21 @@
 
 
     
+  <url>
+    <loc>https://chlyzzo.github.io/2017/05/01/hello-world/</loc>
+    <lastmod>2018-05-05T15:55:55.197Z</lastmod>
+    <data>
+        <display>
+        <title>开始搭建-hexo-git-blog</title>
+        <pubTime>2017-05-01T09:14:13.993Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>https://chlyzzo.github.io/2015/02/20/ML-%E5%AD%A6%E4%B9%A0%E6%B1%87%E6%80%BB%E7%AC%94%E8%AE%B02/</loc>
@@ -665,21 +680,6 @@
              
               <breadCrumb title="散文" url="https://chlyzzo.github.io/categories/%E6%95%A3%E6%96%87/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chlyzzo.github.io/2017/05/01/hello-world/</loc>
-    <lastmod>2017-08-19T16:44:11.253Z</lastmod>
-    <data>
-        <display>
-        <title>开始搭建-hexo-git-blog</title>
-        <pubTime>2017-05-01T09:14:13.993Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
