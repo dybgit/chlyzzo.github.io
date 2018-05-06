@@ -2118,16 +2118,6 @@ footer {
 .cc-license img {
   display: inline-block;
 }
-#gitalk-container,
-.gt-container {
-  width: 600px;
-}
-svg {
-  width: 20px;
-}
-img {
-  width: 30px;
-}
 .article-content pre,
 .article-content .highlight,
 .article-content .highlight pre {
