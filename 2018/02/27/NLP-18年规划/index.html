@@ -256,9 +256,8 @@
           clientSecret: '90a96ec418401a19b45f8d76efaf3a345aec3367',
           repo: 'https://github.com/chlyzzo/chlyzzo.github.io',
           owner: 'chlyzzo',
-          admin: ['chlyzzo'],
-          id: location.pathname,
-          distractionFreeMode: '{{ theme.gitalk.distractionFreeMode }}'
+          admin: 'chlyzzo',
+          id: window.location.pathname
         }) 
        gitalk.render('gitalk-container')        
       </script>
