@@ -1197,42 +1197,6 @@ article .article-content .right {
   margin-left: 1em;
   float: right;
 }
-.gt-user {
-  width: 20px;
-  height: 100px;
-  margin-right: 92px;
-  margin-left: 23px;
-}
-.gt-header {
-  width: 20px;
-  height: 100px;
-  margin-right: 801px;
-  margin-left: 114px;
-}
-.gt-meta {
-  width: 20px;
-  height: 100px;
-  margin-right: 801px;
-  margin-left: 25px;
-}
-.gt-container {
-  width: 20px;
-  height: 100px;
-  margin-right: 801px;
-  margin-left: 280px;
-}
-.gt-error {
-  width: 20px;
-  height: 100px;
-  margin-right: 781px;
-  margin-left: 25px;
-}
-.gt-comments {
-  width: 20px;
-  height: 100px;
-  margin-right: 801px;
-  margin-left: 23px;
-}
 footer.article-footer {
   background: #fafafa;
   padding: 0 4%;
@@ -2153,6 +2117,20 @@ footer {
 }
 .cc-license img {
   display: inline-block;
+}
+.gt-header {
+  width: 818px;
+  height: 114px;
+}
+.gt-comments {
+  width: 818px;
+  height: 33px;
+}
+.gt-popup a {
+  border-bottom: none;
+}
+.gt-container .gt-popup .gt-action.is--active:before {
+  top: 0.7em;
 }
 .article-content pre,
 .article-content .highlight,
