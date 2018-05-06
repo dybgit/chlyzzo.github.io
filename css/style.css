@@ -2118,19 +2118,12 @@ footer {
 .cc-license img {
   display: inline-block;
 }
-.gt-header {
-  width: 818px;
-  height: 114px;
+#gitalk-container,
+.gt-container {
+  width: 600px;
 }
-.gt-comments {
-  width: 818px;
-  height: 33px;
-}
-.gt-popup a {
-  border-bottom: none;
-}
-.gt-container .gt-popup .gt-action.is--active:before {
-  top: 0.7em;
+svg {
+  width: 20px;
 }
 .article-content pre,
 .article-content .highlight,
