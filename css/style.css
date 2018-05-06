@@ -2125,6 +2125,9 @@ footer {
 svg {
   width: 20px;
 }
+img {
+  width: 30px;
+}
 .article-content pre,
 .article-content .highlight,
 .article-content .highlight pre {
