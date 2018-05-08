@@ -10045,15 +10045,15 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     (c) 2012 
 /***/ (function(module, exports) {
 
 module.exports = {
-	"init": "Gitalk 加载中 ...",
-	"no-found-related": "未找到相关的 %{link} 进行评论",
-	"please-contact": "请联系 %{user} 初始化创建",
-	"init-issue": "初始化 Issue",
+	"init": "见证时刻......",
+	"no-found-related": "没有 %{link} 的评论",
+	"please-contact": "寻找 %{user} 开门",
+	"init-issue": "芝麻开门",
 	"leave-a-comment": "说点什么",
 	"comment": "评论",
 	"support-markdown": "",
 	"login-with-github": "Github 登录",
-	"first-comment-person": "不留下文字，不知道你来过",
+	"first-comment-person": "不留下文字我不知道你曾来过",
 	"commented": "发表于",
 	"load-more": "加载更多",
 	"counts": "%{counts} 条评论",
