@@ -34,6 +34,8 @@
     <link rel="apple-touch-icon" href="/img/logo.png">
     <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
     
+    <link rel="stylesheet" href="/css/gitalk.css">
+    <script src="/js/gitalk.js"></script>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -256,7 +258,18 @@
 
 
 
-<div id="SOHUCS" style="width: 95%;"></div>
+
+    <div id="gitalk-container" style="display: inline-block; width: 90%; margin-left: 4%;"></div>
+    <script type="text/javascript">
+        var gitalk = new Gitalk({
+            clientID: '9cc4ad70a7ea08a5e2ee',
+            clientSecret: '90a96ec418401a19b45f8d76efaf3a345aec3367',
+            repo: 'chlyzzo.github.io',
+            owner: 'chlyzzo',
+            admin: ['chlyzzo'],
+        });
+        gitalk.render('gitalk-container')
+    </script>
 
 	
 <nav class="article-nav clearfix">
@@ -459,15 +472,6 @@ $(document).ready(function(){
 
 
 
-<script type="text/javascript">
-  (function(){
-    var appid = 'cytBq4uDL';
-    var conf = '525d9ebeb008b0d3d526cfab0e8b5eb8';
-    var width = window.innerWidth || document.documentElement.clientWidth;
-    if (width < 960) {
-      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
-</script>
-
 
 
 
@@ -542,6 +546,32 @@ var _hmt = _hmt || [];
       }
     });
 </script>
+
+<script type="text/x-mathjax-config">
+    var mathId = document.getElementById("gitalk-container");
+    MathJax.Hub.Config({
+        showProcessingMessages: false,
+        messageStyle: "none",
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+            inlineMath:  [ ["$", "$"] ],
+            displayMath: [ ["$$","$$"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'a'],
+            ignoreClass:"comment-content"
+        },
+        "HTML-CSS": {
+            availableFonts: ["STIX","TeX"]
+        }
+    });
+    if (mathId != null) {
+        window.onload = function() {
+            $(".gt-container").bind("DOMNodeInserted", function() {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub], document.getElementById("gitalk-container"));
+            })
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub], mathId);
+        }
+    }
 
 <script type="text/x-mathjax-config">
     MathJax.Hub.Queue(function() {
