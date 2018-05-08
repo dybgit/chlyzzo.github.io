@@ -58,7 +58,7 @@
                         <div id="music163player">
                              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=260 height=80 src="//music.163.com/outchain/player?type=2&id=27890740&auto=1&height=66"></iframe>
                         </div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -121,7 +121,7 @@
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">目录</strong>
+			<strong class="toc-title">文章目录</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快速开始"><span class="toc-number">1.</span> <span class="toc-text">快速开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在YARN上启动一个长期的Flink集群"><span class="toc-number">1.1.</span> <span class="toc-text">在YARN上启动一个长期的Flink集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在YARN上运行一个Flink的任务"><span class="toc-number">1.2.</span> <span class="toc-text">在YARN上运行一个Flink的任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-YARN-会话"><span class="toc-number">2.</span> <span class="toc-text">Flink YARN 会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动Flink会话"><span class="toc-number">2.1.</span> <span class="toc-text">启动Flink会话</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载Flink"><span class="toc-number">2.1.1.</span> <span class="toc-text">下载Flink</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动一个会话"><span class="toc-number">2.1.2.</span> <span class="toc-text">启动一个会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隔离YARN会话"><span class="toc-number">2.1.3.</span> <span class="toc-text">隔离YARN会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关联现有会话"><span class="toc-number">2.1.4.</span> <span class="toc-text">关联现有会话</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提交job到Flink"><span class="toc-number">2.2.</span> <span class="toc-text">提交job到Flink</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在YARN上运行一个Flink-任务"><span class="toc-number">3.</span> <span class="toc-text">在YARN上运行一个Flink 任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用jars-amp-Classpath"><span class="toc-number">4.</span> <span class="toc-text">使用jars&Classpath</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink在YARN上的恢复行为"><span class="toc-number">5.</span> <span class="toc-text">Flink在YARN上的恢复行为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试一个失败的YARN会话"><span class="toc-number">6.</span> <span class="toc-text">调试一个失败的YARN会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#日志文件"><span class="toc-number">6.1.</span> <span class="toc-text">日志文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#YARN客户端控制台-amp-web接口"><span class="toc-number">6.2.</span> <span class="toc-text">YARN客户端控制台&web接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为指定Hadoop版本构建YARN客户端"><span class="toc-number">7.</span> <span class="toc-text">为指定Hadoop版本构建YARN客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防火墙后在YARN运行Flink"><span class="toc-number">8.</span> <span class="toc-text">防火墙后在YARN运行Flink</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背后-内部"><span class="toc-number">9.</span> <span class="toc-text">背后/内部</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实践经验"><span class="toc-number">10.</span> <span class="toc-text">实践经验</span></a></li></ol>
 		
@@ -357,8 +357,10 @@
             clientID: '9cc4ad70a7ea08a5e2ee',
             clientSecret: '90a96ec418401a19b45f8d76efaf3a345aec3367',
             repo: 'chlyzzo.github.io',
+            id: window.location.pathname,
+            distractionFreeMode: true,
             owner: 'chlyzzo',
-            admin: ['chlyzzo'],
+            admin: ['chlyzzo']
         });
         gitalk.render('gitalk-container')
     </script>
